@@ -4,10 +4,6 @@ server {
     server_name clintwin;
     charset utf-8;
 
-    location /static {
-        alias /usr/src/app/static;
-    }
-
     location / {
         proxy_pass http://clintwin:8000;
         proxy_set_header Host $host;

@@ -5,8 +5,8 @@ services:
     build: ./clintwin
     expose:
       - "8000"
-   # links:
-   #   - elasticsearch:elasticsearch
+    links:
+      - elasticsearch:elasticsearch
     volumes:
       - type: bind
         source: ./clintwin
@@ -14,27 +14,27 @@ services:
     #env_file: .env
     environment:
       DEBUG: 'true'
+    command: python manage.py migrate  
     command: python ./clintwin/manage.py runserver 0.0.0.0:8000
 
   nginx:
     build: ./nginx/
     ports:
       - "80:80"
-    volumes:
-      - web-static:/www/static
     links:
       - clintwin:clintwin
 
-  #elasticsearch:
-  #  image: docker.elastic.co/elasticsearch/elasticsearch:7.6.1@sha256:d74a4d9aa241cc7fda110a38f1208869407f1242e93c733281452cd9831a0064
-  #  environment:
-  #     - discovery.seed_hosts=elasticsearch:9300
-  #  ports:
-  #    - "9200:9200"
-  #  volumes:
-  #    - es_data:/usr/share/elasticsearch/data
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.6.1
+    environment:
+       - discovery.type=single-node
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
 
 volumes:
 #  web-django:
   web-static:
-#  es_data:
+  es_data:
