@@ -42,10 +42,7 @@ urlpatterns = [
 	path('contact', views.ContactPageView.as_view(), name='contact'),
 	path('directions', views.DirectionsPageView.as_view(), name='directions'),
 	path('contactform', views.contact, name='contactform'),
-
+    path('sponsor/viewtrials', views.TrialsView, name='viewtrials'),
+    path('sponsor/newtrial', views.NewTrialView, name='newtrial'),
+    path('sponsor/newtrial/critera', views.CriteriaView, name='criteria'),
 ]
-
-
-# path('sponsor/viewtrials', views.ViewTrials, name='viewtrials')
-# path('sponsor/newtrial', views.NewTrial, name='newtrial')
-# path('sponsor/newtrial/critera, views.Criteria, name='criteria')

@@ -61,63 +61,46 @@
 		</li>
 
 
-		{% if user.is_authenticated %}
+		{% if user.is_authenticated %} <!--Check if clintwin, sponsor, or sponsor super user -->
 
 		<li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#4bc5de">
           Manage Clinical Trials
         </a>
 
 		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="" style="color:#4bc5de">Create New Clinical Trial</a>
+          <a class="dropdown-item" href="{% url 'newtrial' %}" style="color:#4bc5de">Create New Clinical Trial</a>
 
-          <a class="dropdown-item" href="" style="color:#4bc5de">View Clinical Trials</a>
+          <a class="dropdown-item" href="{% url 'viewtrials' %}" style="color:#4bc5de">View Clinical Trials</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="" style="color:#4bc5de">Setup Trial Cofigurations </a>
         </div>
 
 		</li>
+<!--
 
-
-		<li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Manage Participants
-        </a>
-
-
-		  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="">menu 1</a>
-		   <a class="dropdown-item" href="">menu 2</a>
-          <a class="dropdown-item" href="">menu 3</a>
-          <div class="dropdown-divider"></div>
-
-        </div>
-		</li>
-
-
+IF SUPER USER
 
 		<li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Manage Account
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#4bc5de">
+          Manage Accounts
         </a>
 
 
 		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="">Account Dashboard</a>
-
-          <a class="dropdown-item" href="">View Invoices</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="">View Payments </a>
+          <a class="dropdown-item" href="" style="color:#4bc5de">Accounts Dashboard</a>
+          <a class="dropdown-item" href="" style="color:#4bc5de">Add or Remove Account</a>
         </div>
 
 		</li>
 
+	-->
+
 		<li class="nav-item">
-		<a class="nav-link" href="{% url 'logout' %}">logout</a>
+		<a class="nav-link" href="{% url 'logout' %}" style="color:#4bc5de">logout</a>
 		</li>
 
 		<li class="nav-item">
-		<a class="nav-link" style="color:red;">Hi {{ user.username }}!  </p>
+		<a class="nav-link" style="color:#4bc5de">Hi {{ user.username }}!  </p>
 		</li>
 		{% else %}
 

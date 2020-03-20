@@ -105,7 +105,6 @@ def contact(request):
 class AboutPageView(TemplateView):
     template_name = 'about.html'
 
-
 # Static page for How it Works
 class HowWorksPageView(TemplateView):
     template_name = 'how_works.html'
@@ -114,7 +113,6 @@ class HowWorksPageView(TemplateView):
 class ContactPageView(TemplateView):
     template_name = 'contact.html'
 
-
 # Static page for directions
 class DirectionsPageView(TemplateView):
     template_name = 'directions.html'
@@ -122,3 +120,12 @@ class DirectionsPageView(TemplateView):
 # Static page for Message display
 class MessagePageView(TemplateView):
     template_name = 'messages.html'
+
+class NewTrialView(TemplateView):
+    template_name = 'newtrial.html'
+
+class TrialsView(TemplateView):
+    template_name = 'viewtrials.html'
+
+class CriteriaView(TemplateView):
+    template_name = 'criteria.html'
