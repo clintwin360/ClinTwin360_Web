@@ -2,25 +2,41 @@
 {% load static %}
 {% block title %}Criteria{% endblock %}
 {% block content %}
+<script src="{% static 'js/dynamicform.js' %}"></script>
 <div class=' text-center p-5 ' style="color:#4bc5de">
     <h2>Inclusion and Exclusion Criteria</h2>
     <div class="container">
     	<div class="row">
             <div class="control-group" id="fields">
-                <label class="control-label" for="field1">New Criteria
+                <label class="control-label" for="field1">Inclusion Criteria
                 <div class="controls">
                     <form role="form" autocomplete="off">
                         <div class="entry input-group col-xs-3">
                             <input class="form-control" name="fields[]" type="text" placeholder="Type something" />
                         	<span class="input-group-btn">
                                 <button class="btn btn-success btn-add" type="button">
-                                    <span class="glyphicon glyphicon-plus"></span>
                                 </button>
                             </span>
                         </div>
                     </form>
-                <br>
-                <small>Press <span class="glyphicon glyphicon-plus gs"></span> to add another criteria</small>
+                </div>
+            </div>
+    	</div>
+    </div>
+    <div class="container">
+    	<div class="row">
+            <div class="control-group" id="crtierias">
+                <label class="control-label" for="criteria1">Exclusion Criteria
+                <div class="controls">
+                    <form role="form" autocomplete="off">
+                        <div class="entry input-group col-xs-3">
+                            <input class="form-control" name="criterias[]" type="text" placeholder="Type something" />
+                        	<span class="input-group-btn">
+                                <button class="btn btn-success btn-add" type="button">
+                                </button>
+                            </span>
+                        </div>
+                    </form>
                 </div>
             </div>
     	</div>

@@ -44,3 +44,12 @@ class Contact(models.Model):
     last_name = models.CharField(null=True,max_length=50)
     email = models.EmailField()
     comment = models.CharField(max_length=1000)
+
+"""
+class Trial(models.Model)
+    name = models.CharField(required=True)
+
+class TrialCriteria(models.Model)
+    trial = models.ForeignKey(Trial)
+    criteria = models.CharField(required=True)
+"""
