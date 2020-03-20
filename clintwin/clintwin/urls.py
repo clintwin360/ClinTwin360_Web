@@ -42,7 +42,7 @@ urlpatterns = [
 	path('contact', views.ContactPageView.as_view(), name='contact'),
 	path('directions', views.DirectionsPageView.as_view(), name='directions'),
 	path('contactform', views.contact, name='contactform'),
-    path('sponsor/viewtrials', views.TrialsView, name='viewtrials'),
-    path('sponsor/newtrial', views.NewTrialView, name='newtrial'),
-    path('criteria', views.CriteriaView, name='criteria'),
+    path('sponsor/viewtrials', TemplateView.as_view(template_name='viewtrials.html'), name='viewtrials'),
+    path('sponsor/newtrial', TemplateView.as_view(template_name='newtrial.html'), name='newtrial'),
+    path('sponsor/newtrial/criteria', TemplateView.as_view(template_name='criteria.html'), name='criteria'),
 ]
