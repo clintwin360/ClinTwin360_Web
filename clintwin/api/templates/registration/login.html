@@ -3,24 +3,20 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-
-
-<h2 style="color:rgb(255, 165, 0)">Login</h2>
-<div style="color:white">
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit" style="background-color:lightgray">Login</button>
-</form>
-</div >
 <br>
-<div style="color:white">
-<h5 class='px-2' ><a href="{% url 'signup' %}"><font color=#ffc107 >Signup</a></h5></font>
+<div class="center">
+    <h2 style=color:#4bc5de>Login</h2>
+    <div class="center" style="color:black">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="button" class="btn btn-primary" style="background-color:#4bc5de">Login</button>
+        </form>
+    </div >
+    <br>
 </div>
+
+
 
 <body id="bg" style="background-image: url('{% static 'home_bg.jpg' %}')";>
 {% endblock %}
-
-
-
-

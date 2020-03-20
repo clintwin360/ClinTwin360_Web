@@ -2,15 +2,15 @@
 <html style="height:100%">
 <head>
 	{% load static %}
-    <meta charset="UTF-8">    
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    	<link href="{% static 'css/style.css' %}" rel="stylesheet">
  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script> 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> 
-	
-		
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+
 	<style>
 		.footer {
 		position: fixed;
@@ -18,19 +18,19 @@
 		bottom: 0;
 		width: 100%;
 		height: auto;
-		background-color:#B22222;
-		color: white;
+		background-color:white;
+		color: #4bc5de;
 		text-align: center;
 		}
-	</style> 	
-		
+	</style>
+
 </head>
-	
-	
-	<body bgcolor="#E6E6FA">
-	
-	<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
-		<a class="navbar-brand"  href="{% url 'index' %}"><p style="color:#FFC300; font-weight: 900;">ClinTwin360</p></a>
+
+
+	<body bgcolor="white">
+
+	<nav class="navbar navbar-expand-lg bg-white">
+		<a class="navbar-brand"  href="{% url 'index' %}"><p style="color:#4bc5de; font-weight: 900;">ClinTwin360</p></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -38,115 +38,114 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
 		<li class="nav-item active">
-        <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'index' %}" style="color:#4bc5de";>Home <span class="sr-only">(current)</span></a>
 		</li>
-								
 		<li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#4bc5de">
           About
         </a>
-       		
+
 		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{% url 'about' %}">About Us</a>
-		  
-          <a class="dropdown-item" href="">Leadership Team</a>
-		  <a class="dropdown-item" href="{% url 'how_works' %}">How Does It Works </a>
+          <a class="dropdown-item" href="{% url 'about' %}" style="color:#4bc5de">About Us</a>
+
+          <a class="dropdown-item" href="" style="color:#4bc5de">Leadership Team</a>
+		  <a class="dropdown-item" href="{% url 'how_works' %}" style="color:#4bc5de">How Does It Works </a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="">Use Cases </a>
+          <a class="dropdown-item" href="" style="color:#4bc5de">Use Cases </a>
         </div>
-		
-		</li>			
-		
-		<li class="nav-item">
-        <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
+
 		</li>
-		
-				
-		{% if user.is_authenticated %}		
-			
+
+		<li class="nav-item">
+        <a class="nav-link" href="{% url 'contact' %}" style="color:#4bc5de">Contact Us</a>
+		</li>
+
+
+		{% if user.is_authenticated %}
+
 		<li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Manage Clinical Trials
         </a>
-       
+
 		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="">Create New Clinical Trial</a>
-		  
-          <a class="dropdown-item" href="">View Clinical Trials</a>
+          <a class="dropdown-item" href="" style="color:#4bc5de">Create New Clinical Trial</a>
+
+          <a class="dropdown-item" href="" style="color:#4bc5de">View Clinical Trials</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="">Setup Trial Cofigurations </a>
+          <a class="dropdown-item" href="" style="color:#4bc5de">Setup Trial Cofigurations </a>
         </div>
-		
+
 		</li>
-		
-		
+
+
 		<li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Manage Participants
         </a>
-		
-		  
+
+
 		  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="">menu 1</a>
 		   <a class="dropdown-item" href="">menu 2</a>
           <a class="dropdown-item" href="">menu 3</a>
           <div class="dropdown-divider"></div>
-          
+
         </div>
 		</li>
-		
-		
-		
+
+
+
 		<li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Manage Account
         </a>
-       
-		
+
+
 		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="">Account Dashboard</a>
-		  
+
           <a class="dropdown-item" href="">View Invoices</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="">View Payments </a>
         </div>
-		
+
 		</li>
-		
+
 		<li class="nav-item">
 		<a class="nav-link" href="{% url 'logout' %}">logout</a>
 		</li>
-		
+
 		<li class="nav-item">
-		<a class="nav-link" style="color:red;">Hi {{ user.username }}!  </p>	 
+		<a class="nav-link" style="color:red;">Hi {{ user.username }}!  </p>
 		</li>
 		{% else %}
-		
+
 		<li class="nav-item">
-		<a class="nav-link" href="{% url 'login' %}">login</a>
+		<a class="nav-link" href="{% url 'login' %}" style="color:#4bc5de">login</a>
 		</li>
 		{% endif %}
 		</ul>
-   
+
 	</div>
 	</nav>
-	
+
 	<main>
 	<div class="container container-fluid">
-	
+
 	{% block content %}
-       
+
     {% endblock %}
-	 
+
 	</div>
-	
+
 	</main>
-	
-		
+
+
 	<div class="footer">
 	<p>CSCI E-599&copy; Spring 2020 Capstone Project - Team ClinTwin360</p>
 	</div>
-	
-	
+
+
 	</body>
 </html>
