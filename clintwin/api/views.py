@@ -106,6 +106,14 @@ def contact(request):
         form = ContactForm()
     return render(request,'contactform.html',{'form':form})
 
+"""
+not working correctly.  need a django form?
+
+@api_view(['GET', 'POST'])
+def criteria(request):
+    return render(request, 'criteria.html')
+"""
+
 # Static page for About us
 class AboutPageView(TemplateView):
     template_name = 'about.html'

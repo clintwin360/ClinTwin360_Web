@@ -44,5 +44,5 @@ urlpatterns = [
 	path('contactform', views.contact, name='contactform'),
     path('sponsor/viewtrials', views.TrialsView, name='viewtrials'),
     path('sponsor/newtrial', views.NewTrialView, name='newtrial'),
-    path('sponsor/newtrial/critera', views.CriteriaView, name='criteria'),
+    path('criteria', views.CriteriaView, name='criteria'),
 ]

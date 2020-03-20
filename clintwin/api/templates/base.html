@@ -4,11 +4,12 @@
 	{% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
    	<link href="{% static 'css/style.css' %}" rel="stylesheet">
  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
 
 
 	<style>
@@ -61,7 +62,7 @@
 		</li>
 
 
-		{% if user.is_authenticated %} <!--Check if clintwin, sponsor, or sponsor super user -->
+		<!--Put back under authentication once it works again -->
 
 		<li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#4bc5de">
@@ -94,6 +95,8 @@ IF SUPER USER
 		</li>
 
 	-->
+
+		{% if user.is_authenticated %} <!--Check if clintwin, sponsor, or sponsor super user -->
 
 		<li class="nav-item">
 		<a class="nav-link" href="{% url 'logout' %}" style="color:#4bc5de">logout</a>
