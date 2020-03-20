@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-##  New addition
+##  Original additions
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
@@ -18,7 +18,11 @@ from .forms import NewUserForm, UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
 
-# End of new additions
+# New additions
+
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from rest_framework import status
 
 # Create your views here.
 
@@ -86,6 +90,7 @@ def logout(request):
 
 """
 # View for contact us form
+@api_view(['GET, POST'])
 def contact(request):
     if request.method == 'POST':
         # POST, generate bound form with data from the request
@@ -96,7 +101,7 @@ def contact(request):
             form.save()
             # redirect to a new URL:
             return HttpResponseRedirect('success.html')
-    else:
+    elif request.method == 'GET':
         # GET, generate unbound (blank) form
         form = ContactForm()
     return render(request,'contactform.html',{'form':form})
