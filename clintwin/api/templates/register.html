@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+
+  <h3 style="color:rgb(255, 165, 0)" "background-color:lightgray">Sign up</h3>
+  <div style="color:white">
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button id="btn" type="submit" >Sign up</button>
+  </form>
+  </div>
+  
+  <body id="bg" style="background-image: url('{% static 'home_bg.jpg' %}')";>
+{% endblock %}
