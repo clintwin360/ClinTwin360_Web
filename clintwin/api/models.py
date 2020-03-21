@@ -7,7 +7,7 @@ from django.utils.timezone import now
 from django.utils import timezone
 # End of new additions
 
-# Create your models here.
+# Create your models he
 
 
 class UserManager(models.Manager):
@@ -44,6 +44,15 @@ class Contact(models.Model):
     last_name = models.CharField(null=True,max_length=50)
     email = models.EmailField()
     comment = models.CharField(max_length=1000)
+
+class ClinicalTrial(models.Model):
+    name = models.CharField(max_length=500)
+    targetRecruitment = models.IntegerField()
+    currentRecruitment = models.IntegerField()
+    startDate = models.DateTimeField();
+    endDate = models.DateTimeField();
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
 
 """
 class Trial(models.Model)

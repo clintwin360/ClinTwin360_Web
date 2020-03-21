@@ -23,6 +23,7 @@ from django.views import generic
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
+from .models import ClinicalTrial
 
 # Create your views here.
 
@@ -105,6 +106,10 @@ def contact(request):
         # GET, generate unbound (blank) form
         form = ContactForm()
     return render(request,'contactform.html',{'form':form})
+
+def viewTrials(request):
+    query_results = ClinicalTrial.objects.all()
+    return render(request,"viewtrials.html")
 
 """
 not working correctly.  need a django form?
