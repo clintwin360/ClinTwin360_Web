@@ -1,5 +1,11 @@
 $(function()
 {
+    new Def.Autocompleter.Search('condition',
+      'https://clinicaltables.nlm.nih.gov/api/conditions/v3/search');
+
+    new Def.Autocompleter.Search('condition2',
+        'https://clinicaltables.nlm.nih.gov/api/conditions/v3/search');
+
     $(document.forms["form1"]).on('click', '.btn-add', function(e)
     {
         e.preventDefault();
@@ -12,7 +18,7 @@ $(function()
         controlForm.find('.entry:not(:last) .btn-add')
             .removeClass('btn-add').addClass('btn-remove')
             .removeClass('btn-success').addClass('btn-danger')
-            .html('<span class="glyphicon glyphicon-minus"></span>');
+            .html('<span class="fas fa-minus"></span>');
     }).on('click', '.btn-remove', function(e)
     {
 		$(this).parents('.entry:first').remove();
@@ -33,7 +39,7 @@ $(function()
         controlForm.find('.entry:not(:last) .btn-add')
             .removeClass('btn-add').addClass('btn-remove')
             .removeClass('btn-success').addClass('btn-danger')
-            .html('<span class="glyphicon glyphicon-minus"></span>');
+            .html('<span class="fas fa-minus"></span>');
     }).on('click', '.btn-remove', function(e)
     {
 		$(this).parents('.entry:first').remove();

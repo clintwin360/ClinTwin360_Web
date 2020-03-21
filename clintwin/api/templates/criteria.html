@@ -2,6 +2,9 @@
 {% load static %}
 {% block title %}Criteria{% endblock %}
 {% block content %}
+<link href='https://clinicaltables.nlm.nih.gov/autocomplete-lhc-versions/17.0.2/autocomplete-lhc.min.css' rel="stylesheet">
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+<script src='https://clinicaltables.nlm.nih.gov/autocomplete-lhc-versions/17.0.2/autocomplete-lhc.min.js'></script>
 <script src="{% static 'js/dynamicform.js' %}"></script>
 <div class=' text-center p-5 ' style="color:#4bc5de">
     <h2>Inclusion and Exclusion Criteria</h2>
@@ -12,10 +15,10 @@
                 <div class="controls">
                     <form role="form" autocomplete="off" id="form1">
                         <div class="entry input-group col-xs-3">
-                            <input class="form-control" name="fields[]" type="text" placeholder="Type something" />
+                            <input class="form-control" name="fields[]" type="text" placeholder="Enter a condition" id="condition" />
                         	<span class="input-group-btn">
                                 <button class="btn btn-success btn-add" type="button">
-                                    <span class="glyphicon glyphicon-plus"></span>
+                                    <span class="fas fa-plus"></span>
                                 </button>
                             </span>
                         </div>
@@ -31,10 +34,10 @@
                 <div class="controls">
                     <form role="form" autocomplete="off" id="form2">
                         <div class="entry input-group col-xs-3">
-                            <input class="form-control" name="criterias[]" type="text" placeholder="Type something" />
+                            <input class="form-control" name="criterias[]" type="text" placeholder="Enter a condition" id="condition2"/>
                         	<span class="input-group-btn">
                                 <button class="btn btn-success btn-add" type="button">
-                                    <span class="glyphicon glyphicon-plus"></span>
+                                    <span class="fas fa-plus"></span>
                                 </button>
                             </span>
                         </div>
