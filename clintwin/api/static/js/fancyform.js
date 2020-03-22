@@ -54,7 +54,7 @@ function getQuestion() {
   progress.style.width = (position * 100) / questions.length + '%';
 
   // Add User Icon OR Back Arrow Depending On Question
-  prevBtn.className = position ? 'fas fa-arrow-left' : 'fas fa-user';
+  prevBtn.className = position ? 'fas fa-arrow-left' : 'fas fa-heartbeat';
 
   showQuestion();
 }
