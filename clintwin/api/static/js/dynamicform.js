@@ -16,9 +16,8 @@ $(function()
 
         newEntry.find('input').val('');
         controlForm.find('.entry:not(:last) .btn-add')
-            .removeClass('btn-add').addClass('btn-remove')
-            .removeClass('btn-success').addClass('btn-danger')
-            .html('<span class="fas fa-minus"></span>');
+            .removeClass('btn-add').addClass('btn-remove').removeClass('fa-plus')
+            .html('<i class="fas fa-minus fa-lg btn-remove" style="#FF6347"></i>');
     }).on('click', '.btn-remove', function(e)
     {
 		$(this).parents('.entry:first').remove();
@@ -37,9 +36,8 @@ $(function()
 
         newEntry.find('input').val('');
         controlForm.find('.entry:not(:last) .btn-add')
-            .removeClass('btn-add').addClass('btn-remove')
-            .removeClass('btn-success').addClass('btn-danger')
-            .html('<span class="fas fa-minus"></span>');
+        .removeClass('btn-add').addClass('btn-remove').removeClass('fa-plus')
+        .html('<i class="fas fa-minus fa-lg btn-remove" style="#FF6347"></i>');
     }).on('click', '.btn-remove', function(e)
     {
 		$(this).parents('.entry:first').remove();

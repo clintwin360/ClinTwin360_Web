@@ -111,12 +111,24 @@ function inputPass() {
   // Store Answer In Array
   questions[position].answer = inputField.value;
 
-  if ((position == 0) && (inputField.value == "Treatments")){
+  if ((position == 0) && (inputField.value == "Conditions")){
+
+      position = 1;
+  }
+  else if ((position == 0) && (inputField.value == "Allergies")){
+
+      position = 2;
+  }
+  else if ((position == 0) && (inputField.value == "Treatments")){
 
       position = 3;
   }
+  else if ((position == 0) && (inputField.value != null)){
+
+      position = 4;
+  }
   else{
-      position++;
+      position = 5;
   }
 
 
