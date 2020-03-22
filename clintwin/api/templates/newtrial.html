@@ -4,4 +4,12 @@
 {% block content %}
 <div class=' text-center p-5 ' style="color:#4bc5de">
     <h2>Add a New Clinical Trial</h2>
+    <div class="container-fluid">
+        <form method="post" novalidate>
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
 {% endblock %}

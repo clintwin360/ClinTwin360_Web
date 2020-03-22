@@ -13,7 +13,7 @@ from django.views import generic
 from django.views.generic import TemplateView
 #from .forms import *
 from django.views.generic.edit import FormView
-from .forms import NewUserForm, UserCreationForm
+from .forms import NewUserForm, UserCreationForm, NewTrialForm
 #from .forms import AuthenticationForm
 from django.urls import reverse_lazy
 from django.views import generic
@@ -106,6 +106,21 @@ def contact(request):
         # GET, generate unbound (blank) form
         form = ContactForm()
     return render(request,'contactform.html',{'form':form})
+
+def newtrial(request):
+    if request.method == 'POST':
+        # POST, generate bound form with data from the request
+        form = NewTrialForm(request.POST)
+        # check if it's valid:
+        if form.is_valid():
+            # Insert into DB
+            form.save()
+            # redirect to a new URL:
+            return HttpResponseRedirect('viewtrials.html')
+    elif request.method == 'GET':
+        # GET, generate unbound (blank) form
+        form = NewTrialForm()
+    return render(request,'newtrial.html',{'form':form})
 
 def viewTrials(request):
     query_results = ClinicalTrial.objects.all()
