@@ -94,4 +94,4 @@ document.addEventListener("click", function (e) {
     closeAllLists(e.target);
 });
 }
-var categories = ["Conditions", "Basic Information", "Activity", "Nutrition"];
+var categories = ["Conditions", "BMI", "Activity", "Nutrition", "Allergies", "Conditions", "Treatments", "Age", "Weight", "Height", "Smoking"];
