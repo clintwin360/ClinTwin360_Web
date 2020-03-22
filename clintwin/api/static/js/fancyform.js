@@ -2,7 +2,8 @@ const questions = [
   { question: 'Search for a criteria' },
   { question: 'Search for a condition' },
   { question: 'Search for an allergy' },
-  { question: 'Search for a treatment' }
+  { question: 'Search for a treatment' },
+  { question: 'Enter Value' },
 ];
 
 // Transition Times
@@ -110,8 +111,14 @@ function inputPass() {
   // Store Answer In Array
   questions[position].answer = inputField.value;
 
-  // Increment Position
-  position++;
+  if ((position == 0) && (inputField.value == "Treatments")){
+
+      position = 3;
+  }
+  else{
+      position++;
+  }
+
 
   // If New Question, Hide Current and Get Next
   if (questions[position]) {
