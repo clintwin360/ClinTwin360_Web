@@ -1,0 +1,18 @@
+{% load static %}
+<link href="{% static 'css/fancyform.css' %}" rel="stylesheet">
+<script src="{% static 'js/fancyform.js' %}" async></script>
+<script src="{% static 'js/autocomplete.js' %}" async></script>
+
+<div id="form-box">
+    <i id="prev-btn" class="fas fa-arrow-left"></i>
+    <i id="next-btn" class="fas fa-arrow-right"></i>
+<div id="input-group">
+    <input id="input-field" required>
+    <label id="input-label"></label>
+    <div id="input-progress"></div>
+</div>
+<div id="progress-bar"></div>
+</div>
+<script>
+    autocomplete(document.getElementById("input-field"), categories);
+</script>
