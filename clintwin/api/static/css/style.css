@@ -28,6 +28,17 @@ img.bg1 {
     left: 0;
 }
 
+.footer {
+position: fixed;
+left: 0;
+bottom: 0;
+width: 100%;
+height: auto;
+background-color:#fff9f9;
+color: #4bc5de;
+text-align: center;
+}
+
 @media screen and (max-width: 1080px){
     img.bg1 {
     left: 50%;

@@ -1,0 +1,17 @@
+{% load static %}
+<link href="{% static 'css/autocomplete.css' %}" rel="stylesheet">
+<script src="{% static 'js/autocomplete.js' %}"></script>
+
+<form autocomplete="off" id="criteria-form">
+    <div class="autocomplete" style="width:300px;">
+        <input id="criteriaType" type="text" name="criteriaType" placeholder="Criteria type">
+    </div>
+    <span class="input-group-btn">
+        <button class="btn btn-add btn-success" type="button" id="choose">
+            <span class="fas fa-arrow-right"></span>
+        </button>
+    </span>
+</form>
+<script>
+    autocomplete(document.getElementById("criteriaType"), categories);
+</script>

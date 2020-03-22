@@ -6,7 +6,7 @@ $(function()
     new Def.Autocompleter.Search('condition2',
         'https://clinicaltables.nlm.nih.gov/api/conditions/v3/search');
 
-    $(document.forms["form2"]).on('click', '.btn-add', function(e)
+    $(document.forms["inclusion-form"]).on('click', '.btn-add', function(e)
     {
         e.preventDefault();
 
@@ -27,7 +27,7 @@ $(function()
 		return false;
 	});
 
-    $(document.forms["form3"]).on('click', '.btn-add', function(e)
+    $(document.forms["exclusion-form"]).on('click', '.btn-add', function(e)
     {
         e.preventDefault();
 
