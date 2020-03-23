@@ -6,17 +6,24 @@
 <br>
 <div class="center" align="center">
     <!-- <h2 style=color:#4bc5de>Login</h2> -->
-    <br><br><br><br>
+    <div class="imgcontainer">
+    <img src="/static/img/logo.png" alt="Logo" class="logo">
+    </div>
+    <br><br>
     <div class="center" style="color:#00000f">
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <button class="btn btn-primary" type="submit" style="background-color:#4bc5de">Login</button>
         </form>
+        <br>
+        <label>
+        <input type="checkbox" checked="checked" name="remember">  Remember me   </input>
+        </label>
+        <span class="psw"><a href="#">  Forgot password?</a></span>
     </div >
     <br>
 </div>
-
 
 
 <!-- <body id="bg" style="background-image: url('{% static 'home_bg.jpg' %}')";> -->
