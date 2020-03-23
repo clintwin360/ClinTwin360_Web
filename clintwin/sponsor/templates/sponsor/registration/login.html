@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'sponsor/base.html' %}
 {% load static %}
 {% block title %}Login{% endblock %}
 
@@ -7,7 +7,7 @@
 <div class="center" align="center">
     <!-- <h2 style=color:#4bc5de>Login</h2> -->
     <div class="imgcontainer">
-    <img src="/static/img/logo.png" alt="Logo" class="logo">
+    <img src="{% static "sponsor/img/logo.png" %}" alt="Logo" class="logo">
     </div>
     <br><br>
     <div class="center" style="color:#00000f">
@@ -26,5 +26,5 @@
 </div>
 
 
-<!-- <body id="bg" style="background-image: url('{% static 'home_bg.jpg' %}')";> -->
+<!-- <body id="bg" style="background-image: url('{% static 'sponsor/home_bg.jpg' %}')";> -->
 {% endblock %}

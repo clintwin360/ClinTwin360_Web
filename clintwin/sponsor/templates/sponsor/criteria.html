@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "sponsor/base.html" %}
 {% load static %}
 {% block title %}Criteria{% endblock %}
 {% block content %}
@@ -6,13 +6,13 @@
 <div class=' text-center p-5 ' style="color:#4bc5de">
     <h2>Inclusion and Exclusion Criteria</h2>
     <div class="container-fluid" id="dual-lists">
-        {% include 'form/duallist.html' %}
+        {% include 'sponsor/form/duallist.html' %}
     </div>
     <div id="container-fluid" id="fancyform">
-        {% include 'form/fancyform.html' %}
+        {% include 'sponsor/form/fancyform.html' %}
     </div>
     <div class="container-fluid" id="radios">
-        {% include 'form/radionegate.html' %}
+        {% include 'sponsor/form/radionegate.html' %}
     </div>
 </div>
 {% endblock %}

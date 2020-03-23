@@ -25,7 +25,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import views as auth_views
-
+from django.conf.urls import url,include
 
 # End of new additions
 # path('accounts/login/', views.login, name='login'),
@@ -34,15 +34,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 	path('sponsor/accounts/', include('django.contrib.auth.urls')),
 	path('sponsor/login/', auth_views.LoginView.as_view(template_name='login.html')),
-    path('sponsor/register/', TemplateView.as_view(template_name='register.html'), name='signup'),
+    path('sponsor/register/', TemplateView.as_view(template_name='api/../sponsor/templates/sponsor/register.html'), name='signup'),
 	path('sponsor/signup/', views.SignUp.as_view(), name='signup'),
-	path('', TemplateView.as_view(template_name='index.html'), name='index'),
+	path('sponsor/', include('sponsor.urls')),
 	path('about', views.AboutPageView.as_view(), name='about'),
 	path('how_works', views.HowWorksPageView.as_view(), name='how_works'),
 	path('contact', views.ContactPageView.as_view(), name='contact'),
 	path('directions', views.DirectionsPageView.as_view(), name='directions'),
 	path('contactform', views.contact, name='contactform'),
-    path('sponsor/viewtrials', views.viewTrials, name='viewtrials'),
-    path('sponsor/newtrial', TemplateView.as_view(template_name='newtrial.html'), name='newtrial'),
-    path('sponsor/newtrial/criteria', TemplateView.as_view(template_name='criteria.html'), name='criteria'),
 ]

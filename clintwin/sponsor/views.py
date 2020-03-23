@@ -20,13 +20,13 @@ from .models import ClinicalTrial
 #if (bcrypt.checkpw(request.POST['login_password'].encode(), user.password.encode())):
 
 def index(request):
-    return render(request, 'api/../sponsor/templates/sponsor/index.html')
+    return render(request, 'sponsor/index.html')
 
 
 class SignUp(generic.CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('login')
-    template_name = 'api/../sponsor/templates/sponsor/register.html'
+    template_name = 'sponsor/register.html'
 
 
 """
@@ -109,11 +109,11 @@ def newtrial(request):
     elif request.method == 'GET':
         # GET, generate unbound (blank) form
         form = NewTrialForm()
-    return render(request, 'api/../sponsor/templates/sponsor/newtrial.html', {'form':form})
+    return render(request, 'sponsor/newtrial.html', {'form':form})
 
 def viewTrials(request):
     query_results = ClinicalTrial.objects.all()
-    return render(request, "api/../sponsor/templates/sponsor/viewtrials.html")
+    return render(request, "sponsor/viewtrials.html")
 
 """
 not working correctly.  need a django form?
@@ -125,15 +125,15 @@ def criteria(request):
 
 # Static page for About us
 class AboutPageView(TemplateView):
-    template_name = 'api/../sponsor/templates/sponsor/about.html'
+    template_name = 'sponsor/about.html'
 
 # Static page for How it Works
 class HowWorksPageView(TemplateView):
-    template_name = 'api/../sponsor/templates/sponsor/how_works.html'
+    template_name = 'sponsor/how_works.html'
 
 # Static page for Contact us
 class ContactPageView(TemplateView):
-    template_name = 'api/../sponsor/templates/sponsor/contact.html'
+    template_name = 'sponsor/contact.html'
 
 # Static page for directions
 class DirectionsPageView(TemplateView):
@@ -144,10 +144,10 @@ class MessagePageView(TemplateView):
     template_name = 'messages.html'
 
 class NewTrialView(TemplateView):
-    template_name = 'api/../sponsor/templates/sponsor/newtrial.html'
+    template_name = 'sponsor/newtrial.html'
 
 class TrialsView(TemplateView):
-    template_name = 'api/../sponsor/templates/sponsor/viewtrials.html'
+    template_name = 'sponsor/viewtrials.html'
 
 class CriteriaView(TemplateView):
-    template_name = 'api/../sponsor/templates/sponsor/criteria.html'
+    template_name = 'sponsor/criteria.html'
