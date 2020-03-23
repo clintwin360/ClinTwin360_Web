@@ -33,7 +33,6 @@ from django.conf.urls import url,include
 urlpatterns = [
     path('admin/', admin.site.urls),
 	path('sponsor/accounts/', include('django.contrib.auth.urls')),
-	path('sponsor/login/', auth_views.LoginView.as_view(template_name='login.html')),
     path('sponsor/register/', TemplateView.as_view(template_name='api/../sponsor/templates/sponsor/register.html'), name='signup'),
 	path('sponsor/signup/', views.SignUp.as_view(), name='signup'),
 	path('sponsor/', include('sponsor.urls')),
