@@ -4,6 +4,7 @@ from . import views
 from django.conf.urls import url, include
 from django.contrib.auth import views as auth_views
 
+
 urlpatterns = [
     path('', views.index, name='index'),
 	path('accounts/', include('django.contrib.auth.urls')),
