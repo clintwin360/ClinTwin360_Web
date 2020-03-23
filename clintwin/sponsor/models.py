@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.postgres.fields import ArrayField
+#from django.contrib.postgres.fields import ArrayField
 # New additions
 from datetime import date
 import datetime
@@ -60,7 +60,8 @@ class ClinicalTrial(models.Model):
 class ClinicalTrialCriteria(models.Model):
     name = models.CharField(max_length=500)
     valueType = models.CharField(max_length=50)
-    options = ArrayField(models.CharField(max_length=256))
+    #options = ArrayField(models.CharField(max_length=256))
+    options = models.TextField()
 
 
 class ClinicalTrialCriteriaResponse(models.Model):
@@ -76,13 +77,12 @@ class QuestionCategory(models.Model):
 class ParticipantQuestion(models.Model):
     text = models.TextField()
     valueType = models.CharField(max_length=50)
-    options = ArrayField(models.CharField(max_length=256))
+    #options = ArrayField(models.CharField(max_length=256))
+    options = models.TextField()
     categories = models.ManyToManyField(QuestionCategory)
 
 
 class ParticipantQuestionResponse(models.Model):
-    text = models.TextField()
-    valueType = models.CharField(max_length=50)
-    options = ArrayField(models.CharField(max_length=256))
-    categories = models.ManyToManyField(QuestionCategory)
+    question = models.ForeignKey(ParticipantQuestion, on_delete=models.CASCADE)
+    value = models.CharField(max_length=50)
 
