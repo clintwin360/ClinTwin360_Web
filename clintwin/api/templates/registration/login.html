@@ -4,9 +4,10 @@
 
 {% block content %}
 <br>
-<div class="center">
-    <h2 style=color:#4bc5de>Login</h2>
-    <div class="center" style="color:black">
+<div class="center" align="center">
+    <!-- <h2 style=color:#4bc5de>Login</h2> -->
+    <br><br><br><br>
+    <div class="center" style="color:#00000f">
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
@@ -18,5 +19,5 @@
 
 
 
-<body id="bg" style="background-image: url('{% static 'home_bg.jpg' %}')";>
+<!-- <body id="bg" style="background-image: url('{% static 'home_bg.jpg' %}')";> -->
 {% endblock %}
