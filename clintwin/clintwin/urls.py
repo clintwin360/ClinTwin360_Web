@@ -17,7 +17,6 @@ from django.contrib import admin
 from django.urls import include, path
 
 # New additions.
-from api import views
 from django.conf.urls import url
 from django.urls import path, include
 from django.views.generic.base import TemplateView
@@ -25,20 +24,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import views as auth_views
-from django.conf.urls import url,include
 
 # End of new additions
 # path('accounts/login/', views.login, name='login'),
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-	path('sponsor/accounts/', include('django.contrib.auth.urls')),
-    path('sponsor/register/', TemplateView.as_view(template_name='api/../sponsor/templates/sponsor/register.html'), name='signup'),
-	path('sponsor/signup/', views.SignUp.as_view(), name='signup'),
-	path('sponsor/', include('sponsor.urls')),
-	path('about', views.AboutPageView.as_view(), name='about'),
-	path('how_works', views.HowWorksPageView.as_view(), name='how_works'),
-	path('contact', views.ContactPageView.as_view(), name='contact'),
-	path('directions', views.DirectionsPageView.as_view(), name='directions'),
-	path('contactform', views.contact, name='contactform'),
+    path('sponsor/', include('sponsor.urls'))
 ]
