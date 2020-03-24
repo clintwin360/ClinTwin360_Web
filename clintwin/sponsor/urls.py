@@ -12,6 +12,7 @@ router.register(r'questions', views.ParticipantQuestionViewSet)
 urlpatterns = [
     path('', views.index, name='index'),
     path('loaddata/', views.loaddata, name='loaddata'),
+    path('dummy/', views.dummy, name='dummy'),
 	path('accounts/', include('django.contrib.auth.urls')),
     path('register/', TemplateView.as_view(template_name='sponsor/register.html'), name='signup'),
 	path('signup/', views.SignUp.as_view(), name='signup'),

@@ -1,0 +1,14 @@
+{% extends "sponsor/base.html" %}
+{% load static %}
+<script type="text/javascript" src="{% static "sponsor/js/dummy.js" %}"></script>
+{% block scripts %}
+
+{% endblock %}
+{% block content %}
+
+    {% for question in questions %}
+
+        <p>{{ question.text }}</p>
+
+    {% endfor %}
+{% endblock %}
