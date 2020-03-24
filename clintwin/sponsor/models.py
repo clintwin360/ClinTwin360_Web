@@ -81,6 +81,9 @@ class ParticipantQuestion(models.Model):
     options = models.TextField()
     categories = models.ManyToManyField(QuestionCategory)
 
+    def __str__(self):
+        return self.text
+
 
 class ParticipantQuestionResponse(models.Model):
     question = models.ForeignKey(ParticipantQuestion, on_delete=models.CASCADE)

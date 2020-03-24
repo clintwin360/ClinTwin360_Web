@@ -30,6 +30,7 @@ def index(request):
 
 def loaddata(request):
     call_command('loaddata', 'participant_questions')
+    call_command('loaddata', 'users')
     return HttpResponse("Data Loaded!")
 
 class SignUp(generic.CreateView):
