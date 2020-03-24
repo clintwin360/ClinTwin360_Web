@@ -1,5 +1,5 @@
 ##  Original additions
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,HttpResponse
 from django.shortcuts import render
 
 from django.views.generic import TemplateView
@@ -16,6 +16,7 @@ from rest_framework import permissions
 from rest_framework.decorators import api_view
 from .models import ClinicalTrial, ParticipantQuestion
 from .serializers import ParticipantQuestionSerializer
+from django.core.management import call_command
 
 
 # Create your views here.
@@ -26,6 +27,10 @@ from .serializers import ParticipantQuestionSerializer
 def index(request):
     return render(request, 'sponsor/index.html')
 
+
+def loaddata(request):
+    call_command('loaddata', 'participant_questions')
+    return HttpResponse("Data Loaded!")
 
 class SignUp(generic.CreateView):
     form_class = UserCreationForm
@@ -164,3 +169,4 @@ class ParticipantQuestionViewSet(viewsets.ModelViewSet):
     queryset = ParticipantQuestion.objects.all()
     serializer_class = ParticipantQuestionSerializer
     #permission_classes = [permissions.IsAuthenticated]
+
