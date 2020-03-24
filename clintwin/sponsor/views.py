@@ -27,6 +27,9 @@ from django.core.management import call_command
 def index(request):
     return render(request, 'sponsor/index.html')
 
+def dummy(request):
+    questions = ParticipantQuestion.objects.all()
+    return render(request, 'sponsor/dummy.html', {"questions": questions})
 
 def loaddata(request):
     call_command('loaddata', 'participant_questions')

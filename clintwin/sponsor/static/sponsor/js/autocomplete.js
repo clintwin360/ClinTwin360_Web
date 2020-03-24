@@ -94,4 +94,9 @@ document.addEventListener("click", function (e) {
     closeAllLists(e.target);
 });
 }
+
 var categories = ["Conditions", "BMI", "Activity", "Nutrition", "Allergies", "Conditions", "Treatments", "Age", "Weight", "Height", "Smoking"];
+
+//$(function() {
+//    autocomplete(document.getElementById("criteriaType"), categories);
+//})
