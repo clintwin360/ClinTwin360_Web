@@ -24,11 +24,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import views as auth_views
+from django.shortcuts import redirect
 
 # End of new additions
 # path('accounts/login/', views.login, name='login'),
 
 urlpatterns = [
+    path('', lambda request: redirect('sponsor/', permanent=False)),
     path('admin/', admin.site.urls),
     path('sponsor/', include('sponsor.urls'))
 ]
