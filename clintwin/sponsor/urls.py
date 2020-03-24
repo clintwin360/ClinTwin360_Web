@@ -3,7 +3,11 @@ from django.views.generic import TemplateView
 from . import views
 from django.conf.urls import url, include
 from django.contrib.auth import views as auth_views
+from rest_framework import routers
 
+
+router = routers.DefaultRouter()
+router.register(r'questions', views.ParticipantQuestionViewSet)
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -18,5 +22,6 @@ urlpatterns = [
     path('contact', views.ContactPageView.as_view(), name='contact'),
     path('directions', views.DirectionsPageView.as_view(), name='directions'),
     path('contactform', views.contact, name='contactform'),
-
+    path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

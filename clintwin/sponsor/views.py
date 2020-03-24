@@ -8,11 +8,15 @@ from sponsor.forms import UserCreationForm, NewTrialForm
 #from .forms import AuthenticationForm
 from django.urls import reverse_lazy
 from django.views import generic
+from rest_framework import viewsets
+from rest_framework import permissions
 
 # New additions
 
 from rest_framework.decorators import api_view
-from .models import ClinicalTrial
+from .models import ClinicalTrial, ParticipantQuestion
+from .serializers import ParticipantQuestionSerializer
+
 
 # Create your views here.
 
@@ -151,3 +155,12 @@ class TrialsView(TemplateView):
 
 class CriteriaView(TemplateView):
     template_name = 'sponsor/criteria.html'
+
+
+class ParticipantQuestionViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows questions to be viewed or edited.
+    """
+    queryset = ParticipantQuestion.objects.all()
+    serializer_class = ParticipantQuestionSerializer
+    #permission_classes = [permissions.IsAuthenticated]
