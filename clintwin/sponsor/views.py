@@ -14,9 +14,12 @@ from rest_framework import permissions
 # New additions
 
 from rest_framework.decorators import api_view
-from .models import *
+from .models import ClinicalTrial, ParticipantQuestion
+from django.contrib.auth.models import User
+from django.contrib.auth import get_user
 from .serializers import *
 from django.core.management import call_command
+from rest_framework.authtoken.models import Token
 
 
 # Create your views here.
@@ -24,12 +27,20 @@ from django.core.management import call_command
 # hashed_password = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt())
 #if (bcrypt.checkpw(request.POST['login_password'].encode(), user.password.encode())):
 
+
 def index(request):
     return render(request, 'sponsor/index.html')
 
 def dummy(request):
     questions = ParticipantQuestion.objects.all()
     return render(request, 'sponsor/dummy.html', {"questions": questions})
+
+
+def get_token(request):
+    x = get_user(request)
+    token = Token.objects.create(user=x)
+    return HttpResponse(token)
+
 
 def loaddata(request):
     call_command('loaddata', 'participant_questions')
@@ -193,3 +204,4 @@ class ParticipantResponseViewSet(viewsets.ModelViewSet):
     queryset = ParticipantResponse.objects.all()
     serializer_class = ParticipantResponseSerializer
     #permission_classes = [permissions.IsAuthenticated]
+
