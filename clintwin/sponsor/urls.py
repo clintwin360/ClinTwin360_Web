@@ -23,6 +23,13 @@ urlpatterns = [
     path('newtrial', TemplateView.as_view(template_name='sponsor/newtrial.html'), name='newtrial'),
     path('newtrial/inclusion', TemplateView.as_view(template_name='sponsor/inclusion.html'), name='inclusion'),
     path('newtrial/inclusion', TemplateView.as_view(template_name='sponsor/exclusion.html'), name='exclusion'),
+
+    # path('newcriterion', TemplateView.as_view(template_name='sponsor/new_criterion.html'), name='new_criterion'),
+    # path('viewcriteria', TemplateView.as_view(template_name='sponsor/view_criterian.html'), name='view_criteria'),
+    path('newsponsor', TemplateView.as_view(template_name='sponsor/new_sponsor.html'), name='newsponsor'),
+    path('viewsponsors', views.viewSponsors, name='viewsponsors'),
+    path('viewsponsorreq', views.viewSponsorReq, name='viewsponsorreq'),
+
     path('about', views.AboutPageView.as_view(), name='about'),
     path('how_works', views.HowWorksPageView.as_view(), name='how_works'),
     path('contact', views.ContactPageView.as_view(), name='contact'),

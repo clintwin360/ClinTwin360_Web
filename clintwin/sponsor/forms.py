@@ -30,6 +30,15 @@ class NewTrialForm(forms.ModelForm):
     endDate = forms.DateField()
 
 
+class NewSponsorForm(forms.ModelForm):
+    class Meta:
+        model = ClinicalTrial
+        fields = ['sponsor__name', 'information_provided_by']
+
+    sponsor__name = forms.CharField(max_length=500)
+    information_provided_by = forms.CharField(max_length=500)
+
+
 
 """
 widget=forms.Select(choices=TITLE_CHOICES)

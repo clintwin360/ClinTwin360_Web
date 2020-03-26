@@ -73,6 +73,20 @@
 		        </div>
 
 				</li>
+
+				<li class="nav-item dropdown">
+		        	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#4bc5de">
+		          Manage Sponsors
+		        </a>
+
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		          <a class="dropdown-item" href="{% url 'newsponsor' %}" style="color:#4bc5de">Create New Sponsor</a>
+		          <a class="dropdown-item" href="{% url 'viewsponsors' %}" style="color:#4bc5de">View Sponsors</a>
+							<a class="dropdown-item" href="{% url 'viewsponsorreq' %}" style="color:#4bc5de">View Sponsor Requests</a>
+
+		        </div>
+
+				</li>
 		<!--
 
 		IF SUPER USER

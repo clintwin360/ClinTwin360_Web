@@ -47,6 +47,20 @@ class Contact(models.Model):
     comment = models.CharField(max_length=1000)
 
 
+class Sponsor(models.Model):
+    sponsor_id = models.CharField(max_length=50)
+    organization = models.CharField(null=True, max_length=50)
+    date_joined = models.DateTimeField()
+    notes = models.CharField(max_length=1000)
+
+
+class SponsorRequest(models.Model):
+    sponsor_id = models.CharField(max_length=50)
+    criterion_req = models.CharField(null=True, max_length=200)
+    values = models.CharField(null=True, max_length=500)
+    notes = models.CharField(max_length=1000)
+
+
 class ClinicalTrial(models.Model):
     name = models.CharField(max_length=500)
     targetRecruitment = models.IntegerField()
@@ -104,4 +118,3 @@ class ParticipantResponse(models.Model):
 
     def __str__(self):
         return self.question__text
-

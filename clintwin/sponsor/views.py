@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 from django.views.generic import TemplateView
 #from .forms import *
-from sponsor.forms import UserCreationForm, NewTrialForm
+from sponsor.forms import UserCreationForm, NewTrialForm, NewSponsorForm
 #from .forms import AuthenticationForm
 from django.urls import reverse_lazy
 from django.views import generic
@@ -139,6 +139,29 @@ def criteria(request):
     return render(request, 'criteria.html')
 """
 
+def newSponsor(request):
+    if request.method == 'POST':
+        # POST, generate bound form with data from the request
+        form = NewSponsorForm(request.POST)
+        # check if it's valid:
+        if form.is_valid():
+            # Insert into DB
+            form.save()
+            # redirect to a new URL:
+            return HttpResponseRedirect('new_sponsor.html')
+    elif request.method == 'GET':
+        # GET, generate unbound (blank) form
+        form = NewSponsorForm()
+    return render(request, 'sponsor/new_sponsor.html', {'form':form})
+
+def viewSponsors(request):
+    query_results = ClinicalTrial.objects.all()
+    return render(request, "sponsor/view_sponsors.html")
+
+def viewSponsorReq(request):
+    query_results = ClinicalTrial.objects.all()
+    return render(request, "sponsor/view_sponsor_req.html")
+
 # Static page for About us
 class AboutPageView(TemplateView):
     template_name = 'sponsor/about.html'
@@ -167,6 +190,22 @@ class TrialsView(TemplateView):
 
 class CriteriaView(TemplateView):
     template_name = 'sponsor/criteria.html'
+
+# Static pages for Admin
+# class NewCriterionView(TemplateView):
+#     template_name = 'new_criterion.html'
+#
+# class ViewCriteriaView(TemplateView):
+#     template_name = 'view_criteria.html'
+
+class NewSponsorView(TemplateView):
+    template_name = 'sponsor/new_sponsor.html'
+
+class ViewSponsorView(TemplateView):
+    template_name = 'sponsor/view_sponsor.html'
+
+class ViewSponsorReqView(TemplateView):
+    template_name = 'sponsor/view_sponsor_req.html'
 
 
 #API
