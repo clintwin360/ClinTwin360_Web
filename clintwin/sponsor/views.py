@@ -25,7 +25,7 @@ from django.core.management import call_command
 #if (bcrypt.checkpw(request.POST['login_password'].encode(), user.password.encode())):
 
 def index(request):
-    return render(request, 'sponsor/index.html')
+    return render(request, 'registration/login.html')
 
 def dummy(request):
     questions = ParticipantQuestion.objects.all()
@@ -173,4 +173,3 @@ class ParticipantQuestionViewSet(viewsets.ModelViewSet):
     queryset = ParticipantQuestion.objects.all()
     serializer_class = ParticipantQuestionSerializer
     #permission_classes = [permissions.IsAuthenticated]
-
