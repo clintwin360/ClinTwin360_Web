@@ -14,8 +14,8 @@ from rest_framework import permissions
 # New additions
 
 from rest_framework.decorators import api_view
-from .models import ClinicalTrial, ParticipantQuestion
-from .serializers import ParticipantQuestionSerializer
+from .models import *
+from .serializers import *
 from django.core.management import call_command
 
 
@@ -34,6 +34,7 @@ def dummy(request):
 def loaddata(request):
     call_command('loaddata', 'participant_questions')
     call_command('loaddata', 'users')
+    call_command('loaddata', 'participants')
     return HttpResponse("Data Loaded!")
 
 class SignUp(generic.CreateView):
@@ -166,6 +167,7 @@ class CriteriaView(TemplateView):
     template_name = 'sponsor/criteria.html'
 
 
+#API
 class ParticipantQuestionViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows questions to be viewed or edited.
@@ -174,3 +176,20 @@ class ParticipantQuestionViewSet(viewsets.ModelViewSet):
     serializer_class = ParticipantQuestionSerializer
     #permission_classes = [permissions.IsAuthenticated]
 
+
+class ParticipantViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows participants to be viewed or edited.
+    """
+    queryset = Participant.objects.all()
+    serializer_class = ParticipantSerializer
+    #permission_classes = [permissions.IsAuthenticated]
+
+
+class ParticipantResponseViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows responses to be viewed or edited.
+    """
+    queryset = ParticipantResponse.objects.all()
+    serializer_class = ParticipantResponseSerializer
+    #permission_classes = [permissions.IsAuthenticated]
