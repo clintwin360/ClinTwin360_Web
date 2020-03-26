@@ -15,8 +15,11 @@ from rest_framework import permissions
 
 from rest_framework.decorators import api_view
 from .models import ClinicalTrial, ParticipantQuestion
-from .serializers import ParticipantQuestionSerializer
+from django.contrib.auth.models import User
+from django.contrib.auth import get_user
+from .serializers import *
 from django.core.management import call_command
+from rest_framework.authtoken.models import Token
 
 
 # Create your views here.
@@ -24,16 +27,25 @@ from django.core.management import call_command
 # hashed_password = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt())
 #if (bcrypt.checkpw(request.POST['login_password'].encode(), user.password.encode())):
 
+
 def index(request):
-    return render(request, 'registration/login.html')
+    return render(request, 'sponsor/index.html')
 
 def dummy(request):
     questions = ParticipantQuestion.objects.all()
     return render(request, 'sponsor/dummy.html', {"questions": questions})
 
+
+def get_token(request):
+    x = get_user(request)
+    token = Token.objects.create(user=x)
+    return HttpResponse(token)
+
+
 def loaddata(request):
     call_command('loaddata', 'participant_questions')
     call_command('loaddata', 'users')
+    call_command('loaddata', 'participants')
     return HttpResponse("Data Loaded!")
 
 class SignUp(generic.CreateView):
@@ -49,13 +61,10 @@ def register(request):
         for tag, error in errors.iteritems():
             messages.error(request, error, extra_tags=tag)
         return redirect('/')
-
-
     user = User.objects.create(first_name=request.POST['first_name'], last_name=request.POST['last_name'], password=request.POST['password'], email=request.POST['email'])
     user.save()
     request.session['id'] = user.id
     return redirect('/success')
-
 def login(request):
     if request.method == 'POST':
         form = AuthenticationForm(request=request, data=request.POST)
@@ -75,8 +84,6 @@ def login(request):
     return render(request = request,
                     template_name = "login.html",
                     context={"form":form})
-
-
 def login(request):
     if (User.objects.filter(email=request.POST['login_email']).exists()):
         user = User.objects.filter(email=request.POST['login_email'])[0]
@@ -84,13 +91,10 @@ def login(request):
             request.session['id'] = user.id
             return redirect('/success')
     return redirect('/')
-
-
 def logout(request):
     logout(request)
     messages.info(request, "Logged out successfully!")
     return redirect('/')
-
 """
 # View for contact us form
 @api_view(['GET, POST'])
@@ -130,7 +134,6 @@ def viewTrials(request):
 
 """
 not working correctly.  need a django form?
-
 @api_view(['GET', 'POST'])
 def criteria(request):
     return render(request, 'criteria.html')
@@ -166,10 +169,29 @@ class CriteriaView(TemplateView):
     template_name = 'sponsor/criteria.html'
 
 
+#API
 class ParticipantQuestionViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows questions to be viewed or edited.
     """
     queryset = ParticipantQuestion.objects.all()
     serializer_class = ParticipantQuestionSerializer
+    #permission_classes = [permissions.IsAuthenticated]
+
+
+class ParticipantViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows participants to be viewed or edited.
+    """
+    queryset = Participant.objects.all()
+    serializer_class = ParticipantSerializer
+    #permission_classes = [permissions.IsAuthenticated]
+
+
+class ParticipantResponseViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows responses to be viewed or edited.
+    """
+    queryset = ParticipantResponse.objects.all()
+    serializer_class = ParticipantResponseSerializer
     #permission_classes = [permissions.IsAuthenticated]

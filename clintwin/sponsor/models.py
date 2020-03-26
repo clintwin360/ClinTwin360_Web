@@ -73,6 +73,18 @@ class ClinicalTrialCriteriaResponse(models.Model):
 class QuestionCategory(models.Model):
     name = models.CharField(max_length=50)
 
+class Participant(models.Model):
+    first_name = models.CharField(max_length=128)
+    last_name = models.CharField(max_length=128)
+    email = models.EmailField()
+    date_joined = models.DateTimeField(auto_now_add=True)
+
+    def name(self):
+        return self.first_name + " " + self.last_name
+
+    def __str__(self):
+        return self.name()
+
 
 class ParticipantQuestion(models.Model):
     text = models.TextField()
@@ -85,7 +97,11 @@ class ParticipantQuestion(models.Model):
         return self.text
 
 
-class ParticipantQuestionResponse(models.Model):
+class ParticipantResponse(models.Model):
     question = models.ForeignKey(ParticipantQuestion, on_delete=models.CASCADE)
+    participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
     value = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.question__text
 
