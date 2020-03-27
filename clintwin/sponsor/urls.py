@@ -11,6 +11,7 @@ router.register(r'questions', views.ParticipantQuestionViewSet)
 router.register(r'participants', views.ParticipantViewSet)
 router.register(r'responses', views.ParticipantResponseViewSet)
 
+
 urlpatterns = [
     path('', views.index, name='index'),
     # Move to API app

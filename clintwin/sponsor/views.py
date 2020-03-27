@@ -21,7 +21,7 @@ from .serializers import *
 from django.core.management import call_command
 from rest_framework.authtoken.models import Token
 from django.shortcuts import redirect
-
+from django.contrib.auth import views as auth_views
 # Create your views here.
 
 # hashed_password = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt())
@@ -29,10 +29,11 @@ from django.shortcuts import redirect
 
 
 def index(request):
-    if request.user.is_authenticated():
-        return redirect('login_success')
-    else:
+    if not request.user.is_authenticated:
         return redirect('login')
+    else:
+        return redirect('login_success')
+
 
 def dummy(request):
     questions = ParticipantQuestion.objects.all()
