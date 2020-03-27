@@ -16,7 +16,7 @@ urlpatterns = [
     path('loaddata/', views.loaddata, name='loaddata'),
     path('dummy/', views.dummy, name='dummy'),
     path('token/', views.get_token, name='token'),
-	path('accounts/', include('django.contrib.auth.urls')),   
+	path('accounts/', include('django.contrib.auth.urls')),
     path('register/', TemplateView.as_view(template_name='sponsor/register.html'), name='signup'),
 	path('signup/', views.SignUp.as_view(), name='signup'),
     path('viewtrials', views.viewTrials, name='viewtrials'),
@@ -36,5 +36,6 @@ urlpatterns = [
     path('directions', views.DirectionsPageView.as_view(), name='directions'),
     path('contactform', views.contact, name='contactform'),
     path('', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('login_success/', views.login_success, name='login_success'),
 ]

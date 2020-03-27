@@ -20,7 +20,7 @@ from django.contrib.auth import get_user
 from .serializers import *
 from django.core.management import call_command
 from rest_framework.authtoken.models import Token
-
+from django.shortcuts import redirect
 
 # Create your views here.
 
@@ -47,6 +47,12 @@ def loaddata(request):
     call_command('loaddata', 'users')
     call_command('loaddata', 'participants')
     return HttpResponse("Data Loaded!")
+
+def login_success(request):
+    if request.user.groups.filter(name='admin'):
+        return redirect("viewsponsors")
+    else:
+        return redirect("viewtrials")
 
 class SignUp(generic.CreateView):
     form_class = UserCreationForm
