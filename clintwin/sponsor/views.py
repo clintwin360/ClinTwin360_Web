@@ -29,7 +29,7 @@ from django.shortcuts import redirect
 
 
 def index(request):
-    return render(request, 'sponsor/index.html')
+    return redirect("login")
 
 def dummy(request):
     questions = ParticipantQuestion.objects.all()
