@@ -53,13 +53,6 @@ class SignUp(generic.CreateView):
     success_url = reverse_lazy('login')
     template_name = 'sponsor/register.html'
 
-def login(request):
-    username = request.POST['username']
-    password = request.POST['password']
-    user = authenticate(request, username=username, password=password)
-    if user is not None:
-        login(request, user)
-        return redirect('/sponsor/viewtrials.html')
 
 """
 def register(request):
