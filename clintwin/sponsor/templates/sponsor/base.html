@@ -33,6 +33,70 @@
 
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav mr-auto">
+						{% if user.is_authenticated %} <!-- % if request.user.groups.filter(name='admin') % check for admin -->
+
+						<li class="nav-item dropdown">
+				        	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#4bc5de">
+				          Manage Sponsors
+				        </a>
+
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				          <a class="dropdown-item" href="{% url 'newsponsor' %}" style="color:#4bc5de">Create New Sponsor</a>
+				          <a class="dropdown-item" href="{% url 'viewsponsors' %}" style="color:#4bc5de">View Sponsors</a>
+									<a class="dropdown-item" href="{% url 'viewsponsorreq' %}" style="color:#4bc5de">View Sponsor Requests</a>
+
+				        </div>
+
+						</li>
+						<!--% else % -->
+						<li class="nav-item dropdown">
+		 		        	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#4bc5de">
+				          Manage Clinical Trials
+				        </a>
+
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				          <a class="dropdown-item" href="{% url 'newtrial' %}" style="color:#4bc5de">Create New Clinical Trial</a>
+				          <a class="dropdown-item" href="{% url 'viewtrials' %}" style="color:#4bc5de">View Clinical Trials</a>
+
+				          <div class="dropdown-divider"></div>
+						  	<a class="dropdown-item" href="{% url 'inclusion' %}" style="color:#4bc5de">Inclusion Criteria</a>
+							<a class="dropdown-item" href="{% url 'exclusion' %}" style="color:#4bc5de">Exclusion Criteria</a>
+				        </div>
+
+						</li>
+
+
+				<!--
+
+				IF SUPER USER
+
+						<li class="nav-item dropdown">
+				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#4bc5de">
+				          Manage Accounts
+				        </a>
+
+
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				          <a class="dropdown-item" href="" style="color:#4bc5de">Accounts Dashboard</a>
+				          <a class="dropdown-item" href="" style="color:#4bc5de">Add or Remove Account</a>
+				        </div>
+
+						</li>
+
+					-->
+
+
+					 	<!--Check if clintwin, sponsor, or sponsor super user -->
+
+
+							<li class="nav-item">
+								<a class="nav-link" style="color:#4bc5de">Welcome back, {{ user.username }}!  </p>
+							</li>
+							<li class="nav-item ">
+								<a class="nav-link" href="{% url 'logout' %}" style="color:#4bc5de">logout</a>
+							</li>
+
+						{% endif %}
 						{% if not user.is_authenticated %}
 						<li class="nav-item dropdown">
 		        			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#4bc5de">
@@ -54,71 +118,7 @@
 				</li>
 
 
-				<!--Put back under authentication once it works again -->
-				{% if user.is_authenticated %} <!-- % if request.user.groups.filter(name='admin') % check for admin -->
 
-				<li class="nav-item dropdown">
-		        	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#4bc5de">
-		          Manage Sponsors
-		        </a>
-
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-		          <a class="dropdown-item" href="{% url 'newsponsor' %}" style="color:#4bc5de">Create New Sponsor</a>
-		          <a class="dropdown-item" href="{% url 'viewsponsors' %}" style="color:#4bc5de">View Sponsors</a>
-							<a class="dropdown-item" href="{% url 'viewsponsorreq' %}" style="color:#4bc5de">View Sponsor Requests</a>
-
-		        </div>
-
-				</li>
-				<!--% else % -->
-				<li class="nav-item dropdown">
- 		        	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#4bc5de">
-		          Manage Clinical Trials
-		        </a>
-
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-		          <a class="dropdown-item" href="{% url 'newtrial' %}" style="color:#4bc5de">Create New Clinical Trial</a>
-		          <a class="dropdown-item" href="{% url 'viewtrials' %}" style="color:#4bc5de">View Clinical Trials</a>
-
-		          <div class="dropdown-divider"></div>
-				  	<a class="dropdown-item" href="{% url 'inclusion' %}" style="color:#4bc5de">Inclusion Criteria</a>
-					<a class="dropdown-item" href="{% url 'exclusion' %}" style="color:#4bc5de">Exclusion Criteria</a>
-		        </div>
-
-				</li>
-
-
-		<!--
-
-		IF SUPER USER
-
-				<li class="nav-item dropdown">
-		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#4bc5de">
-		          Manage Accounts
-		        </a>
-
-
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-		          <a class="dropdown-item" href="" style="color:#4bc5de">Accounts Dashboard</a>
-		          <a class="dropdown-item" href="" style="color:#4bc5de">Add or Remove Account</a>
-		        </div>
-
-				</li>
-
-			-->
-
-
-			 	<!--Check if clintwin, sponsor, or sponsor super user -->
-
-
-					<li class="nav-item">
-						<a class="nav-link" style="color:#4bc5de">Welcome back, {{ user.username }}!  </p>
-					</li>
-					<li class="nav-item ">
-						<a class="nav-link" href="{% url 'logout' %}" style="color:#4bc5de">logout</a>
-					</li>
-
-				{% endif %}
 				</ul>
 				</div>
 			</div>
