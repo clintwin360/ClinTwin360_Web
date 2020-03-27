@@ -146,4 +146,4 @@ STATIC_ROOT = '/home/ubuntu/static'
 MEDIA_ROOT = '/home/ubuntu/media'
 
 
-LOGIN_REDIRECT_URL = '/sponsor/viewtrials'
+LOGIN_REDIRECT_URL = '/sponsor/login_success'
