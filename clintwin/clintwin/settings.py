@@ -145,6 +145,6 @@ STATIC_URL = '/static/'
 STATIC_ROOT = '/home/ubuntu/static'
 MEDIA_ROOT = '/home/ubuntu/media'
 
-
+LOGIN_URL = '/sponsor/accounts/login'
 LOGIN_REDIRECT_URL = '/sponsor/login_success'
 LOGOUT_REDIRECT_URL = '/sponsor/accounts/login'
