@@ -57,22 +57,7 @@
 
 
 				<!--Put back under authentication once it works again -->
-
-				<li class="nav-item dropdown">
-		        	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#4bc5de">
-		          Manage Clinical Trials
-		        </a>
-
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-		          <a class="dropdown-item" href="{% url 'newtrial' %}" style="color:#4bc5de">Create New Clinical Trial</a>
-		          <a class="dropdown-item" href="{% url 'viewtrials' %}" style="color:#4bc5de">View Clinical Trials</a>
-
-		          <div class="dropdown-divider"></div>
-				  	<a class="dropdown-item" href="{% url 'inclusion' %}" style="color:#4bc5de">Inclusion Criteria</a>
-					<a class="dropdown-item" href="{% url 'exclusion' %}" style="color:#4bc5de">Exclusion Criteria</a>
-		        </div>
-
-				</li>
+				{% if user.is_authenticated %} <!-- {% if request.user.groups.filter(name='admin') %} check for admin -->
 
 				<li class="nav-item dropdown">
 		        	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#4bc5de">
@@ -87,6 +72,24 @@
 		        </div>
 
 				</li>
+				<!--{% else %} -->
+				<li class="nav-item dropdown">
+ 		        	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#4bc5de">
+		          Manage Clinical Trials
+		        </a>
+
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		          <a class="dropdown-item" href="{% url 'newtrial' %}" style="color:#4bc5de">Create New Clinical Trial</a>
+		          <a class="dropdown-item" href="{% url 'viewtrials' %}" style="color:#4bc5de">View Clinical Trials</a>
+
+		          <div class="dropdown-divider"></div>
+				  	<a class="dropdown-item" href="{% url 'inclusion' %}" style="color:#4bc5de">Inclusion Criteria</a>
+					<a class="dropdown-item" href="{% url 'exclusion' %}" style="color:#4bc5de">Exclusion Criteria</a>
+		        </div>
+
+				</li>
+
+
 		<!--
 
 		IF SUPER USER
@@ -106,7 +109,7 @@
 
 			-->
 
-				{% if user.is_authenticated %} <!--Check if clintwin, sponsor, or sponsor super user -->
+			 	<!--Check if clintwin, sponsor, or sponsor super user -->
 
 				<li class="nav-item">
 					<a class="nav-link" href="{% url 'logout' %}" style="color:#4bc5de">logout</a>

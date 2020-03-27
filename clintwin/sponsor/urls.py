@@ -5,7 +5,7 @@ from django.conf.urls import url, include
 from django.contrib.auth import views as auth_views
 from rest_framework import routers
 
-
+# Move to API app
 router = routers.DefaultRouter()
 router.register(r'questions', views.ParticipantQuestionViewSet)
 router.register(r'participants', views.ParticipantViewSet)
@@ -13,8 +13,10 @@ router.register(r'responses', views.ParticipantResponseViewSet)
 
 urlpatterns = [
     path('', views.index, name='index'),
+    # Move to API app
     path('loaddata/', views.loaddata, name='loaddata'),
     path('dummy/', views.dummy, name='dummy'),
+    # Move to API app
     path('token/', views.get_token, name='token'),
 	path('accounts/', include('django.contrib.auth.urls')),
     path('register/', TemplateView.as_view(template_name='sponsor/register.html'), name='signup'),
@@ -35,6 +37,7 @@ urlpatterns = [
     path('contact', views.ContactPageView.as_view(), name='contact'),
     path('directions', views.DirectionsPageView.as_view(), name='directions'),
     path('contactform', views.contact, name='contactform'),
+    # Move to API app
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('login_success/', views.login_success, name='login_success'),
