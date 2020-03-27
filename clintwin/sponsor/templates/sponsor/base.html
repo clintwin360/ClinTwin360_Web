@@ -105,20 +105,19 @@
 				</li>
 
 			-->
+		</ul>
 
 			 	<!--Check if clintwin, sponsor, or sponsor super user -->
 
-				<li class="nav-item justify-content-end">
-					<a class="nav-link" href="{% url 'logout' %}" style="color:#4bc5de">logout</a>
-				</li>
-
-				<li class="nav-item justify-content-end">
-					<a class="nav-link" style="color:#4bc5de">Welcome back, {{ user.username }}!  </p>
-				</li>
-
-				{% endif %}
+				<ul class="navbar-nav justify-content-end">
+					<li class="nav-item">
+						<a class="nav-link" style="color:#4bc5de">Welcome back, {{ user.username }}!  </p>
+					</li>
+					<li class="nav-item ">
+						<a class="nav-link" href="{% url 'logout' %}" style="color:#4bc5de">logout</a>
+					</li>
 				</ul>
-
+				{% endif %}
 				</div>
 			</div>
 		</nav>
