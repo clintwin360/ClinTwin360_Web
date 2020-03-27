@@ -90,34 +90,34 @@
 
 						{% endif %}
 						{% if not user.is_authenticated %}
-						<li class="nav-item dropdown">
-		        			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#4bc5de">
-		          			About</a>
+							<li class="nav-item dropdown">
+			        			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#4bc5de">
+			          			About</a>
 
-							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						    	<a class="dropdown-item" href="{% url 'about' %}" style="color:#4bc5de">About Us</a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							    	<a class="dropdown-item" href="{% url 'about' %}" style="color:#4bc5de">About Us</a>
 
-						        <a class="dropdown-item" href="" style="color:#4bc5de">Leadership Team</a>
-								<a class="dropdown-item" href="{% url 'how_works' %}" style="color:#4bc5de">How Does It Works </a>
-					          <div class="dropdown-divider"></div>
-					          	<a class="dropdown-item" href="" style="color:#4bc5de">Use Cases </a>
-					        </div>
+							        <a class="dropdown-item" href="" style="color:#4bc5de">Leadership Team</a>
+									<a class="dropdown-item" href="{% url 'how_works' %}" style="color:#4bc5de">How Does It Works </a>
+						          <div class="dropdown-divider"></div>
+						          	<a class="dropdown-item" href="" style="color:#4bc5de">Use Cases </a>
+						        </div>
 
-						</li>
+							</li>
 						{% endif %}
 
-				<li class="nav-item">
-		        	<a class="nav-link" href="{% url 'contact' %}" style="color:#4bc5de">Contact Us</a>
-				</li>
+					<li class="nav-item">
+			        	<a class="nav-link" href="{% url 'contact' %}" style="color:#4bc5de">Contact Us</a>
+					</li>
 
 					{% if user.is_authenticated %}
 
-				<li class="nav-item">
-					<a class="nav-link" style="color:#4bc5de">Welcome back, {{ user.username }}!  </p>
-				</li>
-				<li class="nav-item ">
-					<a class="nav-link" href="{% url 'logout' %}" style="color:#4bc5de">logout</a>
-				</li>
+						<li class="nav-item">
+							<a class="nav-link" style="color:#4bc5de">Welcome back, {{ user.username }}!  </p>
+						</li>
+						<li class="nav-item ">
+							<a class="nav-link" href="{% url 'logout' %}" style="color:#4bc5de">logout</a>
+						</li>
 					{% endif %}
 
 
