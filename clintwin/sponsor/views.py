@@ -29,7 +29,10 @@ from django.shortcuts import redirect
 
 
 def index(request):
-    return redirect("login")
+    if request.user.is_authenticated():
+        return redirect('login_success')
+    else:
+        return redirect('login')
 
 def dummy(request):
     questions = ParticipantQuestion.objects.all()
