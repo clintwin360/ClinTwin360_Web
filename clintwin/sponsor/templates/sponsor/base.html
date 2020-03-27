@@ -30,7 +30,7 @@
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
-
+				{% if not user.is_authenticated %}
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav mr-auto">
 						<li class="nav-item dropdown">
@@ -47,14 +47,14 @@
 					        </div>
 
 						</li>
-
+				{% endif %}
 				<li class="nav-item">
 		        	<a class="nav-link" href="{% url 'contact' %}" style="color:#4bc5de">Contact Us</a>
 				</li>
 
 
 				<!--Put back under authentication once it works again -->
-				{% if user.is_authenticated %} <!-- {% if request.user.groups.filter(name='admin') %} check for admin -->
+				{% if user.is_authenticated %} <!-- % if request.user.groups.filter(name='admin') % check for admin -->
 
 				<li class="nav-item dropdown">
 		        	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#4bc5de">
@@ -69,7 +69,7 @@
 		        </div>
 
 				</li>
-				<!--{% else %} -->
+				<!--% else % -->
 				<li class="nav-item dropdown">
  		        	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#4bc5de">
 		          Manage Clinical Trials
@@ -108,18 +108,14 @@
 
 			 	<!--Check if clintwin, sponsor, or sponsor super user -->
 
-				<li class="nav-item">
+				<li class="nav-item justify-content-end">
 					<a class="nav-link" href="{% url 'logout' %}" style="color:#4bc5de">logout</a>
 				</li>
 
-				<li class="nav-item">
-					<a class="nav-link" style="color:#4bc5de">Hi {{ user.username }}!  </p>
+				<li class="nav-item justify-content-end">
+					<a class="nav-link" style="color:#4bc5de">Welcome back, {{ user.username }}!  </p>
 				</li>
-				{% else %}
 
-				<li class="nav-item">
-					<a class="nav-link" href="{% url 'login' %}" style="color:#4bc5de">login</a>
-				</li>
 				{% endif %}
 				</ul>
 
