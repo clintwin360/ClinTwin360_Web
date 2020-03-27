@@ -17,7 +17,7 @@ urlpatterns = [
     path('dummy/', views.dummy, name='dummy'),
     path('token/', views.get_token, name='token'),
 	path('accounts/', include('django.contrib.auth.urls')),
-    path('profile/', auth_views.LoginView.as_view(template_name='sponsor/viewtrial.html', name='dashboard')),    
+    path('accounts/profile/', auth_views.LoginView.as_view(template_name='sponsor/viewtrial.html', name='dashboard')),    
     path('register/', TemplateView.as_view(template_name='sponsor/register.html'), name='signup'),
 	path('signup/', views.SignUp.as_view(), name='signup'),
     path('viewtrials', views.viewTrials, name='viewtrials'),
