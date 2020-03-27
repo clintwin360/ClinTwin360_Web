@@ -22,7 +22,7 @@ urlpatterns = [
     path('viewtrials', views.viewTrials, name='viewtrials'),
     path('newtrial', TemplateView.as_view(template_name='sponsor/newtrial.html'), name='newtrial'),
     path('newtrial/inclusion', TemplateView.as_view(template_name='sponsor/inclusion.html'), name='inclusion'),
-    path('newtrial/inclusion', TemplateView.as_view(template_name='sponsor/exclusion.html'), name='exclusion'),
+    path('newtrial/exclusion', TemplateView.as_view(template_name='sponsor/exclusion.html'), name='exclusion'),
 
     # path('newcriterion', TemplateView.as_view(template_name='sponsor/new_criterion.html'), name='new_criterion'),
     # path('viewcriteria', TemplateView.as_view(template_name='sponsor/view_criterian.html'), name='view_criteria'),
