@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 from django.views.generic import TemplateView
 #from .forms import *
-from sponsor.forms import UserCreationForm, NewTrialForm
+from sponsor.forms import UserCreationForm, NewTrialForm, NewSponsorForm
 #from .forms import AuthenticationForm
 from django.urls import reverse_lazy
 from django.views import generic
@@ -20,7 +20,7 @@ from django.contrib.auth import get_user
 from .serializers import *
 from django.core.management import call_command
 from rest_framework.authtoken.models import Token
-
+from django.shortcuts import redirect
 
 # Create your views here.
 
@@ -48,6 +48,12 @@ def loaddata(request):
     call_command('loaddata', 'participants')
     return HttpResponse("Data Loaded!")
 
+def login_success(request):
+    if request.user.groups.filter(name='admin'):
+        return redirect("viewsponsors")
+    else:
+        return redirect("viewtrials")
+
 class SignUp(generic.CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('login')
@@ -61,13 +67,10 @@ def register(request):
         for tag, error in errors.iteritems():
             messages.error(request, error, extra_tags=tag)
         return redirect('/')
-
-
     user = User.objects.create(first_name=request.POST['first_name'], last_name=request.POST['last_name'], password=request.POST['password'], email=request.POST['email'])
     user.save()
     request.session['id'] = user.id
     return redirect('/success')
-
 def login(request):
     if request.method == 'POST':
         form = AuthenticationForm(request=request, data=request.POST)
@@ -87,8 +90,6 @@ def login(request):
     return render(request = request,
                     template_name = "login.html",
                     context={"form":form})
-
-
 def login(request):
     if (User.objects.filter(email=request.POST['login_email']).exists()):
         user = User.objects.filter(email=request.POST['login_email'])[0]
@@ -96,13 +97,10 @@ def login(request):
             request.session['id'] = user.id
             return redirect('/success')
     return redirect('/')
-
-
 def logout(request):
     logout(request)
     messages.info(request, "Logged out successfully!")
     return redirect('/')
-
 """
 # View for contact us form
 @api_view(['GET, POST'])
@@ -142,11 +140,33 @@ def viewTrials(request):
 
 """
 not working correctly.  need a django form?
-
 @api_view(['GET', 'POST'])
 def criteria(request):
     return render(request, 'criteria.html')
 """
+
+def newSponsor(request):
+    if request.method == 'POST':
+        # POST, generate bound form with data from the request
+        form = NewSponsorForm(request.POST)
+        # check if it's valid:
+        if form.is_valid():
+            # Insert into DB
+            form.save()
+            # redirect to a new URL:
+            return HttpResponseRedirect('new_sponsor.html')
+    elif request.method == 'GET':
+        # GET, generate unbound (blank) form
+        form = NewSponsorForm()
+    return render(request, 'sponsor/new_sponsor.html', {'form':form})
+
+def viewSponsors(request):
+    query_results = ClinicalTrial.objects.all()
+    return render(request, "sponsor/view_sponsors.html")
+
+def viewSponsorReq(request):
+    query_results = ClinicalTrial.objects.all()
+    return render(request, "sponsor/view_sponsor_req.html")
 
 # Static page for About us
 class AboutPageView(TemplateView):
@@ -177,6 +197,22 @@ class TrialsView(TemplateView):
 class CriteriaView(TemplateView):
     template_name = 'sponsor/criteria.html'
 
+# Static pages for Admin
+# class NewCriterionView(TemplateView):
+#     template_name = 'new_criterion.html'
+#
+# class ViewCriteriaView(TemplateView):
+#     template_name = 'view_criteria.html'
+
+class NewSponsorView(TemplateView):
+    template_name = 'sponsor/new_sponsor.html'
+
+class ViewSponsorView(TemplateView):
+    template_name = 'sponsor/view_sponsor.html'
+
+class ViewSponsorReqView(TemplateView):
+    template_name = 'sponsor/view_sponsor_req.html'
+
 
 #API
 class ParticipantQuestionViewSet(viewsets.ModelViewSet):
@@ -204,4 +240,3 @@ class ParticipantResponseViewSet(viewsets.ModelViewSet):
     queryset = ParticipantResponse.objects.all()
     serializer_class = ParticipantResponseSerializer
     #permission_classes = [permissions.IsAuthenticated]
-

@@ -25,7 +25,8 @@
 		{% block navbar %}
 		<nav class="navbar navbar-expand-lg" style="background-color:#fff9f9">
 			<div class="container-fluid">
-				<a class="navbar-brand"  href="{% url 'index' %}"><p style="color:#4bc5de; font-weight: 900;">ClinTwin360</p></a>
+				<a class="navbar-brand"  href="{% url 'login' %}"><p style="color:#4bc5de; font-weight: 900; margin-top: 1rem;
+		    margin-bottom: 1rem;">ClinTwin360</p></a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
@@ -33,7 +34,7 @@
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav mr-auto">
 						<li class="nav-item active">
-		        			<a class="nav-link" href="{% url 'index' %}" style="color:#4bc5de";>Home <span class="sr-only">(current)</span></a>
+		        			<a class="nav-link" href="{% url 'login' %}" style="color:#4bc5de";>Home <span class="sr-only">(current)</span></a>
 						</li>
 						<li class="nav-item dropdown">
 		        			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#4bc5de">
@@ -69,6 +70,20 @@
 		          <div class="dropdown-divider"></div>
 				  	<a class="dropdown-item" href="{% url 'inclusion' %}" style="color:#4bc5de">Inclusion Criteria</a>
 					<a class="dropdown-item" href="{% url 'exclusion' %}" style="color:#4bc5de">Exclusion Criteria</a>
+		        </div>
+
+				</li>
+
+				<li class="nav-item dropdown">
+		        	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#4bc5de">
+		          Manage Sponsors
+		        </a>
+
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		          <a class="dropdown-item" href="{% url 'newsponsor' %}" style="color:#4bc5de">Create New Sponsor</a>
+		          <a class="dropdown-item" href="{% url 'viewsponsors' %}" style="color:#4bc5de">View Sponsors</a>
+							<a class="dropdown-item" href="{% url 'viewsponsorreq' %}" style="color:#4bc5de">View Sponsor Requests</a>
+
 		        </div>
 
 				</li>
