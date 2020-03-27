@@ -144,3 +144,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = '/home/ubuntu/static'
 MEDIA_ROOT = '/home/ubuntu/media'
+
+
+LOGIN_REDIRECT_URL = '/sponsor/viewtrials.html'
