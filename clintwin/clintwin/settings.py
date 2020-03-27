@@ -147,3 +147,4 @@ MEDIA_ROOT = '/home/ubuntu/media'
 
 
 LOGIN_REDIRECT_URL = '/sponsor/login_success'
+LOGOUT_REDIRECT_URL = '/'
