@@ -10,6 +10,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 from rest_framework import viewsets
 from rest_framework import permissions
+from rest_framework import generics
 
 # New additions
 
@@ -33,7 +34,6 @@ def index(request):
         return redirect('login')
     else:
         return redirect('login_success')
-
 
 def dummy(request):
     questions = ParticipantQuestion.objects.all()
@@ -138,9 +138,15 @@ def newtrial(request):
         form = NewTrialForm()
     return render(request, 'sponsor/newtrial.html', {'form':form})
 
+
 def viewTrials(request):
-    query_results = ClinicalTrial.objects.all()
+    queryset = ClinicalTrial.objects.all()
     return render(request, "sponsor/viewtrials.html")
+
+@api_view(['GET'])
+class TrialList(generics.ListCreateAPIView):
+    queryset = Participant.objects.all()
+    serializer_class = ParticipantSerializer
 
 """
 not working correctly.  need a django form?
@@ -165,7 +171,7 @@ def newSponsor(request):
     return render(request, 'sponsor/new_sponsor.html', {'form':form})
 
 def viewSponsors(request):
-    query_results = ClinicalTrial.objects.all()
+    queryset = ClinicalTrial.objects.all()
     return render(request, "sponsor/view_sponsors.html")
 
 def viewSponsorReq(request):
