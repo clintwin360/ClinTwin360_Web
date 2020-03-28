@@ -133,7 +133,7 @@ def newtrial(request):
             # Insert into DB
             form.save()
             # redirect to a new URL:
-            return HttpResponseRedirect('viewtrials.html')
+            return redirect('inclusion')
     elif request.method == 'GET':
         # GET, generate unbound (blank) form
         form = NewTrialForm()
@@ -141,7 +141,7 @@ def newtrial(request):
 
 
 def viewTrials(request):
-    queryset = ClinicalTrial.objects.all()
+    queryset = ClinicalTrial.objects.all() #filter(sponsorId=request.user.sponsor_id)
     return render(request, "sponsor/viewtrials.html", {"queryset": queryset})
 
 @api_view(['GET'])

@@ -69,7 +69,7 @@ class ClinicalTrial(models.Model):
     endDate = models.DateTimeField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
+    #sponsorId = models.ForeignKey(Sponsor)
 
 class ClinicalTrialCriteria(models.Model):
     name = models.CharField(max_length=500)
