@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 from django.views.generic import TemplateView
 from . import views
 from django.conf.urls import url, include
@@ -10,6 +10,8 @@ router = routers.DefaultRouter()
 router.register(r'questions', views.ParticipantQuestionViewSet)
 router.register(r'participants', views.ParticipantViewSet)
 router.register(r'responses', views.ParticipantResponseViewSet)
+
+router.register(r'profile', views.SponsorProfileViewSet)
 
 
 urlpatterns = [
@@ -42,4 +44,5 @@ urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('login_success/', views.login_success, name='login_success'),
+    re_path(r'^profile/<int:pk>/$', views.ProfileView.as_view(), name='profile'),
 ]

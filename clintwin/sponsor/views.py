@@ -23,6 +23,7 @@ from django.core.management import call_command
 from rest_framework.authtoken.models import Token
 from django.shortcuts import redirect
 from django.contrib.auth import views as auth_views
+from rest_framework.renderers import TemplateHTMLRenderer
 # Create your views here.
 
 # hashed_password = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt())
@@ -141,7 +142,7 @@ def newtrial(request):
 
 def viewTrials(request):
     queryset = ClinicalTrial.objects.all()
-    return render(request, "sponsor/viewtrials.html")
+    return render(request, "sponsor/viewtrials.html", {"queryset": queryset})
 
 @api_view(['GET'])
 class TrialList(generics.ListCreateAPIView):
@@ -207,6 +208,14 @@ class TrialsView(TemplateView):
 class CriteriaView(TemplateView):
     template_name = 'sponsor/criteria.html'
 
+class ProfileView(generics.RetrieveAPIView):
+    queryset = Sponsor.objects.all()
+    renderer_classes = [TemplateHTMLRenderer]
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return Response({'sponsor': self.object}, template_name='sponsor/sponsorprofile.html')
+
 # Static pages for Admin
 # class NewCriterionView(TemplateView):
 #     template_name = 'new_criterion.html'
@@ -249,4 +258,12 @@ class ParticipantResponseViewSet(viewsets.ModelViewSet):
     """
     queryset = ParticipantResponse.objects.all()
     serializer_class = ParticipantResponseSerializer
+    #permission_classes = [permissions.IsAuthenticated]
+
+class SponsorProfileViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows responses to be viewed or edited.
+    """
+    queryset = Sponsor.objects.all()
+    serializer_class = SponsorSerializer
     #permission_classes = [permissions.IsAuthenticated]

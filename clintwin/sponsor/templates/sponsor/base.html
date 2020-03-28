@@ -115,7 +115,7 @@
 					{% if user.is_authenticated %}
 
 						<li class="nav-item">
-							<a class="nav-link" style="color:#4bc5de">Welcome back, {{ user.username }}!  </p>
+							<a class="nav-link" href="{% url 'profile' %} " style="color:#4bc5de">Welcome back, {{ user.username }}!  </p>  
 						</li>
 						<li class="nav-item ">
 							<a class="nav-link" href="{% url 'logout' %}" style="color:#4bc5de" align="right">logout</a>

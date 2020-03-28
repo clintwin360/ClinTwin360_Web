@@ -19,3 +19,7 @@ class ParticipantResponseSerializer(serializers.ModelSerializer):
         model = ParticipantResponse
         fields = ['question', 'participant', 'value']
 
+class SponsorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Sponsor
+        fields = '__all__'
