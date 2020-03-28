@@ -104,11 +104,13 @@
 						        </div>
 
 							</li>
+
+							<li class="nav-item">
+					        	<a class="nav-link" href="{% url 'contact' %}" style="color:#4bc5de">Contact Us</a>
+							</li>
 						{% endif %}
 
-					<li class="nav-item">
-			        	<a class="nav-link" href="{% url 'contact' %}" style="color:#4bc5de">Contact Us</a>
-					</li>
+
 
 					{% if user.is_authenticated %}
 
@@ -116,7 +118,7 @@
 							<a class="nav-link" style="color:#4bc5de">Welcome back, {{ user.username }}!  </p>
 						</li>
 						<li class="nav-item ">
-							<a class="nav-link" href="{% url 'logout' %}" style="color:#4bc5de">logout</a>
+							<a class="nav-link" href="{% url 'logout' %}" style="color:#4bc5de" align="right">logout</a>
 						</li>
 					{% endif %}
 
