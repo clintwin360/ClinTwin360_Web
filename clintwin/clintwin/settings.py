@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'api',
     'sponsor',
     'rest_framework',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'crispy_forms',
 
 ]
 
@@ -145,6 +146,10 @@ STATIC_URL = '/static/'
 STATIC_ROOT = '/home/ubuntu/static'
 MEDIA_ROOT = '/home/ubuntu/media'
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 LOGIN_URL = '/sponsor/accounts/login'
 LOGIN_REDIRECT_URL = '/sponsor/login_success'
 LOGOUT_REDIRECT_URL = '/sponsor/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

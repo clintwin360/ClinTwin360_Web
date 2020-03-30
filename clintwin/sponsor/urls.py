@@ -25,7 +25,7 @@ urlpatterns = [
     path('register/', TemplateView.as_view(template_name='sponsor/register.html'), name='signup'),
 	path('signup/', views.SignUp.as_view(), name='signup'),
     path('viewtrials', views.viewTrials, name='viewtrials'),
-    path('newtrial', TemplateView.as_view(template_name='sponsor/newtrial.html'), name='newtrial'),
+    path('newtrial', views.NewClinicalTrialView.as_view(), name='newtrial'),
     path('newtrial/inclusion', TemplateView.as_view(template_name='sponsor/inclusion.html'), name='inclusion'),
     path('newtrial/exclusion', TemplateView.as_view(template_name='sponsor/exclusion.html'), name='exclusion'),
 

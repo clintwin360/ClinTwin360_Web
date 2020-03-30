@@ -10,7 +10,6 @@ from django.utils import timezone
 
 # Create your models he
 
-""" PRE-MERGE MODELS
 class UserManager(models.Manager):
     def validator(self, postData):
         errors = {}
@@ -63,20 +62,26 @@ class SponsorRequest(models.Model):
 
 
 class ClinicalTrial(models.Model):
-    name = models.CharField(max_length=500)
-    targetRecruitment = models.IntegerField()
-    currentRecruitment = models.IntegerField()
-    startDate = models.DateTimeField()
-    endDate = models.DateTimeField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    #sponsorId = models.ForeignKey(Sponsor)
+    trialId = models.CharField('Trial ID', max_length=30,primary_key=True)
+    sponsorId = models.ForeignKey('Sponsor', on_delete=models.SET_NULL, null=True)
+    title=  models.CharField('Trial Title', max_length=100)
+    objective = models.CharField('Objective', max_length=100)
+    recruitmentStartDate= models.DateField('Recruitment Start Date', help_text='MM/DD/YY')
+    recruitmentEndDate= models.DateField('Recruitment End Date', help_text='MM/DD/YY')
+    enrollmentTarget= models.IntegerField('Enrollment Target',null=True, blank=True)
+    url=models.URLField('URL', null=True,blank=True)
+    followUp= models.TextField('Followup Notes',null=True, blank=True)
+    location=  models.CharField('Location',max_length=100)
+    comments = models.TextField('Comments', null=True, blank=True)
+    createdTimeStamp=models.DateTimeField(auto_now_add = True)
 
-class ClinicalTrialCriteria(models.Model):
-    name = models.CharField(max_length=500)
-    valueType = models.CharField(max_length=50)
-    #options = ArrayField(models.CharField(max_length=256))
-    options = models.TextField()
+    def __str__(self):
+        ret = self.trialId + self.title
+        return ret
+
+    def get_absolute_url(self):
+        #Returns the url to access a detail record for the Clinical Trial.
+        return reverse('clinicalTrial-detail', args=[str(self.trialId)])
 
 
 class ClinicalTrialCriteriaResponse(models.Model):
@@ -119,8 +124,9 @@ class ParticipantResponse(models.Model):
 
     def __str__(self):
         return self.question__text
-"""
 
+
+"""
 
 class UserManager(models.Manager):
     def validator(self, postData):
@@ -155,9 +161,9 @@ class Contact(models.Model):
     first_name = models.CharField(null=True,max_length=50)
     last_name = models.CharField(null=True,max_length=50)
     organization=models.CharField(null=True,max_length=50)
-    email = models.EmailField()  
+    email = models.EmailField()
     comment = models.TextField
-	
+
 
 class Sponsor(models.Model):
     sponsorId= models.CharField('Sponsor ID', max_length=30,primary_key=True, help_text='Unique Sponsor ID')
@@ -165,19 +171,19 @@ class Sponsor(models.Model):
     dateRegistered= models.DateField('Date of Registration')
     dateDeregistered=models.DateField('Date of De-Regstration', null=True, blank=True)
     contactPerson=models.CharField('Contact Person', max_length=50)
-    email = models.EmailField('Email')  
-    phone= models.IntegerField('Phone') 
+    email = models.EmailField('Email')
+    phone= models.IntegerField('Phone')
     location=models.CharField('Location',max_length=100)
 
     def __str__(self):
-        ret = self.sponsorId + ',' + self.OrganizationName		 
-        return ret	
-		
+        ret = self.sponsorId + ',' + self.OrganizationName
+        return ret
+
     def get_absolute_url(self):
-        """Returns the url to access a detail record for the Sponsor."""
+        #Returns the url to access a detail record for the Sponsor.
         return reverse('sponsor-detail', args=[str(self.sponsorId)])
 
-    
+
 class Participant(models.Model):
     GENDER = (
         ('M', 'Male'),
@@ -194,49 +200,50 @@ class Participant(models.Model):
     dateBirth=models.DateField('Date of Birth',help_text='MM/DD/YY')
     dateRegistered= models.DateField('Date of Registration', help_text='MM/DD/YY')
     dateDeregistered=models.DateField('Date of De-Registration', help_text='MM/DD/YY',null=True, blank=True)
-    email = models.EmailField('Email')  
-    phone= models.IntegerField('Phone') 
+    email = models.EmailField('Email')
+    phone= models.IntegerField('Phone')
     location=models.CharField('Location',max_length=100)
     lastLogin=models.DateTimeField(auto_now = True)
-	
+
     def __str__(self):
-        ret = self.participantId + ',' + self.firstName + ',' + self.lastName	 
-        return ret	
-	
+        ret = self.participantId + ',' + self.firstName + ',' + self.lastName
+        return ret
+
     def get_absolute_url(self):
-        """Returns the url to access a detail record for the Participant."""
+        #Returns the url to access a detail record for the Participant.
         return reverse('participant-detail', args=[str(self.participantId)])
 
 
-	
+
 class Criteria (models.Model):
     criteriaId=models.CharField('Criteria ID', max_length=30,primary_key=True)
     name=models.CharField('Criteria Name',max_length=50)
     value=models.CharField('Criteria Value', max_length=50)
     valueType=models.CharField('Criteria Type', max_length=50)
-	
+
     def __str__(self):
-        ret = self.criteriaId + ',' + self.name	
+        ret = self.criteriaId + ',' + self.name
         return ret
-		
+
     def get_absolute_url(self):
-        """Returns the url to access a detail record for the Criteria."""
+        Returns the url to access a detail record for the Criteria.
+
         return reverse('criteria-detail', args=[str(self.criteriaId)])
-	
+
 class Categories (models.Model):
     categoryId=models.CharField('Category ID', max_length=30,primary_key=True)
     name=models.CharField('Category Name', max_length=50)
     value=models.CharField('Category Value',max_length=50)
     valueType=models.CharField('Value Type',max_length=50)
-	
+
     def __str__(self):
-        ret = self.categoryId + ',' + self.name 	
+        ret = self.categoryId + ',' + self.name
         return ret
-	
+
     def get_absolute_url(self):
-        """Returns the url to access a detail record for the Category."""
+        #Returns the url to access a detail record for the Category.
         return reverse('category-detail', args=[str(self.categoryId)])
-	
+
 
 class ClinicalTrial(models.Model):
     trialId = models.CharField('Trial ID', max_length=30,primary_key=True)
@@ -253,28 +260,28 @@ class ClinicalTrial(models.Model):
     location=  models.CharField('Location',max_length=100)
     comments = models.TextField('Comments', null=True, blank=True)
     createdTimeStamp=models.DateTimeField(auto_now_add = True)
-	
+
     def __str__(self):
-        ret = self.trialId + self.title 		
+        ret = self.trialId + self.title
         return ret
 
     def get_absolute_url(self):
-        """Returns the url to access a detail record for the Clinical Trial."""
-        return reverse('clinicalTrial-detail', args=[str(self.trialId)])		
-		
+        #Returns the url to access a detail record for the Clinical Trial.
+        return reverse('clinicalTrial-detail', args=[str(self.trialId)])
+
 
 class ClinicalTrialCriteriaResponse (models.Model):
     responseId=models.CharField('Response ID',max_length=30,primary_key=True)
     trialId=models.ForeignKey('ClinicalTrial', on_delete=models.SET_NULL, null=True)
     value=models.CharField('Value',max_length=50)
-	
+
     def __str__(self):
-        ret = self.responseId + ',' + self.trialId + ',' + self.value 	
-        return 
-	
+        ret = self.responseId + ',' + self.trialId + ',' + self.value
+        return
+
     def get_absolute_url(self):
-        """Returns the url to access a detail record for the Trial response."""
-        return reverse('trialResponse-detail', args=[str(self.responseId)])		
+        #Returns the url to access a detail record for the Trial response.
+        return reverse('trialResponse-detail', args=[str(self.responseId)])
 
 class QuestionSchema (models.Model):
     questionId=models.CharField('Question ID',max_length=30,primary_key=True)
@@ -285,9 +292,10 @@ class QuestionSchema (models.Model):
     nextQuestion=models.CharField ('Next Question', max_length=30, null=True, blank=True)
 
     def __str__(self):
-        ret = self.questionId 
+        ret = self.questionId
         return ret
-		
+
     def get_absolute_url(self):
-        """Returns the url to access a detail record for the Question Schema."""
-        return reverse('questionSchema-detail', args=[str(self.questionId)])	
+        #Returns the url to access a detail record for the Question Schema.
+        return reverse('questionSchema-detail', args=[str(self.questionId)])
+"""

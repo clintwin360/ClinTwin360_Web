@@ -1,5 +1,6 @@
 {% extends "sponsor/base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block title %}Add New Clinical Trial{% endblock %}
 {% block content %}
 <div class=' text-center p-5 ' style="color:#4bc5de">
@@ -7,8 +8,37 @@
     <div class="container-fluid">
         <form method="post" novalidate>
             {% csrf_token %}
-            {{ form }}
-            <button type="submit">Submit</button>
+            <div class="row">
+                <div class="col-6">
+                    {{ form.title|as_crispy_field }}
+                </div>
+                <div class="col-6">
+                    {{ form.url|as_crispy_field }}
+                </div>
+            	<div class="col-4">
+                    {{ form.recruitmentStartDate|as_crispy_field }}
+                </div>
+            	<div class="col-4">
+                    {{ form.recruitmentEndDate|as_crispy_field }}
+                </div>
+            	<div class="col-4">
+                    {{ form.enrollmentTarget|as_crispy_field }}
+                </div>
+            	<div class="col-6">
+                    {{ form.objective|as_crispy_field }}
+                </div>
+        	    <div class="col-6">
+                    {{ form.location|as_crispy_field }}
+                </div>
+            	<div class="col-6">
+                    {{ form.comments|as_crispy_field }}
+                </div>
+            	<div class="col-6">
+                    {{ form.followUp|as_crispy_field }}
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Create Trial</button>
+        </div>
         </form>
     </div>
 </div>
