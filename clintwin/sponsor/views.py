@@ -146,20 +146,6 @@ def criteria(request):
     return render(request, 'criteria.html')
 """
 
-def newSponsor(request):
-    if request.method == 'POST':
-        # POST, generate bound form with data from the request
-        form = NewSponsorForm(request.POST)
-        # check if it's valid:
-        if form.is_valid():
-            # Insert into DB
-            form.save()
-            # redirect to a new URL:
-            return HttpResponseRedirect('new_sponsor.html')
-    elif request.method == 'GET':
-        # GET, generate unbound (blank) form
-        form = NewSponsorForm()
-    return render(request, 'sponsor/new_sponsor.html', {'form':form})
 
 def viewSponsors(request):
     queryset = Sponsor.objects.all()
@@ -212,6 +198,11 @@ class ProfileView(generics.RetrieveAPIView):
 #
 # class ViewCriteriaView(TemplateView):
 #     template_name = 'view_criteria.html'
+
+class NewSponsorView(generic.CreateView):
+    model = Sponsor
+    fields = ('organization', 'contactPerson', 'location', 'phone', 'email','notes')
+    template_name = 'sponsor/new_sponsor.html'
 
 class NewClinicalTrialView(generic.CreateView):
     model = ClinicalTrial

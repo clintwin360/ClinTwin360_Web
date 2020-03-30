@@ -31,7 +31,7 @@ urlpatterns = [
 
     # path('newcriterion', TemplateView.as_view(template_name='sponsor/new_criterion.html'), name='new_criterion'),
     # path('viewcriteria', TemplateView.as_view(template_name='sponsor/view_criterian.html'), name='view_criteria'),
-    path('newsponsor', TemplateView.as_view(template_name='sponsor/new_sponsor.html'), name='newsponsor'),
+    path('newsponsor', views.NewSponsorView.as_view(), name='newsponsor'),
     path('viewsponsors', views.viewSponsors, name='viewsponsors'),
     path('viewsponsorreq', views.viewSponsorReq, name='viewsponsorreq'),
 

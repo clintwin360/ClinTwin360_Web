@@ -1,5 +1,6 @@
 {% extends "sponsor/base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block title %}Add New Sponsor{% endblock %}
 {% block content %}
 <div class=' text-center p-5 ' style="color:#4bc5de">
@@ -7,8 +8,9 @@
     <div class="container-fluid">
         <form method="post" novalidate>
             {% csrf_token %}
-            {{ form }}
-            <button type="submit">Submit</button>
+            <div class="row">
+            </div>
+            <button class="btn btn-primary" type="submit">Add Sponsor</button>
         </form>
     </div>
 </div>
