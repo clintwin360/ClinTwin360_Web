@@ -33,7 +33,8 @@
 
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav mr-auto">
-						{% if user.is_authenticated %} <!-- % if request.user.groups.filter(name='admin') % check for admin -->
+						{% if user.is_authenticated %}
+							{% if request.user.groups.filter(name='clintwin') %}
 
 						<li class="nav-item dropdown">
 				        	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#4bc5de">
@@ -48,7 +49,7 @@
 				        </div>
 
 						</li>
-						<!--% else % -->
+						{% else %} -->
 						<li class="nav-item dropdown">
 		 		        	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#4bc5de">
 				          Manage Clinical Trials
@@ -66,9 +67,9 @@
 						</li>
 
 
-				<!--
 
-				IF SUPER USER
+
+						{% if request.user.groups.filter(name='sponsor_admin') %}
 
 						<li class="nav-item dropdown">
 				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#4bc5de">
@@ -82,12 +83,12 @@
 				        </div>
 
 						</li>
-
-					-->
+						{% endif %}
 
 
 					 	<!--Check if clintwin, sponsor, or sponsor super user -->
 
+						{% endif %}
 						{% endif %}
 						{% if not user.is_authenticated %}
 							<li class="nav-item dropdown">
@@ -115,7 +116,7 @@
 					{% if user.is_authenticated %}
 
 						<li class="nav-item">
-							<a class="nav-link" href="{% url 'profile' %} " style="color:#4bc5de">Welcome back, {{ user.username }}!  </p>  
+							<a class="nav-link" href="{% url 'profile' %} " style="color:#4bc5de">Welcome back, {{ user.username }}!  </p>
 						</li>
 						<li class="nav-item ">
 							<a class="nav-link" href="{% url 'logout' %}" style="color:#4bc5de" align="right">logout</a>
