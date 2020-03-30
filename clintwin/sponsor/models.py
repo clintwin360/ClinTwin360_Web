@@ -71,11 +71,17 @@ class ClinicalTrial(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     #sponsorId = models.ForeignKey(Sponsor)
 
+
 class ClinicalTrialCriteria(models.Model):
     name = models.CharField(max_length=500)
     valueType = models.CharField(max_length=50)
-    #options = ArrayField(models.CharField(max_length=256))
     options = models.TextField()
+    #options = ArrayField(models.CharField(max_length=256))
+    searchable = models.BooleanField()
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, related_name='subcriteria')
+
+    def __str__(self):
+        return self.name
 
 
 class ClinicalTrialCriteriaResponse(models.Model):
@@ -86,6 +92,7 @@ class ClinicalTrialCriteriaResponse(models.Model):
 
 class QuestionCategory(models.Model):
     name = models.CharField(max_length=50)
+
 
 class Participant(models.Model):
     first_name = models.CharField(max_length=128)
