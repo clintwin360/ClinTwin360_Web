@@ -54,7 +54,7 @@ def loaddata(request):
     return HttpResponse("Data Loaded!")
 
 def login_success(request):
-    if request.user.groups.filter(name='admin'):
+    if request.user.groups.filter(name='clintwin'):
         return redirect("viewsponsors")
     else:
         return redirect("viewtrials")
