@@ -49,10 +49,10 @@ class Contact(models.Model):
 
 
 class Sponsor(models.Model):
-    organization = models.CharField('Organization Name', max_length=50, help_text='Name of Sponsor')
+    organization = models.CharField('Organization Name', max_length=500, help_text='Name of Sponsor')
     date_joined = models.DateField('Date of Registration', null=True)
     dateDeregistered = models.DateField('Date of De-Regstration', null=True, blank=True)
-    contactPerson = models.CharField('Contact Person', null=True, max_length=50)
+    contactPerson = models.CharField('Contact Person', null=True, max_length=500)
     email = models.EmailField('Email', null=True)
     phone = models.IntegerField('Phone', null=True)
     location = models.CharField('Location', null=True, max_length=100)
