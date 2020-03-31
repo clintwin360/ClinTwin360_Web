@@ -201,7 +201,7 @@ class ProfileView(generics.RetrieveAPIView):
 
 class NewSponsorView(generic.CreateView):
     model = Sponsor
-    fields = ('organization', 'contactPerson', T'location', 'phone', 'email', 'notes')
+    fields = ('organization', 'contactPerson', 'location', 'phone', 'email', 'notes')
     template_name = 'sponsor/new_sponsor.html'
 
 class NewClinicalTrialView(generic.CreateView):
