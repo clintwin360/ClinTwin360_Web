@@ -433,7 +433,7 @@
     "pk": 40, 
     "fields": {
       "name": "cardiovascular disease", 
-      "options": "[\"Congenital heart disease\", \"Arrhythmia\", \"Coronary artery disease\", \"Dilated cardiomyopathy\", \"Myocardial infarction\", \"Heart failure\", \"Hypertrophic cardiomyopathy\", Mitral regurgitation\", \"Mitral valve prolapse\", \"Pulmonary stenosis\"]", 
+      "options": "[\"\", \"Arrhythmia\", \"Coronary artery disease\", \"Dilated cardiomyopathy\", \"Myocardial infarction\", \"Heart failure\", \"Hypertrophic cardiomyopathy\", Mitral regurgitation\", \"Mitral valve prolapse\", \"Pulmonary stenosis\"]",
       "valueType": "list", 
       "parent": null, 
       "searchable": true

@@ -107,11 +107,12 @@ class ClinicalTrialCriteria(models.Model):
 
 
 class ClinicalTrialCriteriaResponse(models.Model):
-    value = models.CharField(max_length=50)
+    criteria = models.ForeignKey(ClinicalTrialCriteria, on_delete=models.CASCADE, null=True)
+    trial = models.ForeignKey(ClinicalTrial, on_delete=models.CASCADE, null=True, related_name='criteria')
+    value = models.CharField(max_length=1024)
+    comparison = models.CharField(max_length=50)
     criteriaType = models.CharField(max_length=50)
     negated = models.BooleanField()
-
-
 
 
 class QuestionCategory(models.Model):
