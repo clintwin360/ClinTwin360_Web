@@ -25,13 +25,13 @@ urlpatterns = [
     path('register/', TemplateView.as_view(template_name='sponsor/register.html'), name='signup'),
 	path('signup/', views.SignUp.as_view(), name='signup'),
     path('viewtrials', views.viewTrials, name='viewtrials'),
-    path('newtrial', TemplateView.as_view(template_name='sponsor/newtrial.html'), name='newtrial'),
+    path('newtrial', views.NewClinicalTrialView.as_view(), name='newtrial'),
     path('newtrial/inclusion', TemplateView.as_view(template_name='sponsor/inclusion.html'), name='inclusion'),
     path('newtrial/exclusion', TemplateView.as_view(template_name='sponsor/exclusion.html'), name='exclusion'),
 
     # path('newcriterion', TemplateView.as_view(template_name='sponsor/new_criterion.html'), name='new_criterion'),
     # path('viewcriteria', TemplateView.as_view(template_name='sponsor/view_criterian.html'), name='view_criteria'),
-    path('newsponsor', TemplateView.as_view(template_name='sponsor/new_sponsor.html'), name='newsponsor'),
+    path('newsponsor', views.NewSponsorView.as_view(), name='newsponsor'),
     path('viewsponsors', views.viewSponsors, name='viewsponsors'),
     path('viewsponsorreq', views.viewSponsorReq, name='viewsponsorreq'),
 

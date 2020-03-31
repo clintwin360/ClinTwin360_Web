@@ -54,7 +54,7 @@ def loaddata(request):
     return HttpResponse("Data Loaded!")
 
 def login_success(request):
-    if request.user.groups.filter(name='admin'):
+    if request.user.groups.filter(name='clintwin'):
         return redirect("viewsponsors")
     else:
         return redirect("viewtrials")
@@ -124,25 +124,15 @@ def contact(request):
         form = ContactForm()
     return render(request,'contactform.html',{'form':form})
 
-def newtrial(request):
-    if request.method == 'POST':
-        # POST, generate bound form with data from the request
-        form = NewTrialForm(request.POST)
-        # check if it's valid:
-        if form.is_valid():
-            # Insert into DB
-            form.save()
-            # redirect to a new URL:
-            return redirect('inclusion')
-    elif request.method == 'GET':
-        # GET, generate unbound (blank) form
-        form = NewTrialForm()
-    return render(request, 'sponsor/newtrial.html', {'form':form})
+class ClinicalTrialCreateView(generic.CreateView):
+    model = ClinicalTrial
+    fields = ('trialId', 'sponsorId', 'title', 'objective','recruitmentStartDate','recruitmentEndDate','enrollmentTarget','url','followUp','location','comments')
+    template_name = 'create_trial_form.html'
 
 
 def viewTrials(request):
-    queryset = ClinicalTrial.objects.all() #filter(sponsorId=request.user.sponsor_id)
-    return render(request, "sponsor/viewtrials.html", {"queryset": queryset})
+    #queryset = ClinicalTrial.objects.all() #filter(sponsorId=request.user.sponsor_id)
+    return render(request, "sponsor/viewtrials.html")
 
 @api_view(['GET'])
 class TrialList(generics.ListCreateAPIView):
@@ -156,27 +146,13 @@ def criteria(request):
     return render(request, 'criteria.html')
 """
 
-def newSponsor(request):
-    if request.method == 'POST':
-        # POST, generate bound form with data from the request
-        form = NewSponsorForm(request.POST)
-        # check if it's valid:
-        if form.is_valid():
-            # Insert into DB
-            form.save()
-            # redirect to a new URL:
-            return HttpResponseRedirect('new_sponsor.html')
-    elif request.method == 'GET':
-        # GET, generate unbound (blank) form
-        form = NewSponsorForm()
-    return render(request, 'sponsor/new_sponsor.html', {'form':form})
 
 def viewSponsors(request):
-    queryset = ClinicalTrial.objects.all()
+    queryset = Sponsor.objects.all()
     return render(request, "sponsor/view_sponsors.html")
 
 def viewSponsorReq(request):
-    query_results = ClinicalTrial.objects.all()
+    query_results = SponsorRequest.objects.all()
     return render(request, "sponsor/view_sponsor_req.html")
 
 # Static page for About us
@@ -222,6 +198,16 @@ class ProfileView(generics.RetrieveAPIView):
 #
 # class ViewCriteriaView(TemplateView):
 #     template_name = 'view_criteria.html'
+
+class NewSponsorView(generic.CreateView):
+    model = Sponsor
+    fields = ('organization', 'contactPerson',' location',' phone', 'email', 'notes')
+    template_name = 'sponsor/new_sponsor.html'
+
+class NewClinicalTrialView(generic.CreateView):
+    model = ClinicalTrial
+    fields = ('trialId', 'sponsorId', 'title', 'objective','recruitmentStartDate','recruitmentEndDate','enrollmentTarget','url','followUp','location','comments')
+    template_name = 'sponsor/newtrial.html'
 
 class NewSponsorView(TemplateView):
     template_name = 'sponsor/new_sponsor.html'
