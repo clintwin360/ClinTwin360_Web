@@ -131,7 +131,7 @@ class ClinicalTrialCreateView(generic.CreateView):
 
 
 def viewTrials(request):
-    queryset = ClinicalTrial.objects.all() #filter(sponsorId=request.user.sponsor_id)
+    #queryset = ClinicalTrial.objects.all() #filter(sponsorId=request.user.sponsor_id)
     return render(request, "sponsor/viewtrials.html")
 
 @api_view(['GET'])
