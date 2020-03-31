@@ -1,0 +1,16 @@
+[
+  {
+    "model": "sponsor.Sponsor",
+    "pk": "1",
+    "fields": {
+      "organization": "Academisch Medisch Centrum - Universiteit van Amsterdam (AMC-UvA)",
+      "date_joined": "2020-03-25",
+      "dateDeregistered": null,
+      "contactPerson": "Berto J Bouma",
+      "email": "berto@amcuva.edu",
+      "phone": 5555555555,
+      "location": "Amsterdam",
+      "notes": "blah blah blah"
+    }
+  }
+]

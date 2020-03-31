@@ -52,6 +52,8 @@ def loaddata(request):
     call_command('loaddata', 'users')
     call_command('loaddata', 'participants')
     call_command('loaddata', 'trial_criteria')
+    call_command('loaddata', 'sponsors')
+    call_command('loaddata', 'clinical_trials')
     return HttpResponse("Data Loaded!")
 
 def login_success(request):

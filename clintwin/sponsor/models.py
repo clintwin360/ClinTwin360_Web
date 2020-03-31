@@ -44,28 +44,23 @@ class User(models.Model):
 class Contact(models.Model):
     first_name = models.CharField(null=True, max_length=50)
     last_name = models.CharField(null=True, max_length=50)
-    email = models.EmailField()
-    comment = models.CharField(max_length=1000)
+    email = models.EmailField(null=True)
+    comment = models.CharField(max_length=1000, null=True,)
 
 
 class Sponsor(models.Model):
-    sponsor_id= models.CharField('Sponsor ID', max_length=30,primary_key=True, help_text='Unique Sponsor ID')
     organization = models.CharField('Organization Name', max_length=50, help_text='Name of Sponsor')
-    date_joined= models.DateField('Date of Registration')
-    dateDeregistered=models.DateField('Date of De-Regstration', null=True, blank=True)
-    contactPerson=models.CharField('Contact Person', max_length=50)
-    email = models.EmailField('Email')
-    phone= models.IntegerField('Phone')
-    location=models.CharField('Location',max_length=100)
+    date_joined = models.DateField('Date of Registration', null=True)
+    dateDeregistered = models.DateField('Date of De-Regstration', null=True, blank=True)
+    contactPerson = models.CharField('Contact Person', null=True, max_length=50)
+    email = models.EmailField('Email', null=True)
+    phone = models.IntegerField('Phone', null=True)
+    location = models.CharField('Location', null=True, max_length=100)
     notes = models.TextField('Comments', null=True, blank=True)
 
     def __str__(self):
-        ret = self.sponsor_id + ',' + self.organization
+        ret = str(self.id) + ',' + self.organization
         return ret
-
-    def get_absolute_url(self):
-        #Returns the url to access a detail record for the Sponsor.
-        return reverse('sponsor-detail', args=[str(self.sponsor_id)])
 
 
 class SponsorRequest(models.Model):
@@ -77,17 +72,18 @@ class SponsorRequest(models.Model):
 
 class ClinicalTrial(models.Model):
     trialId = models.CharField('Trial ID', max_length=30,primary_key=True)
-    sponsorId = models.ForeignKey('Sponsor', on_delete=models.SET_NULL, null=True)
-    title=  models.CharField('Trial Title', max_length=100)
-    objective = models.CharField('Objective', max_length=100)
-    recruitmentStartDate= models.DateField('Recruitment Start Date', help_text='MM/DD/YY')
-    recruitmentEndDate= models.DateField('Recruitment End Date', help_text='MM/DD/YY')
-    enrollmentTarget= models.IntegerField('Enrollment Target',null=True, blank=True)
-    url=models.URLField('URL', null=True,blank=True)
-    followUp= models.TextField('Followup Notes',null=True, blank=True)
-    location=  models.CharField('Location',max_length=100)
+    sponsor = models.ForeignKey('Sponsor', null=True, on_delete=models.SET_NULL)
+    title = models.CharField('Trial Title', null=True, max_length=100)
+    objective = models.TextField('Objective', null=True)
+    description = models.TextField('Description', null=True, blank=True)
+    recruitmentStartDate = models.DateField('Recruitment Start Date', null=True, help_text='MM/DD/YY')
+    recruitmentEndDate = models.DateField('Recruitment End Date', null=True, help_text='MM/DD/YY')
+    enrollmentTarget = models.IntegerField('Enrollment Target', null=True, blank=True)
+    url = models.URLField('URL', null=True, blank=True)
+    followUp = models.TextField('Followup Notes', null=True, blank=True)
+    location = models.CharField('Location', null=True, max_length=100)
     comments = models.TextField('Comments', null=True, blank=True)
-    createdTimeStamp=models.DateTimeField(auto_now_add = True)
+    createdTimeStamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         ret = self.trialId + self.title
@@ -116,6 +112,8 @@ class ClinicalTrialCriteriaResponse(models.Model):
     negated = models.BooleanField()
 
 
+
+
 class QuestionCategory(models.Model):
     name = models.CharField(max_length=50)
 
@@ -131,6 +129,11 @@ class Participant(models.Model):
 
     def __str__(self):
         return self.name()
+
+
+class ClinicalTrialMatch(models.Model):
+    participant = models.ForeignKey(Participant, on_delete=models.CASCADE, related_name='trial_matches')
+    clinical_trial = models.ForeignKey(ClinicalTrial, on_delete=models.CASCADE, related_name='trial_matches')
 
 
 class ParticipantQuestion(models.Model):
