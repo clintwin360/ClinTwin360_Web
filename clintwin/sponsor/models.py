@@ -67,6 +67,7 @@ class Sponsor(models.Model):
         #Returns the url to access a detail record for the Sponsor.
         return reverse('sponsor-detail', args=[str(self.sponsor_id)])
 
+
 class SponsorRequest(models.Model):
     sponsor_id = models.CharField(max_length=50)
     criterion_req = models.CharField(null=True, max_length=200)
