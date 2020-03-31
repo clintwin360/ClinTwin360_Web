@@ -1,0 +1,10 @@
+[
+  {
+    "model": "sponsor.ClinicalTrialMatch",
+    "pk": 1, 
+    "fields": {
+      "participant": "1",
+      "clinical_trial": "12345"
+    }
+  }
+]

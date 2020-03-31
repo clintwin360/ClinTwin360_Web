@@ -55,6 +55,7 @@ def loaddata(request):
     call_command('loaddata', 'sponsors')
     call_command('loaddata', 'clinical_trials')
     call_command('loaddata', 'criteria_responses')
+    call_command('loaddata', 'trial_matches')
     return HttpResponse("Data Loaded!")
 
 def login_success(request):
@@ -254,3 +255,27 @@ class SponsorProfileViewSet(viewsets.ModelViewSet):
     queryset = Sponsor.objects.all()
     serializer_class = SponsorSerializer
     #permission_classes = [permissions.IsAuthenticated]
+
+
+class ClinicalTrialMatchViewSet(viewsets.ModelViewSet):
+
+    serializer_class = ClinicalTrialMatchSerializer
+
+    def get_queryset(self):
+        participant_id = self.request.query_params.get('participant')
+        participant = Participant.objects.get(id=participant_id)
+        queryset = ClinicalTrialMatch.objects.filter(participant=participant)
+
+        return queryset
+
+
+class ClinicalTrialDetailsViewSet(viewsets.ModelViewSet):
+
+    serializer_class = ClinicalTrialDetailSerializer
+
+    def get_queryset(self):
+        trial_id = self.request.query_params.get('id')
+        queryset = ClinicalTrial.objects.filter(trialId=trial_id)
+
+        return queryset
+
