@@ -54,7 +54,7 @@ class Sponsor(models.Model):
     dateDeregistered = models.DateField('Date of De-Regstration', null=True, blank=True)
     contactPerson = models.CharField('Contact Person', null=True, max_length=500)
     email = models.EmailField('Email', null=True)
-    phone = models.IntegerField('Phone', null=True)
+    phone = models.CharField('Phone', null=True, max_length=20)
     location = models.CharField('Location', null=True, max_length=100)
     notes = models.TextField('Comments', null=True, blank=True)
 
