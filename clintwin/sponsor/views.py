@@ -15,7 +15,7 @@ from rest_framework import generics
 # New additions
 
 from rest_framework.decorators import api_view
-from .models import User, UserManager, Contact, Sponsor, Participant, ClinicalTrial, Criteria, Categories, ClinicalTrialCriteriaResponse, ParticipantQuestion
+from .models import User, UserManager, Contact, Sponsor, Participant, ClinicalTrial, ClinicalTrialCriteriaResponse, ParticipantQuestion
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user
 from .serializers import *

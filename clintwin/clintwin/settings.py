@@ -61,7 +61,8 @@ ROOT_URLCONF = 'clintwin.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        #'DIRS': [],
+		'DIRS': [os.path.join(BASE_DIR, 'sponsor/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -152,5 +153,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_URL = '/sponsor/accounts/login'
 LOGIN_REDIRECT_URL = '/sponsor/login_success'
 LOGOUT_REDIRECT_URL = '/sponsor/'
+#LOGOUT_REDIRECT_URL = 'registration/logged_out.html'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # For testing password reset link emails sent to console
+#EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend" # For testing password reset link emails sent to file
+#EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")# Folder for storing password reset link emails text files that are generated

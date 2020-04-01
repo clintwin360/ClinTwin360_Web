@@ -28,7 +28,7 @@ from django.shortcuts import redirect
 from django.http import HttpResponse
 
 # End of new additions
-# path('accounts/login/', views.login, name='login'),
+#path('accounts/login/', views.login, name='login'),
 
 urlpatterns = [
     path('', lambda request: redirect('sponsor/', permanent=False)),

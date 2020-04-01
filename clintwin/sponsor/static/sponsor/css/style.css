@@ -48,7 +48,7 @@ text-align: center;
 }
 
 #btn{
-	background-color: #4CAF50;
+	background-color: #00CCFF;
   border: none;
   color: white;
   padding: 16px 32px;
@@ -59,7 +59,7 @@ text-align: center;
 
 /* Set a style for all buttons */
 button {
-  background-color: #2499C8;
+  background-color: #00b8fb;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;

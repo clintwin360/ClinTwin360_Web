@@ -1,4 +1,4 @@
-##  Original additions
+  ##  Original additions
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
