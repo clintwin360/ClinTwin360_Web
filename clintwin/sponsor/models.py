@@ -94,26 +94,6 @@ class ClinicalTrial(models.Model):
         return reverse('clinicalTrial-detail', args=[str(self.trialId)])
 
 
-class ClinicalTrialCriteria(models.Model):
-    name = models.CharField(max_length=500)
-    valueType = models.CharField(max_length=50)
-    options = models.TextField()
-    #options = ArrayField(models.CharField(max_length=256))
-    searchable = models.BooleanField()
-    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, related_name='subcriteria')
-
-    def __str__(self):
-        return self.name
-
-
-class ClinicalTrialCriteriaResponse(models.Model):
-    criteria = models.ForeignKey(ClinicalTrialCriteria, on_delete=models.CASCADE, null=True)
-    trial = models.ForeignKey(ClinicalTrial, on_delete=models.CASCADE, null=True, related_name='criteria')
-    value = models.CharField(max_length=1024)
-    comparison = models.CharField(max_length=50)
-    criteriaType = models.CharField(max_length=50)
-    negated = models.BooleanField()
-
 
 class QuestionCategory(models.Model):
     name = models.CharField(max_length=50)
@@ -156,6 +136,27 @@ class ParticipantResponse(models.Model):
     def __str__(self):
         return self.question__text
 
+
+class ClinicalTrialCriteria(models.Model):
+    name = models.CharField(max_length=500)
+    valueType = models.CharField(max_length=50)
+    options = models.TextField()
+    #options = ArrayField(models.CharField(max_length=256))
+    searchable = models.BooleanField()
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, related_name='subcriteria')
+    question = models.ForeignKey(ParticipantQuestion, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return self.name
+
+
+class ClinicalTrialCriteriaResponse(models.Model):
+    criteria = models.ForeignKey(ClinicalTrialCriteria, on_delete=models.CASCADE, null=True)
+    trial = models.ForeignKey(ClinicalTrial, on_delete=models.CASCADE, null=True, related_name='criteria')
+    value = models.CharField(max_length=1024)
+    comparison = models.CharField(max_length=50)
+    criteriaType = models.CharField(max_length=50)
+    negated = models.BooleanField()
 
 """
 

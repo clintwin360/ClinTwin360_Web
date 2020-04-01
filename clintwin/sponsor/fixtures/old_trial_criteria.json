@@ -7,8 +7,7 @@
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no", 
       "parent": null, 
-      "searchable": true, 
-      "question_id": "26"
+      "searchable": true
     }
   }, 
   {
@@ -18,9 +17,8 @@
       "name": "allergies type", 
       "options": "[\"Drugs\", \"Chemicals\", \"Food\", \"Seasonal\"]", 
       "valueType": "pick_one", 
-      "parent": null, 
-      "searchable": true, 
-      "question_id": "27"
+      "parent": 1, 
+      "searchable": true
     }
   }, 
   {
@@ -31,8 +29,7 @@
       "options": "[\"amoxicillin\", \"ampicillin\", \"penicillin\", \"tetracycline\", \"ibuprofen\", \"naproxen\", \"'aspirin\", \"cetuximab (Erbitux)\", \"rituximab (Rituxian)\", \"Insulin\", \"carbamazepine (Tegretol)\", \"lamotrigine (Lamictal)\", \"phenytoin\", \"atracurium\", \"succinylcholine\", \"vecuronium\"]", 
       "valueType": "list", 
       "parent": 2, 
-      "searchable": false, 
-      "question_id": "28"
+      "searchable": false
     }
   }, 
   {
@@ -40,11 +37,10 @@
     "pk": 4, 
     "fields": {
       "name": "food allergies", 
-      "options": "[\"Milk\", \"Eggs\", \"Fish\", \"shellfish\", \"tree nuts\", \"Peanuts\", \"Wheat\", \"Soybeans\"]", 
+      "options": "[\"peanuts\", \"shrimp\"]", 
       "valueType": "list", 
       "parent": 2, 
-      "searchable": false, 
-      "question_id": "85"
+      "searchable": false
     }
   }, 
   {
@@ -55,8 +51,7 @@
       "options": "[\"amoxicillin\", \"ampicillin\", \"penicillin\", \"tetracycline\", \"ibuprofen\", \"naproxen\", \"'aspirin\", \"cetuximab (Erbitux)\", \"rituximab (Rituxian)\", \"Insulin\", \"carbamazepine (Tegretol)\", \"lamotrigine (Lamictal)\", \"phenytoin\", \"atracurium\", \"succinylcholine\", \"vecuronium\"]", 
       "valueType": "list", 
       "parent": 2, 
-      "searchable": false, 
-      "question_id": "28"
+      "searchable": false
     }
   }, 
   {
@@ -67,8 +62,7 @@
       "options": "[\"Birch pollen\", \"oak pollen\", \"grass pollen\", \"ragweed pollen\"]", 
       "valueType": "list", 
       "parent": 2, 
-      "searchable": false, 
-      "question_id": "86"
+      "searchable": false
     }
   }, 
   {
@@ -79,8 +73,7 @@
       "options": "[Blurred vision\", \"Pain/redness in eyes\", \"Itchy eyes\", \"Watery eyes\"', \"Hoarsness\", \"Smell or taste change\", \"Dizziness\", \"Drainage\", \"Itching throat\", \"Snoring\", \"Ringing in ears\", \"Headaches\", \"Itching (general)\", \"Rash\", \"Hives\", \"Depression\", \"Tremor\", \"Anxiety\", \"Persitent cough\", \"Wheezing\", \"Shortness of breath\", \"Chest pain\", \"Palpitation\", \"No sleep/Insomnia\"]", 
       "valueType": "list", 
       "parent": 6, 
-      "searchable": false, 
-      "question_id": "29"
+      "searchable": false
     }
   }, 
   {
@@ -91,8 +84,7 @@
       "options": "[\"Yes\", \"No\", \"In the past\"]", 
       "valueType": "yes_no", 
       "parent": null, 
-      "searchable": true, 
-      "question_id": "14"
+      "searchable": true
     }
   }, 
   {
@@ -103,8 +95,7 @@
       "options": "[\"less than 6 months\", \"1-2 years\", \"2-5 years\", \"over 5 years\"]", 
       "valueType": "pick_one", 
       "parent": 8, 
-      "searchable": false, 
-      "question_id": "16"
+      "searchable": false
     }
   }, 
   {
@@ -115,8 +106,7 @@
       "options": "[\"1 per day\", \"2-5 per day\", \"5-10 per day\", \"more than 10 per day\"]", 
       "valueType": "pick_one", 
       "parent": null, 
-      "searchable": false, 
-      "question_id": "15"
+      "searchable": false
     }
   }, 
   {
@@ -127,8 +117,7 @@
       "options": "[\"smokeless\", \"smoke tobacco\"]", 
       "valueType": "pick_one", 
       "parent": 8, 
-      "searchable": false, 
-      "question_id": "17"
+      "searchable": false
     }
   }, 
   {
@@ -139,8 +128,7 @@
       "options": "[\"less than 6 months\", \"1-2 years\", \"2-5 years\", \"over 5 years\"]", 
       "valueType": "pick_one", 
       "parent": 8, 
-      "searchable": false, 
-      "question_id": "18"
+      "searchable": false
     }
   }, 
   {
@@ -148,11 +136,10 @@
     "pk": 13, 
     "fields": {
       "name": "BMI", 
-      "options": "[]", 
+      "options": "none", 
       "valueType": "enter_val", 
       "parent": null, 
-      "searchable": true, 
-      "question_id": "87"
+      "searchable": true
     }
   }, 
   {
@@ -160,11 +147,10 @@
     "pk": 14, 
     "fields": {
       "name": "age", 
-      "options": "[]", 
-      "valueType": "list", 
+      "options": "none", 
+      "valueType": "enter_val", 
       "parent": null, 
-      "searchable": true, 
-      "question_id": "3"
+      "searchable": true
     }
   }, 
   {
@@ -175,8 +161,7 @@
       "options": "[\"American Indian or Alaska Native\",\"Black or African American\", \"Hispanic or Latino\", \"Native Hawaiian or Other Pacific Islander\", \"White\"]", 
       "valueType": "list", 
       "parent": null, 
-      "searchable": true, 
-      "question_id": "4"
+      "searchable": true
     }
   }, 
   {
@@ -187,8 +172,7 @@
       "options": "[\"American Indian or Alaska Native\",\"Black or African American\", \"Hispanic or Latino\", \"Native Hawaiian or Other Pacific Islander\", \"White\"]", 
       "valueType": "list", 
       "parent": null, 
-      "searchable": true, 
-      "question_id": "4"
+      "searchable": true
     }
   }, 
   {
@@ -196,10 +180,10 @@
     "pk": 17, 
     "fields": {
       "name": "location", 
-      "options": "list", 
-      "valueType": "none", 
+      "options": "none", 
+      "valueType": "enter_val", 
       "parent": null, 
-      "searchable": false
+      "searchable": true
     }
   }, 
   {
@@ -207,10 +191,10 @@
     "pk": 18, 
     "fields": {
       "name": "city", 
-      "options": "list", 
-      "valueType": "none", 
+      "options": "none", 
+      "valueType": "enter_val", 
       "parent": null, 
-      "searchable": false
+      "searchable": true
     }
   }, 
   {
@@ -218,10 +202,10 @@
     "pk": 19, 
     "fields": {
       "name": "zipcode", 
-      "options": "list", 
-      "valueType": "none", 
+      "options": "none", 
+      "valueType": "enter_val", 
       "parent": null, 
-      "searchable": false
+      "searchable": true
     }
   }, 
   {
@@ -232,8 +216,7 @@
       "options": "[\"single\", \"married\", \"widowed\", \"divorced\", \"separated\", \"registered partnership\"]", 
       "valueType": "pick_one", 
       "parent": null, 
-      "searchable": true, 
-      "question_id": "7"
+      "searchable": true
     }
   }, 
   {
@@ -244,8 +227,7 @@
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no", 
       "parent": null, 
-      "searchable": true, 
-      "question_id": "9"
+      "searchable": true
     }
   }, 
   {
@@ -256,8 +238,7 @@
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no", 
       "parent": null, 
-      "searchable": true, 
-      "question_id": "9"
+      "searchable": true
     }
   }, 
   {
@@ -268,8 +249,7 @@
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no", 
       "parent": null, 
-      "searchable": true, 
-      "question_id": "10"
+      "searchable": true
     }
   }, 
   {
@@ -280,8 +260,7 @@
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no", 
       "parent": null, 
-      "searchable": true, 
-      "question_id": "11"
+      "searchable": true
     }
   }, 
   {
@@ -292,8 +271,7 @@
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no", 
       "parent": null, 
-      "searchable": true, 
-      "question_id": "12"
+      "searchable": true
     }
   }, 
   {
@@ -304,8 +282,7 @@
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no", 
       "parent": null, 
-      "searchable": true, 
-      "question_id": "13"
+      "searchable": true
     }
   }, 
   {
@@ -316,8 +293,7 @@
       "options": "[\"own a home\", \"rent\", \"live with parents\", \"live with roommates\", \"homeless\"]", 
       "valueType": "pick_one", 
       "parent": null, 
-      "searchable": true, 
-      "question_id": "8"
+      "searchable": true
     }
   }, 
   {
@@ -328,8 +304,7 @@
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no", 
       "parent": null, 
-      "searchable": true, 
-      "question_id": "20"
+      "searchable": true
     }
   }, 
   {
@@ -340,8 +315,7 @@
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no", 
       "parent": null, 
-      "searchable": true, 
-      "question_id": "20"
+      "searchable": true
     }
   }, 
   {
@@ -349,11 +323,10 @@
     "pk": 30, 
     "fields": {
       "name": "exercise frequency", 
-      "options": "[\"1 day\", \"2 days\", \"3 days\", \"4 days\", \"5 days\", \"6 days\", \"7 days\"] ", 
+      "options": "[\"1 day\", \"2 days\", \"3 days\", \"4 days\", \"5 days\", \"6 days\", \"7 days\"]", 
       "valueType": "pick_one", 
       "parent": 29, 
-      "searchable": false, 
-      "question_id": "21"
+      "searchable": false
     }
   }, 
   {
@@ -364,8 +337,7 @@
       "options": "[\"less than 30 minutes\", \"30-45 minutes\", \"45 minutes - 1 hour\", \"over 1 hour\"]", 
       "valueType": "pick_one", 
       "parent": 29, 
-      "searchable": false, 
-      "question_id": "22"
+      "searchable": false
     }
   }, 
   {
@@ -376,8 +348,7 @@
       "options": "[\"balance exercises\", \"strength training\", \"aerobics\", \"flexibility exercises\"]", 
       "valueType": "pick_one", 
       "parent": 29, 
-      "searchable": false, 
-      "question_id": "23"
+      "searchable": false
     }
   }, 
   {
@@ -388,8 +359,7 @@
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no", 
       "parent": null, 
-      "searchable": true, 
-      "question_id": "24"
+      "searchable": true
     }
   }, 
   {
@@ -400,8 +370,7 @@
       "options": "[\"1\", \"2\", \"3\", \"4\", \"more than 5\"]", 
       "valueType": "pick_one", 
       "parent": 33, 
-      "searchable": false, 
-      "question_id": "25"
+      "searchable": false
     }
   }, 
   {
@@ -412,8 +381,7 @@
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no", 
       "parent": null, 
-      "searchable": true, 
-      "question_id": "31"
+      "searchable": true
     }
   }, 
   {
@@ -424,8 +392,7 @@
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no", 
       "parent": null, 
-      "searchable": true, 
-      "question_id": "31"
+      "searchable": true
     }
   }, 
   {
@@ -436,8 +403,7 @@
       "options": "[\"less than 1 month\", \"1-3 months\", \"3-6 months\", \"6 months - 1 year\", \"over 1 year\"]", 
       "valueType": "pick_one", 
       "parent": 36, 
-      "searchable": false, 
-      "question_id": "30"
+      "searchable": false
     }
   }, 
   {
@@ -448,8 +414,7 @@
       "options": "[\"less than 1 month\", \"1-3 months\", \"3-6 months\", \"6 months - 1 year\", \"over 1 year\"]", 
       "valueType": "pick_one", 
       "parent": null, 
-      "searchable": false, 
-      "question_id": "30"
+      "searchable": false
     }
   }, 
   {
@@ -460,8 +425,7 @@
       "options": "[\"weight loss and fatigue\", \"Eye Problems: e.g. glaucoma\", \"Ear, Nose, Throat, Mouth\", \"Cardiovascular: e.g. angina, chest pain, heart attack, high blood pressure\",\"Respiratory: e.g. embolism, tuberculosis\", \"GI: e.g trouble swallowing, heartburn, reflux\", \"Urinary track infections or recurring problems\", \"Musculoskeletal: e.g. arthritis, osteoporosis\", \"Skin Problems: e.g. rashes, acne, psoriasis\", \"Neurological: e.g.headache, stroke\", \"Endocrine: e.g. diabetes, thyroid disease\", \"Psychiatric/Emotional: e.g. depression, eating disorders\", \"Hematologic Lymphatic: e.g. anemia, enlarged lymph nodes\"]", 
       "valueType": "list", 
       "parent": null, 
-      "searchable": true, 
-      "question_id": "32"
+      "searchable": true
     }
   }, 
   {
@@ -469,11 +433,10 @@
     "pk": 40, 
     "fields": {
       "name": "cardiovascular disease", 
-      "options": "[\"Congenital heart disease\", \"Arrhythmia\", \"Coronary artery disease\", \"Dilated cardiomyopathy\", \"Myocardial infarction\", \"Heart failure\", \"Hypertrophic cardiomyopathy\", Mitral regurgitation\", \"Mitral valve prolapse\", \"Pulmonary stenosis\"]", 
+      "options": "[\"\", \"Arrhythmia\", \"Coronary artery disease\", \"Dilated cardiomyopathy\", \"Myocardial infarction\", \"Heart failure\", \"Hypertrophic cardiomyopathy\", Mitral regurgitation\", \"Mitral valve prolapse\", \"Pulmonary stenosis\"]",
       "valueType": "list", 
       "parent": null, 
-      "searchable": true, 
-      "question_id": "39"
+      "searchable": true
     }
   }, 
   {
@@ -484,8 +447,7 @@
       "options": "[\"Congenital heart disease\", \"Arrhythmia\", \"Coronary artery disease\", \"Dilated cardiomyopathy\", \"Myocardial infarction\", \"Heart failure\", \"Hypertrophic cardiomyopathy\", Mitral regurgitation\", \"Mitral valve prolapse\", \"Pulmonary stenosis\"]", 
       "valueType": "list", 
       "parent": null, 
-      "searchable": true, 
-      "question_id": "39"
+      "searchable": true
     }
   }, 
   {
@@ -496,8 +458,7 @@
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no", 
       "parent": 41, 
-      "searchable": false, 
-      "question_id": "40"
+      "searchable": false
     }
   }, 
   {
@@ -508,8 +469,7 @@
       "options": "[\"less than 1 month ago\", \"1-3 months ago\", \"3-6 months ago\", \"6-12 months ago\", \"more than 1 year ago\"]", 
       "valueType": "pick_one", 
       "parent": 41, 
-      "searchable": false, 
-      "question_id": "41"
+      "searchable": false
     }
   }, 
   {
@@ -520,7 +480,7 @@
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no", 
       "parent": null, 
-      "searchable": false
+      "searchable": true
     }
   }, 
   {
@@ -531,8 +491,7 @@
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no", 
       "parent": null, 
-      "searchable": true, 
-      "question_id": "34"
+      "searchable": true
     }
   }, 
   {
@@ -543,8 +502,7 @@
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no", 
       "parent": 45, 
-      "searchable": false, 
-      "question_id": "35"
+      "searchable": false
     }
   }, 
   {
@@ -555,8 +513,7 @@
       "options": "[\"Fitbit\", \"Apple Watch\", \"Garmin\", \"Misfit\", \"Pebble\"]", 
       "valueType": "list", 
       "parent": 45, 
-      "searchable": false, 
-      "question_id": "36"
+      "searchable": false
     }
   }, 
   {
@@ -567,8 +524,7 @@
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no", 
       "parent": null, 
-      "searchable": true, 
-      "question_id": "37"
+      "searchable": true
     }
   }, 
   {
@@ -579,8 +535,7 @@
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no", 
       "parent": null, 
-      "searchable": true, 
-      "question_id": "38"
+      "searchable": true
     }
   }, 
   {
@@ -591,8 +546,7 @@
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no", 
       "parent": null, 
-      "searchable": true, 
-      "question_id": "38"
+      "searchable": true
     }
   }, 
   {
@@ -603,8 +557,7 @@
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no", 
       "parent": null, 
-      "searchable": true, 
-      "question_id": "42"
+      "searchable": true
     }
   }, 
   {
@@ -615,8 +568,7 @@
       "options": "[\"Anthem\", \"Kaiser Permanente\", \"Aetna\", \"UnitedHealth Group\", \"Cardinal Health\"]", 
       "valueType": "pick_one", 
       "parent": 51, 
-      "searchable": false, 
-      "question_id": "43"
+      "searchable": false
     }
   }, 
   {
@@ -627,488 +579,436 @@
       "options": "[\"English\", \"Spanish\", \"French\", \"Italian\", \"Mandarin\", \"Japanese\"]", 
       "valueType": "list", 
       "parent": null, 
-      "searchable": true, 
-      "question_id": "44"
+      "searchable": true
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 54, 
     "fields": {
-      "name": "risk coherence", 
+      "name": "medical procedure", 
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no", 
       "parent": null, 
-      "searchable": true, 
-      "question_id": "45"
+      "searchable": true
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 55, 
     "fields": {
-      "name": "medical procedure", 
-      "options": "[\"Yes\", \"No\"]", 
-      "valueType": "yes_no", 
-      "parent": null, 
-      "searchable": true, 
-      "question_id": "46"
+      "name": "medical procedure type", 
+      "options": "[\"hemodialysis\", \"peritoneal dialysis\", \"prandial insulin therapy\", \"surgery including the use of anesthesia\"]", 
+      "valueType": "list", 
+      "parent": 54, 
+      "searchable": false
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 56, 
     "fields": {
-      "name": "medical procedure type", 
-      "options": "[\"hemodialysis\", \"peritoneal dialysis\", \"prandial insulin therapy\", \"surgery including the use of anesthesia\"]", 
-      "valueType": "list", 
-      "parent": 55, 
-      "searchable": false, 
-      "question_id": "47"
+      "name": "medical procedure time", 
+      "options": "[\"in less than 3 months\", \"in 3-6 months\", \"in 6-12 months\"]", 
+      "valueType": "pick_one", 
+      "parent": 54, 
+      "searchable": false
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 57, 
     "fields": {
-      "name": "medical procedure time", 
-      "options": "[\"in less than 3 months\", \"in 3-6 months\", \"in 6-12 months\"]", 
-      "valueType": "pick_one", 
-      "parent": 55, 
-      "searchable": false, 
-      "question_id": "48"
+      "name": "medication", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no", 
+      "parent": null, 
+      "searchable": true
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 58, 
     "fields": {
-      "name": "medication", 
-      "options": "[\"Yes\", \"No\"]", 
-      "valueType": "yes_no", 
-      "parent": null, 
-      "searchable": true, 
-      "question_id": "49"
+      "name": "medication type", 
+      "options": "[\"vitamins\", \"diet supplements\", \"herbal supplements\", \"glucocorticoid\", \"aspirin\", \"insulin\", \"other over-the-counter medications\", \"plavix/clopidogrel (for heart disease)\", \"coumadin/warfarin (blood thinners)\"]", 
+      "valueType": "list", 
+      "parent": 57, 
+      "searchable": false
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 59, 
     "fields": {
-      "name": "medication type", 
-      "options": "[\"vitamins\", \"diet supplements\", \"herbal supplements\", \"glucocorticoid\", \"aspirin\", \"insulin\", \"other over-the-counter medications\", \"plavix/clopidogrel (for heart disease)\", \"coumadin/warfarin (blood thinners)\"]", 
-      "valueType": "list", 
-      "parent": 58, 
-      "searchable": false, 
-      "question_id": "50"
+      "name": "diabetes", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no", 
+      "parent": null, 
+      "searchable": true
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 60, 
     "fields": {
-      "name": "diabetes", 
-      "options": "[\"Yes\", \"No\"]", 
-      "valueType": "yes_no", 
-      "parent": null, 
-      "searchable": true, 
-      "question_id": "51"
+      "name": "diabetes type", 
+      "options": "[\"type 1\", \"type 2, \"gestational\", \"prediabetes\", \"secondary\"]", 
+      "valueType": "pick_one", 
+      "parent": 59, 
+      "searchable": false
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 61, 
     "fields": {
-      "name": "diabetes type", 
-      "options": "[\"type 1\", \"type 2, \"gestational\", \"prediabetes\", \"secondary\"]", 
+      "name": "diabetes diagnosis time", 
+      "options": "[\"less than 6 months\", \"1-2 years\", \"2-5 years\", \"over 5 years\"]", 
       "valueType": "pick_one", 
-      "parent": 60, 
-      "searchable": false, 
-      "question_id": "52"
+      "parent": 59, 
+      "searchable": false
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 62, 
     "fields": {
-      "name": "diabetes diagnosis time", 
-      "options": "[\"less than 6 months\", \"1-2 years\", \"2-5 years\", \"over 5 years\"]", 
-      "valueType": "pick_one", 
-      "parent": 60, 
-      "searchable": false, 
-      "question_id": "53"
+      "name": "diabetes changes", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no", 
+      "parent": 59, 
+      "searchable": false
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 63, 
     "fields": {
-      "name": "diabetes changes", 
-      "options": "[\"Yes\", \"No\"]", 
-      "valueType": "yes_no", 
-      "parent": 60, 
-      "searchable": false, 
-      "question_id": "54"
+      "name": "diabetes changes time", 
+      "options": "[\"less than 3 months ago\", \"3-6 months ago\", \"1-2 years ago\", \"2-5 years ago\", \"over 5 years ago\"]", 
+      "valueType": "pick_one", 
+      "parent": 59, 
+      "searchable": false
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 64, 
     "fields": {
-      "name": "diabetes changes time", 
-      "options": "[\"less than 3 months ago\", \"3-6 months ago\", \"1-2 years ago\", \"2-5 years ago\", \"over 5 years ago\"]", 
-      "valueType": "pick_one", 
-      "parent": 60, 
-      "searchable": false, 
-      "question_id": "55"
+      "name": "cancer", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no", 
+      "parent": null, 
+      "searchable": true
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 65, 
     "fields": {
-      "name": "cancer", 
-      "options": "[\"Yes\", \"No\"]", 
-      "valueType": "yes_no", 
-      "parent": null, 
-      "searchable": true, 
-      "question_id": "56"
+      "name": "cancer body region", 
+      "options": "[\"Breast\", \"Digestive/Gastrointestinal\", \"Endocrine and Neuroendocrine\", \"Eye\", \"Genitourinary\", \"Germ Cell\", \"Gynecologic\", \"Head and Neck\", \"Hematologic/Blood\", \"Musculoskeletal\", \"Neurologic\", \"Respiratory/Thoracic\", \"Skin\", \"AIDS-Related\"]", 
+      "valueType": "list", 
+      "parent": 64, 
+      "searchable": false
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 66, 
     "fields": {
-      "name": "cancer body region", 
-      "options": "[\"Breast\", \"Digestive/Gastrointestinal\", \"Endocrine and Neuroendocrine\", \"Eye\", \"Genitourinary\", \"Germ Cell\", \"Gynecologic\", \"Head and Neck\", \"Hematologic/Blood\", \"Musculoskeletal\", \"Neurologic\", \"Respiratory/Thoracic\", \"Skin\", \"AIDS-Related\"]", 
+      "name": "germ cell cancer", 
+      "options": "[\"Central Nervous System\", \"Extracranial Germ Cell Tumor\", \"Extragonadal Germ Cell Tumor\", \"Ovarian Germ Cell Tumor\", \"Testicular Cancer\"]", 
       "valueType": "list", 
-      "parent": 65, 
-      "searchable": false, 
-      "question_id": "57"
+      "parent": null, 
+      "searchable": false
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 67, 
     "fields": {
-      "name": "germ cell cancer", 
-      "options": "[\"Central Nervous System\", \"Extracranial Germ Cell Tumor\", \"Extragonadal Germ Cell Tumor\", \"Ovarian Germ Cell Tumor\", \"Testicular Cancer\"]", 
+      "name": "digestive/gastrointestinal cancer", 
+      "options": "[\"Anal Cancer\", \"Appendix Cancer\", \"Bile Duct Cancer\", \"Carcinoid Tumor\", \"Gastrointestinal\", \"Colon Cancer\", \"Esophageal Cancer\", \"Gallbladder Cancer\", \"Gastric Cancer\", \"Gastrointestinal Stromal Tumors (GIST)\", \"Islet Cell Tumors\", \"Pancreatic Neuroendocrine Tumors\", \"Liver Cancer\", \"Pancreatic Cancer\", \"Rectal Cancer\", \"Small Intestine Cancer\", \"Stomach (Gastric) Cancer\"]\n", 
       "valueType": "list", 
       "parent": null, 
-      "searchable": false, 
-      "question_id": "58"
+      "searchable": false
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 68, 
     "fields": {
-      "name": "digestive/gastrointestinal cancer", 
-      "options": "[\"Anal Cancer\", \"Appendix Cancer\", \"Bile Duct Cancer\", \"Carcinoid Tumor\", \"Gastrointestinal\", \"Colon Cancer\", \"Esophageal Cancer\", \"Gallbladder Cancer\", \"Gastric Cancer\", \"Gastrointestinal Stromal Tumors (GIST)\", \"Islet Cell Tumors\", \"Pancreatic Neuroendocrine Tumors\", \"Liver Cancer\", \"Pancreatic Cancer\", \"Rectal Cancer\", \"Small Intestine Cancer\", \"Stomach (Gastric) Cancer\"]\n", 
+      "name": "endocrine and neuroendocrine cancer", 
+      "options": "[\"Adrenocortical Carcinoma\", \"Gastrointestinal Carcinoid Tumor\", \"Islet Cell Tumors\", \"Pancreatic Neuroendocrine Tumors\", \"Neuroendocrine Carcinoma of the Skin (Merkel Cell Carcinoma)\", \"Parathyroid Cancer\", \"Paraganglioma\", \"Pheochromocytoma\", \"Pituitary Tumor\", \"Thyroid Cancer\"]", 
       "valueType": "list", 
       "parent": null, 
-      "searchable": false, 
-      "question_id": "59"
+      "searchable": false
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 69, 
     "fields": {
-      "name": "endocrine and neuroendocrine cancer", 
-      "options": "[\"Adrenocortical Carcinoma\", \"Gastrointestinal Carcinoid Tumor\", \"Islet Cell Tumors\", \"Pancreatic Neuroendocrine Tumors\", \"Neuroendocrine Carcinoma of the Skin (Merkel Cell Carcinoma)\", \"Parathyroid Cancer\", \"Paraganglioma\", \"Pheochromocytoma\", \"Pituitary Tumor\", \"Thyroid Cancer\"]", 
+      "name": "eye cancer", 
+      "options": "[\"Intraocular Melanoma\", \"Retinoblastoma\"]", 
       "valueType": "list", 
       "parent": null, 
-      "searchable": false, 
-      "question_id": "60"
+      "searchable": false
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 70, 
     "fields": {
-      "name": "eye cancer", 
-      "options": "[\"Intraocular Melanoma\", \"Retinoblastoma\"]", 
+      "name": "genitourinary  cancer", 
+      "options": "[\"Bladder Cancer\", \"Kidney (Renal Cell) Cancer\", \"Penile Cancer\", \"Prostate Cancer\", \"Renal Pelvis and Ureter Cancer\", \"Transitional Cell\", Testicular Cancer\", \"Urethral Cancer\", \"Wilms Tumor\"]", 
       "valueType": "list", 
       "parent": null, 
-      "searchable": false, 
-      "question_id": "61"
+      "searchable": false
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 71, 
     "fields": {
-      "name": "genitourinary  cancer", 
-      "options": "[\"Bladder Cancer\", \"Kidney (Renal Cell) Cancer\", \"Penile Cancer\", \"Prostate Cancer\", \"Renal Pelvis and Ureter Cancer\", \"Transitional Cell\", Testicular Cancer\", \"Urethral Cancer\", \"Wilms Tumor\"]", 
+      "name": "gynecologic cancer", 
+      "options": "[\"Cervical Cancer\", \"Endometrial Cancer\", \"Fallopian Tube Cancer\", \"Gestational Trophoblastic Tumor\", \"Ovarian Epithelial Cancer\", \"Ovarian Germ Cell Tumor\", \"Ovarian Low Malignant Potential Tumor\", \"Primary Peritoneal Cancer\", \"Uterine Sarcoma\", \"Vaginal Cancer\", \"Vulvar Cancer\"]", 
       "valueType": "list", 
       "parent": null, 
-      "searchable": false, 
-      "question_id": "62"
+      "searchable": false
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 72, 
     "fields": {
-      "name": "gynecologic cancer", 
-      "options": "[\"Cervical Cancer\", \"Endometrial Cancer\", \"Fallopian Tube Cancer\", \"Gestational Trophoblastic Tumor\", \"Ovarian Epithelial Cancer\", \"Ovarian Germ Cell Tumor\", \"Ovarian Low Malignant Potential Tumor\", \"Primary Peritoneal Cancer\", \"Uterine Sarcoma\", \"Vaginal Cancer\", \"Vulvar Cancer\"]", 
+      "name": "head and neck cancer", 
+      "options": "[\"Hypopharyngeal Cancer\", \"Laryngeal Cancer\", \"Lip and Oral Cavity Cancer\", \"Metastatic Squamous Neck Cancer\", \"Mouth Cancer\", \"Nasopharyngeal Cancer\", \"Paranasal Sinus and Nasal Cavity Cancer\", \"Parathyroid Cancer\", \"Pharyngeal Cancer\", \"Salivary Gland Cancer\", \"Throat Cancer\", \"Thyroid Cancer\"]", 
       "valueType": "list", 
       "parent": null, 
-      "searchable": false, 
-      "question_id": "63"
+      "searchable": false
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 73, 
     "fields": {
-      "name": "head and neck cancer", 
-      "options": "[\"Hypopharyngeal Cancer\", \"Laryngeal Cancer\", \"Lip and Oral Cavity Cancer\", \"Metastatic Squamous Neck Cancer\", \"Mouth Cancer\", \"Nasopharyngeal Cancer\", \"Paranasal Sinus and Nasal Cavity Cancer\", \"Parathyroid Cancer\", \"Pharyngeal Cancer\", \"Salivary Gland Cancer\", \"Throat Cancer\", \"Thyroid Cancer\"]", 
+      "name": "hematologic/blood cancer", 
+      "options": "[\"Leukemia\", \"Lymphoma\"]", 
       "valueType": "list", 
       "parent": null, 
-      "searchable": false, 
-      "question_id": "64"
+      "searchable": false
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 74, 
     "fields": {
-      "name": "hematologic/blood cancer", 
-      "options": "[\"Leukemia\", \"Lymphoma\"]", 
+      "name": "musculoskeletal cancer", 
+      "options": "[\"Bone Cancer\", \"Rhabdomyosarcoma\", \"Soft Tissue Sarcoma\"]", 
       "valueType": "list", 
       "parent": null, 
-      "searchable": false, 
-      "question_id": "65"
+      "searchable": false
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 75, 
     "fields": {
-      "name": "musculoskeletal cancer", 
-      "options": "[\"Bone Cancer\", \"Rhabdomyosarcoma\", \"Soft Tissue Sarcoma\"]", 
+      "name": "neurologic cancer", 
+      "options": "[\"Brain Tumor\", \"Neuroblastoma\", \"Pituitary Tumor\", \"Primary Central Nervous System (CNS) Lymphoma\"]", 
       "valueType": "list", 
       "parent": null, 
-      "searchable": false, 
-      "question_id": "66"
+      "searchable": false
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 76, 
     "fields": {
-      "name": "neurologic cancer", 
-      "options": "[\"Brain Tumor\", \"Neuroblastoma\", \"Pituitary Tumor\", \"Primary Central Nervous System (CNS) Lymphoma\"]", 
+      "name": "respiratory/thoraciccancer", 
+      "options": "[\"Non-Small Cell Lung Cancer\", \"Small Cell Lung Cancer\", \"Pleuropulmonary Blastoma\", \"Tracheobronchial Tumors\", \"Malignant Mesothelioma\", \"Thymoma and Thymic Carcinoma\"]", 
       "valueType": "list", 
       "parent": null, 
-      "searchable": false, 
-      "question_id": "67"
+      "searchable": false
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 77, 
     "fields": {
-      "name": "respiratory/thoraciccancer", 
-      "options": "[\"Non-Small Cell Lung Cancer\", \"Small Cell Lung Cancer\", \"Pleuropulmonary Blastoma\", \"Tracheobronchial Tumors\", \"Malignant Mesothelioma\", \"Thymoma and Thymic Carcinoma\"]", 
+      "name": "skin cancer", 
+      "options": "[\"Cutaneous T-Cell Lymphoma\", \"Kaposi Sarcoma\", \"Melanoma\", \"Merkel Cell Carcinoma\", \"Skin Cancer\", \"Cutaneous T-Cell Lymphoma\"]", 
       "valueType": "list", 
       "parent": null, 
-      "searchable": false, 
-      "question_id": "68"
+      "searchable": false
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 78, 
     "fields": {
-      "name": "skin cancer", 
-      "options": "[\"Cutaneous T-Cell Lymphoma\", \"Kaposi Sarcoma\", \"Melanoma\", \"Merkel Cell Carcinoma\", \"Skin Cancer\", \"Cutaneous T-Cell Lymphoma\"]", 
+      "name": "AIDS-related cancer", 
+      "options": "[\"AIDS-Related Lymphoma\", \"Primary Central Nervous System Lymphoma\", \"Kaposi Sarcoma\"]", 
       "valueType": "list", 
       "parent": null, 
-      "searchable": false, 
-      "question_id": "69"
+      "searchable": false
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 79, 
     "fields": {
-      "name": "AIDS-related cancer", 
-      "options": "[\"AIDS-Related Lymphoma\", \"Primary Central Nervous System Lymphoma\", \"Kaposi Sarcoma\"]", 
-      "valueType": "list", 
-      "parent": null, 
-      "searchable": false, 
-      "question_id": "70"
+      "name": "cancer agents", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no", 
+      "parent": 64, 
+      "searchable": false
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 80, 
     "fields": {
-      "name": "cancer agents", 
+      "name": "monoclonal reaction", 
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no", 
-      "parent": 65, 
-      "searchable": false, 
-      "question_id": "71"
+      "parent": 64, 
+      "searchable": false
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 81, 
     "fields": {
-      "name": "monoclonal reaction", 
+      "name": "antiretroviral therapy", 
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no", 
-      "parent": 65, 
-      "searchable": false, 
-      "question_id": "72"
+      "parent": 64, 
+      "searchable": false
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 82, 
     "fields": {
-      "name": "antiretroviral therapy", 
+      "name": "metastasis", 
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no", 
-      "parent": 65, 
-      "searchable": false, 
-      "question_id": "74"
+      "parent": 64, 
+      "searchable": false
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 83, 
     "fields": {
-      "name": "metastasis", 
+      "name": "oncologist evaluation", 
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no", 
-      "parent": 65, 
-      "searchable": false, 
-      "question_id": "75"
+      "parent": 64, 
+      "searchable": false
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 84, 
     "fields": {
-      "name": "oncologist evaluation", 
+      "name": "radiotherapy dose", 
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no", 
-      "parent": 65, 
-      "searchable": false, 
-      "question_id": "76"
+      "parent": 64, 
+      "searchable": false
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 85, 
     "fields": {
-      "name": "radiotherapy dose", 
+      "name": "prior cancer treatment", 
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no", 
-      "parent": 65, 
-      "searchable": false, 
-      "question_id": "77"
+      "parent": 64, 
+      "searchable": false
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 86, 
     "fields": {
-      "name": "prior cancer treatment", 
+      "name": "cancer consent", 
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no", 
-      "parent": 65, 
-      "searchable": false, 
-      "question_id": "78"
+      "parent": 64, 
+      "searchable": false
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 87, 
     "fields": {
-      "name": "cancer consent", 
+      "name": "cancer supplements", 
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no", 
-      "parent": 65, 
-      "searchable": false, 
-      "question_id": "79"
+      "parent": 64, 
+      "searchable": false
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 88, 
     "fields": {
-      "name": "cancer supplements", 
-      "options": "[\"Yes\", \"No\"]", 
-      "valueType": "yes_no", 
-      "parent": 65, 
-      "searchable": false, 
-      "question_id": "80"
+      "name": "post-diagnosis disease-free", 
+      "options": "[\"less than 1 year\", \"1-2 years\", \"3-5 years\", \"more than 5 years\"]", 
+      "valueType": "pick_one", 
+      "parent": 64, 
+      "searchable": false
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 89, 
     "fields": {
-      "name": "post-diagnosis disease-free", 
-      "options": "[\"less than 1 year\", \"1-2 years\", \"3-5 years\", \"more than 5 years\"]", 
-      "valueType": "pick_one", 
-      "parent": 65, 
-      "searchable": false, 
-      "question_id": "81"
+      "name": "HIV", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no", 
+      "parent": null, 
+      "searchable": false
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 90, 
     "fields": {
-      "name": "HIV", 
+      "name": "surgical injury history", 
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no", 
       "parent": null, 
-      "searchable": false, 
-      "question_id": "73"
+      "searchable": true
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 91, 
     "fields": {
-      "name": "surgical injury history", 
-      "options": "[\"Yes\", \"No\"]", 
-      "valueType": "yes_no", 
+      "name": "surgical injury time", 
+      "options": "[\"less than a month ago\", \"1-3 months\", \"3-6 months\", \"6-12 months\", \"more than 1 year\"]", 
+      "valueType": "pick_one", 
       "parent": null, 
-      "searchable": true, 
-      "question_id": "82"
+      "searchable": true
     }
   }, 
   {
     "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 92, 
     "fields": {
-      "name": "surgical injury time", 
-      "options": "[\"less than a month ago\", \"1-3 months\", \"3-6 months\", \"6-12 months\", \"more than 1 year\"]", 
-      "valueType": "pick_one", 
-      "parent": null, 
-      "searchable": true, 
-      "question_id": "83"
-    }
-  }, 
-  {
-    "model": "sponsor.ClinicalTrialCriteria", 
-    "pk": 93, 
-    "fields": {
       "name": "wounds", 
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no", 
       "parent": null, 
-      "searchable": true, 
-      "question_id": "84"
+      "searchable": true
     }
   }
 ]

@@ -772,5 +772,14 @@
       "options": "[\"Birch pollen\", \"oak pollen\", \"grass pollen\", \"ragweed pollen\"]", 
       "valueType": "list"
     }
+  },
+  {
+    "model": "sponsor.ParticipantQuestion",
+    "pk": "87",
+    "fields": {
+      "text": "What is your BMI",
+      "options": "",
+      "valueType": "enter_val"
+    }
   }
 ]
