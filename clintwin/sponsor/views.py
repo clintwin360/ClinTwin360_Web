@@ -36,6 +36,16 @@ def index(request):
     else:
         return redirect('login_success')
 
+def login_success(request):
+    if request.user.groups.filter(name='clintwin'):
+        return redirect("viewsponsors")
+    else:
+        return redirect("viewtrials")
+
+def viewTrials(request):
+    trials = ClinicalTrial.objects.all() #filter(sponsorId=request.user.sponsor_id)
+    return render(request, "sponsor/viewtrials.html", {"trials": trials})
+
 def dummy(request):
     questions = ParticipantQuestion.objects.all()
     return render(request, 'sponsor/dummy.html', {"questions": questions})
@@ -69,11 +79,7 @@ def loaddata(request):
     call_command('loaddata', 'participant_responses')
     return HttpResponse("Data Loaded!")
 
-def login_success(request):
-    if request.user.groups.filter(name='clintwin'):
-        return redirect("viewsponsors")
-    else:
-        return redirect("viewtrials")
+
 
 class SignUp(generic.CreateView):
     form_class = UserCreationForm
@@ -146,9 +152,7 @@ class ClinicalTrialCreateView(generic.CreateView):
     template_name = 'create_trial_form.html'
 
 
-def viewTrials(request):
-    queryset = ClinicalTrial.objects.all() #filter(sponsorId=request.user.sponsor_id)
-    return render(request, "sponsor/viewtrials.html")
+
 
 @api_view(['GET'])
 class TrialList(generics.ListCreateAPIView):
