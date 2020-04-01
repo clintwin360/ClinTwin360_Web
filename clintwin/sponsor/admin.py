@@ -5,8 +5,9 @@ from .models import *
 admin.site.register(ParticipantQuestion)
 admin.site.register(Participant)
 admin.site.register(ParticipantResponse)
-admin.site.register(ClinicalTrial)
+
+admin.site.register(ClinicalTrialCriteria)
 admin.site.register(Sponsor)
-admin.site.register(SponsorRequest)
+admin.site.register(ClinicalTrial)
 admin.site.register(ClinicalTrialCriteriaResponse)
-admin.site.register(QuestionCategory)
+

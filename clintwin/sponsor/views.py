@@ -51,6 +51,11 @@ def loaddata(request):
     call_command('loaddata', 'participant_questions')
     call_command('loaddata', 'users')
     call_command('loaddata', 'participants')
+    call_command('loaddata', 'trial_criteria')
+    call_command('loaddata', 'sponsors')
+    call_command('loaddata', 'clinical_trials')
+    call_command('loaddata', 'criteria_responses')
+    call_command('loaddata', 'trial_matches')
     return HttpResponse("Data Loaded!")
 
 def login_success(request):
@@ -201,16 +206,14 @@ class ProfileView(generics.RetrieveAPIView):
 
 class NewSponsorView(generic.CreateView):
     model = Sponsor
-    fields = ('organization', 'contactPerson', 'phone', 'location','email', 'notes')
+
+    fields = ('organization', 'contactPerson', 'location', 'phone', 'email', 'notes')
     template_name = 'sponsor/new_sponsor.html'
 
 class NewClinicalTrialView(generic.CreateView):
     model = ClinicalTrial
-    fields = ('trialId', 'sponsorId', 'title', 'objective','recruitmentStartDate','recruitmentEndDate','enrollmentTarget','url','followUp','location','comments')
+    fields = ('trialId', 'sponsor', 'title', 'objective','recruitmentStartDate','recruitmentEndDate','enrollmentTarget','url','followUp','location','comments')
     template_name = 'sponsor/newtrial.html'
-
-#class NewSponsorView(TemplateView):
-    #template_name = 'sponsor/new_sponsor.html'
 
 class ViewSponsorView(TemplateView):
     template_name = 'sponsor/view_sponsor.html'
@@ -253,3 +256,26 @@ class SponsorProfileViewSet(viewsets.ModelViewSet):
     queryset = Sponsor.objects.all()
     serializer_class = SponsorSerializer
     #permission_classes = [permissions.IsAuthenticated]
+
+
+class ClinicalTrialMatchViewSet(viewsets.ModelViewSet):
+
+    serializer_class = ClinicalTrialMatchSerializer
+
+    def get_queryset(self):
+        participant_id = self.request.query_params.get('participant')
+        participant = Participant.objects.get(id=participant_id)
+        queryset = ClinicalTrialMatch.objects.filter(participant=participant)
+
+        return queryset
+
+
+class ClinicalTrialDetailsViewSet(viewsets.ModelViewSet):
+
+    serializer_class = ClinicalTrialDetailSerializer
+
+    def get_queryset(self):
+        trial_id = self.request.query_params.get('id')
+        queryset = ClinicalTrial.objects.filter(trialId=trial_id)
+
+        return queryset

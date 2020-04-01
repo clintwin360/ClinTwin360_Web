@@ -1,0 +1,74 @@
+[
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 1, 
+    "fields": {
+      "criteria": 14,
+      "trial": "12345",
+      "value": "18",
+      "comparison": "gte",
+      "criteriaType": "inclusion",
+      "negated": false
+    }
+  },
+    {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 2,
+    "fields": {
+      "criteria": 40,
+      "trial": "12345",
+      "value": "Congenital heart disease",
+      "comparison": "equals",
+      "criteriaType": "inclusion",
+      "negated": false
+    }
+  },
+    {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 3,
+    "fields": {
+      "criteria": 44,
+      "trial": "12345",
+      "value": "No",
+      "comparison": "equals",
+      "criteriaType": "inclusion",
+      "negated": false
+    }
+  },
+    {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 4,
+    "fields": {
+      "criteria": 45,
+      "trial": "12345",
+      "value": "Yes",
+      "comparison": "equals",
+      "criteriaType": "inclusion",
+      "negated": false
+    }
+  },
+    {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 5,
+    "fields": {
+      "criteria": 28,
+      "trial": "12345",
+      "value": "No",
+      "comparison": "equals",
+      "criteriaType": "exclusion",
+      "negated": false
+    }
+  },
+    {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 6,
+    "fields": {
+      "criteria": 49,
+      "trial": "12345",
+      "value": "Yes",
+      "comparison": "equals",
+      "criteriaType": "exclusion",
+      "negated": false
+    }
+  }
+]

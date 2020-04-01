@@ -9,7 +9,26 @@
         <form method="post" novalidate>
             {% csrf_token %}
             <div class="row">
-			{{ form.organization|as_crispy_field }}
+
+                <div class="col-6">
+                    {{ form.organization|as_crispy_field }}
+                </div>
+                <div class="col-6">
+                    {{ form.location|as_crispy_field }}
+                </div>
+            	<div class="col-4">
+                    {{ form.contactPerson|as_crispy_field }}
+                </div>
+            	<div class="col-4">
+                    {{ form.email|as_crispy_field }}
+                </div>
+            	<div class="col-4">
+                    {{ form.phone|as_crispy_field }}
+                </div>
+            	<div class="col-10">
+                    {{ form.notes|as_crispy_field }}
+                </div>
+
             </div>
             <button class="btn btn-primary" type="submit">Add Sponsor</button>
         </form>

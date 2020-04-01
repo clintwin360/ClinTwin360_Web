@@ -1,0 +1,20 @@
+[
+  {
+    "model": "sponsor.ClinicalTrial",
+    "fields": {
+      "trialId": "12345",
+      "sponsor": "1",
+      "title": "Physical Activity Impact in Grown-up Congenital Heart Disease",
+      "objective": "The objective of the trial is to assess whether encouragement of a six-month sports participation program in addition to usual care in symptomatic adult patients with congenital heart disease improves exercise capacity and quality of life, and lowers serum N-terminal prohormone brain natriuretic peptide (NT-proBNP) levels.",
+      "description": "Regular physical activity and aerobic exercise training are related to decreased cardiovascular mortality in healthy individuals, as well as in individuals with cardiovascular risk factors and cardiac patients. Unfortunately, no such data is available on exercise training in adult patients with congenital heart disease.",
+      "recruitmentStartDate": "2020-01-01",
+      "recruitmentEndDate": "2020-06-01",
+      "enrollmentTarget": "500",
+      "url": "https://clinicaltrials.gov/ct2/show/NCT02825472?cond=Heart+Diseases&draw=2&rank=11",
+      "followUp": "do this thing",
+      "location": "everywhere",
+      "comments": "blah blah",
+      "createdTimeStamp": "2020-03-25 22:18:16"
+    }
+  }
+]
