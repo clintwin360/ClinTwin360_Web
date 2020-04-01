@@ -21,6 +21,7 @@ urlpatterns = [
     # Move to API app
     path('loaddata/', views.loaddata, name='loaddata'),
     path('dummy/', views.dummy, name='dummy'),
+    path('trial_match/', views.calculate_trial_matches, name='trial_matches'),
     # Move to API app
     path('token/', views.get_token, name='token'),
 	path('accounts/', include('django.contrib.auth.urls')),

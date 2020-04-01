@@ -1,0 +1,47 @@
+[
+  {
+    "model": "sponsor.ParticipantResponse",
+    "pk": "1", 
+    "fields": {
+      "question": "39",
+      "participant": "1",
+      "value": "Congenital heart disease"
+    }
+  },
+    {
+    "model": "sponsor.ParticipantResponse",
+    "pk": "1",
+    "fields": {
+      "question": "33",
+      "participant": "1",
+      "value": "No"
+    }
+  },
+    {
+    "model": "sponsor.ParticipantResponse",
+    "pk": "1",
+    "fields": {
+      "question": "34",
+      "participant": "1",
+      "value": "Yes"
+    }
+  },
+    {
+    "model": "sponsor.ParticipantResponse",
+    "pk": "1",
+    "fields": {
+      "question": "20",
+      "participant": "1",
+      "value": "Yes"
+    }
+  },
+    {
+    "model": "sponsor.ParticipantResponse",
+    "pk": "1",
+    "fields": {
+      "question": "38",
+      "participant": "1",
+      "value": "No"
+    }
+  }
+]
