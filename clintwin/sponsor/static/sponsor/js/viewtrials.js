@@ -1,7 +1,13 @@
+var cardtitleTemplate = '<h5 class="card-title">';
+var cardtextTemplate = '<p class="card-text">';
+var cardtextsmallTemplate = '<p class="card-text"><small class="text-muted">'
+var cardTemplate = '<div class="card">';
+var cardbodyTemplate = '<div class="card-body">';
+
 $(function(){
-  $.getJSON("/sponsor/trial/", function(result){
+  $.getJSON("/sponsor/trial/?id=12345", function(result){
     $.each(result.results, function(i, field){
-      $(document.getElementById("tabledata")).append("<td>" + field.trialId + "</td>").append("<td>" + field.title + "</td>").append("<td>" + field.objective + "</td>").append("<td>" + field.description + "</td>").append("<td>" + field.recruitmentStartDate + "</td>").append("<td>" + field.recruitmentEndDate + "</td>").append("<td>" + field.enrollmentTarget + "</td>");
+      $("#cardlist").append(cardTemplate + cardbodyTemplate + cardtitleTemplate + field.title + '</h5>' + cardtextTemplate + field.description + "</p>" + cardtextsmallTemplate + 'Recruitment Start: ' + field.recruitmentStartDate + " Recruitment End: " + field.recruitmentEndDate + ' Enrollment Target: ' + field.enrollmentTarget + '</small></p></div></div>');
     });
   });
 });
