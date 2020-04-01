@@ -1,6 +1,9 @@
 {% extends "sponsor/base.html" %}
 {% load static %}
-{% block scripts %}<script type="text/javascript" src="{% static "sponsor/js/viewtrials.js" %}"></script>{% endblock %}
+<link href="{% static 'sponsor/css/style.css' %}" rel="stylesheet">
+{% block scripts %}
+<script type="text/javascript" src="{% static "sponsor/js/viewtrials.js" %}"></script>
+{% endblock %}
 {% block title %}Trials Dashboard{% endblock %}
 {% block content %}
 
@@ -11,28 +14,34 @@
 
 <div class=' text-center p-5 ' style="color:#4bc5de">
     <h2>Clinical Trial Dashboard</h2>
+    <br>
     <div class="row">
         <div class="col-md-6">
             <div class="container-fluid">
-                <div class="row">
+                <div class="row flex-row">
                     <div class="col">
                         <div class="container-fluid" id="cardlist">
-                            <div class="card">
-                                <div class="card-body" id="cardinfo_x">
-                                    <h5 class="card-title">Super Fake Example Trial</h5>
-                                        <p class="card-text">This is here to show what a card will look like once the javasript is working.</p>
-                                        <p class="card-text"><small class="text-muted">Start Date: Soon End Date: Never Target Enrollment: 100000000000</small></p>
+                            <label>
+                                <input type="radio" name="trialselect" class="card-input-element d-none" id="fake">
+                                <div class="card">
+                                    <div class="card-body bg-light flex-row justify-content-between align-items-cent" id="cardinfo_x">
+                                        <h5 class="card-title">Super Fake Example Trial</h5>
+                                            <p class="card-text">This is here to show what a card will look like once the javasript is working.</p>
+                                            <p class="card-text"><small class="text-muted">Start Date: Soon <br>End Date: Never Target <br>Enrollment: 100000000000</small></p>
+                                    </div>
                                 </div>
-                            </div>
+                            </label>
+                            <br>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-6">
-            <div class="container-fluid" id="trialdetail">
+            <div class="container-fluid bg-light border rounded" id="trialdetail">
+                <br>
                 <h6>Clinical Trial Details</h6>
-                <p>Coming Soon...</p>
+                <p>Coming Soon... </p>
             </div>
         </div>
     </div>
