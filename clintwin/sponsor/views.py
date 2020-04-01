@@ -15,7 +15,7 @@ from rest_framework import generics
 # New additions
 
 from rest_framework.decorators import api_view
-from .models import ClinicalTrial, ParticipantQuestion
+from .models import User, UserManager, Contact, Sponsor, Participant, ClinicalTrial, ClinicalTrialCriteriaResponse, ParticipantQuestion
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user
 from .serializers import *
@@ -35,6 +35,16 @@ def index(request):
         return redirect('login')
     else:
         return redirect('login_success')
+
+def login_success(request):
+    if request.user.groups.filter(name='clintwin'):
+        return redirect("viewsponsors")
+    else:
+        return redirect("viewtrials")
+
+def viewTrials(request):
+    trials = ClinicalTrial.objects.all() #filter(sponsorId=request.user.sponsor_id)
+    return render(request, "sponsor/viewtrials.html", {"trials": trials})
 
 def dummy(request):
     questions = ParticipantQuestion.objects.all()
@@ -69,11 +79,7 @@ def loaddata(request):
     call_command('loaddata', 'participant_responses')
     return HttpResponse("Data Loaded!")
 
-def login_success(request):
-    if request.user.groups.filter(name='clintwin'):
-        return redirect("viewsponsors")
-    else:
-        return redirect("viewtrials")
+
 
 class SignUp(generic.CreateView):
     form_class = UserCreationForm
@@ -146,9 +152,7 @@ class ClinicalTrialCreateView(generic.CreateView):
     template_name = 'create_trial_form.html'
 
 
-def viewTrials(request):
-    #queryset = ClinicalTrial.objects.all() #filter(sponsorId=request.user.sponsor_id)
-    return render(request, "sponsor/viewtrials.html")
+
 
 @api_view(['GET'])
 class TrialList(generics.ListCreateAPIView):
@@ -217,6 +221,7 @@ class ProfileView(generics.RetrieveAPIView):
 
 class NewSponsorView(generic.CreateView):
     model = Sponsor
+
     fields = ('organization', 'contactPerson', 'location', 'phone', 'email', 'notes')
     template_name = 'sponsor/new_sponsor.html'
 

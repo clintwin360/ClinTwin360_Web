@@ -1,5 +1,6 @@
 {% extends "sponsor/base.html" %}
 {% load static %}
+{% block scripts %}<script type="text/javascript" src="{% static "sponsor/js/viewtrials.js" %}"></script>{% endblock %}
 {% block title %}Trials Dashboard{% endblock %}
 {% block content %}
 
@@ -15,23 +16,26 @@
             <tr>
                 <th scope="col">Trial ID</th>
                 <th scope="col">Name</th>
-                <th scope="col">Current Recruitment</th>
-                <th scope="col">Target Recruitment</th>
+                <th scope="col">Objective/th>
+                <th scope="col">Description</th>
                 <th scope="col">Start Date</th>
                 <th scope="col">End Date</th>
-                <th scope="col">Details</th>
+                <th scope="col">Target Recruitment</th>
+
             </tr>
         </thead>
-        {% for trial in queryset %}
+        {% for trial in trials %}
         <tbody>
         <tr>
             <th scope="row"></th>
+            <div id="tabledata">
             <!--<td>{{ trial.id }}</td>
             <td>{{ trial.name }}</td>
             <td>{{ trial.currentRecruitment }}</td>
             <td>{{ trial.targetRecruitment }}</td>
             <td>{{ trial.startDate }}</td>
             <td>{{ trial.endDate}}</td>-->
+            </div>
             <td><button class="btn btn-submit" type="button">View</button></td>
         </tr>
         {% endfor %}
