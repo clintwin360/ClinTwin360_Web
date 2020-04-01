@@ -211,7 +211,7 @@ class NewSponsorView(generic.CreateView):
 
 class NewClinicalTrialView(generic.CreateView):
     model = ClinicalTrial
-    fields = ('trialId', 'sponsorId', 'title', 'objective','recruitmentStartDate','recruitmentEndDate','enrollmentTarget','url','followUp','location','comments')
+    fields = ('trialId', 'sponsor', 'title', 'objective','recruitmentStartDate','recruitmentEndDate','enrollmentTarget','url','followUp','location','comments')
     template_name = 'sponsor/newtrial.html'
 
 class ViewSponsorView(TemplateView):
@@ -278,4 +278,3 @@ class ClinicalTrialDetailsViewSet(viewsets.ModelViewSet):
         queryset = ClinicalTrial.objects.filter(trialId=trial_id)
 
         return queryset
-
