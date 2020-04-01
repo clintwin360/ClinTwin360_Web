@@ -1,11 +1,21 @@
 [
   {
     "model": "sponsor.Participant",
-    "pk": "1", 
+    "pk": "1",
     "fields": {
       "first_name": "John",
       "last_name": "Doe",
       "email": "john.doe@fakemail.com",
+      "date_joined": "2020-03-25 22:18:16"
+    }
+  },
+    {
+    "model": "sponsor.Participant",
+    "pk": "2",
+    "fields": {
+      "first_name": "Jane",
+      "last_name": "Johnson",
+      "email": "jane.joe@fakemail.com",
       "date_joined": "2020-03-25 22:18:16"
     }
   }

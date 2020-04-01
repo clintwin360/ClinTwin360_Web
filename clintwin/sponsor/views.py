@@ -1,5 +1,5 @@
 ##  Original additions
-from django.http import HttpResponseRedirect,HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import render
 
 from django.views.generic import TemplateView
@@ -47,6 +47,16 @@ def get_token(request):
     return HttpResponse(token)
 
 
+def calculate_trial_matches(request):
+    trials = ClinicalTrial.objects.all()
+    data = {}
+    for trial in trials:
+        data["trial"] = {'name': trial.title, 'criteria': []}
+        criteria = trial.criteria.all()
+        for criterion in criteria:
+            data["trial"]['criteria'].append(criterion.criteria.name)
+    return JsonResponse(data)
+
 def loaddata(request):
     call_command('loaddata', 'participant_questions')
     call_command('loaddata', 'users')
@@ -56,6 +66,7 @@ def loaddata(request):
     call_command('loaddata', 'clinical_trials')
     call_command('loaddata', 'criteria_responses')
     call_command('loaddata', 'trial_matches')
+    call_command('loaddata', 'participant_responses')
     return HttpResponse("Data Loaded!")
 
 def login_success(request):
