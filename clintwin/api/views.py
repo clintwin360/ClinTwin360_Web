@@ -8,8 +8,7 @@ from sponsor.forms import UserCreationForm, NewTrialForm
 #from .forms import AuthenticationForm
 from django.urls import reverse_lazy
 from django.views import generic
-
-# New additions
+from .models import User, UserManager, Contact, Sponsor, Participant, ClinicalTrial, Criteria, Categories, ClinicalTrialCriteriaResponse, QuestionSchema, ParticipantQuestion
 
 from rest_framework.decorators import api_view
 

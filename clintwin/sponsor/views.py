@@ -15,7 +15,7 @@ from rest_framework import generics
 # New additions
 
 from rest_framework.decorators import api_view
-from .models import ClinicalTrial, ParticipantQuestion
+from .models import User, UserManager, Contact, Sponsor, Participant, ClinicalTrial, Criteria, Categories, ClinicalTrialCriteriaResponse, ParticipantQuestion
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user
 from .serializers import *
@@ -131,7 +131,7 @@ class ClinicalTrialCreateView(generic.CreateView):
 
 
 def viewTrials(request):
-    #queryset = ClinicalTrial.objects.all() #filter(sponsorId=request.user.sponsor_id)
+    queryset = ClinicalTrial.objects.all() #filter(sponsorId=request.user.sponsor_id)
     return render(request, "sponsor/viewtrials.html")
 
 @api_view(['GET'])
@@ -201,7 +201,7 @@ class ProfileView(generics.RetrieveAPIView):
 
 class NewSponsorView(generic.CreateView):
     model = Sponsor
-    fields = ('organization', 'contactPerson',' location',' phone', 'email', 'notes')
+    fields = ('organization', 'contactPerson', 'phone', 'location','email', 'notes')
     template_name = 'sponsor/new_sponsor.html'
 
 class NewClinicalTrialView(generic.CreateView):
@@ -209,8 +209,8 @@ class NewClinicalTrialView(generic.CreateView):
     fields = ('trialId', 'sponsorId', 'title', 'objective','recruitmentStartDate','recruitmentEndDate','enrollmentTarget','url','followUp','location','comments')
     template_name = 'sponsor/newtrial.html'
 
-class NewSponsorView(TemplateView):
-    template_name = 'sponsor/new_sponsor.html'
+#class NewSponsorView(TemplateView):
+    #template_name = 'sponsor/new_sponsor.html'
 
 class ViewSponsorView(TemplateView):
     template_name = 'sponsor/view_sponsor.html'
