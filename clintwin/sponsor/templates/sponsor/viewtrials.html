@@ -1,6 +1,8 @@
 {% extends "sponsor/base.html" %}
 {% load static %}
-<link href="{% static 'sponsor/css/style.css' %}" rel="stylesheet">
+<link href="{% static 'sponsor/css/viewtrials.css' %}" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 {% block scripts %}
 <script type="text/javascript" src="{% static "sponsor/js/viewtrials.js" %}"></script>
 {% endblock %}
@@ -16,16 +18,19 @@
     <h2>Clinical Trial Dashboard</h2>
     <br>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-6">
             <div class="container-fluid">
                 <div class="row flex-row">
                     <div class="col">
                         <div class="container-fluid" id="cardlist">
                             <label>
-                                <input type="radio" name="trialselect" class="card-input-element d-none" id="fake">
+                                <input type="radio" name="trialselect" class="card-input-element d-none" id="fake"/>
                                 <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Super Fake Example Trial</h4>
+                                    </div>
                                     <div class="card-body bg-light flex-row justify-content-between align-items-cent" id="cardinfo_x">
-                                        <h5 class="card-title">Super Fake Example Trial</h5>
+                                        <h6 class="card-text">Super Fake Objective</h6>
                                             <p class="card-text">This is here to show what a card will look like once the javasript is working.</p>
                                             <p class="card-text"><small class="text-muted">Start Date: Soon <br>End Date: Never Target <br>Enrollment: 100000000000</small></p>
                                     </div>
@@ -37,7 +42,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-6">
             <div class="container-fluid bg-light border rounded" id="trialdetail">
                 <br>
                 <h6>Clinical Trial Details</h6>
