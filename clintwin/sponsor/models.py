@@ -130,7 +130,7 @@ class ParticipantQuestion(models.Model):
 
 class ParticipantResponse(models.Model):
     question = models.ForeignKey(ParticipantQuestion, on_delete=models.CASCADE)
-    participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
+    participant = models.ForeignKey(Participant, on_delete=models.CASCADE, related_name='responses')
     value = models.CharField(max_length=50)
 
     def __str__(self):

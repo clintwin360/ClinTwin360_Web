@@ -25,7 +25,7 @@ label {
 
 .card-input-element:checked+.card::after {
   content: '\e5ca';
-  color: #AFB8EA;
+  color: #4BCFDE;
   font-family: 'Material Icons';
   font-size: 24px;
   -webkit-animation-name: fadeInCheckbox;

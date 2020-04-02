@@ -57,14 +57,45 @@ def get_token(request):
     return HttpResponse(token)
 
 
+def compare_values(a, op, b):
+    if op == "equals":
+        return a == b
+    if op == 'gte':
+        return float(a) >= float(b)
+    if op == 'lte':
+        return float(a) <= float(b)
+
+
 def calculate_trial_matches(request):
+    participant = Participant.objects.get(id=1)
+    responses = participant.responses.all()
     trials = ClinicalTrial.objects.all()
-    data = {}
+    data = {'matches': [], 'questions': []}
     for trial in trials:
-        data["trial"] = {'name': trial.title, 'criteria': []}
+        trial_match = True
         criteria = trial.criteria.all()
         for criterion in criteria:
-            data["trial"]['criteria'].append(criterion.criteria.name)
+            if trial_match:
+                criterion_value = criterion.value
+                comparison = criterion.comparison
+                criterion_type = criterion.criteriaType
+                question = criterion.criteria.question
+                print(question.text)
+                response = responses.get(question__id=question.id)
+                response_value = response.value
+                value_match = compare_values(response_value, comparison, criterion_value)
+                data['questions'].append({'text': question.text, 'expected': criterion_value,
+                                          'comparison': comparison, 'type': criterion_type,
+                                          'response': response_value, 'status': value_match})
+                if value_match and criterion_type == "inclusion" or not value_match and criterion_type == "exclusion":
+                    continue
+                else:#this will not match if value_match is not true or if type is exclusion, we may want to separate cases
+                    trial_match = False
+                    continue
+        if trial_match:
+            data['matches'].append(trial.title)
+    data['participant'] = participant.name()
+    data['responses'] = [x.question.text for x in participant.responses.all()]
     return JsonResponse(data)
 
 def loaddata(request):
@@ -79,12 +110,6 @@ def loaddata(request):
     call_command('loaddata', 'participant_responses')
     return HttpResponse("Data Loaded!")
 
-
-
-class SignUp(generic.CreateView):
-    form_class = UserCreationForm
-    success_url = reverse_lazy('login')
-    template_name = 'sponsor/register.html'
 
 
 """
@@ -292,5 +317,18 @@ class ClinicalTrialDetailsViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         trial_id = self.request.query_params.get('id')
         queryset = ClinicalTrial.objects.filter(trialId=trial_id)
+
+        return queryset
+
+
+class ClinicalTrialViewSet(viewsets.ModelViewSet):
+    serializer_class = ClinicalTrialListSerializer
+
+    def get_queryset(self):
+        sponsor_id = self.request.query_params.get('sponsor_id', None)
+        if sponsor_id:
+            queryset = ClinicalTrial.objects.filter(sponsor__id=sponsor_id)
+        else:
+            queryset = ClinicalTrial.objects.all()
 
         return queryset
