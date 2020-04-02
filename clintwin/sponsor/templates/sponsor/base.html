@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html style="height:100%">
+<html>
 <head>
 	{% load static %}
     <meta charset="UTF-8">
@@ -20,44 +20,42 @@
 <body>
 	<div id="navbar">
 		{% block navbar %}
-		<nav class="navbar navbar-expand-lg" style="background-color:#fff9f9">
+		<nav class="navbar navbar-expand-lg">
 			<div class="container-fluid">
-				<a class="navbar-brand"  href="{% url 'index' %}"><p style="color:#4bc5de; font-weight: 900; margin-top: 1rem;
-		    margin-bottom: 1rem;">ClinTwin360</p></a>
+				<a class="navbar-brand"  href="{% url 'index' %}"><p>ClinTwin360</p></a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
-
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav mr-auto">
 						{% if user.is_authenticated %} <!-- % if request.user.groups.filter(name='admin') % check for admin context processor-->
 
 						<li class="nav-item dropdown">
-				        	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#4bc5de">
+				        	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				          Manage Sponsors
 				        </a>
 
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-				          <a class="dropdown-item" href="{% url 'newsponsor' %}" style="color:#4bc5de">Create New Sponsor</a>
-				          <a class="dropdown-item" href="{% url 'viewsponsors' %}" style="color:#4bc5de">View Sponsors</a>
-									<a class="dropdown-item" href="{% url 'viewsponsorreq' %}" style="color:#4bc5de">View Sponsor Requests</a>
+				          <a class="dropdown-item" href="{% url 'newsponsor' %}">Create New Sponsor</a>
+				          <a class="dropdown-item" href="{% url 'viewsponsors' %}">View Sponsors</a>
+									<a class="dropdown-item" href="{% url 'viewsponsorreq' %}">View Sponsor Requests</a>
 
 				        </div>
 
 						</li>
 						<!--% else % -->
 						<li class="nav-item dropdown">
-		 		        	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#4bc5de">
+		 		        	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				          Manage Clinical Trials
 				        </a>
 
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-				          <a class="dropdown-item" href="{% url 'newtrial' %}" style="color:#4bc5de">Create New Clinical Trial</a>
-				          <a class="dropdown-item" href="{% url 'viewtrials' %}" style="color:#4bc5de">View Clinical Trials</a>
+				          <a class="dropdown-item" href="{% url 'newtrial' %}">Create New Clinical Trial</a>
+				          <a class="dropdown-item" href="{% url 'viewtrials' %}">View Clinical Trials</a>
 
 				          <div class="dropdown-divider"></div>
-						  	<a class="dropdown-item" href="{% url 'inclusion' %}" style="color:#4bc5de">Inclusion Criteria</a>
-							<a class="dropdown-item" href="{% url 'exclusion' %}" style="color:#4bc5de">Exclusion Criteria</a>
+						  	<a class="dropdown-item" href="{% url 'inclusion' %}">Inclusion Criteria</a>
+							<a class="dropdown-item" href="{% url 'exclusion' %}">Exclusion Criteria</a>
 				        </div>
 
 						</li>
@@ -88,22 +86,18 @@
 						{% endif %}
 						{% if not user.is_authenticated %}
 							<li class="nav-item dropdown">
-			        			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#4bc5de">
+			        			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			          			About</a>
 
 								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							    	<a class="dropdown-item" href="{% url 'about' %}" style="color:#4bc5de">About Us</a>
-
-							        <a class="dropdown-item" href="" style="color:#4bc5de">Leadership Team</a>
-									<a class="dropdown-item" href="{% url 'how_works' %}" style="color:#4bc5de">How Does It Works </a>
-						          <div class="dropdown-divider"></div>
-						          	<a class="dropdown-item" href="" style="color:#4bc5de">Use Cases </a>
+							    	<a class="dropdown-item" href="{% url 'about' %}">About Us</a>
+									<a class="dropdown-item" href="{% url 'how_works' %}">How Does It Works </a>
 						        </div>
 
 							</li>
 
 							<li class="nav-item">
-					        	<a class="nav-link" href="{% url 'contact' %}" style="color:#4bc5de">Contact Us</a>
+					        	<a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
 							</li>
 						{% endif %}
 
@@ -112,10 +106,10 @@
 					{% if user.is_authenticated %}
 
 						<li class="nav-item">
-							<a class="nav-link" href="{% url 'profile' %} " style="color:#4bc5de">Welcome back, {{ user.username }}!  </p>
+							<a class="nav-link" href="{% url 'profile' %}">Welcome back, {{ user.username }}!  </p>
 						</li>
 						<li class="nav-item ">
-							<a class="nav-link" href="{% url 'logout' %}" style="color:#4bc5de" align="right">logout</a>
+							<a class="nav-link" href="{% url 'logout' %}" align="right">logout</a>
 						</li>
 					{% endif %}
 

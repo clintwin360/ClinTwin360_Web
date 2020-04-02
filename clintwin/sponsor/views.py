@@ -81,12 +81,6 @@ def loaddata(request):
 
 
 
-class SignUp(generic.CreateView):
-    form_class = UserCreationForm
-    success_url = reverse_lazy('login')
-    template_name = 'sponsor/register.html'
-
-
 """
 def register(request):
     errors = User.objects.validator(request.POST)
