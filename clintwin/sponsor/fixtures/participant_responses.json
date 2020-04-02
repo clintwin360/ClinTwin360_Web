@@ -43,5 +43,14 @@
       "participant": "1",
       "value": "No"
     }
+  },
+    {
+    "model": "sponsor.ParticipantResponse",
+    "pk": "6",
+    "fields": {
+      "question": "3",
+      "participant": "1",
+      "value": "66"
+    }
   }
 ]
