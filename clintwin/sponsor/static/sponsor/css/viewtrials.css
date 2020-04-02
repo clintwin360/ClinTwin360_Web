@@ -63,6 +63,6 @@
 Keep
 */
 
-div.cardlist{
+.cardlist{
     overflow-y:scroll;
 }

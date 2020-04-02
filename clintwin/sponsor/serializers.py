@@ -31,7 +31,8 @@ class ClinicalTrialListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ClinicalTrial
-        fields = ['title', 'objective', 'trialId', 'sponsor']
+        fields = ['title', 'objective', 'trialId', 'sponsor', 'recruitmentStartDate',
+                  'recruitmentEndDate', 'enrollmentTarget', 'description', 'url',]
 
 class ClinicalTrialDetailSerializer(serializers.ModelSerializer):
     sponsor = SponsorDetailSerializer(read_only=True)
