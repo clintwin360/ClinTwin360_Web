@@ -34,5 +34,6 @@ urlpatterns = [
     path('', lambda request: redirect('sponsor/', permanent=False)),
     path('healthcheck/', lambda r: HttpResponse()),
     path('admin/', admin.site.urls),
-    path('sponsor/', include('sponsor.urls'))
+    path('sponsor/', include('sponsor.urls')),
+    path('api/', include('api.urls')),
 ]
