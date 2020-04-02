@@ -17,6 +17,7 @@ router.register(r'responses', views.ParticipantResponseViewSet)
 router.register(r'profile', views.SponsorProfileViewSet)
 router.register(r'matches', views.ClinicalTrialMatchViewSet, basename='ClinicalTrialMatch')
 router.register(r'trial', views.ClinicalTrialDetailsViewSet, basename='ClinicalTrial')
+router.register(r'trials', views.ClinicalTrialViewSet, basename='ClinicalTrial')
 
 
 urlpatterns = [

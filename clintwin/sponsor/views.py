@@ -58,6 +58,7 @@ def get_token(request):
 
 
 def calculate_trial_matches(request):
+    participant = Participant.objects.get(id=1)
     trials = ClinicalTrial.objects.all()
     data = {}
     for trial in trials:
@@ -65,6 +66,8 @@ def calculate_trial_matches(request):
         criteria = trial.criteria.all()
         for criterion in criteria:
             data["trial"]['criteria'].append(criterion.criteria.name)
+    data['participant'] = participant.name()
+    data['responses'] = [x.question.text for x in participant.responses.all()]
     return JsonResponse(data)
 
 def loaddata(request):
@@ -286,5 +289,18 @@ class ClinicalTrialDetailsViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         trial_id = self.request.query_params.get('id')
         queryset = ClinicalTrial.objects.filter(trialId=trial_id)
+
+        return queryset
+
+
+class ClinicalTrialViewSet(viewsets.ModelViewSet):
+    serializer_class = ClinicalTrialListSerializer
+
+    def get_queryset(self):
+        sponsor_id = self.request.query_params.get('sponsor_id', None)
+        if sponsor_id:
+            queryset = ClinicalTrial.objects.filter(sponsor__id=sponsor_id)
+        else:
+            queryset = ClinicalTrial.objects.all()
 
         return queryset
