@@ -1,4 +1,4 @@
-var radiocardTemplate = '<label class="mt-3"><input type="radio" name="trialselect" class="card-input-element d-none" id="test"/>';
+var radiocardTemplate = '<label class="mt-3"><input type="radio" name="trialselect" class="card-input-element" id="test"/>';
 var cardTemplate = '<div class="card">';
 var cardheaderTemplate = '<div class="card-header"><h4 class="card-title">';
 var cardbodyTemplate = '<div class="card-body bg-light flex-row justify-content-between align-items-cent">';
