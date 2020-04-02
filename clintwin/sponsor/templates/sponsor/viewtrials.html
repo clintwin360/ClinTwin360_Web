@@ -12,39 +12,31 @@
 {% block content %}
 
 <div class="container-fluid">
-  <p>Sponsor ID: </p>
-  <p>Organization: </p>
-</div>
-
-<div class="container-fluid">
     <h2>Clinical Trial Dashboard</h2>
     <br>
     <div class="row">
-        <div class="col-6">
-            <div class="container-fluid">
-                <div class="row flex-row">
-                    <div class="col">
-                        <div class="container-fluid" id="cardlist">
-                            <label>
-                                <input type="radio" name="trialselect" class="card-input-element" id="fake" autocomplete="off" checked>
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4 class="card-title"><i class="fas fa-book-medical fa-lg"></i>  Super Fake Example Trial</h4>
-                                    </div>
-                                    <div class="card-body bg-light flex-row justify-content-between align-items-cent" id="cardinfo_x">
-                                        <h6 class="card-text">Super Fake Objective</h6>
-                                            <p class="card-text">This is here to show what a card will look like once the javasript is working.</p>
-                                            <p class="card-text"><small class="text-muted">Start Date: Soon <br>End Date: Never Target <br>Enrollment: 100000000000</small></p>
-                                    </div>
+        <div class="col-5">
+            <div class="row">
+                <div class="col">
+                    <div id="cardlist" style="overflow-y:scroll;">
+                        <label>
+                            <input type="radio" name="trialselect" class="card-input-element d-none" id="fake" autocomplete="off" checked>
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title"><i class="fas fa-book-medical fa-lg"></i>  Super Fake Example Trial</h4>
                                 </div>
-                            </label>
-                            <br>
-                        </div>
+                                <div class="card-body bg-light flex-row justify-content-between align-items-cent" id="cardinfo_x">
+                                    <h6 class="card-text">Super Fake Objective</h6>
+                                        <p class="card-text">This is here to show what a card will look like once the javasript is working.</p>
+                                        <p class="card-text"><small class="text-muted">Start Date: Soon <br>End Date: Never Target <br>Enrollment: 100000000000</small></p>
+                                </div>
+                            </div>
+                        </label>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-7">
             <div class="container-fluid bg-light border rounded" id="trialdetail">
                 <br>
                 <h6>Clinical Trial Details</h6>

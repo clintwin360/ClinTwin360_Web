@@ -68,7 +68,6 @@ button {
   width: 20%;
 }
 
-<style>
 div.background {
   background: url(klematis.jpg) repeat;
   border: 2px solid black;
@@ -81,7 +80,6 @@ div.transbox {
   opacity: 0.6;
   filter: alpha(opacity=60); /* For IE8 and earlier */
 }
-</style>
 
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 300px) {
