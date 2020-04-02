@@ -7,6 +7,7 @@
 <link href="https://daemonite.github.io/material/css/material.min.css" rel="stylesheet">
 {% block scripts %}
 <script type="text/javascript" src="{% static "sponsor/js/viewtrials.js" %}"></script>
+<script type="text/javascript" src="{% static "sponsor/js/showdetails.js" %}"></script>
 {% endblock %}
 {% block title %}Trials Dashboard{% endblock %}
 {% block content %}
@@ -16,100 +17,9 @@
         <div class="col-5">
             <div class="row">
                 <div class="col">
-                    <div class="h-25 d-inline-block" id="cardlist" style="overflow-y:scroll;">
+                    <div id="cardlist" style="overflow-y:scroll;">
                         <label>
-                            <input type="radio" name="trialselect" class="card-input-element d-none" id="fake" autocomplete="off" checked>
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-title"><i class="fas fa-book-medical fa-lg"></i>  Super Fake Example Trial</h5><small>0/10000000</small>
-                                </div>
-                                <div class="card-body bg-light flex-row justify-content-between align-items-cent" id="cardinfo_x">
-                                    <h6 class="card-text">Super Fake Objective</h6>
-                                        <p class="card-text">This is here to show what a card will look like once the javasript is working.</p>
-                                        <p class="card-text"><small class="text-muted">Start Date: Soon  End Date: Never Target</small></p>
-                                </div>
-                            </div>
-                        </label>
-                        <label>
-                            <input type="radio" name="trialselect" class="card-input-element d-none" id="fake" autocomplete="off" checked>
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-title"><i class="fas fa-book-medical fa-lg"></i>  Super Fake Example Trial</h5><small>0/10000000</small>
-                                </div>
-                                <div class="card-body bg-light flex-row justify-content-between align-items-cent" id="cardinfo_x">
-                                    <h6 class="card-text">Super Fake Objective</h6>
-                                        <p class="card-text">This is here to show what a card will look like once the javasript is working.</p>
-                                        <p class="card-text"><small class="text-muted">Start Date: Soon  End Date: Never Target</small></p>
-                                </div>
-                            </div>
-                        </label>
-                        <label>
-                            <input type="radio" name="trialselect" class="card-input-element d-none" id="fake" autocomplete="off" checked>
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-title"><i class="fas fa-book-medical fa-lg"></i>  Super Fake Example Trial</h5><small>0/10000000</small>
-                                </div>
-                                <div class="card-body bg-light flex-row justify-content-between align-items-cent" id="cardinfo_x">
-                                    <h6 class="card-text">Super Fake Objective</h6>
-                                        <p class="card-text">This is here to show what a card will look like once the javasript is working.</p>
-                                        <p class="card-text"><small class="text-muted">Start Date: Soon  End Date: Never Target</small></p>
-                                </div>
-                            </div>
-                        </label>
-                        <label>
-                            <input type="radio" name="trialselect" class="card-input-element d-none" id="fake" autocomplete="off" checked>
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-title"><i class="fas fa-book-medical fa-lg"></i>  Super Fake Example Trial</h5><small>0/10000000</small>
-                                </div>
-                                <div class="card-body bg-light flex-row justify-content-between align-items-cent" id="cardinfo_x">
-                                    <h6 class="card-text">Super Fake Objective</h6>
-                                        <p class="card-text">This is here to show what a card will look like once the javasript is working.</p>
-                                        <p class="card-text"><small class="text-muted">Start Date: Soon  End Date: Never Target</small></p>
-                                </div>
-                            </div>
-                        </label>
-                        <label>
-                            <input type="radio" name="trialselect" class="card-input-element d-none" id="fake" autocomplete="off" checked>
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-title"><i class="fas fa-book-medical fa-lg"></i>  Super Fake Example Trial</h5><small>0/10000000</small>
-                                </div>
-                                <div class="card-body bg-light flex-row justify-content-between align-items-cent" id="cardinfo_x">
-                                    <h6 class="card-text">Super Fake Objective</h6>
-                                        <p class="card-text">This is here to show what a card will look like once the javasript is working.</p>
-                                        <p class="card-text"><small class="text-muted">Start Date: Soon  End Date: Never Target</small></p>
-                                </div>
-                            </div>
-                        </label>
-                        <label>
-                            <input type="radio" name="trialselect" class="card-input-element d-none" id="fake" autocomplete="off" checked>
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-title"><i class="fas fa-book-medical fa-lg"></i>  Super Fake Example Trial</h5><small>0/10000000</small>
-                                </div>
-                                <div class="card-body bg-light flex-row justify-content-between align-items-cent" id="cardinfo_x">
-                                    <h6 class="card-text">Super Fake Objective</h6>
-                                        <p class="card-text">This is here to show what a card will look like once the javasript is working.</p>
-                                        <p class="card-text"><small class="text-muted">Start Date: Soon  End Date: Never Target</small></p>
-                                </div>
-                            </div>
-                        </label>
-                        <label>
-                            <input type="radio" name="trialselect" class="card-input-element d-none" id="fake" autocomplete="off" checked>
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-title"><i class="fas fa-book-medical fa-lg"></i>  Super Fake Example Trial</h5><small>0/10000000</small>
-                                </div>
-                                <div class="card-body bg-light flex-row justify-content-between align-items-cent" id="cardinfo_x">
-                                    <h6 class="card-text">Super Fake Objective</h6>
-                                        <p class="card-text">This is here to show what a card will look like once the javasript is working.</p>
-                                        <p class="card-text"><small class="text-muted">Start Date: Soon  End Date: Never Target</small></p>
-                                </div>
-                            </div>
-                        </label>
-                        <label>
-                            <input type="radio" name="trialselect" class="card-input-element d-none" id="fake" autocomplete="off" checked>
+                            <input type="radio" name="trialselect" class="card-input-element d-none" value="fake" autocomplete="off" checked>
                             <div class="card">
                                 <div class="card-header">
                                     <h5 class="card-title"><i class="fas fa-book-medical fa-lg"></i>  Super Fake Example Trial</h5><small>0/10000000</small>
