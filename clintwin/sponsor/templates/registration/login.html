@@ -7,16 +7,18 @@
 <div class="container-fluid">
     <!-- <h2 style=color:#4bc5de>Login</h2> -->
     <div class="imgcontainer">
-    <img src="{% static "sponsor/img/logo.png" %}" alt="Logo" class="logo">
+    <img src="{% static "sponsor/img/new_logo.png" %}" alt="Logo" class="logo" id="clintwin360_logo">
     </div>
-    <br><br>
-    <div class="container-fluid">
+    <br>
+
+    <div id="login_form">
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <button class="btn btn-primary" type="submit">Login</button>
+            <button type="submit" id="login_button">Login</button>
         </form>
         <br>
+        
         <label>
         <input type="checkbox" checked="checked" name="remember">  Remember me   </input>
         </label>
