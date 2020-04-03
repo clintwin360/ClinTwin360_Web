@@ -5,9 +5,23 @@ body {
 }
 
 /* Style navbar elements */
-#navbar, #navbarDropdown, #contact_us, #navbarLogo {
+#navbar, #navbarDropdown, #contact_us, #navbarLogo, #logout_link {
   background-color: #4bc5ef;
   color: white;
+}
+
+#greeting {
+  color: #333333;
+}
+
+/* Trying to push 2 buttons to right of page */
+navbar-nav ul li:last-child {
+  float: right;
+}
+nav ul li {
+  list-style:none;
+  /* margin:10px; */
+  float: right;
 }
 
 /* Styling to keep footer at page bottom */
@@ -99,11 +113,4 @@ button.reset_btn, #id_email {
   margin-right: auto;
   width:90%;
   height:90%;
-}
-
-/* Trying to push 2 buttons to right of page */
-#greeting, #logout_link {
-  background-color: #4bc5ef;
-  color: white;
-  text-align: right;
 }

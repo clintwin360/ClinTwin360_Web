@@ -23,9 +23,9 @@
 		<nav class="navbar navbar-expand-lg">
 			<div class="container-fluid">
 				<a class="navbar-brand"  href="{% url 'index' %}" id="navbarLogo">ClinTwin360</a>
-				<!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
-				</button> -->
+				</button>
 
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav mr-auto">
@@ -102,20 +102,19 @@
 							</li>
 						{% endif %}
 
+				</ul>
 
-
+				<ul class="navbar-nav ml-auto">
 					{% if user.is_authenticated %}
-
-						<li class="nav-item" id="greeting">
-							<a class="nav-link">Welcome back, {{ user.username }}!  </p>
+						<li class="nav-item">
+							<a class="nav-link" id="greeting">Welcome back, {{ user.username }}!  </a>
 						</li>
-						<li class="nav-item " id="logout_link">
-							<a class="nav-link" href="{% url 'logout' %}" align="right">logout</a>
+						<li class="nav-item">
+							<a class="nav-link" id="logout_link" href="{% url 'logout' %}" align="right">logout</a>
 						</li>
 					{% endif %}
-
-
 				</ul>
+
 				</div>
 			</div>
 		</nav>
