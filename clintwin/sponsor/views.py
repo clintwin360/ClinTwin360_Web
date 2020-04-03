@@ -24,7 +24,9 @@ from rest_framework.authtoken.models import Token
 from django.shortcuts import redirect
 from django.contrib.auth import views as auth_views
 from rest_framework.renderers import TemplateHTMLRenderer
+from django.db.models import Count
 # Create your views here.
+
 
 # hashed_password = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt())
 #if (bcrypt.checkpw(request.POST['login_password'].encode(), user.password.encode())):
@@ -36,15 +38,18 @@ def index(request):
     else:
         return redirect('login_success')
 
+
 def login_success(request):
     if request.user.groups.filter(name='clintwin'):
         return redirect("viewsponsors")
     else:
         return redirect("viewtrials")
 
+
 def viewTrials(request):
     trials = ClinicalTrial.objects.all() #filter(sponsorId=request.user.sponsor_id)
     return render(request, "sponsor/viewtrials.html", {"trials": trials})
+
 
 def dummy(request):
     questions = ParticipantQuestion.objects.all()
@@ -98,7 +103,22 @@ def calculate_trial_matches(request):
     data['responses'] = [x.question.text for x in participant.responses.all()]
     return JsonResponse(data)
 
-def loaddata(request):
+
+def question_rank(request):
+    questions = ParticipantQuestion.objects.all()
+    data = {"questions": []}
+    for q in questions:
+        rank = 0
+        criteria = q.criteria.all()
+        for criterion in criteria:
+            rank += criterion.trial_responses.count()
+        data['questions'].append({"text": q.text, "rank": rank})
+
+    data['questions'].sort(key=lambda x: x['rank'],reverse=True)
+    return JsonResponse(data)
+
+
+def load_data(request):
     call_command('loaddata', 'participant_questions')
     call_command('loaddata', 'users')
     call_command('loaddata', 'participants')

@@ -1,16 +1,19 @@
 {% extends "sponsor/base.html" %}
 {% load static %}
 {% block content %}
-<div class="container-fluid">
-        <h2>How Does It Work?</h2>
-        <!--<iframe src="{% static 'sponsor/Clinical-Trials.gif' %}" width="1280" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>-->
-        <iframe src="{% static 'sponsor/Clinical-Trials2.gif' %}" width="1280" height="300" frameborder="0" allowfullscreen></iframe>
-        <p>
-		The major benefits of ClinTwin360 include: </br>
+<div id="how_works_container">
+  <br>
+    <h2 id="how_it_works">How Does It Work?</h2>
+    <!--<iframe src="{% static 'sponsor/Clinical-Trials.gif' %}" width="1280" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>-->
+    <iframe src="{% static 'sponsor/Clinical-Trials2.gif' %}" width="900" height="300" id="iframe_works" frameborder="0" allowfullscreen></iframe>
+    <div id="how_works_text">
+    <p><br>
+		The major benefits of ClinTwin360 include: <br>
 
-1.	Reduced enrollment inefficiencies with a centralized and robust clinical trial matching service that is exposed to a larger participant pool of mobile phone users <br/>
-2.	Enriches clinical trial data with participant biometrics that provide insights and improve trial effectiveness <br/>
-3.	Optimizes clinical trial execution through analysis of a wide range of clinical trial and biometric data <br/>
- </p>
-		</div>
+    1.	Reduced enrollment inefficiencies with a centralized and robust clinical trial matching service that is exposed to a larger participant pool of mobile phone users <br/>
+    2.	Enriches clinical trial data with participant biometrics that provide insights and improve trial effectiveness <br/>
+    3.	Optimizes clinical trial execution through analysis of a wide range of clinical trial and biometric data <br/>
+    </p><br>
+    </div>
+</div>
 {% endblock %}

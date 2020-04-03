@@ -23,9 +23,10 @@ router.register(r'trials', views.ClinicalTrialViewSet, basename='ClinicalTrial')
 urlpatterns = [
     path('', views.index, name='index'),
     # Move to API app
-    path('loaddata/', views.loaddata, name='loaddata'),
+    path('loaddata/', views.load_data, name='load_data'),
     path('dummy/', views.dummy, name='dummy'),
     path('trial_match/', views.calculate_trial_matches, name='trial_matches'),
+    path('question_rank/', views.question_rank, name='question_rank'),
     # Move to API app
     path('token/', views.get_token, name='token'),
 	#path('accounts/', include('django.contrib.auth.urls')),

@@ -98,7 +98,6 @@ class ClinicalTrial(models.Model):
         return reverse('clinicalTrial-detail', args=[str(self.trialId)])
 
 
-
 class QuestionCategory(models.Model):
     name = models.CharField(max_length=50)
 
@@ -178,14 +177,15 @@ class ClinicalTrialCriteria(models.Model):
     #options = ArrayField(models.CharField(max_length=256))
     searchable = models.BooleanField()
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, related_name='subcriteria')
-    question = models.ForeignKey(ParticipantQuestion, on_delete=models.CASCADE, null=True)
+    question = models.ForeignKey(ParticipantQuestion, on_delete=models.CASCADE, null=True,related_name="criteria")
 
     def __str__(self):
         return self.name
 
 
 class ClinicalTrialCriteriaResponse(models.Model):
-    criteria = models.ForeignKey(ClinicalTrialCriteria, on_delete=models.CASCADE, null=True)
+    criteria = models.ForeignKey(ClinicalTrialCriteria, on_delete=models.CASCADE, null=True,
+                                 related_name='trial_responses')
     trial = models.ForeignKey(ClinicalTrial, on_delete=models.CASCADE, null=True, related_name='criteria')
     value = models.CharField(max_length=1024)
     comparison = models.CharField(max_length=50)

@@ -1,93 +1,109 @@
-.entry:not(:first-of-type)
-{
-    margin-top: 10px;
+/* Style body color to off-white */
+body {
+  background-color: #fff9f9;
+  margin: auto;
 }
 
-.bg{
-    width: 100%;
-	height: auto;
-	background-size: cover;
-    background-repeat: no-repeat;
-    background-position: top;
-    #background-attachment: fixed;
+/* Style navbar elements */
+#navbar, #navbarDropdown, #contact_us, #navbarLogo {
+  background-color: #4bc5ef;
+  color: white;
 }
 
-
-img.bg1 {
-    min-height: 100%;
-    min-width: 1080px;
-    width: 100%;
-    height: auto;
-    position: fixed;
-    top: 0;
-    left: 0;
-}
-
-/* Center the avatar image inside this container */
-.imgcontainer {
+/* Styling to keep footer at page bottom */
+div.footer {
+  background-color: #4bc5ef;
+  color: white;
   text-align: center;
-  margin: 24px 0 12px 0;
+  justify-content: center;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.dropdown-item {
+  background-color: white;
+  color: #333333;
 }
 
 
-.footer {
-position: fixed;
-left: 0;
-bottom: 0;
-width: 100%;
-height: auto;
-background-color:#fff9f9;
-color: #4bc5de;
-text-align: center;
+/* Style logo image on login page */
+#clintwin360_logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width:23%;
+  height:23%;
 }
 
-@media screen and (max-width: 1080px){
-    img.bg1 {
-    left: 50%;
-    margin-left: -512px; }
+/* Center the login form */
+#login_form{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width:25%;
+  height:25%;
 }
 
-#btn{
-	background-color: #00CCFF;
-  border: none;
-  color: white;
-  padding: 16px 32px;
-  text-decoration: none;
-  margin: 4px 2px;
-  cursor: pointer;
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 2px 4px;
+  margin: 2px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
 }
 
-/* Set a style for all buttons */
+/* Styling for all buttons */
 button {
-  background-color: #00b8fb;
+  background-color: #4bc5ef;
+  border-radius: 4px;
   color: white;
-  padding: 14px 20px;
+  padding: 3px 5px;
   margin: 8px 0;
   border: none;
   cursor: pointer;
+  width: 100%;
+}
+
+/* Styling for "forgot password" */
+span.psw {
+  float: right;
+}
+
+/* Styling for forgot password page */
+div.pwd_reset_container {
+  margin: 5%;
+}
+
+button.reset_btn, #id_email {
   width: 20%;
 }
 
-div.background {
-  background: url(klematis.jpg) repeat;
-  border: 2px solid black;
+/* Styling for page headers */
+#about_us, #our_location, #how_it_works, #contact{
+  color: #55666f;
+  text-align: center;
 }
 
-div.transbox {
-  margin: 30px;
-  background-color: #ffffff;
-  border: 1px solid black;
-  opacity: 0.6;
-  filter: alpha(opacity=60); /* For IE8 and earlier */
+/* Styling for "how it works" page */
+#iframe_works {
+  margin: 0 auto;
+  display: block;
+}
+#how_works_text {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width:90%;
+  height:90%;
 }
 
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-  span.psw {
-    display: block;
-    float: none;
-  }
-  .createaccbtn {
-    width: 100%;
-  }
+/* Trying to push 2 buttons to right of page */
+#greeting, #logout_link {
+  background-color: #4bc5ef;
+  color: white;
+  text-align: right;
 }

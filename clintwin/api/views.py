@@ -1,16 +1,13 @@
-  ##  Original additions
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from rest_framework import permissions
+from django.contrib.auth import get_user_model
+from rest_framework.generics import CreateAPIView
 
-from django.views.generic import TemplateView
-#from .forms import *
-from sponsor.forms import UserCreationForm, NewTrialForm
-#from .forms import AuthenticationForm
-from django.urls import reverse_lazy
-from django.views import generic
-from .models import User, UserManager, Contact, Sponsor, Participant, ClinicalTrial, Criteria, Categories, ClinicalTrialCriteriaResponse, QuestionSchema, ParticipantQuestion
+from .serializers import UserSerializer
 
-from rest_framework.decorators import api_view
 
-# Create your views here.
-
+class CreateUserView(CreateAPIView):
+    model = get_user_model()
+    permission_classes = [
+        permissions.AllowAny  # Or anon users can't register
+    ]
+    serializer_class = UserSerializer
