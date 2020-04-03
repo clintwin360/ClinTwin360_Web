@@ -97,7 +97,8 @@ button.reset_btn, #id_email {
 }
 
 /* Styling for page headers */
-#about_us, #our_location, #how_it_works, #contact, #trial_dashboard{
+#about_us, #our_location, #how_it_works,
+#contact, #trial_dashboard, #create-trial{
   color: #55666f;
   text-align: center;
 }
@@ -159,3 +160,5 @@ button.reset_btn, #id_email {
 
   }
 </style>
+
+/* Styling for the Create New Trial Page */
