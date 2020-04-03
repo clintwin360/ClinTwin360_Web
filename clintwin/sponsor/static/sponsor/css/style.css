@@ -5,9 +5,23 @@ body {
 }
 
 /* Style navbar elements */
-#navbar, #navbarDropdown, #contact_us, #navbarLogo {
+#navbar, #navbarDropdown, #contact_us, #navbarLogo, #logout_link {
   background-color: #4bc5ef;
   color: white;
+}
+
+#greeting, thead {
+  color: #333333;
+}
+
+/* Trying to push 2 buttons to right of page */
+navbar-nav ul li:last-child {
+  float: right;
+}
+nav ul li {
+  list-style:none;
+  /* margin:10px; */
+  float: right;
 }
 
 /* Styling to keep footer at page bottom */
@@ -83,7 +97,8 @@ button.reset_btn, #id_email {
 }
 
 /* Styling for page headers */
-#about_us, #our_location, #how_it_works, #contact{
+#about_us, #our_location, #how_it_works,
+#contact, #trial_dashboard, #create-trial{
   color: #55666f;
   text-align: center;
 }
@@ -101,9 +116,49 @@ button.reset_btn, #id_email {
   height:90%;
 }
 
-/* Trying to push 2 buttons to right of page */
-#greeting, #logout_link {
-  background-color: #4bc5ef;
-  color: white;
-  text-align: right;
-}
+/* Styling for Trial Dashboard */
+<style>
+  .main-cards {
+    column-count: 2;
+    column-gap: 10px;
+    display: inline-block;
+  }
+
+  .row {
+    width: 100%;
+    margin: auto;
+  }
+
+  .card {
+    display: inline-block;
+    border-radius: 4px;
+    flex-direction: column;
+    align-items: center;
+    /* width: 50%; */
+    background-color: white;
+    margin-bottom: 20px;
+    -webkit-column-break-inside: avoid;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  /* Force varying heights to simulate dynamic content */
+  .card:first-child {
+    height: 485px;
+    width: 55%
+  }
+
+  .card:nth-child(2) {
+    height: 485px;
+    width: 45%;
+  }
+
+  /* Fixed width for date column in Trials Dashboard */
+  #end_date {
+    width: 18%;
+  }
+
+  }
+</style>
+
+/* Styling for the Create New Trial Page */

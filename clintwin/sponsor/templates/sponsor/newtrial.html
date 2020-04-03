@@ -3,8 +3,8 @@
 {% load crispy_forms_tags %}
 {% block title %}Add New Clinical Trial{% endblock %}
 {% block content %}
-<div class="container-fluid">
-    <h2>Add a New Clinical Trial</h2>
+<div class="container-fluid"><br>
+    <h2 id="create-trial">Add a New Clinical Trial</h2>
     <div class="container-fluid">
         <form method="post" novalidate>
             {% csrf_token %}
@@ -15,21 +15,22 @@
                 <div class="col-6">
                     {{ form.url|as_crispy_field }}
                 </div>
-            	<div class="col-4">
+            	<div class="col-3">
                     {{ form.recruitmentStartDate|as_crispy_field }}
                 </div>
-            	<div class="col-4">
+            	<div class="col-3">
                     {{ form.recruitmentEndDate|as_crispy_field }}
                 </div>
-            	<div class="col-4">
+            	<div class="col-3">
                     {{ form.enrollmentTarget|as_crispy_field }}
+                </div>
+              <div class="col-3">
+                      {{ form.location|as_crispy_field }}
                 </div>
             	<div class="col-6">
                     {{ form.objective|as_crispy_field }}
                 </div>
-        	    <div class="col-6">
-                    {{ form.location|as_crispy_field }}
-                </div>
+
             	<div class="col-6">
                     {{ form.comments|as_crispy_field }}
                 </div>

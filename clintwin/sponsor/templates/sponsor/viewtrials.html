@@ -8,39 +8,90 @@
 {% endblock %}
 {% block title %}Trials Dashboard{% endblock %}
 {% block content %}
-    <h2>Trial Dashboard</h2>
     <br>
-    <div class="row">
-        <div class="col-5">
-            <div class="row">
-                <div class="col">
-                    <div class="cardlist" id="cardlist">
-                        <label>
-                            <input type="radio" name="trialselect" class="card-input-element d-none" value="fake" autocomplete="off" checked>
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-title"><i class="fas fa-book-medical fa-lg"></i>  Super Fake Example Trial</h5><small>0/10000000</small>
-                                </div>
-                                <div class="card-body bg-light flex-row justify-content-between align-items-cent" id="cardinfo_x">
-                                    <h6 class="card-text">Super Fake Objective</h6>
-                                        <p class="card-text">This is here to show what a card will look like once the javasript is working.</p>
-                                        <p class="card-text"><small class="text-muted">Start Date: Soon  End Date: Never Target</small></p>
-                                </div>
+    <h2 id="trial_dashboard">Clinical Trials Dashboard</h2>
+    <br>
+
+    <div class="main-cards row">
+        <div class="card">
+          <table class="table table-bordered table-hover">
+            <thead class="thead-light">
+              <tr>
+                <th>Trial ID</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Target Recruitment</th>
+                <th id="end_date">End Date</th>
+              </tr>
+            </thead>
+
+            <tbody>
+            <tr onclick="">
+                <div id="tabledata">
+                  <td><a class="trial-id-link" href="">CLINTR876</a></td>
+                  <td>Physical Activity Impact in Grown-up Congenital Heart Disease</td>
+                  <td>Draft</td>
+                  <td>500</td>
+                  <td>None Yet</td>
+                </div>
+            </tr>
+            <tr onclick="">
+                <div id="tabledata">
+                  <td><a class="trial-id-link" href="">CLINTR003</a></td>
+                  <td>Electronic Decision Support for Intervention in Poorly Controlled Type 2 Diabetes (PATH)</td>
+                  <td>Published</td>
+                  <td>200</td>
+                  <td>07-15-2020</td>
+                </div>
+            </tr>
+
+          </table>
+        </div>
+
+
+      <div class="card">Trial Details <br><br>
+        The goal is to click on the trial ID or anywhere on the row and have this section be polulated with the details of the trial. <br>
+        <br>(The previous code is just commented out so fel  free to revert it, if this isn't what we want)
+      </div>
+    </div>
+
+
+{% endblock %}
+
+
+
+<!-- <h2>Trial Dashboard</h2>
+<br>
+<div class="row">
+    <div class="col-5">
+        <div class="row">
+            <div class="col">
+                <div class="cardlist" id="cardlist">
+                    <label>
+                        <input type="radio" name="trialselect" class="card-input-element d-none" value="fake" autocomplete="off" checked>
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title"><i class="fas fa-book-medical fa-lg"></i>  Super Fake Example Trial</h5><small>0/10000000</small>
                             </div>
-                        </label>
-                    </div>
+                            <div class="card-body bg-light flex-row justify-content-between align-items-cent" id="cardinfo_x">
+                                <h6 class="card-text">Super Fake Objective</h6>
+                                    <p class="card-text">This is here to show what a card will look like once the javasript is working.</p>
+                                    <p class="card-text"><small class="text-muted">Start Date: Soon  End Date: Never Target</small></p>
+                            </div>
+                        </div>
+                    </label>
                 </div>
             </div>
         </div>
-        <div class="col-7">
-            <div class="container-fluid bg-light border rounded" id="trialdetail">
-                <br>
-                <h6>Clinical Trial Details</h6>
-                <br>
-            </div>
+    </div>
+    <div class="col-7">
+        <div class="container-fluid bg-light border rounded" id="trialdetail">
+            <br>
+            <h6>Clinical Trial Details</h6>
+            <br>
         </div>
     </div>
-{% endblock %}
+</div> -->
 
 
 
