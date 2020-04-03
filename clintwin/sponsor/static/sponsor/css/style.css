@@ -10,7 +10,7 @@ body {
   color: white;
 }
 
-#greeting {
+#greeting, thead {
   color: #333333;
 }
 
@@ -97,7 +97,7 @@ button.reset_btn, #id_email {
 }
 
 /* Styling for page headers */
-#about_us, #our_location, #how_it_works, #contact{
+#about_us, #our_location, #how_it_works, #contact, #trial_dashboard{
   color: #55666f;
   text-align: center;
 }
@@ -114,3 +114,48 @@ button.reset_btn, #id_email {
   width:90%;
   height:90%;
 }
+
+/* Styling for Trial Dashboard */
+<style>
+  .main-cards {
+    column-count: 2;
+    column-gap: 10px;
+    display: inline-block;
+  }
+
+  .row {
+    width: 100%;
+    margin: auto;
+  }
+
+  .card {
+    display: inline-block;
+    border-radius: 4px;
+    flex-direction: column;
+    align-items: center;
+    /* width: 50%; */
+    background-color: white;
+    margin-bottom: 20px;
+    -webkit-column-break-inside: avoid;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  /* Force varying heights to simulate dynamic content */
+  .card:first-child {
+    height: 485px;
+    width: 55%
+  }
+
+  .card:nth-child(2) {
+    height: 485px;
+    width: 45%;
+  }
+
+  /* Fixed width for date column in Trials Dashboard */
+  #end_date {
+    width: 18%;
+  }
+
+  }
+</style>
