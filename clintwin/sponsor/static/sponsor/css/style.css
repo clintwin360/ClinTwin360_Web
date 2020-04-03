@@ -34,8 +34,8 @@ div.footer {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width:20%;
-  height:20%;
+  width:23%;
+  height:23%;
 }
 
 /* Center the login form */
@@ -101,6 +101,9 @@ button.reset_btn, #id_email {
   height:90%;
 }
 
+/* Trying to push 2 buttons to right of page */
 #greeting, #logout_link {
+  background-color: #4bc5ef;
+  color: white;
   text-align: right;
 }
