@@ -1,6 +1,7 @@
 /* Style body color to off-white */
 body {
   background-color: #fff9f9;
+  margin: auto;
 }
 
 /* Style navbar elements */
@@ -38,7 +39,7 @@ div.footer {
 }
 
 /* Center the login form */
-#login_form {
+#login_form{
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -67,8 +68,37 @@ button {
   width: 100%;
 }
 
+/* Styling for "forgot password" */
 span.psw {
   float: right;
+}
+
+/* Styling for forgot password page */
+div.pwd_reset_container {
+  margin: 5%;
+}
+
+button.reset_btn, #id_email {
+  width: 20%;
+}
+
+/* Styling for page headers */
+#about_us, #our_location, #how_it_works, #contact{
+  color: #55666f;
+  text-align: center;
+}
+
+/* Styling for "how it works" page */
+#iframe_works {
+  margin: 0 auto;
+  display: block;
+}
+#how_works_text {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width:90%;
+  height:90%;
 }
 
 #greeting, #logout_link {
