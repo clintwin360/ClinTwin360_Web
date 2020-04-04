@@ -1,10 +1,8 @@
 {% extends "sponsor/base.html" %}
 {% load static %}
 <link href="{% static 'sponsor/css/viewtrials.css' %}" rel="stylesheet">
-<link href="{% static 'sponsor/css/showdetails.css' %}" rel="stylesheet">
 {% block scripts %}
 <script type="text/javascript" src="{% static "sponsor/js/viewtrials.js" %}"></script>
-<script type="text/javascript" src="{% static "sponsor/js/showdetails.js" %}"></script>
 {% endblock %}
 {% block title %}Trials Dashboard{% endblock %}
 {% block content %}
@@ -14,7 +12,7 @@
 
     <div class="main-cards row">
         <div class="card">
-          <table class="table table-bordered table-hover">
+          <table class="table table-bordered table-hover" id='trials'>
             <thead class="thead-light">
               <tr>
                 <th>Trial ID</th>
@@ -25,31 +23,32 @@
               </tr>
             </thead>
 
-            <tbody>
-            <tr onclick="">
-                <div id="tabledata">
-                  <td><a class="trial-id-link" href="">CLINTR876</a></td>
-                  <td>Physical Activity Impact in Grown-up Congenital Heart Disease</td>
-                  <td>Draft</td>
-                  <td>500</td>
-                  <td>None Yet</td>
-                </div>
-            </tr>
-            <tr onclick="">
-                <div id="tabledata">
-                  <td><a class="trial-id-link" href="">CLINTR003</a></td>
-                  <td>Electronic Decision Support for Intervention in Poorly Controlled Type 2 Diabetes (PATH)</td>
-                  <td>Published</td>
-                  <td>200</td>
-                  <td>07-15-2020</td>
-                </div>
-            </tr>
-
+            <div class='triallist' id='triallist'>
+                <tbody>
+                <tr onclick="">
+                    <div id="tabledata">
+                      <td><a class="trial-id-link" href="">CLINTR876</a></td>
+                      <td>Physical Activity Impact in Grown-up Congenital Heart Disease</td>
+                      <td>Draft</td>
+                      <td>500</td>
+                      <td>None Yet</td>
+                    </div>
+                </tr>
+                <tr onclick="">
+                    <div id="tabledata">
+                      <td><a class="trial-id-link" href="">CLINTR003</a></td>
+                      <td>Electronic Decision Support for Intervention in Poorly Controlled Type 2 Diabetes (PATH)</td>
+                      <td>Published</td>
+                      <td>200</td>
+                      <td>07-15-2020</td>
+                    </div>
+                </tr>
+            </div>
           </table>
         </div>
 
 
-      <div class="card">Trial Details <br><br>
+      <div class="card" id='trialdetails'>Trial Details <br><br>
         The goal is to click on the trial ID or anywhere on the row and have this section be polulated with the details of the trial. <br>
         <br>(The previous code is just commented out so feel free to revert it, if this isn't what we want)
       </div>

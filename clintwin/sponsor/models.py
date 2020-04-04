@@ -61,12 +61,12 @@ class Sponsor(models.Model):
     def __str__(self):
         ret = str(self.id) + ',' + self.organization
         return ret
-    
+
 	# New method
     def get_absolute_url(self):
         #Returns the url to access a detail record for the Sponsor.
         return reverse('sponsor-detail', args=[str(self.id)])
-		
+
 class SponsorRequest(models.Model):
     sponsor_id = models.CharField(max_length=50)
     criterion_req = models.CharField(null=True, max_length=200)
@@ -88,6 +88,8 @@ class ClinicalTrial(models.Model):
     location = models.CharField('Location', null=True, max_length=100)
     comments = models.TextField('Comments', null=True, blank=True)
     createdTimeStamp = models.DateTimeField(auto_now_add=True)
+    #Status
+    #current recuitment
 
     def __str__(self):
         ret = self.trialId + self.title
@@ -116,7 +118,7 @@ class Participant(models.Model):
         return self.name()
 """
 
-# NEW 
+# NEW
 class Participant(models.Model):
     GENDER = (
         ('M', 'Male'),
@@ -194,7 +196,7 @@ class ClinicalTrialCriteriaResponse(models.Model):
 
 
 
-# NEW		
+# NEW
 class QuestionSchema (models.Model):
     questionText=models.TextField('Question Text',  null=True, blank=True)
     responseId=models.ForeignKey('ClinicalTrialCriteriaResponse', on_delete=models.SET_NULL, null=True)
@@ -209,4 +211,3 @@ class QuestionSchema (models.Model):
     def get_absolute_url(self):
         #Returns the url to access a detail record for the Question Schema.
         return reverse('questionSchema-detail', args=[str(self.id)])
-
