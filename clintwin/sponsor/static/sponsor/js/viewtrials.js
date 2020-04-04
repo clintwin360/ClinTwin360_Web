@@ -9,7 +9,7 @@ var cardtextsmallTemplate = '<p class="card-text"><small class="text-muted">';
 $(function(){
   $.getJSON("/sponsor/trials/", function(result){
     $.each(result.results, function(i, field){
-      $("#triallist").append(tableEntryTemplate + field.trialId + '</a></td><td>' + field.title + '</td><td>' + field.recruitmentStartDate + '</td><td>' + field.enrollmentTarget + '</td><td>' + field.recruitmentEndDate + '</td></div></tr>');
+      $("#triallist").append(tableEntryTemplate + field.trialId + '</a></td><td>' + field.title + '</td><td>Started: ' + field.recruitmentStartDate + '</td><td>' + field.enrollmentTarget + '</td><td>' + field.recruitmentEndDate + '</td></div></tr>');
     });
   });
 });
