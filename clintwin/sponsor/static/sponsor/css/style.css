@@ -61,6 +61,15 @@ div.footer {
   height:25%;
 }
 
+/* Center the new trial form */
+#new_trial_form{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width:50%;
+  height:50%;
+}
+
 input[type=text], input[type=password] {
   width: 100%;
   padding: 2px 4px;
@@ -98,8 +107,7 @@ button.reset_btn, #id_email {
 
 /* Styling for page headers */
 #about_us, #our_location, #how_it_works,
-#contact, #trial_dashboard, #create-trial,
-#view-sponsors {
+#contact, #trial_dashboard, #create-trial {
   color: #55666f;
   text-align: center;
 }

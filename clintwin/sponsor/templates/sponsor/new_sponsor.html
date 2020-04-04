@@ -3,13 +3,11 @@
 {% load crispy_forms_tags %}
 {% block title %}Add New Sponsor{% endblock %}
 {% block content %}
-<div class="container-fluid">
-    <h2>Add a New Sponsor</h2>
+<div class="container-fluid"><br>
+    <h2 id="create-trial">Add a New Sponsor</h2>
     <div class="container-fluid">
         <form method="post" novalidate>
             {% csrf_token %}
-            <div class="row">
-
                 <div class="col-6">
                     {{ form.organization|as_crispy_field }}
                 </div>
@@ -29,9 +27,9 @@
                     {{ form.notes|as_crispy_field }}
                 </div>
 
-            </div>
             <button class="btn btn-primary" type="submit">Add Sponsor</button>
         </form>
+        <br><br><br>
     </div>
 </div>
 {% endblock %}

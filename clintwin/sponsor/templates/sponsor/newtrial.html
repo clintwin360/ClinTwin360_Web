@@ -5,22 +5,25 @@
 {% block content %}
 <div class="container-fluid"><br>
     <h2 id="create-trial">Add a New Clinical Trial</h2>
-    <div class="container-fluid">
+
+    <div id="new_trial_form">
         <form method="post" novalidate>
             {% csrf_token %}
-            <div class="row">
                 <div class="col-6">
                     {{ form.title|as_crispy_field }}
                 </div>
                 <div class="col-6">
                     {{ form.url|as_crispy_field }}
                 </div>
-            	<div class="col-3">
+              <div class="row">
+                <div class="col-3">
                     {{ form.recruitmentStartDate|as_crispy_field }}
                 </div>
-            	<div class="col-3">
+            	  <div class="col-3">
                     {{ form.recruitmentEndDate|as_crispy_field }}
                 </div>
+              </div>
+
             	<div class="col-3">
                     {{ form.enrollmentTarget|as_crispy_field }}
                 </div>
@@ -37,9 +40,11 @@
             	<div class="col-6">
                     {{ form.followUp|as_crispy_field }}
                 </div>
-            </div>
-            <button class="btn btn-primary" type="submit">Create Trial</button>
+
+            <button class="btn btn-primary" type="submit" id="login_button">Create Trial</button>
+
         </form>
+        <br><br><br>
     </div>
 </div>
 {% endblock %}
