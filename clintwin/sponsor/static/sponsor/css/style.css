@@ -98,7 +98,8 @@ button.reset_btn, #id_email {
 
 /* Styling for page headers */
 #about_us, #our_location, #how_it_works,
-#contact, #trial_dashboard, #create-trial{
+#contact, #trial_dashboard, #create-trial,
+#view-sponsors {
   color: #55666f;
   text-align: center;
 }
