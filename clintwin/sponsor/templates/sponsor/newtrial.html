@@ -9,42 +9,58 @@
     <div id="new_trial_form">
         <form method="post" novalidate>
             {% csrf_token %}
-                <div class="col-6">
                     {{ form.title|as_crispy_field }}
-                </div>
-                <div class="col-6">
                     {{ form.url|as_crispy_field }}
-                </div>
-              <div class="row">
-                <div class="col-3">
+              <div class="d-flex justify-content-around">
                     {{ form.recruitmentStartDate|as_crispy_field }}
-                </div>
-            	  <div class="col-3">
                     {{ form.recruitmentEndDate|as_crispy_field }}
-                </div>
               </div>
-
-            	<div class="col-3">
                     {{ form.enrollmentTarget|as_crispy_field }}
-                </div>
-              <div class="col-3">
-                      {{ form.location|as_crispy_field }}
-                </div>
-            	<div class="col-6">
+                    {{ form.location|as_crispy_field }}
                     {{ form.objective|as_crispy_field }}
-                </div>
-
-            	<div class="col-6">
                     {{ form.comments|as_crispy_field }}
-                </div>
-            	<div class="col-6">
                     {{ form.followUp|as_crispy_field }}
-                </div>
 
-            <button class="btn btn-primary" type="submit" id="login_button">Create Trial</button>
+            <button class="btn btn-primary" type="submit" id="create_button">Create Trial</button>
 
         </form>
-        <br><br><br>
+        <br><br><br><br>
     </div>
 </div>
 {% endblock %}
+
+<!-- The OLD Code -->
+<!-- <form method="post" novalidate>
+    {% csrf_token %}
+        <div class="col-6">
+            {{ form.title|as_crispy_field }}
+        </div>
+        <div class="col-6">
+            {{ form.url|as_crispy_field }}
+        </div>
+      <div class="row">
+        <div class="col-3">
+            {{ form.recruitmentStartDate|as_crispy_field }}
+        </div>
+        <div class="col-3">
+            {{ form.recruitmentEndDate|as_crispy_field }}
+        </div>
+      </div>
+
+      <div class="col-3">
+            {{ form.enrollmentTarget|as_crispy_field }}
+        </div>
+      <div class="col-3">
+              {{ form.location|as_crispy_field }}
+        </div>
+      <div class="col-6">
+            {{ form.objective|as_crispy_field }}
+        </div>
+
+      <div class="col-6">
+            {{ form.comments|as_crispy_field }}
+        </div>
+      <div class="col-6">
+            {{ form.followUp|as_crispy_field }}
+        </div>
+</form> -->

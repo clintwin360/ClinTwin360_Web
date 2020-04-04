@@ -62,7 +62,7 @@ div.footer {
 }
 
 /* Center the new trial form */
-#new_trial_form{
+#new_trial_form, #new_sponsor_form {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -80,7 +80,7 @@ input[type=text], input[type=password] {
 }
 
 /* Styling for all buttons */
-button {
+button, #create_button {
   background-color: #4bc5ef;
   border-radius: 4px;
   color: white;
@@ -101,13 +101,14 @@ div.pwd_reset_container {
   margin: 5%;
 }
 
-button.reset_btn, #id_email {
-  width: 20%;
+button.reset_btn, #id_email, #id_phone {
+  width: 40%;
 }
 
 /* Styling for page headers */
 #about_us, #our_location, #how_it_works,
-#contact, #trial_dashboard, #create-trial {
+#contact, #trial_dashboard, #create-trial,
+#new-sponsor, #sponsor-req {
   color: #55666f;
   text-align: center;
 }
