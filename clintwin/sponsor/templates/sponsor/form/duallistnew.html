@@ -1,8 +1,13 @@
 {% load static %}
+{% block style %}
 <link href="{% static 'sponsor/css/duallist.css' %}" rel="stylesheet">
 <link href='https://clinicaltables.nlm.nih.gov/autocomplete-lhc-versions/17.0.2/autocomplete-lhc.min.css' rel="stylesheet">
+{% endblock %}
+{% block scripts %}
 <script src='https://clinicaltables.nlm.nih.gov/autocomplete-lhc-versions/17.0.2/autocomplete-lhc.min.js'></script>
 <script src="{% static 'sponsor/js/dynamicform.js' %}"></script>
+{% endblock %}
+
 
 <div class="container-fluid" id="inclusion">
     <div class="row">

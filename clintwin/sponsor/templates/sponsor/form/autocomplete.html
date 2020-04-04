@@ -1,7 +1,10 @@
 {% load static %}
+{% block style %}
 <link href="{% static 'sponsor/css/autocomplete.css' %}" rel="stylesheet">
+{% endblock %}
+{% block scripts %}
 <script src="{% static 'sponsor/js/autocomplete.js' %}"></script>
-
+{% endblock %}
 <form autocomplete="off" id="criteria-form">
     <div class="autocomplete" style="width:300px;">
         <input id="criteriaType" type="text" name="criteriaType" placeholder="Criteria type">
