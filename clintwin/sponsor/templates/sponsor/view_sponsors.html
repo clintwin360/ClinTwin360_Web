@@ -1,5 +1,9 @@
 {% extends "sponsor/base.html" %}
 {% load static %}
+{% block style %}{% endblock %}
+{% block scripts %}
+<script type="text/javascript" src="{% static "sponsor/js/viewsponsors.js"%}?{% now "U" %}"></script>
+{% endblock %}
 {% block title %}View Sponsors{% endblock %}
 {% block content %}
 
@@ -19,7 +23,7 @@
               </tr>
             </thead>
 
-            <tbody>
+            <tbody id="sponsor-list-body">
             <tr onclick="">
                 <div id="tabledata">
                   <td><a class="sponsor-id-link" href="">SNPSR225</a></td>
