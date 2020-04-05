@@ -1,0 +1,16 @@
+{% extends "sponsor/base.html" %}
+
+{% block content %}
+  <h1>Clinical Trials Dashboard 2</h1>
+  {% if clinicaltrial_list %}
+  <ul>
+    {% for trial in clinicaltrial_list %}
+      <li>
+        <a href="{{ trial.get_absolute_url }}">{{ trial.trialId }}</a> ({{trial.title}})
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>You currently have no trials in the database.</p>
+  {% endif %}       
+{% endblock %}

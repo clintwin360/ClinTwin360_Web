@@ -25,6 +25,14 @@ from django.shortcuts import redirect
 from django.contrib.auth import views as auth_views
 from rest_framework.renderers import TemplateHTMLRenderer
 from django.db.models import Count
+
+# New 
+from django.views.generic import ListView
+from django_tables2 import SingleTableView
+from .tables import ClinicalTrialTable
+from rest_framework import pagination
+
+
 # Create your views here.
 
 
@@ -352,3 +360,15 @@ class ClinicalTrialViewSet(viewsets.ModelViewSet):
             queryset = ClinicalTrial.objects.all()
 
         return queryset
+
+#NEW: view for clinicaltrial_list2
+class ClinicalTrialListView2(SingleTableView):
+    model = ClinicalTrial
+    template_name = 'sponsor/clinicaltrial_list2.html'
+    table_class = ClinicalTrialTable
+
+
+class TrialView(SingleTableView):
+    model = ClinicalTrial
+    #template_name = 'sponsor/trial_view_column.html'
+    #table_class = ClinicalTrialTable	

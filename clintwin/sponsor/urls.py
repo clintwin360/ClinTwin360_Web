@@ -39,7 +39,11 @@ urlpatterns = [
     path('accounts/password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
 	path('accounts/password_reset_done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
 	path('viewtrials', views.viewTrials, name='viewtrials'),
-    path('newtrial', views.NewClinicalTrialView.as_view(), name='newtrial'),
+	
+	path("clinicaltrial_list2", views.ClinicalTrialListView2.as_view(),name='clinicaltrial_list2'),# NEW: for clinicaltrial_list2
+	path('trial_view', views.TrialView.as_view(),name='trial_view'),# NEW: for clinicaltrial_list2
+    
+	path('newtrial', views.NewClinicalTrialView.as_view(), name='newtrial'),
     path('newtrial/inclusion', TemplateView.as_view(template_name='sponsor/inclusion.html'), name='inclusion'),
     path('newtrial/exclusion', TemplateView.as_view(template_name='sponsor/exclusion.html'), name='exclusion'),
     # path('newcriterion', TemplateView.as_view(template_name='sponsor/new_criterion.html'), name='new_criterion'),
