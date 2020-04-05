@@ -40,6 +40,19 @@ class User(models.Model):
     updated_at = models.DateTimeField(auto_now = True)
     objects = UserManager()
 
+    def isClintwin():
+        if this.group.filter('clintwin'):
+            return True
+        else
+            return False
+
+
+    def isSponsorAdmin():
+        if this.group.filter('sponsor_admin'):
+            return True
+        else
+            return False
+
 
 class Contact(models.Model):
     first_name = models.CharField(null=True, max_length=50)
