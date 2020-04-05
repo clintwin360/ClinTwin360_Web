@@ -40,15 +40,15 @@ class User(models.Model):
     updated_at = models.DateTimeField(auto_now = True)
     objects = UserManager()
 
-    def isClintwin():
-        if this.group.filter('clintwin'):
+    def isClintwin(self):
+        if self.group.filter('clintwin'):
             return True
         else:
             return False
 
 
-    def isSponsorAdmin():
-        if this.group.filter('sponsor_admin'):
+    def isSponsorAdmin(self):
+        if self.group.filter('sponsor_admin'):
             return True
         else:
             return False

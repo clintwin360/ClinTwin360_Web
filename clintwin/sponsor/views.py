@@ -26,7 +26,7 @@ from django.contrib.auth import views as auth_views
 from rest_framework.renderers import TemplateHTMLRenderer
 from django.db.models import Count
 
-# New 
+# New
 from django.views.generic import ListView
 from django_tables2 import SingleTableView
 from .tables import ClinicalTrialTable
@@ -361,6 +361,8 @@ class ClinicalTrialViewSet(viewsets.ModelViewSet):
 
         return queryset
 
+        
+
 #NEW: view for clinicaltrial_list2
 class ClinicalTrialListView2(SingleTableView):
     model = ClinicalTrial
@@ -371,4 +373,4 @@ class ClinicalTrialListView2(SingleTableView):
 class TrialView(SingleTableView):
     model = ClinicalTrial
     #template_name = 'sponsor/trial_view_column.html'
-    #table_class = ClinicalTrialTable	
+    #table_class = ClinicalTrialTable
