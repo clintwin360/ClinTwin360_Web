@@ -43,14 +43,14 @@ class User(models.Model):
     def isClintwin():
         if this.group.filter('clintwin'):
             return True
-        else
+        else:
             return False
 
 
     def isSponsorAdmin():
         if this.group.filter('sponsor_admin'):
             return True
-        else
+        else:
             return False
 
 
