@@ -24,13 +24,14 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='participant',
             name='gender',
-            field=models.CharField(choices=[('M', 'Male'), ('F', 'Female'), ('O', 'Other')], default=None, max_length=1, verbose_name='Gender'),
+            field=models.CharField(choices=[('M', 'Male'), ('F', 'Female'), ('O', 'Other')], default=None, max_length=1,
+                                   null=True, verbose_name='Gender'),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='participant',
             name='height',
-            field=models.FloatField(default=None, verbose_name='Height'),
+            field=models.FloatField(default=None, verbose_name='Height', null=True,),
             preserve_default=False,
         ),
         migrations.AddField(
@@ -41,19 +42,19 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='participant',
             name='location',
-            field=models.CharField(default=None, max_length=100, verbose_name='Location'),
+            field=models.CharField(default=None, max_length=100, verbose_name='Location', null=True,),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='participant',
             name='phone',
-            field=models.IntegerField(default=None, verbose_name='Phone'),
+            field=models.IntegerField(default=None, verbose_name='Phone', null=True,),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='participant',
             name='weight',
-            field=models.FloatField(default=None, verbose_name='Weight'),
+            field=models.FloatField(default=None, verbose_name='Weight', null=True,),
             preserve_default=False,
         ),
         migrations.AlterField(
@@ -69,12 +70,12 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='participant',
             name='first_name',
-            field=models.CharField(max_length=50, verbose_name='First Name'),
+            field=models.CharField(max_length=50, verbose_name='First Name', null=True,),
         ),
         migrations.AlterField(
             model_name='participant',
             name='last_name',
-            field=models.CharField(max_length=50, verbose_name='Lasst Name'),
+            field=models.CharField(max_length=50, verbose_name='Lasst Name', null=True,),
         ),
         migrations.CreateModel(
             name='QuestionSchema',

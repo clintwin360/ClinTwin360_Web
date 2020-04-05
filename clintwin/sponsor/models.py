@@ -40,6 +40,19 @@ class User(models.Model):
     updated_at = models.DateTimeField(auto_now = True)
     objects = UserManager()
 
+    def isClintwin(self):
+        if self.group.filter('clintwin'):
+            return True
+        else:
+            return False
+
+
+    def isSponsorAdmin(self):
+        if self.group.filter('sponsor_admin'):
+            return True
+        else:
+            return False
+
 
 class Contact(models.Model):
     first_name = models.CharField(null=True, max_length=50)
@@ -88,8 +101,8 @@ class ClinicalTrial(models.Model):
     location = models.CharField('Location', null=True, max_length=100)
     comments = models.TextField('Comments', null=True, blank=True)
     createdTimeStamp = models.DateTimeField(auto_now_add=True)
-    #Status
-    #current recuitment
+    status = models.CharField('Status', null=True, max_length=100)
+    current_recruitment = models.IntegerField('Current Recruitment', null=True, blank=True)
 
     def __str__(self):
         ret = self.trialId + self.title
@@ -126,18 +139,18 @@ class Participant(models.Model):
         ('O', 'Other'),
     )
 
-    first_name = models.CharField('First Name', max_length=50)
-    last_name = models.CharField('Lasst Name', max_length=50)
-    gender=models.CharField('Gender', max_length=1, choices=GENDER)
-    weight=models.FloatField('Weight')
-    height=models.FloatField('Height')
-    dateBirth=models.DateField('Date of Birth',help_text='MM/DD/YY',null=True, blank=True)
-    date_joined= models.DateField('Date of Registration', help_text='MM/DD/YY',null=True, blank=True)
-    date_deregistered=models.DateField('Date of De-Registration', help_text='MM/DD/YY',null=True, blank=True)
+    first_name = models.CharField('First Name', max_length=50, null=True)
+    last_name = models.CharField('Lasst Name', max_length=50, null=True)
+    gender = models.CharField('Gender', max_length=1, null=True, choices=GENDER)
+    weight = models.FloatField('Weight', null=True)
+    height = models.FloatField('Height', null=True)
+    dateBirth = models.DateField('Date of Birth', help_text='MM/DD/YY', null=True, blank=True)
+    date_joined = models.DateField('Date of Registration', help_text='MM/DD/YY', null=True, blank=True)
+    date_deregistered = models.DateField('Date of De-Registration', help_text='MM/DD/YY', null=True, blank=True)
     email = models.EmailField('Email')
-    phone= models.IntegerField('Phone')
-    location=models.CharField('Location',max_length=100)
-    last_login=models.DateTimeField(auto_now = True)
+    phone = models.IntegerField('Phone', null=True)
+    location = models.CharField('Location', null=True, max_length=100)
+    last_login = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         ret = self.first_name + ',' + self.last_name
@@ -146,6 +159,7 @@ class Participant(models.Model):
     def get_absolute_url(self):
         #Returns the url to access a detail record for the Participant.
         return reverse('participant-detail', args=[str(self.id)])
+
 
 class ClinicalTrialMatch(models.Model):
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE, related_name='trial_matches')
