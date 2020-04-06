@@ -6,6 +6,7 @@ from rest_framework import routers
 router = routers.DefaultRouter()
 router.register(r'questions', views.ParticipantQuestionViewSet)
 router.register(r'participants', views.ParticipantViewSet)
+router.register(r'health', views.ParticipantBasicHealthViewSet)
 router.register(r'responses', views.ParticipantResponseViewSet)
 router.register(r'profile', views.SponsorProfileViewSet)
 router.register(r'matches', views.ClinicalTrialMatchViewSet, basename='ClinicalTrialMatch')

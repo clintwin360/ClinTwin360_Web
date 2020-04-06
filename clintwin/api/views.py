@@ -36,6 +36,19 @@ class ParticipantViewSet(viewsets.ModelViewSet):
     # permission_classes = [permissions.IsAuthenticated]
 
 
+class ParticipantBasicHealthViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows participants to be viewed or edited.
+    """
+    queryset = ParticipantBasicHealth.objects.all()
+    serializer_class = ParticipantBasicHealthSerializer
+
+    def perform_create(self, serializer):
+        basic_health = serializer.save()
+        print(basic_health)
+    # permission_classes = [permissions.IsAuthenticated]
+
+
 class ParticipantResponseViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows responses to be viewed or edited.

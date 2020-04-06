@@ -145,6 +145,14 @@ class ParticipantBasicHealth(models.Model):
     height = models.FloatField('Height', null=True)
     birth_date = models.DateField('Date of Birth', help_text='MM/DD/YY', null=True, blank=True)
 
+    def bmi(self):
+        return 703 * (self.weight/(self.height*self.height))
+
+    def age(self):
+        today = date.today()
+        return today.year - self.birth_date.year - \
+            ((today.month, today.day) < (self.birth_date.month, self.birth_date.day))
+
     def __str__(self):
         return self.participant.name() + " Basic Health Info"
 

@@ -14,6 +14,13 @@ class ParticipantSerializer(serializers.ModelSerializer):
         fields = ['id', 'first_name', 'last_name', 'email']
 
 
+class ParticipantBasicHealthSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ParticipantBasicHealth
+        fields = ['participant', 'gender', 'weight', 'height', 'birth_date']
+
+
 class ParticipantResponseSerializer(serializers.ModelSerializer):
     class Meta:
         model = ParticipantResponse
