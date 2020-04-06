@@ -229,12 +229,132 @@
   },
   {
     "model": "sponsor.ClinicalTrialCriteriaResponse",
-    "pk": 19,
+    "pk": 20,
     "fields": {
-      "criteria": 59,
-      "trial": "55555",
-      "value": "prandial insulin therapy",
+      "criteria": 83,
+      "trial": "ABCDFG",
+      "value": "No",
+      "comparison": "equals",
+      "criteriaType": "inclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 21,
+    "fields": {
+      "criteria": 84,
+      "trial": "ABCDFG",
+      "value": "Yes",
+      "comparison": "equals",
+      "criteriaType": "inclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 22,
+    "fields": {
+      "criteria": 85,
+      "trial": "ABCDFG",
+      "value": "Yes",
+      "comparison": "equals",
+      "criteriaType": "inclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 23,
+    "fields": {
+      "criteria": 86,
+      "trial": "ABCDFG",
+      "value": "No",
+      "comparison": "equals",
+      "criteriaType": "inclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 24,
+    "fields": {
+      "criteria": 14,
+      "trial": "ABCDFG",
+      "value": "45",
+      "comparison": "gte",
+      "criteriaType": "inclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 25,
+    "fields": {
+      "criteria": 48,
+      "trial": "ABCDFG",
+      "value": "Yes",
+      "comparison": "equals",
+      "criteriaType": "inclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 26,
+    "fields": {
+      "criteria": 48,
+      "trial": "ABCDFG",
+      "value": "Yes",
+      "comparison": "equals",
+      "criteriaType": "inclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 27,
+    "fields": {
+      "criteria": 89,
+      "trial": "ABCDFG",
+      "value": "more than 5 years",
+      "comparison": "equals",
+      "criteriaType": "inclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 28,
+    "fields": {
+      "criteria": 39,
+      "trial": "ABCDFG",
+      "value": "Cardiovascular: e.g. angina, chest pain, heart attack, high blood pressure",
       "comparison": "contains",
+      "criteriaType": "inclusion",
+      "negated": true
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 29,
+    "fields": {
+      "criteria": 40,
+      "trial": "ABCDFG",
+      "value": "any",
+      "comparison": "contains",
+      "criteriaType": "inclusion",
+      "negated": true
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 30,
+    "fields": {
+      "criteria": 81,
+      "trial": "ABCDFG",
+      "value": "Yes",
+      "comparison": "equals",
       "criteriaType": "exclusion",
       "negated": false
     }
