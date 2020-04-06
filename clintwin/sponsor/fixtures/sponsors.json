@@ -12,5 +12,33 @@
       "location": "Amsterdam",
       "notes": "blah blah blah"
     }
+  },
+  {
+    "model": "sponsor.Sponsor",
+    "pk": "2",
+    "fields": {
+      "organization": "Kaiser Permanente",
+      "date_joined": "2020-03-25",
+      "dateDeregistered": null,
+      "contactPerson": "Kaiser Soze",
+      "email": "kaiser@kaiserpermanente.com",
+      "phone": "5555555555",
+      "location": "California",
+      "notes": "blah blah blah"
+    }
+  },
+  {
+    "model": "sponsor.Sponsor",
+    "pk": "3",
+    "fields": {
+      "organization": "University of Pittsburgh",
+      "date_joined": "2020-03-25",
+      "dateDeregistered": null,
+      "contactPerson": "Eli Lilly",
+      "email": "eli@genentech.edu",
+      "phone": "5555555555",
+      "location": "Pittsburgh",
+      "notes": "blah blah blah"
+    }
   }
 ]

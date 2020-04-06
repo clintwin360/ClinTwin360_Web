@@ -5,7 +5,7 @@
     "fields": {
       "text": "What is your height? (ft.)", 
       "options": "[\"3ft. 1in.\", \"3ft 2in.\", \"3ft 3in.\", \"3ft 4in.\", \"3ft 5in.\", \"3ft 6in.\",\"3ft 7in.\",\"3ft 8in.\", \"3ft 8in.\", \"3ft 9in.\", \"3ft 10in.\", \"3ft 11in.\", \"4ft\", \"3ft. 1in.\", \"3ft 2in.\", \"3ft 3in.\", \"3ft 4in.\", \"3ft 5in.\", \"3ft 6in.\",\"3ft 7in.\",\"3ft 8in.\", \"3ft 8in.\", \"3ft 9in.\", \"3ft 10in.\", \"3ft 11in.\", \"4ft\", \"4ft. 1in.\", \"4ft 2in.\", \"4ft 3in.\", \"4ft 4in.\", \"4ft 5in.\", \"4ft 6in.\",\"4ft 7in.\",\"4ft 8in.\", \"4ft 8in.\", \"4ft 9in.\", \"4ft 10in.\", \"4ft 11in.\", \"5ft\", \"5ft. 1in.\", \"5ft 2in.\", \"5ft 3in.\", \"5ft 4in.\", \"5ft 5in.\", \"5ft 6in.\",\"5ft 7in.\",\"5ft 8in.\", \"5ft 8in.\", \"5ft 9in.\", \"5ft 10in.\", \"5ft 11in.\", \"4ft\", \"3ft. 1in.\", \"6ft 2in.\", \"6ft 3in.\", \"6ft 4in.\", \"6ft 5in.\", \"6ft 6in.\",\"6ft 7in.\",\"6ft 8in.\", \"6ft 8in.\", \"6ft 9in.\", \"6ft 10in.\", \"6ft 11in.\", \"7ft\", \"7ft. 1in.\", \"7ft 2in.\", \"7ft 3in.\", \"7ft 4in.\", \"7ft 5in.\", \"7ft 6in.\",\"7ft 7in.\",\"7ft 8in.\", \"7ft 8in.\", \"7ft 9in.\", \"7ft 10in.\", \"7ft 11in.\", \"8ft\",]", 
-      "valueType": "list"
+      "valueType": "large_option_set"
     }
   }, 
   {
@@ -14,7 +14,7 @@
     "fields": {
       "text": "What is your weight? (lbs.)", 
       "options": "[\"100\", \"101\", ..., \"190\"] ", 
-      "valueType": "list"
+      "valueType": "large_option_set"
     }
   }, 
   {
@@ -23,7 +23,7 @@
     "fields": {
       "text": "How old are you?", 
       "options": "[\"under 18\", \"18\", \"19\", ...\"140\"]", 
-      "valueType": "list"
+      "valueType": "large_option_set"
     }
   }, 
   {
@@ -32,7 +32,7 @@
     "fields": {
       "text": "What race of ethnicity do you identify with?", 
       "options": "[\"American Indian or Alaska Native\",\"Black or African American\", \"Hispanic or Latino\", \"Native Hawaiian or Other Pacific Islander\", \"White\"]", 
-      "valueType": "list"
+      "valueType": "pick_one"
     }
   }, 
   {
@@ -41,7 +41,7 @@
     "fields": {
       "text": "Gender", 
       "options": "[\"Male\", \"Female\"]", 
-      "valueType": "list"
+      "valueType": "pick_one"
     }
   }, 
   {
@@ -50,7 +50,7 @@
     "fields": {
       "text": "What is your zipcode?", 
       "options": "[\"xxxxx\",...]", 
-      "valueType": "list"
+      "valueType": "large_option_set"
     }
   }, 
   {
@@ -59,7 +59,7 @@
     "fields": {
       "text": "Marital Status", 
       "options": "[\"single\", \"married\", \"widowed\", \"divorced\", \"separated\", \"registered partnership\"]", 
-      "valueType": "list"
+      "valueType": "pick_one"
     }
   }, 
   {
@@ -68,7 +68,7 @@
     "fields": {
       "text": "Living Situation", 
       "options": "[\"own a home\", \"rent\", \"live with parents\", \"live with roommates\", \"homeless\"]", 
-      "valueType": "list"
+      "valueType": "pick_one"
     }
   }, 
   {
@@ -113,7 +113,7 @@
     "fields": {
       "text": "Blood Type", 
       "options": "[\"O+\", \"O-\", \"A+\", \"A-\", \"B+\", \"B-\", \"AB+\", \"AB-\"]", 
-      "valueType": "list"
+      "valueType": "pick_one"
     }
   }, 
   {
@@ -122,7 +122,7 @@
     "fields": {
       "text": "Do you use Tobacco?", 
       "options": "[\"Yes\", \"No\", \"In the past\"]", 
-      "valueType": "yes_no"
+      "valueType": "pick_one"
     }
   }, 
   {
@@ -131,7 +131,7 @@
     "fields": {
       "text": "How often?", 
       "options": "[\"1 per day\", \"2-5 per day\", \"5-10 per day\", \"more than 10 per day\"]", 
-      "valueType": "list"
+      "valueType": "pick_one"
     }
   }, 
   {
@@ -140,7 +140,7 @@
     "fields": {
       "text": "How long have you used tobacco?", 
       "options": "[\"less than 6 months\", \"1-2 years\", \"2-5 years\", \"over 5 years\"]", 
-      "valueType": "list"
+      "valueType": "pick_one"
     }
   }, 
   {
@@ -158,7 +158,7 @@
     "fields": {
       "text": "When did you quit?", 
       "options": "[\"less than 6 months\", \"1-2 years\", \"2-5 years\", \"over 5 years\"]", 
-      "valueType": "yes_no"
+      "valueType": "pick_one"
     }
   }, 
   {
@@ -167,7 +167,7 @@
     "fields": {
       "text": "Did you quit the use of Tobacco?", 
       "options": "[\"Yes\", \"No\"]", 
-      "valueType": "list"
+      "valueType": "yes_no"
     }
   }, 
   {
@@ -185,7 +185,7 @@
     "fields": {
       "text": "How often do you exercise in a week?", 
       "options": "[\"1 day\", \"2 days\", \"3 days\", \"4 days\", \"5 days\", \"6 days\", \"7 days\"] ", 
-      "valueType": "list"
+      "valueType": "pick_one"
     }
   }, 
   {
@@ -194,7 +194,7 @@
     "fields": {
       "text": "How long is each exercise period?", 
       "options": "[\"less than 30 minutes\", \"30-45 minutes\", \"45 minutes - 1 hour\", \"over 1 hour\"]", 
-      "valueType": "list"
+      "valueType": "pick_one"
     }
   }, 
   {
@@ -221,7 +221,7 @@
     "fields": {
       "text": "Average number of glasses of alcohol per week?", 
       "options": "[\"1\", \"2\", \"3\", \"4\", \"more than 5\"]", 
-      "valueType": "list"
+      "valueType": "pick_one"
     }
   }, 
   {
@@ -257,7 +257,7 @@
     "fields": {
       "text": "What allergy symptoms do you experience?", 
       "options": "[Blurred vision\", \"Pain/redness in eyes\", \"Itchy eyes\", \"Watery eyes\"', \"Hoarsness\", \"Smell or taste change\", \"Dizziness\", \"Drainage\", \"Itching throat\", \"Snoring\", \"Ringing in ears\", \"Headaches\", \"Itching (general)\", \"Rash\", \"Hives\", \"Depression\", \"Tremor\", \"Anxiety\", \"Persitent cough\", \"Wheezing\", \"Shortness of breath\", \"Chest pain\", \"Palpitation\", \"No sleep/Insomnia\"]", 
-      "valueType": "[\"allergy symptoms\"]"
+      "valueType": "list"
     }
   }, 
   {
@@ -266,7 +266,7 @@
     "fields": {
       "text": "When was your last visit to see a doctor?", 
       "options": "[\"less than 1 month\", \"1-3 months\", \"3-6 months\", \"6 months - 1 year\", \"over 1 year\"]", 
-      "valueType": "list"
+      "valueType": "pick_one"
     }
   }, 
   {
@@ -365,7 +365,7 @@
     "fields": {
       "text": "When was your last cardiovascular event and/or precedure?", 
       "options": "[\"less than 1 month ago\", \"1-3 months ago\", \"3-6 months ago\", \"6-12 months ago\", \"more than 1 year ago\"]", 
-      "valueType": "list"
+      "valueType": "pick_one"
     }
   }, 
   {
@@ -383,7 +383,7 @@
     "fields": {
       "text": "Select healthcare provider", 
       "options": "[\"Anthem\", \"Kaiser Permanente\", \"Aetna\", \"UnitedHealth Group\", \"Cardinal Health\"]", 
-      "valueType": "list"
+      "valueType": "pick_one"
     }
   }, 
   {
@@ -428,7 +428,7 @@
     "fields": {
       "text": "When is the upcoming medical procedure scheduled for?", 
       "options": "[\"in less than 3 months\", \"in 3-6 months\", \"in 6-12 months\"]", 
-      "valueType": "list"
+      "valueType": "pick_one"
     }
   }, 
   {
@@ -464,7 +464,7 @@
     "fields": {
       "text": "What types of diabetes do you have?", 
       "options": "[\"type 1\", \"type 2, \"gestational\", \"prediabetes\", \"secondary\"]", 
-      "valueType": "list"
+      "valueType": "pick_one"
     }
   }, 
   {
@@ -473,7 +473,7 @@
     "fields": {
       "text": "How long have you been diagnosed with diabetes?", 
       "options": "[\"less than 6 months\", \"1-2 years\", \"2-5 years\", \"over 5 years\"]", 
-      "valueType": "list"
+      "valueType": "pick_one"
     }
   }, 
   {
@@ -491,7 +491,7 @@
     "fields": {
       "text": "When was the last change in your diabetes medication or dasage?", 
       "options": "[\"less than 3 months ago\", \"3-6 months ago\", \"1-2 years ago\", \"2-5 years ago\", \"over 5 years ago\"]", 
-      "valueType": "list"
+      "valueType": "pick_one"
     }
   }, 
   {
@@ -725,7 +725,7 @@
     "fields": {
       "text": "How long were you disease-free post diagnosis of any malignancy?", 
       "options": "[\"less than 1 year\", \"1-2 years\", \"3-5 years\", \"more than 5 years\"]", 
-      "valueType": "list"
+      "valueType": "pick_one"
     }
   }, 
   {
@@ -743,7 +743,7 @@
     "fields": {
       "text": "How far back did the major surgical procedure, open biopsy, or significant traumatic injury happen?", 
       "options": "[\"less than a month ago\", \"1-3 months\", \"3-6 months\", \"6-12 months\", \"more than 1 year\"]", 
-      "valueType": "list"
+      "valueType": "pick_one"
     }
   }, 
   {
@@ -772,14 +772,14 @@
       "options": "[\"Birch pollen\", \"oak pollen\", \"grass pollen\", \"ragweed pollen\"]", 
       "valueType": "list"
     }
-  },
+  }, 
   {
-    "model": "sponsor.ParticipantQuestion",
-    "pk": "87",
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "87", 
     "fields": {
-      "text": "What is your BMI",
-      "options": "",
-      "valueType": "enter_val"
+      "text": "What is your BMI?", 
+      "options": "\"\"", 
+      "valueType": "calc_val"
     }
   }
 ]

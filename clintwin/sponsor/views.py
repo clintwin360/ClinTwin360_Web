@@ -199,9 +199,10 @@ def contact(request):
         form = ContactForm()
     return render(request,'contactform.html',{'form':form})
 
+
 class ClinicalTrialCreateView(generic.CreateView):
     model = ClinicalTrial
-    fields = ('trialId', 'sponsorId', 'title', 'objective','recruitmentStartDate','recruitmentEndDate','enrollmentTarget','url','followUp','location','comments')
+    fields = ('id', 'sponsorId', 'title', 'objective','recruitmentStartDate','recruitmentEndDate','enrollmentTarget','url','followUp','location','comments')
     template_name = 'create_trial_form.html'
 
 
@@ -288,80 +289,6 @@ class ViewSponsorView(TemplateView):
 
 class ViewSponsorReqView(TemplateView):
     template_name = 'sponsor/view_sponsor_req.html'
-
-
-#API
-class ParticipantQuestionViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows questions to be viewed or edited.
-    """
-    queryset = ParticipantQuestion.objects.all()
-    serializer_class = ParticipantQuestionSerializer
-    #permission_classes = [permissions.IsAuthenticated]
-
-
-class ParticipantViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows participants to be viewed or edited.
-    """
-    queryset = Participant.objects.all()
-    serializer_class = ParticipantSerializer
-    #permission_classes = [permissions.IsAuthenticated]
-
-
-class ParticipantResponseViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows responses to be viewed or edited.
-    """
-    queryset = ParticipantResponse.objects.all()
-    serializer_class = ParticipantResponseSerializer
-    #permission_classes = [permissions.IsAuthenticated]
-
-class SponsorProfileViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows responses to be viewed or edited.
-    """
-    queryset = Sponsor.objects.all()
-    serializer_class = SponsorSerializer
-    #permission_classes = [permissions.IsAuthenticated]
-
-
-class ClinicalTrialMatchViewSet(viewsets.ModelViewSet):
-
-    serializer_class = ClinicalTrialMatchSerializer
-
-    def get_queryset(self):
-        participant_id = self.request.query_params.get('participant')
-        participant = Participant.objects.get(id=participant_id)
-        queryset = ClinicalTrialMatch.objects.filter(participant=participant)
-
-        return queryset
-
-
-class ClinicalTrialDetailsViewSet(viewsets.ModelViewSet):
-
-    serializer_class = ClinicalTrialDetailSerializer
-
-    def get_queryset(self):
-        trial_id = self.request.query_params.get('id')
-        queryset = ClinicalTrial.objects.filter(trialId=trial_id)
-
-        return queryset
-
-
-class ClinicalTrialViewSet(viewsets.ModelViewSet):
-    serializer_class = ClinicalTrialListSerializer
-
-    def get_queryset(self):
-        sponsor_id = self.request.query_params.get('sponsor_id', None)
-        if sponsor_id:
-            queryset = ClinicalTrial.objects.filter(sponsor__id=sponsor_id)
-        else:
-            queryset = ClinicalTrial.objects.all()
-
-        return queryset
-
-        
 
 #NEW: view for clinicaltrial_list2
 class ClinicalTrialListView2(SingleTableView):
