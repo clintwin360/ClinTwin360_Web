@@ -5,13 +5,23 @@ body {
 }
 
 /* Style navbar elements */
-#navbar, #navbarDropdown, #contact_us, #navbarLogo, #logout_link {
+#navbar, #navbarDropdown, #contact_us, #navbarLogo {
   background-color: #4bc5ef;
   color: white;
+}
+	
+
+#logout_link{
+	float: right;
+	text-align:right;
+	background-color: #4bc5ef;
+    color: white;
 }
 
 #greeting, thead {
   color: #333333;
+  float: right;
+  text-align:right;
 }
 
 /* Trying to push 2 buttons to right of page */

@@ -40,37 +40,21 @@
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 				          <a class="dropdown-item" href="{% url 'newsponsor' %}">Create New Sponsor</a>
 				          <a class="dropdown-item" href="{% url 'viewsponsors' %}">View Sponsors</a>
-									<a class="dropdown-item" href="{% url 'viewsponsorreq' %}">View Sponsor Requests</a>
-
+						  <a class="dropdown-item" href="{% url 'viewsponsorreq' %}">View Sponsor Requests</a>
 				        </div>
-
-						</li>
-						<!--% else % -->
-						<li class="nav-item dropdown">
-		 		        	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				          Manage Clinical Trials
-				        </a>
-
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-				          <a class="dropdown-item" href="{% url 'newtrial' %}">Create New Clinical Trial</a>
-				          <a class="dropdown-item" href="{% url 'viewtrials' %}">View Clinical Trials</a>
-						  <a class="dropdown-item" href="{% url 'clinicaltrial_list2' %}">View Clinical Trials2</a>		
-				          <div class="dropdown-divider"></div>
-						  	<a class="dropdown-item" href="{% url 'inclusion' %}">Inclusion Criteria</a>
-							<a class="dropdown-item" href="{% url 'exclusion' %}">Exclusion Criteria</a>
-				        </div>
-
 						</li>
 						
+						
 						<li class="nav-item">
-							<a class="nav-link" id="greeting">Welcome back, {{ user.username }}!  </a>
+						  <a class="nav-link" id="greeting" >Welcome back, {{ user.username }}!  </a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" id="logout_link" href="{% url 'logout' %}" align="right">logout</a>
+						
+						<li class="nav-item" >
+						<a class="nav-link" id="logout_link" href="{% url 'logout' %}" >logout</a>
 						</li>
+					</div>
 
 				<!--
-
 				IF SUPER USER
 
 						<li class="nav-item dropdown">
@@ -84,7 +68,6 @@
 				        </div>
 
 						</li>
-
 					-->
 
 					 	<!--Check if clintwin, sponsor, or sponsor super user -->
@@ -106,11 +89,12 @@
 							</li>
 							
 							<li class="nav-item">
-							<a class="nav-link" id="greeting">Welcome back, {{ user.username }}!  </a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" id="logout_link" href="{% url 'logout' %}" align="right">logout</a>
-						</li>
+							<a class="nav-link" id="greeting" >Welcome back, {{ user.username }}!  </a>
+							</li>
+							
+							<li class="nav-item">
+							<a class="nav-link" id="logout_link" href="{% url 'logout' %}" >logout</a>
+							</li>
 							
 							{% endif %}
 						{% else %}
@@ -131,22 +115,11 @@
 							</li>
 						{% endif %}
 					{% endif %}
-				</ul>
-				<!--
-				<ul class="navbar-nav ml-auto">
-					{% if user.is_authenticated %}
-						<li class="nav-item">
-							<a class="nav-link" id="greeting">Welcome back, {{ user.username }}!  </a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" id="logout_link" href="{% url 'logout' %}" align="right">logout</a>
-						</li>
-					{% endif %}
-				</ul>
-				-->
-
+					</ul>
+				
 				</div>
 			</div>
+				
 		</nav>
 	{% endblock %}
 	</div>
@@ -155,6 +128,8 @@
 			{% block content %}{% endblock %}
 		</div>
 	</main>
+	
+	
 	<div class="footer">
 		<p>&copy; 2020 ClinTwin360</p>
 	</div>
