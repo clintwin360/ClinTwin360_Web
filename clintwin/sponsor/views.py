@@ -281,7 +281,7 @@ class NewSponsorView(generic.CreateView):
 
 class NewClinicalTrialView(generic.CreateView):
     model = ClinicalTrial
-    fields = ('trialId', 'sponsor', 'title', 'objective','recruitmentStartDate','recruitmentEndDate','enrollmentTarget','url','followUp','location','comments')
+    fields = ('id', 'sponsor', 'title', 'objective','recruitmentStartDate','recruitmentEndDate','enrollmentTarget','url','followUp','location','comments')
     template_name = 'sponsor/newtrial.html'
 
 class ViewSponsorView(TemplateView):

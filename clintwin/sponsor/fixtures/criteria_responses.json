@@ -70,5 +70,173 @@
       "criteriaType": "exclusion",
       "negated": false
     }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 7,
+    "fields": {
+      "criteria": 52,
+      "trial": "55555",
+      "value": "Kaiser Permanente",
+      "comparison": "equals",
+      "criteriaType": "inclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 8,
+    "fields": {
+      "criteria": 14,
+      "trial": "55555",
+      "value": "30",
+      "comparison": "gte",
+      "criteriaType": "inclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 9,
+    "fields": {
+      "criteria": 61,
+      "trial": "55555",
+      "value": "type 2",
+      "comparison": "equals",
+      "criteriaType": "inclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 10,
+    "fields": {
+      "criteria": 62,
+      "trial": "55555",
+      "value": "less than 6 months",
+      "comparison": "not equals",
+      "criteriaType": "inclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 11,
+    "fields": {
+      "criteria": 53,
+      "trial": "55555",
+      "value": "English",
+      "comparison": "contains",
+      "criteriaType": "inclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 12,
+    "fields": {
+      "criteria": 54,
+      "trial": "55555",
+      "value": "Yes",
+      "comparison": "equals",
+      "criteriaType": "inclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 13,
+    "fields": {
+      "criteria": 61,
+      "trial": "55555",
+      "value": "type 1",
+      "comparison": "equals",
+      "criteriaType": "exclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 14,
+    "fields": {
+      "criteria": 61,
+      "trial": "55555",
+      "value": "gestational",
+      "comparison": "equals",
+      "criteriaType": "exclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 15,
+    "fields": {
+      "criteria": 61,
+      "trial": "55555",
+      "value": "secondary",
+      "comparison": "equals",
+      "criteriaType": "exclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 16,
+    "fields": {
+      "criteria": 56,
+      "trial": "55555",
+      "value": "hemodialysis",
+      "comparison": "contains",
+      "criteriaType": "exclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 17,
+    "fields": {
+      "criteria": 56,
+      "trial": "55555",
+      "value": "peritoneal dialysis",
+      "comparison": "contains",
+      "criteriaType": "exclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 18,
+    "fields": {
+      "criteria": 59,
+      "trial": "55555",
+      "value": "glucocorticoid",
+      "comparison": "contains",
+      "criteriaType": "exclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 19,
+    "fields": {
+      "criteria": 59,
+      "trial": "55555",
+      "value": "prandial insulin therapy",
+      "comparison": "contains",
+      "criteriaType": "exclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 19,
+    "fields": {
+      "criteria": 59,
+      "trial": "55555",
+      "value": "prandial insulin therapy",
+      "comparison": "contains",
+      "criteriaType": "exclusion",
+      "negated": false
+    }
   }
 ]
