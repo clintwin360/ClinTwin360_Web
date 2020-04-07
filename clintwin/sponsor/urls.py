@@ -13,6 +13,7 @@ urlpatterns = [
     path('dummy/', views.dummy, name='dummy'),
     path('trial_match/', views.calculate_trial_matches, name='trial_matches'),
     path('question_rank/', views.question_rank, name='question_rank'),
+    path('question_flow/', views.question_flow, name='question_flow'),
     # Move to API app
     path('token/', views.get_token, name='token'),
     # path('accounts/', include('django.contrib.auth.urls')),
