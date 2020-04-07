@@ -5,11 +5,19 @@ var cardbodyTemplate = '<div class="card-body bg-light flex-row justify-content-
 var cardtitleTemplate = '<h6 class="card-text">';
 var cardtextTemplate = '<p class="card-text">';
 var cardtextsmallTemplate = '<p class="card-text"><small class="text-muted">';
+var editButton = '<td><button class="viewbtn" type="button">View</button><button class="editbtn" type="button">Edit</button></td>';
+
 
 $(function(){
-  $.getJSON("/sponsor/trials/", function(result){
+  $.getJSON("/api/trials/", function(result){
     $.each(result.results, function(i, field){
-      $("#trial-list-body").append(tableEntryTemplate + field.trialId + '</a></td><td>' + field.title + '</td><td>Started: ' + field.recruitmentStartDate + '</td><td>' + field.enrollmentTarget + '</td><td>' + field.recruitmentEndDate + '</td></div></tr>');
+      $("#trial-list-body").append(tableEntryTemplate +
+        field.trialId + '</a></td><td>' +
+        field.title + '</td><td>Started: ' +
+        field.recruitmentStartDate + '</td><td>' +
+        field.enrollmentTarget + '</td><td>' +
+        field.recruitmentEndDate + '</td>' +
+        editButton + '</tr></div>') ;
     });
   });
 });

@@ -11,33 +11,44 @@
     <br>
     <h2 id="trial_dashboard">Clinical Trials Dashboard</h2>
     <br>
-
+<div class="table_container">
     <div class="main-cards row">
-        <div class="card">
-          <table class="table table-bordered table-hover" id='trials'>
+          <table class="table table-bordered" id='trials'>
             <thead class="thead-light">
               <tr>
-                <th>Trial ID</th>
+                <th id="trial_id">Trial ID</th>
                 <th>Name</th>
                 <th>Status</th>
+                <th>Current Recruitment</th>
                 <th>Target Recruitment</th>
+                <th id="end_date">Start Date</th>
                 <th id="end_date">End Date</th>
+                <th id="view_edit">Edit / View</th>
               </tr>
             </thead>
 
-            <div class='triallist' id='triallist'>
-                <tbody id='trial-list-body'>
-            </div>
+
+            <tbody id='trial-list-body'>
+                {% for trial in query_results %}
+                <tr onclick="">
+                  <td>{{ trial.id }}</td>
+                  <td>{{ trial.name }}</td>
+                  <td>{{ trial.currentRecruitment }}</td>
+                  <td>{{ trial.targetRecruitment }}</td>
+                  <td>{{ trial.startDate }}</td>
+                  <td>{{ trial.endDate}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
           </table>
-        </div>
 
-
+<!--
       <div class="card" id='trialdetails'>Trial Details <br><br>
         The goal is to click on the trial ID or anywhere on the row and have this section be polulated with the details of the trial. <br>
         <br>(The previous code is just commented out so feel free to revert it, if this isn't what we want)
-      </div>
+      </div> -->
     </div>
-
+</div>
 
 {% endblock %}
 

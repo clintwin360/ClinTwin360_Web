@@ -154,8 +154,8 @@ button.reset_btn, #id_email, #id_phone {
   }
 
   /* Fixed width for date column in Trials Dashboard */
-  #end_date, #spnsr_id {
-    width: 12%;
+  #end_date, #spnsr_id, #trial_id, #view_edit {
+    width: 10%;
   }
 
   }
