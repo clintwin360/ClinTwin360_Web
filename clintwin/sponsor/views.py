@@ -113,22 +113,22 @@ def calculate_trial_matches(request):
     return JsonResponse(data)
 
 
-def question_rank(request):
-    questions = ParticipantQuestion.objects.all()
-    data = {"questions": []}
+def question_rank(questions):
+    ranks = {}
     for q in questions:
         rank = 0
         criteria = q.criteria.all()
         for criterion in criteria:
             rank += criterion.trial_responses.count()
-        data['questions'].append({"text": q.text, "rank": rank})
+        ranks[q.id] = rank
 
-    data['questions'].sort(key=lambda x: x['rank'], reverse=True)
-    return JsonResponse(data)
+    #data['questions'].sort(key=lambda x: x['rank'], reverse=True)
+    return ranks
 
 
 def question_flow(request):
     questions = ParticipantQuestion.objects.all()
+    ranks = question_rank(questions)
     data = {'questions': []}
     for question in questions:
         flow = question.question_flow.all()
@@ -136,6 +136,8 @@ def question_flow(request):
         data['questions'].append({'id': question.id,
                                   'text': question.text,
                                   'is_followup': is_followup,
+                                  'rank': ranks[question.id],
+                                  'value_type': question.valueType,
                                   'options':
                                       [{'value': x.response, 'next_question': x.next_question.id} for x in flow]})
     return JsonResponse(data)
