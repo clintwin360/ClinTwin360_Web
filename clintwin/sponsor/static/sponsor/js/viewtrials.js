@@ -12,7 +12,7 @@ $(function(){
   $.getJSON("/api/trials/", function(result){
     $.each(result.results, function(i, field){
       $("#trial-list-body").append(tableEntryTemplate +
-        field.trialId + '</a></td><td>' +
+        field.id + '</a></td><td>' +
         field.title + '</td><td>Started: ' +
         field.recruitmentStartDate + '</td><td>' +
         field.enrollmentTarget + '</td><td>' +

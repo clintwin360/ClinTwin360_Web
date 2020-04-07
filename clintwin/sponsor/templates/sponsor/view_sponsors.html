@@ -24,17 +24,6 @@
             </thead>
 
             <tbody id="sponsor-list-body">
-              {% for sponsor in query_results %}
-              <tr onclick="">
-                  <td>{{ sponsor.sponsor_id }}</td>
-                  <td>{{ sponsor.organization }}</td>
-                  <td>{{ sponsor.date_joined }}</td>
-                  <td>{{ sponsor.notes }}</td>
-                  <td>
-                    <button class="btn btn-submit" type="button">View</button>
-                  </td>
-              </tr>
-              {% endfor %}
             </tbody>
           </table>
       <!-- <div class="card">Sponsor Details <br><br>
