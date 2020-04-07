@@ -88,7 +88,7 @@ class SponsorRequest(models.Model):
 
 
 class ClinicalTrial(models.Model):
-    id = models.CharField('Trial ID', max_length=100,primary_key=True)
+    custom_id = models.CharField('Trial ID', max_length=100,null=True)
     sponsor = models.ForeignKey('Sponsor', null=True, on_delete=models.SET_NULL)
     title = models.CharField('Trial Title', null=True, max_length=100)
     objective = models.TextField('Objective', null=True)
