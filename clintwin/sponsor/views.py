@@ -54,13 +54,26 @@ def login_success(request):
     else:
         return redirect("viewtrials")
 
-
+#Trial Views
 def viewTrials(request):
     trials = ClinicalTrial.objects.all()  # filter(sponsorId=request.user.sponsor_id)
     return render(request, "sponsor/viewtrials.html", {"trials": trials})
 
 class TrialDetailView(generic.DetailView):
     model = ClinicalTrial
+
+class TrialUpdateView(generic.UpdateView):
+    model = ClinicalTrial
+    fields = ['title']
+
+#Sponsor Views
+
+class SponsorDetailView(generic.DetailView):
+    model = Sponsor
+
+class SponsorUpdateView(generic.UpdateView):
+    model = Sponsor
+    fields = ['organization']
 
 def dummy(request):
     questions = ParticipantQuestion.objects.all()
@@ -291,8 +304,7 @@ class CriteriaView(TemplateView):
     template_name = 'sponsor/criteria.html'
 
 
-class SponsorDetailView(generic.DetailView):
-    model = Sponsor
+
 
 
 # Static pages for Admin

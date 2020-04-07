@@ -1,6 +1,7 @@
 var tableEntryTemplate = '<td><a class="sponsor-id-link" href="/sponsor/profile/';
 var tableRowTemplate = '<tr onclick="" id=sponsor_';
-var editButton = '<td><button class="viewbtn" type="button">View</button><button class="editbtn" type="button">Edit</button></td>';
+var editButtonOld = '<td><button class="viewbtn" type="button">View</button><button class="editbtn" type="button">Edit</button></td>';
+var editButton = '<td><a class="sponsor-update-link" href="/sponsor/updateprofile/';
 
 $(function(){
   $.getJSON("/api/profile/", function(result){
@@ -11,7 +12,7 @@ $(function(){
         field.organization + '</td><td>Date Joined: ' +
         field.date_joined + '</td><td>Notes:' +
         field.notes + '</td>' +
-        editButton + '</tr>') ;
+        editButton + field.id.toString() + '">Update</a></td></tr>') ;
     });
   });
 });
