@@ -1,4 +1,4 @@
-var tableEntryTemplate = '<td><a class="sponsor-id-link" href="/api/profile/?id=';
+var tableEntryTemplate = '<td><a class="sponsor-id-link" href="/sponsor/profile/';
 var tableRowTemplate = '<tr onclick="" id=sponsor_';
 var editButton = '<td><button class="viewbtn" type="button">View</button><button class="editbtn" type="button">Edit</button></td>';
 

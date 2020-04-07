@@ -47,5 +47,6 @@ urlpatterns = [
     # Move to API app
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('login_success/', views.login_success, name='login_success'),
-    re_path(r'^profile/<int:pk>/$', views.ProfileView.as_view(), name='profile'),
+    re_path(r'^profile/(?P<pk>\d+)$', views.SponsorDetailView.as_view(), name='sponsordetail'),
+    re_path(r'^trial/(?P<pk>\d+)$', views.TrialDetailView.as_view(), name='trialdetail'),
 ]

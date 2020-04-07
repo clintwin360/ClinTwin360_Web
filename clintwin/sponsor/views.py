@@ -59,6 +59,8 @@ def viewTrials(request):
     trials = ClinicalTrial.objects.all()  # filter(sponsorId=request.user.sponsor_id)
     return render(request, "sponsor/viewtrials.html", {"trials": trials})
 
+class TrialDetailView(generic.DetailView):
+    model = ClinicalTrial
 
 def dummy(request):
     questions = ParticipantQuestion.objects.all()
@@ -289,13 +291,8 @@ class CriteriaView(TemplateView):
     template_name = 'sponsor/criteria.html'
 
 
-class ProfileView(generics.RetrieveAPIView):
-    queryset = Sponsor.objects.all()
-    renderer_classes = [TemplateHTMLRenderer]
-
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        return Response({'sponsor': self.object}, template_name='sponsor/sponsorprofile.html')
+class SponsorDetailView(generic.DetailView):
+    model = Sponsor
 
 
 # Static pages for Admin

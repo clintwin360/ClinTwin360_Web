@@ -1,10 +1,14 @@
-$(document).ready(function(){
-    $(document).on('click', 'input[type=radio]', function(){
-        var value = $("#trialselect").val();
-        if (value == 'fake') {
-             $("#trialdetails").append('<p>Super fake details</p>');
-        } else if (value == 'test') {
-             $("#trialdetails").append('<p>Presumably more real details</p>');
-        }
+/*function clickTrial() {
+    console.log(this);
+    var idArray = this.id.toString().split("_");
+    var trialId = idArray[1];
+    $.getJSON("/api/trial/?id=" + trialId, function(result){
+        $('#trial-details').append('<p>The trial selected has a pk of ' + trialId + '</p><br>');
     });
-});
+};
+
+        /*
+
+        });
+    });
+*/

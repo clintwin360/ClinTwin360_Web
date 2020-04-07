@@ -5,6 +5,7 @@
 {% endblock %}
 {% block scripts %}
 <script type="text/javascript" src="{% static "sponsor/js/viewtrials.js"%}?{% now "U" %}"></script>
+<script type="text/javascript" src="{% static "sponsor/js/showdetails.js"%}?{% now "U" %}"></script>
 {% endblock %}
 {% block title %}Trials Dashboard{% endblock %}
 {% block content %}
@@ -13,7 +14,7 @@
     <br>
 <div class="table_container">
     <div class="main-cards row">
-          <table class="table table-bordered" id='trials'>
+          <table class="table table-bordered" id="trials">
             <thead class="thead-light">
               <tr>
                 <th id="trial_id">Trial ID</th>
@@ -35,6 +36,11 @@
         The goal is to click on the trial ID or anywhere on the row and have this section be polulated with the details of the trial. <br>
         <br>(The previous code is just commented out so feel free to revert it, if this isn't what we want)
       </div> -->
+    </div>
+</div>
+<div class="container-fluid">
+    <div id = "trial-details">
+        <h3> Trial Details </h3>
     </div>
 </div>
 
