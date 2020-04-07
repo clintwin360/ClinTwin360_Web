@@ -39,7 +39,7 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     objects = UserManager()
-    
+
     def isClintwin(self):
         if self.group.filter('clintwin'):
             return True
@@ -90,7 +90,7 @@ class SponsorRequest(models.Model):
 class ClinicalTrial(models.Model):
     custom_id = models.CharField('Trial ID', max_length=100,null=True)
     sponsor = models.ForeignKey('Sponsor', null=True, on_delete=models.SET_NULL)
-    title = models.CharField('Trial Title', null=True, max_length=100)
+    title = models.CharField('Trial Title', null=True, max_length=1000)
     objective = models.TextField('Objective', null=True)
     description = models.TextField('Description', null=True, blank=True)
     recruitmentStartDate = models.DateField('Recruitment Start Date', null=True, help_text='MM/DD/YY')

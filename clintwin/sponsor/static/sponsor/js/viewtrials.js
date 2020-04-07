@@ -6,10 +6,11 @@ var editButton = '<td><button class="viewbtn" type="button">View</button><button
 $(function(){
   $.getJSON("/api/trials/", function(result){
     $.each(result.results, function(i, field){
-      $("#trial-list-body").append(tableEntryTemplate +
+      $("#trial-list-body").append(tableRowTemplate + field.id + '">' +
+        tableEntryTemplate + field.id + '">' +
         field.id + '</a></td><td>' +
         field.title + '</td><td>' +
-        field.current_recruitment + '</td><td>'
+        field.current_recruitment + '</td><td>' +
         field.enrollmentTarget + '</td><td>Started: ' +
         field.recruitmentStartDate + '</td><td>' +
         field.recruitmentEndDate + '</td>' +
