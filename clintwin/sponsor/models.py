@@ -105,7 +105,7 @@ class ClinicalTrial(models.Model):
     current_recruitment = models.IntegerField('Current Recruitment', null=True, blank=True)
 
     def __str__(self):
-        ret = self.id + self.title
+        ret = str(self.id) + ":" + self.title
         return ret
 
     def get_absolute_url(self):

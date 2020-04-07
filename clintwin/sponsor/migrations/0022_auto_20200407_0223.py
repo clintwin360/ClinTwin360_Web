@@ -10,9 +10,4 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterField(
-            model_name='clinicaltrial',
-            name='id',
-            field=models.CharField(max_length=100, primary_key=True, serialize=False, verbose_name='Trial ID'),
-        ),
     ]

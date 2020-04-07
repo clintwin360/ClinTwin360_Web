@@ -10,14 +10,4 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='clinicaltrial',
-            name='custom_id',
-            field=models.CharField(max_length=100, null=True, verbose_name='Trial ID'),
-        ),
-        migrations.AlterField(
-            model_name='clinicaltrial',
-            name='id',
-            field=models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID'),
-        ),
     ]

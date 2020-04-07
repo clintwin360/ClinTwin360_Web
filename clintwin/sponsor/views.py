@@ -128,12 +128,17 @@ def question_rank(request):
 
 
 def question_flow(request):
-    question = ParticipantQuestion.objects.get(pk=20)
-    flow = question.question_flow.all()
-    return JsonResponse({'questions':
-                             [{'id': question.id, 'text': question.text,
-                               'options':
-                                   [{'value': x.response, 'next_question': x.next_question.id} for x in flow]}]})
+    questions = ParticipantQuestion.objects.all()
+    data = {'questions': []}
+    for question in questions:
+        flow = question.question_flow.all()
+        is_followup = QuestionFlow.objects.filter(next_question=question.id).count()
+        data['questions'].append({'id': question.id,
+                                  'text': question.text,
+                                  'is_followup': is_followup,
+                                  'options':
+                                      [{'value': x.response, 'next_question': x.next_question.id} for x in flow]})
+    return JsonResponse(data)
 
 
 def load_data(request):

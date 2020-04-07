@@ -26,10 +26,6 @@ class Migration(migrations.Migration):
         ),
         migrations.RemoveField(
             model_name='clinicaltrial',
-            name='id',
-        ),
-        migrations.RemoveField(
-            model_name='clinicaltrial',
             name='name',
         ),
         migrations.RemoveField(
@@ -97,12 +93,6 @@ class Migration(migrations.Migration):
             model_name='clinicaltrial',
             name='title',
             field=models.CharField(max_length=100, null=True, verbose_name='Trial Title'),
-        ),
-        migrations.AddField(
-            model_name='clinicaltrial',
-            name='trialId',
-            field=models.CharField(default=1, max_length=30, primary_key=True, serialize=False, verbose_name='Trial ID'),
-            preserve_default=False,
         ),
         migrations.AddField(
             model_name='clinicaltrial',
