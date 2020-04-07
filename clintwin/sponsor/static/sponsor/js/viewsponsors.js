@@ -9,7 +9,7 @@ $(function(){
         field.organization + '</td><td>Date Joined: ' +
         field.date_joined + '</td><td>Notes:' +
         field.notes + '</td>' +
-        editButton + '</tr></div>') ;
+        editButton + '</tr>') ;
     });
   });
 });
