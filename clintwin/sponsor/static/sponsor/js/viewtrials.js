@@ -8,8 +8,9 @@ $(function(){
     $.each(result.results, function(i, field){
       $("#trial-list-body").append(tableRowTemplate + field.id + '">' +
         tableEntryTemplate + field.id + '">' +
-        field.id + '</a></td><td>' +
+        field.custom_id + '</a></td><td>' +
         field.title + '</td><td>' +
+        field.status + '</td><td>' +
         field.current_recruitment + '</td><td>' +
         field.enrollmentTarget + '</td><td>Started: ' +
         field.recruitmentStartDate + '</td><td>' +
