@@ -1,10 +1,5 @@
-var tableEntryTemplate = '<tr onclick=""><td><a class="trial-id-link" href="">';
-var cardTemplate = '<div class="card">';
-var cardheaderTemplate = '<div class="card-header"><h5 class="card-title">';
-var cardbodyTemplate = '<div class="card-body bg-light flex-row justify-content-between align-items-cent">';
-var cardtitleTemplate = '<h6 class="card-text">';
-var cardtextTemplate = '<p class="card-text">';
-var cardtextsmallTemplate = '<p class="card-text"><small class="text-muted">';
+var tableEntryTemplate = '<td><a class="sponsor-id-link" href="/api/trial/?id="';
+var tableRowTemplate = '<tr onclick="" id="';
 var editButton = '<td><button class="viewbtn" type="button">View</button><button class="editbtn" type="button">Edit</button></td>';
 
 
@@ -13,9 +8,10 @@ $(function(){
     $.each(result.results, function(i, field){
       $("#trial-list-body").append(tableEntryTemplate +
         field.id + '</a></td><td>' +
-        field.title + '</td><td>Started: ' +
+        field.title + '</td><td>' +
+        field.current_recruitment + '</td><td>'
+        field.enrollmentTarget + '</td><td>Started: ' +
         field.recruitmentStartDate + '</td><td>' +
-        field.enrollmentTarget + '</td><td>' +
         field.recruitmentEndDate + '</td>' +
         editButton + '</tr>') ;
     });

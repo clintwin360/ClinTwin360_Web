@@ -26,19 +26,7 @@
                 <th id="view_edit">Edit / View</th>
               </tr>
             </thead>
-
-
             <tbody id='trial-list-body'>
-                {% for trial in query_results %}
-                <tr onclick="">
-                  <td>{{ trial.id }}</td>
-                  <td>{{ trial.name }}</td>
-                  <td>{{ trial.currentRecruitment }}</td>
-                  <td>{{ trial.targetRecruitment }}</td>
-                  <td>{{ trial.startDate }}</td>
-                  <td>{{ trial.endDate}}</td>
-                </tr>
-            {% endfor %}
             </tbody>
           </table>
 
