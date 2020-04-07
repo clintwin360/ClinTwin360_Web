@@ -3,9 +3,9 @@ from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import render
 
 from django.views.generic import TemplateView
-#from .forms import *
+# from .forms import *
 from sponsor.forms import UserCreationForm, NewTrialForm, NewSponsorForm
-#from .forms import AuthenticationForm
+# from .forms import AuthenticationForm
 from django.urls import reverse_lazy
 from django.views import generic
 from rest_framework import viewsets
@@ -15,7 +15,8 @@ from rest_framework import generics
 # New additions
 
 from rest_framework.decorators import api_view
-from .models import User, UserManager, Contact, Sponsor, Participant, ClinicalTrial, ClinicalTrialCriteriaResponse, ParticipantQuestion
+from .models import User, UserManager, Contact, Sponsor, Participant, ClinicalTrial, ClinicalTrialCriteriaResponse, \
+    ParticipantQuestion
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user
 from .serializers import *
@@ -37,7 +38,7 @@ from rest_framework import pagination
 
 
 # hashed_password = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt())
-#if (bcrypt.checkpw(request.POST['login_password'].encode(), user.password.encode())):
+# if (bcrypt.checkpw(request.POST['login_password'].encode(), user.password.encode())):
 
 
 def index(request):
@@ -55,7 +56,7 @@ def login_success(request):
 
 
 def viewTrials(request):
-    trials = ClinicalTrial.objects.all() #filter(sponsorId=request.user.sponsor_id)
+    trials = ClinicalTrial.objects.all()  # filter(sponsorId=request.user.sponsor_id)
     return render(request, "sponsor/viewtrials.html", {"trials": trials})
 
 
@@ -102,7 +103,7 @@ def calculate_trial_matches(request):
                                           'response': response_value, 'status': value_match})
                 if value_match and criterion_type == "inclusion" or not value_match and criterion_type == "exclusion":
                     continue
-                else:#this will not match if value_match is not true or if type is exclusion, we may want to separate cases
+                else:  # this will not match if value_match is not true or if type is exclusion, we may want to separate cases
                     trial_match = False
                     continue
         if trial_match:
@@ -122,7 +123,21 @@ def question_rank(request):
             rank += criterion.trial_responses.count()
         data['questions'].append({"text": q.text, "rank": rank})
 
-    data['questions'].sort(key=lambda x: x['rank'],reverse=True)
+    data['questions'].sort(key=lambda x: x['rank'], reverse=True)
+    return JsonResponse(data)
+
+
+def question_flow(request):
+    questions = ParticipantQuestion.objects.all()
+    data = {'questions': []}
+    for question in questions:
+        flow = question.question_flow.all()
+        is_followup = QuestionFlow.objects.filter(next_question=question.id).count()
+        data['questions'].append({'id': question.id,
+                                  'text': question.text,
+                                  'is_followup': is_followup,
+                                  'options':
+                                      [{'value': x.response, 'next_question': x.next_question.id} for x in flow]})
     return JsonResponse(data)
 
 
@@ -136,8 +151,8 @@ def load_data(request):
     call_command('loaddata', 'criteria_responses')
     call_command('loaddata', 'trial_matches')
     call_command('loaddata', 'participant_responses')
+    call_command('loaddata', 'question_flow')
     return HttpResponse("Data Loaded!")
-
 
 
 """
@@ -182,6 +197,8 @@ def logout(request):
     messages.info(request, "Logged out successfully!")
     return redirect('/')
 """
+
+
 # View for contact us form
 @api_view(['GET, POST'])
 def contact(request):
@@ -197,20 +214,23 @@ def contact(request):
     elif request.method == 'GET':
         # GET, generate unbound (blank) form
         form = ContactForm()
-    return render(request,'contactform.html',{'form':form})
+    return render(request, 'contactform.html', {'form': form})
+
 
 class ClinicalTrialCreateView(generic.CreateView):
     model = ClinicalTrial
-    fields = ('trialId', 'sponsorId', 'title', 'objective','recruitmentStartDate','recruitmentEndDate','enrollmentTarget','url','followUp','location','comments')
+    fields = (
+        'id', 'sponsorId', 'title', 'objective', 'recruitmentStartDate', 'recruitmentEndDate', 'enrollmentTarget',
+        'url',
+        'followUp', 'location', 'comments')
     template_name = 'create_trial_form.html'
-
-
 
 
 @api_view(['GET'])
 class TrialList(generics.ListCreateAPIView):
     queryset = Participant.objects.all()
     serializer_class = ParticipantSerializer
+
 
 """
 not working correctly.  need a django form?
@@ -224,38 +244,48 @@ def viewSponsors(request):
     queryset = Sponsor.objects.all()
     return render(request, "sponsor/view_sponsors.html")
 
+
 def viewSponsorReq(request):
     query_results = SponsorRequest.objects.all()
     return render(request, "sponsor/view_sponsor_req.html")
+
 
 # Static page for About us
 class AboutPageView(TemplateView):
     template_name = 'sponsor/about.html'
 
+
 # Static page for How it Works
 class HowWorksPageView(TemplateView):
     template_name = 'sponsor/how_works.html'
+
 
 # Static page for Contact us
 class ContactPageView(TemplateView):
     template_name = 'sponsor/contact.html'
 
+
 # Static page for directions
 class DirectionsPageView(TemplateView):
     template_name = 'directions.html'
+
 
 # Static page for Message display
 class MessagePageView(TemplateView):
     template_name = 'messages.html'
 
+
 class NewTrialView(TemplateView):
     template_name = 'sponsor/newtrial.html'
+
 
 class TrialsView(TemplateView):
     template_name = 'sponsor/viewtrials.html'
 
+
 class CriteriaView(TemplateView):
     template_name = 'sponsor/criteria.html'
+
 
 class ProfileView(generics.RetrieveAPIView):
     queryset = Sponsor.objects.all()
@@ -264,6 +294,7 @@ class ProfileView(generics.RetrieveAPIView):
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
         return Response({'sponsor': self.object}, template_name='sponsor/sponsorprofile.html')
+
 
 # Static pages for Admin
 # class NewCriterionView(TemplateView):
@@ -278,92 +309,24 @@ class NewSponsorView(generic.CreateView):
     fields = ('organization', 'contactPerson', 'location', 'phone', 'email', 'notes')
     template_name = 'sponsor/new_sponsor.html'
 
+
 class NewClinicalTrialView(generic.CreateView):
     model = ClinicalTrial
-    fields = ('trialId', 'sponsor', 'title', 'objective','recruitmentStartDate','recruitmentEndDate','enrollmentTarget','url','followUp','location','comments')
+    fields = (
+        'id', 'sponsor', 'title', 'objective', 'recruitmentStartDate', 'recruitmentEndDate', 'enrollmentTarget', 'url',
+        'followUp', 'location', 'comments')
     template_name = 'sponsor/newtrial.html'
+
 
 class ViewSponsorView(TemplateView):
     template_name = 'sponsor/view_sponsor.html'
+
 
 class ViewSponsorReqView(TemplateView):
     template_name = 'sponsor/view_sponsor_req.html'
 
 
-#API
-class ParticipantQuestionViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows questions to be viewed or edited.
-    """
-    queryset = ParticipantQuestion.objects.all()
-    serializer_class = ParticipantQuestionSerializer
-    #permission_classes = [permissions.IsAuthenticated]
-
-
-class ParticipantViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows participants to be viewed or edited.
-    """
-    queryset = Participant.objects.all()
-    serializer_class = ParticipantSerializer
-    #permission_classes = [permissions.IsAuthenticated]
-
-
-class ParticipantResponseViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows responses to be viewed or edited.
-    """
-    queryset = ParticipantResponse.objects.all()
-    serializer_class = ParticipantResponseSerializer
-    #permission_classes = [permissions.IsAuthenticated]
-
-class SponsorProfileViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows responses to be viewed or edited.
-    """
-    queryset = Sponsor.objects.all()
-    serializer_class = SponsorSerializer
-    #permission_classes = [permissions.IsAuthenticated]
-
-
-class ClinicalTrialMatchViewSet(viewsets.ModelViewSet):
-
-    serializer_class = ClinicalTrialMatchSerializer
-
-    def get_queryset(self):
-        participant_id = self.request.query_params.get('participant')
-        participant = Participant.objects.get(id=participant_id)
-        queryset = ClinicalTrialMatch.objects.filter(participant=participant)
-
-        return queryset
-
-
-class ClinicalTrialDetailsViewSet(viewsets.ModelViewSet):
-
-    serializer_class = ClinicalTrialDetailSerializer
-
-    def get_queryset(self):
-        trial_id = self.request.query_params.get('id')
-        queryset = ClinicalTrial.objects.filter(trialId=trial_id)
-
-        return queryset
-
-
-class ClinicalTrialViewSet(viewsets.ModelViewSet):
-    serializer_class = ClinicalTrialListSerializer
-
-    def get_queryset(self):
-        sponsor_id = self.request.query_params.get('sponsor_id', None)
-        if sponsor_id:
-            queryset = ClinicalTrial.objects.filter(sponsor__id=sponsor_id)
-        else:
-            queryset = ClinicalTrial.objects.all()
-
-        return queryset
-
-        
-
-#NEW: view for clinicaltrial_list2
+# NEW: view for clinicaltrial_list2
 class ClinicalTrialListView2(SingleTableView):
     model = ClinicalTrial
     template_name = 'sponsor/clinicaltrial_list2.html'
@@ -372,5 +335,5 @@ class ClinicalTrialListView2(SingleTableView):
 
 class TrialView(SingleTableView):
     model = ClinicalTrial
-    #template_name = 'sponsor/trial_view_column.html'
-    #table_class = ClinicalTrialTable
+    # template_name = 'sponsor/trial_view_column.html'
+    # table_class = ClinicalTrialTable

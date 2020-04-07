@@ -14,6 +14,13 @@ class ParticipantSerializer(serializers.ModelSerializer):
         fields = ['id', 'first_name', 'last_name', 'email']
 
 
+class ParticipantBasicHealthSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ParticipantBasicHealth
+        fields = ['participant', 'gender', 'weight', 'height', 'birth_date']
+
+
 class ParticipantResponseSerializer(serializers.ModelSerializer):
     class Meta:
         model = ParticipantResponse
@@ -37,7 +44,7 @@ class ClinicalTrialListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ClinicalTrial
-        fields = ['title', 'objective', 'trialId', 'sponsor', 'recruitmentStartDate',
+        fields = ['title', 'objective', 'id', 'sponsor', 'recruitmentStartDate',
                   'recruitmentEndDate', 'enrollmentTarget', 'description', 'url',]
 
 
@@ -47,7 +54,7 @@ class ClinicalTrialDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClinicalTrial
         fields = ['title', 'objective', 'description', 'recruitmentStartDate',
-                  'recruitmentEndDate', 'trialId', 'sponsor', 'url']
+                  'recruitmentEndDate', 'id', 'sponsor', 'url']
 
 
 class ClinicalTrialMatchSerializer(serializers.ModelSerializer):

@@ -21,3 +21,4 @@ class UserSerializer(serializers.ModelSerializer):
         model = UserModel
         # Tuple of serialized model fields (see link [2])
         fields = ("password", "email")
+

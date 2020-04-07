@@ -88,7 +88,7 @@ class SponsorRequest(models.Model):
 
 
 class ClinicalTrial(models.Model):
-    trialId = models.CharField('Trial ID', max_length=30,primary_key=True)
+    custom_id = models.CharField('Trial ID', max_length=100,null=True)
     sponsor = models.ForeignKey('Sponsor', null=True, on_delete=models.SET_NULL)
     title = models.CharField('Trial Title', null=True, max_length=100)
     objective = models.TextField('Objective', null=True)
@@ -105,60 +105,56 @@ class ClinicalTrial(models.Model):
     current_recruitment = models.IntegerField('Current Recruitment', null=True, blank=True)
 
     def __str__(self):
-        ret = self.trialId + self.title
+        ret = str(self.id) + ":" + self.title
         return ret
 
     def get_absolute_url(self):
         #Returns the url to access a detail record for the Clinical Trial.
-        return reverse('clinicalTrial-detail', args=[str(self.trialId)])
+        return reverse('clinicalTrial-detail', args=[str(self.id)])
 
 
 class QuestionCategory(models.Model):
     name = models.CharField(max_length=50)
 
 
-"""	OLD
 class Participant(models.Model):
-    first_name = models.CharField(max_length=128)
-    last_name = models.CharField(max_length=128)
+    first_name = models.CharField(max_length=128, null=True)
+    last_name = models.CharField(max_length=128, null=True)
     email = models.EmailField()
-    date_joined = models.DateTimeField(auto_now_add=True)
+    date_joined = models.DateTimeField(auto_now_add=True, null=True)
+    phone = models.CharField(null=True, max_length=16)
+    location = models.CharField(null=True, max_length=100)
+    last_login = models.DateTimeField(auto_now=True, null=True)
 
     def name(self):
         return self.first_name + " " + self.last_name
 
     def __str__(self):
         return self.name()
-"""
 
-# NEW
-class Participant(models.Model):
+
+class ParticipantBasicHealth(models.Model):
     GENDER = (
         ('M', 'Male'),
         ('F', 'Female'),
         ('O', 'Other'),
     )
-
-    first_name = models.CharField('First Name', max_length=50, null=True)
-    last_name = models.CharField('Lasst Name', max_length=50, null=True)
+    participant = models.OneToOneField("Participant", on_delete=models.CASCADE)
     gender = models.CharField('Gender', max_length=1, null=True, choices=GENDER)
     weight = models.FloatField('Weight', null=True)
     height = models.FloatField('Height', null=True)
-    dateBirth = models.DateField('Date of Birth', help_text='MM/DD/YY', null=True, blank=True)
-    date_joined = models.DateField('Date of Registration', help_text='MM/DD/YY', null=True, blank=True)
-    date_deregistered = models.DateField('Date of De-Registration', help_text='MM/DD/YY', null=True, blank=True)
-    email = models.EmailField('Email')
-    phone = models.IntegerField('Phone', null=True)
-    location = models.CharField('Location', null=True, max_length=100)
-    last_login = models.DateTimeField(auto_now=True)
+    birth_date = models.DateField('Date of Birth', help_text='MM/DD/YY', null=True, blank=True)
+
+    def bmi(self):
+        return 703 * (self.weight/(self.height*self.height))
+
+    def age(self):
+        today = date.today()
+        return today.year - self.birth_date.year - \
+            ((today.month, today.day) < (self.birth_date.month, self.birth_date.day))
 
     def __str__(self):
-        ret = self.first_name + ',' + self.last_name
-        return ret
-
-    def get_absolute_url(self):
-        #Returns the url to access a detail record for the Participant.
-        return reverse('participant-detail', args=[str(self.id)])
+        return self.participant.name() + " Basic Health Info"
 
 
 class ClinicalTrialMatch(models.Model):
@@ -175,6 +171,15 @@ class ParticipantQuestion(models.Model):
 
     def __str__(self):
         return self.text
+
+
+class QuestionFlow(models.Model):
+    question = models.ForeignKey(ParticipantQuestion, on_delete=models.CASCADE, related_name='question_flow')
+    response = models.CharField(max_length=128)
+    next_question = models.ForeignKey(ParticipantQuestion, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return self.question.text + ">>>" + self.response + ">>>" + self.next_question.text
 
 
 class ParticipantResponse(models.Model):

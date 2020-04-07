@@ -1,9 +1,10 @@
 [
   {
     "model": "sponsor.ClinicalTrial",
+    "pk": "1",
     "fields": {
-      "trialId": "12345",
       "sponsor": "1",
+      "custom_id": "12345",
       "title": "Physical Activity Impact in Grown-up Congenital Heart Disease",
       "objective": "The objective of the trial is to assess whether encouragement of a six-month sports participation program in addition to usual care in symptomatic adult patients with congenital heart disease improves exercise capacity and quality of life, and lowers serum N-terminal prohormone brain natriuretic peptide (NT-proBNP) levels.",
       "description": "Regular physical activity and aerobic exercise training are related to decreased cardiovascular mortality in healthy individuals, as well as in individuals with cardiovascular risk factors and cardiac patients. Unfortunately, no such data is available on exercise training in adult patients with congenital heart disease.",
@@ -11,6 +12,44 @@
       "recruitmentEndDate": "2020-06-01",
       "enrollmentTarget": "500",
       "url": "https://clinicaltrials.gov/ct2/show/NCT02825472?cond=Heart+Diseases&draw=2&rank=11",
+      "followUp": "do this thing",
+      "location": "everywhere",
+      "comments": "blah blah",
+      "createdTimeStamp": "2020-03-25 22:18:16"
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrial",
+    "pk": "2",
+    "fields": {
+      "sponsor": "2",
+      "custom_id": "55555",
+      "title": "Electronic Decision Support for Intervention in Poorly Controlled Type 2 Diabetes",
+      "objective": "",
+      "description": "To determine the impact of an electronic decision support tool on physician decision making and patient outcomes for the treatment of poorly controlled diabetes mellitus. Primary endpoint will measure change in hemoglobin A1c. Secondary endpoints will examine cost of therapy and patient satisfaction with therapy. Study hypothesis is that use of the PATH decision tool will produce greater reduction overall in measurements of hemoglobin A1c in patients who participate and follow the PATH decision tool than patients who elect not to follow the PATH decision tool. PATH decision tool will provide more cost effective solutions for management of diabetic medication than current methods.",
+      "recruitmentStartDate": "2020-01-01",
+      "recruitmentEndDate": "2020-07-01",
+      "enrollmentTarget": "200",
+      "url": "https://clinicaltrials.gov/ct2/show/NCT02924207?cond=diabetes&draw=2&rank=11",
+      "followUp": "do this thing",
+      "location": "everywhere",
+      "comments": "blah blah",
+      "createdTimeStamp": "2020-03-25 22:18:16"
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrial",
+    "pk": "3",
+    "fields": {
+      "sponsor": "3",
+      "custom_id": "ABCDG",
+      "title": "Phase II Randomized Trial of Radiation, Cetuximab and Pemetrexed With or Without Bevacizumab in Locally Advanced Head and Neck Cancer",
+      "objective": "",
+      "description": "The purpose of this study is to compare the effects (good and bad) of chemoradiotherapy with or without Bevacizumab (Avastin). Chemoradiotherapy is the combination of chemotherapy (the drugs pemetrexed and cetuximab) and radiation. Pemetrexed is not approved by the Food and Drug Administration (FDA) for head and neck cancer when used in combination with radiation therapy. Cetuximab is also approved by the FDA for head and neck cancers in patients who have failed other chemotherapy treatments. Bevacizumab is approved by the Food and Drug Administration (FDA) for colorectal cancer and non-small cell lung cancer in combination of chemotherapy. In this study, the use of bevacizumab is investigational.",
+      "recruitmentStartDate": "2020-01-01",
+      "recruitmentEndDate": "2020-10-01",
+      "enrollmentTarget": "200",
+      "url": "https://clinicaltrials.gov/ct2/show/NCT00703976?cond=Cancer&draw=2&rank=36",
       "followUp": "do this thing",
       "location": "everywhere",
       "comments": "blah blah",

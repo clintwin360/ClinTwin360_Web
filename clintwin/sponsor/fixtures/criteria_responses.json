@@ -4,7 +4,7 @@
     "pk": 1, 
     "fields": {
       "criteria": 14,
-      "trial": "12345",
+      "trial": "1",
       "value": "18",
       "comparison": "gte",
       "criteriaType": "inclusion",
@@ -16,7 +16,7 @@
     "pk": 2,
     "fields": {
       "criteria": 40,
-      "trial": "12345",
+      "trial": "1",
       "value": "Congenital heart disease",
       "comparison": "equals",
       "criteriaType": "inclusion",
@@ -28,7 +28,7 @@
     "pk": 3,
     "fields": {
       "criteria": 44,
-      "trial": "12345",
+      "trial": "1",
       "value": "No",
       "comparison": "equals",
       "criteriaType": "inclusion",
@@ -40,7 +40,7 @@
     "pk": 4,
     "fields": {
       "criteria": 45,
-      "trial": "12345",
+      "trial": "1",
       "value": "Yes",
       "comparison": "equals",
       "criteriaType": "inclusion",
@@ -52,7 +52,7 @@
     "pk": 5,
     "fields": {
       "criteria": 28,
-      "trial": "12345",
+      "trial": "1",
       "value": "No",
       "comparison": "equals",
       "criteriaType": "exclusion",
@@ -64,7 +64,295 @@
     "pk": 6,
     "fields": {
       "criteria": 49,
-      "trial": "12345",
+      "trial": "1",
+      "value": "Yes",
+      "comparison": "equals",
+      "criteriaType": "exclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 7,
+    "fields": {
+      "criteria": 52,
+      "trial": "2",
+      "value": "Kaiser Permanente",
+      "comparison": "equals",
+      "criteriaType": "inclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 8,
+    "fields": {
+      "criteria": 14,
+      "trial": "2",
+      "value": "30",
+      "comparison": "gte",
+      "criteriaType": "inclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 9,
+    "fields": {
+      "criteria": 61,
+      "trial": "2",
+      "value": "type 2",
+      "comparison": "equals",
+      "criteriaType": "inclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 10,
+    "fields": {
+      "criteria": 62,
+      "trial": "2",
+      "value": "less than 6 months",
+      "comparison": "not equals",
+      "criteriaType": "inclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 11,
+    "fields": {
+      "criteria": 53,
+      "trial": "2",
+      "value": "English",
+      "comparison": "contains",
+      "criteriaType": "inclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 12,
+    "fields": {
+      "criteria": 54,
+      "trial": "2",
+      "value": "Yes",
+      "comparison": "equals",
+      "criteriaType": "inclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 13,
+    "fields": {
+      "criteria": 61,
+      "trial": "2",
+      "value": "type 1",
+      "comparison": "equals",
+      "criteriaType": "exclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 14,
+    "fields": {
+      "criteria": 61,
+      "trial": "2",
+      "value": "gestational",
+      "comparison": "equals",
+      "criteriaType": "exclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 15,
+    "fields": {
+      "criteria": 61,
+      "trial": "2",
+      "value": "secondary",
+      "comparison": "equals",
+      "criteriaType": "exclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 16,
+    "fields": {
+      "criteria": 56,
+      "trial": "2",
+      "value": "hemodialysis",
+      "comparison": "contains",
+      "criteriaType": "exclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 17,
+    "fields": {
+      "criteria": 56,
+      "trial": "2",
+      "value": "peritoneal dialysis",
+      "comparison": "contains",
+      "criteriaType": "exclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 18,
+    "fields": {
+      "criteria": 59,
+      "trial": "2",
+      "value": "glucocorticoid",
+      "comparison": "contains",
+      "criteriaType": "exclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 19,
+    "fields": {
+      "criteria": 59,
+      "trial": "2",
+      "value": "prandial insulin therapy",
+      "comparison": "contains",
+      "criteriaType": "exclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 20,
+    "fields": {
+      "criteria": 83,
+      "trial": "3",
+      "value": "No",
+      "comparison": "equals",
+      "criteriaType": "inclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 21,
+    "fields": {
+      "criteria": 84,
+      "trial": "3",
+      "value": "Yes",
+      "comparison": "equals",
+      "criteriaType": "inclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 22,
+    "fields": {
+      "criteria": 85,
+      "trial": "3",
+      "value": "Yes",
+      "comparison": "equals",
+      "criteriaType": "inclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 23,
+    "fields": {
+      "criteria": 86,
+      "trial": "3",
+      "value": "No",
+      "comparison": "equals",
+      "criteriaType": "inclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 24,
+    "fields": {
+      "criteria": 14,
+      "trial": "3",
+      "value": "45",
+      "comparison": "gte",
+      "criteriaType": "inclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 25,
+    "fields": {
+      "criteria": 48,
+      "trial": "3",
+      "value": "Yes",
+      "comparison": "equals",
+      "criteriaType": "inclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 26,
+    "fields": {
+      "criteria": 48,
+      "trial": "3",
+      "value": "Yes",
+      "comparison": "equals",
+      "criteriaType": "inclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 27,
+    "fields": {
+      "criteria": 89,
+      "trial": "3",
+      "value": "more than 5 years",
+      "comparison": "equals",
+      "criteriaType": "inclusion",
+      "negated": false
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 28,
+    "fields": {
+      "criteria": 39,
+      "trial": "3",
+      "value": "Cardiovascular: e.g. angina, chest pain, heart attack, high blood pressure",
+      "comparison": "contains",
+      "criteriaType": "inclusion",
+      "negated": true
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 29,
+    "fields": {
+      "criteria": 40,
+      "trial": "3",
+      "value": "any",
+      "comparison": "contains",
+      "criteriaType": "inclusion",
+      "negated": true
+    }
+  },
+  {
+    "model": "sponsor.ClinicalTrialCriteriaResponse",
+    "pk": 30,
+    "fields": {
+      "criteria": 81,
+      "trial": "3",
       "value": "Yes",
       "comparison": "equals",
       "criteriaType": "exclusion",

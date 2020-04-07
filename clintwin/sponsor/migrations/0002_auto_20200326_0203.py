@@ -27,4 +27,9 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(default='', on_delete=django.db.models.deletion.CASCADE, to='sponsor.Participant'),
             preserve_default=False,
         ),
+        migrations.AddField(
+            model_name='clinicaltrial',
+            name='custom_id',
+            field=models.CharField(max_length=100, null=True, verbose_name='Trial ID'),
+        ),
     ]
