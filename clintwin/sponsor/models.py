@@ -173,6 +173,12 @@ class ParticipantQuestion(models.Model):
         return self.text
 
 
+class QuestionFlow(models.Model):
+    question = models.ForeignKey(ParticipantQuestion, on_delete=models.CASCADE, related_name='question_flow')
+    response = models.CharField(max_length=128)
+    next_question = models.ForeignKey(ParticipantQuestion, on_delete=models.SET_NULL, null=True)
+
+
 class ParticipantResponse(models.Model):
     question = models.ForeignKey(ParticipantQuestion, on_delete=models.CASCADE)
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE, related_name='responses')
