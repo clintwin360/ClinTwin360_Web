@@ -64,7 +64,7 @@ class TrialDetailView(generic.DetailView):
 
 class TrialUpdateView(generic.UpdateView):
     model = ClinicalTrial
-    fields = ['title']
+    fields = '__all__'
 
 #Sponsor Views
 
@@ -73,7 +73,7 @@ class SponsorDetailView(generic.DetailView):
 
 class SponsorUpdateView(generic.UpdateView):
     model = Sponsor
-    fields = ['organization']
+    fields = '__all__'
 
 def dummy(request):
     questions = ParticipantQuestion.objects.all()

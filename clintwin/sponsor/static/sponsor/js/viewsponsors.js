@@ -9,8 +9,8 @@ $(function(){
       $("#sponsor-list-body").append(tableRowTemplate + field.id.toString() + '>' +
         tableEntryTemplate + field.id.toString() + '">' +
         field.id + '</a></td><td>' +
-        field.organization + '</td><td>Date Joined: ' +
-        field.date_joined + '</td><td>Notes:' +
+        field.organization + '</td><td>' +
+        field.date_joined + '</td><td>' +
         field.notes + '</td>' +
         editButton + field.id.toString() + '">Update</a></td></tr>') ;
     });
