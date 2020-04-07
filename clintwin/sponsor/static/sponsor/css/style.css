@@ -9,7 +9,7 @@ body {
   background-color: #4bc5ef;
   color: white;
 }
-	
+
 
 #logout_link{
 	float: right;
@@ -18,7 +18,7 @@ body {
     color: white;
 }
 
-#greeting, thead {
+#greeting {
   color: #333333;
   float: right;
   text-align:right;
@@ -138,44 +138,24 @@ button.reset_btn, #id_email, #id_phone {
 
 /* Styling for Trial Dashboard */
 <style>
+
+  div.table_container {
+    overflow-y: auto;
+  }
   .main-cards {
-    column-count: 2;
+    column-count: 1;
     column-gap: 10px;
     display: inline-block;
-  }
+    }
 
   .row {
     width: 100%;
     margin: auto;
   }
 
-  .card {
-    display: inline-block;
-    border-radius: 4px;
-    flex-direction: column;
-    align-items: center;
-    /* width: 50%; */
-    background-color: white;
-    margin-bottom: 20px;
-    -webkit-column-break-inside: avoid;
-    padding: 10px;
-    box-sizing: border-box;
-  }
-
-  /* Force varying heights to simulate dynamic content */
-  .card:first-child {
-    height: 485px;
-    width: 55%
-  }
-
-  .card:nth-child(2) {
-    height: 485px;
-    width: 45%;
-  }
-
   /* Fixed width for date column in Trials Dashboard */
-  #end_date {
-    width: 18%;
+  #end_date, #spnsr_id {
+    width: 12%;
   }
 
   }
