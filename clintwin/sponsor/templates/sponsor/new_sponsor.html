@@ -16,8 +16,10 @@
                     {{ form.phone|as_crispy_field }}
                     {{ form.notes|as_crispy_field }}
 
-            <button class="btn btn-primary" type="submit" id="create_button">Add Sponsor</button>
+            <button class="btn btn-primary" type="submit" name="create_button" id="create_button">Add Sponsor</button>
+            <!-- <input type="hidden" name="redirect" value="{% url 'viewsponsors' %}"/> -->
         </form>
+
         <br><br><br><br>
     </div>
 </div>

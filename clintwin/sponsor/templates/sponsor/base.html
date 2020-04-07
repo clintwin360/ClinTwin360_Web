@@ -29,7 +29,7 @@
 
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav mr-auto">
-						
+
 						{% if user.is_authenticated %} <!-- % if request.user.groups.filter(name='admin') % check for admin context processor-->
 							{% if user.is_staff%}
 						<li class="nav-item dropdown">
@@ -43,16 +43,18 @@
 						  <a class="dropdown-item" href="{% url 'viewsponsorreq' %}">View Sponsor Requests</a>
 				        </div>
 						</li>
-						
-						
+					</ul>
+
+					<ul class="navbar-nav ml-auto">
 						<li class="nav-item">
 						  <a class="nav-link" id="greeting" >Welcome back, {{ user.username }}!  </a>
 						</li>
-						
+
 						<li class="nav-item" >
 						<a class="nav-link" id="logout_link" href="{% url 'logout' %}" >logout</a>
 						</li>
-					</div>
+					</ul>
+				</div>
 
 				<!--
 				IF SUPER USER
@@ -72,6 +74,7 @@
 
 					 	<!--Check if clintwin, sponsor, or sponsor super user -->
 							{% else %}
+						<ul class="navbar-nav mr-auto">
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								Manage Clinical Trials
@@ -80,25 +83,29 @@
 								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 								<a class="dropdown-item" href="{% url 'newtrial' %}">Create New Clinical Trial</a>
 								<a class="dropdown-item" href="{% url 'viewtrials' %}">View Clinical Trials</a>
-								<a class="dropdown-item" href="{% url 'clinicaltrial_list2' %}">View Clinical Trials2</a>		
+								<a class="dropdown-item" href="{% url 'clinicaltrial_list2' %}">View Clinical Trials2</a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="{% url 'inclusion' %}">Inclusion Criteria</a>
 								<a class="dropdown-item" href="{% url 'exclusion' %}">Exclusion Criteria</a>
 								</div>
 
 							</li>
-							
-							<li class="nav-item">
-							<a class="nav-link" id="greeting" >Welcome back, {{ user.username }}!  </a>
-							</li>
-							
-							<li class="nav-item">
-							<a class="nav-link" id="logout_link" href="{% url 'logout' %}" >logout</a>
-							</li>
-							
+						</ul>
+
+							<ul class="navbar-nav ml-auto">
+								<li class="nav-item">
+									<a class="nav-link" id="greeting" >Welcome back, {{ user.username }}!  </a>
+								</li>
+
+								<li class="nav-item">
+									<a class="nav-link" id="logout_link" href="{% url 'logout' %}" >logout</a>
+								</li>
+							</ul>
+
 							{% endif %}
 						{% else %}
 						<!--{% if not user.is_authenticated %}-->
+						<ul class="navbar-nav mr-auto">
 							<li class="nav-item dropdown">
 			        			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			          			About</a>
@@ -116,10 +123,10 @@
 						{% endif %}
 					{% endif %}
 					</ul>
-				
+
 				</div>
 			</div>
-				
+
 		</nav>
 	{% endblock %}
 	</div>
@@ -128,8 +135,8 @@
 			{% block content %}{% endblock %}
 		</div>
 	</main>
-	
-	
+
+
 	<div class="footer">
 		<p>&copy; 2020 ClinTwin360</p>
 	</div>
