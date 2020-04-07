@@ -136,6 +136,7 @@ def load_data(request):
     call_command('loaddata', 'criteria_responses')
     call_command('loaddata', 'trial_matches')
     call_command('loaddata', 'participant_responses')
+    call_command('loaddata', 'question_flow')
     return HttpResponse("Data Loaded!")
 
 

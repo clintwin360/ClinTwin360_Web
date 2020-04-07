@@ -88,7 +88,7 @@ class SponsorRequest(models.Model):
 
 
 class ClinicalTrial(models.Model):
-    id = models.CharField('Trial ID', max_length=30,primary_key=True)
+    id = models.CharField('Trial ID', max_length=100,primary_key=True)
     sponsor = models.ForeignKey('Sponsor', null=True, on_delete=models.SET_NULL)
     title = models.CharField('Trial Title', null=True, max_length=100)
     objective = models.TextField('Objective', null=True)
@@ -177,6 +177,9 @@ class QuestionFlow(models.Model):
     question = models.ForeignKey(ParticipantQuestion, on_delete=models.CASCADE, related_name='question_flow')
     response = models.CharField(max_length=128)
     next_question = models.ForeignKey(ParticipantQuestion, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return self.question.text + ">>>" + self.response + ">>>" + self.next_question.text
 
 
 class ParticipantResponse(models.Model):
