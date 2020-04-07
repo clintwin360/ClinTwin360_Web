@@ -45,7 +45,7 @@ class ClinicalTrialListSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClinicalTrial
         fields = ['title', 'objective', 'id', 'sponsor', 'recruitmentStartDate',
-                  'recruitmentEndDate', 'enrollmentTarget', 'description', 'url', 'current_recruitment', 'status',]
+                  'recruitmentEndDate', 'enrollmentTarget', 'description', 'url', 'current_recruitment', 'status', 'custom_id',]
 
 
 class ClinicalTrialDetailSerializer(serializers.ModelSerializer):
@@ -54,7 +54,7 @@ class ClinicalTrialDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClinicalTrial
         fields = ['title', 'objective', 'description', 'recruitmentStartDate',
-                  'recruitmentEndDate', 'id', 'sponsor', 'url',  'current_recruitment', 'status',]
+                  'recruitmentEndDate', 'id', 'sponsor', 'url',  'current_recruitment', 'status', 'custom_id',]
 
 
 class ClinicalTrialMatchSerializer(serializers.ModelSerializer):
