@@ -23,18 +23,10 @@ function trial_row(props){
     return template;
 }
 
-
-
 $(function(){
   $.getJSON("/api/trials/", function(result){
     $.each(result.results, function(i, field){
      $("#trial-list-body").append(trial_row(field));
     });
   });
-
-
-    $(document).on( "click","tr.clickable-row", function() {
-    console.log("clicked!!" ,$(this).attr('id'));
-});
-
 });
