@@ -12,7 +12,7 @@ $(function(){
         field.title + '</td><td>' +
         field.status + '</td><td>' +
         field.current_recruitment + '</td><td>' +
-        field.enrollmentTarget + '</td><td>Started: ' +
+        field.enrollmentTarget + '</td><td>' +
         field.recruitmentStartDate + '</td><td>' +
         field.recruitmentEndDate + '</td>' +
         editButton + field.id.toString() + '">Edit</a></td></tr>').appendTo('#trial-list-body') ;
