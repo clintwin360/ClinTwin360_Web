@@ -16,7 +16,7 @@
   <p><strong>End Date:</strong> {{ clinicaltrial.recruitmentEndDate }}</p>
   <p><strong>Current Recruitment:</strong> {{ clinicaltrial.current_recruitment }}</p>
   <p><strong>Target Enrollment:</strong> {{ clinicaltrial.enrollmentTarget }}</p>
-  <p><strong>URL:</strong> {{ clinicaltrial.url }}</p>
+  <p><strong>URL:</strong> <a class="trial-url-link" href="{{ clinicaltrial.url }}">{{ clinicaltrial.url }}</a></p>
   <p><strong>Comments:</strong> {{ clinicaltrial.comments }}</p>
 
 {% endblock %}
