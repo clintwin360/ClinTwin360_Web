@@ -5,6 +5,13 @@
 {% block title %}Sponsor Details{% endblock %}
 
 {% block content %}
-  <h1>Name: {{ sponsor.organization }}</h1>
-
+<p><strong>ID:</strong> {{ sponsor.id }}</p>
+<p><strong>Name:</strong> {{ sponsor.organization }}</p>
+<p><strong>Contact Liason:</strong> {{ sponsor.contactPerson }}</p>
+<p><strong>Email:</strong> {{ sponsor.email }}</p>
+<p><strong>Phone:</strong> {{ sponsor.phone }}</p>
+<p><strong>Location:</strong> {{ sponsor.location}}</p>
+<p><strong>Join Date:</strong> {{ sponsor.date_joined }}</p>
+<p><strong>Quit Date:</strong> {{ sponsor.dateDeregistered }}</p>
+<p><strong>Notes:</strong> {{ sponsor.notes }}</p>
 {% endblock %}
