@@ -65,6 +65,9 @@ class TrialDetailView(generic.DetailView):
 class TrialUpdateView(generic.UpdateView):
     model = ClinicalTrial
     fields = '__all__'
+    def get_success_url(self):
+          trialid=self.kwargs['pk']
+          return reverse_lazy('trialdetail', kwargs={'pk': trialid})
 
 #Sponsor Views
 
@@ -74,6 +77,10 @@ class SponsorDetailView(generic.DetailView):
 class SponsorUpdateView(generic.UpdateView):
     model = Sponsor
     fields = '__all__'
+
+    def get_success_url(self):
+          sponsorid=self.kwargs['pk']
+          return reverse_lazy('sponsordetail', kwargs={'pk': sponsorid})
 
 def dummy(request):
     questions = ParticipantQuestion.objects.all()

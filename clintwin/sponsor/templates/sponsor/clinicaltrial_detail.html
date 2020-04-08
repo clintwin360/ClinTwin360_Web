@@ -18,5 +18,6 @@
   <p><strong>Target Enrollment:</strong> {{ clinicaltrial.enrollmentTarget }}</p>
   <p><strong>URL:</strong> <a class="trial-url-link" href="{{ clinicaltrial.url }}">{{ clinicaltrial.url }}</a></p>
   <p><strong>Comments:</strong> {{ clinicaltrial.comments }}</p>
+  <a class="btn btn-info returnbtn" href="{% url 'viewtrials' %}">Return to Dashboard</a>
 
 {% endblock %}

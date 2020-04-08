@@ -15,4 +15,5 @@
 <p><strong>Join Date:</strong> {{ sponsor.date_joined }}</p>
 <p><strong>Quit Date:</strong> {{ sponsor.dateDeregistered }}</p>
 <p><strong>Notes:</strong> {{ sponsor.notes }}</p>
+<a class="btn btn-info returnbtn" href="{% url 'viewsponsors' %}">Return to Dashboard</a>
 {% endblock %}
