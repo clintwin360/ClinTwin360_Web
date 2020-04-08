@@ -1,24 +1,7 @@
-/*function clickTrial() {
-    console.log(this);
-    var idArray = this.id.toString().split("_");
-    var trialId = idArray[1];
-    $.getJSON("/api/trial/?id=" + trialId, function(result){
-        $('#trial-details').append('<p>The trial selected has a pk of ' + trialId + '</p><br>');
-    });
-};
-
-        /*
-
-        });
-    });
-*/
-
-
-
 function trial_details(id){
     let template = "" + "<div id=\"pane\">" +
         "<object type=\"text/html\" data=\"/sponsor/pane/"+id+
-        "\" id=\"trial-detail-pane\" class=\"trial-detail-pane\">" +
+        "\" id=\"trial-detail-pane\" class=\"trial-detail-pane\" width=\"800px\" height=\"600px\" style=\"overflow:auto;border:5px ridge blue\">" +
         "</object></div>"
     return template;
 };
