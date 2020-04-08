@@ -42,7 +42,7 @@ class Contact(models.Model):
 
 class Sponsor(models.Model):
     organization = models.CharField('Organization Name', max_length=500, help_text='Name of Sponsor')
-    date_joined = models.DateField('Date of Registration', null=True)
+    date_joined = models.DateField('Date of Registration', null=True, auto_now_add=True)
     dateDeregistered = models.DateField('Date of De-Regstration', null=True, blank=True)
     contactPerson = models.CharField('Contact Person', null=True, max_length=500)
     email = models.EmailField('Email', null=True)
@@ -70,7 +70,7 @@ class SponsorRequest(models.Model):
 class ClinicalTrial(models.Model):
     custom_id = models.CharField('Trial ID', max_length=100, null=True)
     sponsor = models.ForeignKey('Sponsor', null=True, on_delete=models.SET_NULL)
-    title = models.CharField('Trial Title', null=True, max_length=1000)
+    title = models.CharField('Trial Title', null=True, max_length=500)
     objective = models.TextField('Objective', null=True)
     description = models.TextField('Description', null=True, blank=True)
     recruitmentStartDate = models.DateField('Recruitment Start Date', null=True, help_text='MM/DD/YY')

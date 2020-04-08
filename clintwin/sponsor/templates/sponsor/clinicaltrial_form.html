@@ -8,7 +8,8 @@
 <form method="post">
     {% csrf_token %}
     {{form.as_p}}
-    <a href="{% url 'viewtrials' %}" class="btn btn-danger" role="button">Go Back</a>
+    <a href="{% url 'viewtrials' %}" class="btn btn-info" role="button">Go Back</a>
+    <a href="{% url 'viewtrials' %}" class="btn btn-info" role="button">Delete Trial</a>
     <button class="btn btn-success w-25" type="submit" id="edit_button">Edit Trial</button>
 </form>
 <br>
