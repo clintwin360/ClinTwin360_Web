@@ -1,11 +1,12 @@
 from rest_framework import permissions
 from django.contrib.auth import get_user_model
 from rest_framework.generics import CreateAPIView
+from rest_framework.viewsets import GenericViewSet
 
 from .serializers import UserSerializer
 from sponsor.serializers import *
 from sponsor.models import *
-from rest_framework import viewsets
+from rest_framework import viewsets, mixins
 from rest_framework import permissions
 
 
@@ -18,27 +19,33 @@ class CreateUserView(CreateAPIView):
 
 
 # API
-class ParticipantQuestionViewSet(viewsets.ModelViewSet):
+class ParticipantQuestionViewSet(mixins.ListModelMixin,
+                                 GenericViewSet):
     """
-    API endpoint that allows questions to be viewed or edited.
+    retrieve a list of questions
     """
     queryset = ParticipantQuestion.objects.all()
     serializer_class = ParticipantQuestionSerializer
     # permission_classes = [permissions.IsAuthenticated]
 
 
-class ParticipantViewSet(viewsets.ModelViewSet):
+class ParticipantViewSet(mixins.CreateModelMixin,
+                         mixins.RetrieveModelMixin,
+                         mixins.UpdateModelMixin,
+                         GenericViewSet):
     """
-    API endpoint that allows participants to be viewed or edited.
+    create, get, or update a participant
     """
     queryset = Participant.objects.all()
     serializer_class = ParticipantSerializer
     # permission_classes = [permissions.IsAuthenticated]
 
 
-class ParticipantBasicHealthViewSet(viewsets.ModelViewSet):
+class ParticipantBasicHealthViewSet(mixins.CreateModelMixin,
+                                    mixins.UpdateModelMixin,
+                                    GenericViewSet):
     """
-    API endpoint that allows participants to be viewed or edited.
+    post or update the basic health info for a participant
     """
     queryset = ParticipantBasicHealth.objects.all()
     serializer_class = ParticipantBasicHealthSerializer
@@ -49,9 +56,11 @@ class ParticipantBasicHealthViewSet(viewsets.ModelViewSet):
     # permission_classes = [permissions.IsAuthenticated]
 
 
-class ParticipantResponseViewSet(viewsets.ModelViewSet):
+class ParticipantResponseViewSet(mixins.CreateModelMixin,
+                                 mixins.UpdateModelMixin,
+                                 GenericViewSet):
     """
-    API endpoint that allows responses to be viewed or edited.
+    post or update a participants response to a question
     """
     queryset = ParticipantResponse.objects.all()
     serializer_class = ParticipantResponseSerializer
@@ -60,25 +69,36 @@ class ParticipantResponseViewSet(viewsets.ModelViewSet):
 
 class SponsorProfileViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows responses to be viewed or edited.
+    Allow sponsors to be viewed or edited.
     """
     queryset = Sponsor.objects.all()
     serializer_class = SponsorSerializer
     # permission_classes = [permissions.IsAuthenticated]
 
 
-class ClinicalTrialMatchViewSet(viewsets.ModelViewSet):
+class ClinicalTrialMatchViewSet(mixins.ListModelMixin,
+                                GenericViewSet):
+    """
+    Get a list of matching trials for a participant
+    """
     serializer_class = ClinicalTrialMatchSerializer
 
     def get_queryset(self):
         participant_id = self.request.query_params.get('participant')
-        participant = Participant.objects.get(id=participant_id)
-        queryset = ClinicalTrialMatch.objects.filter(participant=participant)
+        if participant_id:
+            participant = Participant.objects.get(id=participant_id)
+            queryset = ClinicalTrialMatch.objects.filter(participant=participant)
+        else:
+            queryset = ClinicalTrialMatch.objects.none()
 
         return queryset
 
 
-class ClinicalTrialDetailsViewSet(viewsets.ModelViewSet):
+class ClinicalTrialDetailsViewSet(mixins.RetrieveModelMixin,
+                                  GenericViewSet):
+    """
+    Get the details for a specific Clinical Trial
+    """
     serializer_class = ClinicalTrialDetailSerializer
 
     def get_queryset(self):
@@ -88,7 +108,11 @@ class ClinicalTrialDetailsViewSet(viewsets.ModelViewSet):
         return queryset
 
 
-class ClinicalTrialViewSet(viewsets.ModelViewSet):
+class ClinicalTrialViewSet(mixins.ListModelMixin,
+                           GenericViewSet):
+    """
+    List all Clinical Trials or List trials by sponsor_id
+    """
     serializer_class = ClinicalTrialListSerializer
 
     def get_queryset(self):

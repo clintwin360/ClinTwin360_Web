@@ -14,7 +14,7 @@ from rest_framework import generics
 
 # New additions
 
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from .models import Contact, Sponsor, Participant, ClinicalTrial, ClinicalTrialCriteriaResponse, \
     ParticipantQuestion
 from django.contrib.auth.models import User
@@ -54,13 +54,16 @@ def login_success(request):
     else:
         return redirect("viewtrials")
 
+
 #Trial Views
 def viewTrials(request):
     trials = ClinicalTrial.objects.all()  # filter(sponsorId=request.user.sponsor_id)
     return render(request, "sponsor/viewtrials.html", {"trials": trials})
 
+
 class TrialDetailView(generic.DetailView):
     model = ClinicalTrial
+
 
 class TrialUpdateView(generic.UpdateView):
     model = ClinicalTrial
@@ -69,9 +72,11 @@ class TrialUpdateView(generic.UpdateView):
           trialid=self.kwargs['pk']
           return reverse_lazy('trialdetail', kwargs={'pk': trialid})
 
+
 class DeleteTrialView(generic.DeleteView):
     model = ClinicalTrial
     success_url = reverse_lazy('viewtrials')
+
 
 class NewClinicalTrialView(generic.CreateView):
     model = ClinicalTrial
@@ -81,13 +86,35 @@ class NewClinicalTrialView(generic.CreateView):
     template_name = 'sponsor/newtrial.html'
     success_url = reverse_lazy('inclusion')
 
+    def form_valid(self, form):
+        print('form_valid called')
+        form.instance.user = self.request.user
+        return super(CreateEmailTemplateView, self).form_valid(form)
+
+    def form_invalid(self, form):
+        print("FORM INVALID")
+        print(form.errors)
+        response = super().form_invalid(form)
+        if self.request.is_ajax():
+            return JsonResponse(form.errors, status=400)
+        else:
+            return response
+
+    #def get_form(self):
+    #    print(self.request.POST)
+    #    self.object = self.get_object()
+    #    return self.form_class(for_list=self.object, data=self.request.POST)
+
+
 #Sponsor Views
 def viewSponsors(request):
     queryset = Sponsor.objects.all()
     return render(request, "sponsor/view_sponsors.html")
 
+
 class SponsorDetailView(generic.DetailView):
     model = Sponsor
+
 
 class SponsorUpdateView(generic.UpdateView):
     model = Sponsor
@@ -97,9 +124,11 @@ class SponsorUpdateView(generic.UpdateView):
           sponsorid=self.kwargs['pk']
           return reverse_lazy('sponsordetail', kwargs={'pk': sponsorid})
 
+
 class DeleteSponsorView(generic.DeleteView):
     model = Sponsor
     success_url = reverse_lazy('viewsponsors')
+
 
 class NewSponsorView(generic.CreateView):
     model = Sponsor
@@ -251,7 +280,8 @@ def logout(request):
 
 
 # View for contact us form
-@api_view(['GET, POST'])
+#@api_view(['GET, POST'])
+@permission_classes((permissions.AllowAny,))
 def contact(request):
     if request.method == 'POST':
         # POST, generate bound form with data from the request
@@ -275,15 +305,6 @@ class ClinicalTrialCreateView(generic.CreateView):
         'url',
         'followUp', 'location', 'comments')
     template_name = 'create_trial_form.html'
-
-
-"""
-not working correctly.  need a django form?
-@api_view(['GET', 'POST'])
-def criteria(request):
-    return render(request, 'criteria.html')
-"""
-
 
 
 def viewSponsorReq(request):
@@ -328,19 +349,12 @@ class CriteriaView(TemplateView):
     template_name = 'sponsor/criteria.html'
 
 
-
-
-
 # Static pages for Admin
 # class NewCriterionView(TemplateView):
 #     template_name = 'new_criterion.html'
 #
 # class ViewCriteriaView(TemplateView):
 #     template_name = 'view_criteria.html'
-
-
-
-
 
 
 class ViewSponsorView(TemplateView):

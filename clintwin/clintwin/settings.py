@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
@@ -23,11 +22,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get("SECRET_KEY", 'm4ywgla$kl@&^lur=znkgsauz4&#7nm&x&0i#376$0$bfn7d2u')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = int(os.environ.get("DEBUG", default=1))
+# DEBUG = int(os.environ.get("DEBUG", default=1))
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -43,7 +41,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'crispy_forms',
-	'django_tables2',
+    'django_tables2',
+    'rest_framework_swagger'
 
 ]
 
@@ -62,8 +61,8 @@ ROOT_URLCONF = 'clintwin.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        #'DIRS': [],
-		'DIRS': [os.path.join(BASE_DIR, 'sponsor/templates')],
+        # 'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'sponsor/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -77,7 +76,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'clintwin.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -124,11 +122,9 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
 }
-
-
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -143,7 +139,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
@@ -156,7 +151,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_URL = '/sponsor/accounts/login'
 LOGIN_REDIRECT_URL = '/sponsor/login_success'
 LOGOUT_REDIRECT_URL = '/sponsor/'
-#LOGOUT_REDIRECT_URL = 'registration/logged_out.html'
+# LOGOUT_REDIRECT_URL = 'registration/logged_out.html'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

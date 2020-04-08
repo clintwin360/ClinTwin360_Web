@@ -5,9 +5,14 @@ from django.conf.urls import url, include
 from django.contrib.auth import views as auth_views
 from django.contrib import admin
 from django.urls import path
+from rest_framework_swagger.views import get_swagger_view
+from rest_framework.schemas import get_schema_view
+schema_view = get_swagger_view(title='Pastebin API')
+
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('openapi2', schema_view),
     # Move to API app
     path('loaddata/', views.load_data, name='load_data'),
     path('dummy/', views.dummy, name='dummy'),
@@ -19,8 +24,6 @@ urlpatterns = [
     # path('accounts/', include('django.contrib.auth.urls')),
     # path('register/', TemplateView.as_view(template_name='sponsor/register.html'), name='signup'),
     # path('signup/', views.SignUp.as_view(), name='signup'),
-
-    # path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     # path('accounts/logout/', auth_views.LogoutView.as_view(template_name= 'registration/logged_out.html'), name='LogOut'),
     path('accounts/password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
