@@ -69,7 +69,18 @@ class TrialUpdateView(generic.UpdateView):
           trialid=self.kwargs['pk']
           return reverse_lazy('trialdetail', kwargs={'pk': trialid})
 
+class NewClinicalTrialView(generic.CreateView):
+    model = ClinicalTrial
+    fields = (
+        'custom_id', 'sponsor', 'title', 'objective', 'recruitmentStartDate', 'recruitmentEndDate', 'enrollmentTarget', 'url',
+        'followUp', 'location', 'comments')
+    template_name = 'sponsor/newtrial.html'
+    success_url = reverse_lazy('inclusion')
+
 #Sponsor Views
+def viewSponsors(request):
+    queryset = Sponsor.objects.all()
+    return render(request, "sponsor/view_sponsors.html")
 
 class SponsorDetailView(generic.DetailView):
     model = Sponsor
@@ -81,6 +92,14 @@ class SponsorUpdateView(generic.UpdateView):
     def get_success_url(self):
           sponsorid=self.kwargs['pk']
           return reverse_lazy('sponsordetail', kwargs={'pk': sponsorid})
+
+class NewSponsorView(generic.CreateView):
+    model = Sponsor
+    fields = ('organization', 'contactPerson', 'location', 'phone', 'email', 'notes')
+    template_name = 'sponsor/new_sponsor.html'
+    success_url = reverse_lazy('viewsponsors')
+
+#Other views
 
 def dummy(request):
     questions = ParticipantQuestion.objects.all()
@@ -250,12 +269,6 @@ class ClinicalTrialCreateView(generic.CreateView):
     template_name = 'create_trial_form.html'
 
 
-@api_view(['GET'])
-class TrialList(generics.ListCreateAPIView):
-    queryset = Participant.objects.all()
-    serializer_class = ParticipantSerializer
-
-
 """
 not working correctly.  need a django form?
 @api_view(['GET', 'POST'])
@@ -263,10 +276,6 @@ def criteria(request):
     return render(request, 'criteria.html')
 """
 
-
-def viewSponsors(request):
-    queryset = Sponsor.objects.all()
-    return render(request, "sponsor/view_sponsors.html")
 
 
 def viewSponsorReq(request):
@@ -321,19 +330,9 @@ class CriteriaView(TemplateView):
 # class ViewCriteriaView(TemplateView):
 #     template_name = 'view_criteria.html'
 
-class NewSponsorView(generic.CreateView):
-    model = Sponsor
-
-    fields = ('organization', 'contactPerson', 'location', 'phone', 'email', 'notes')
-    template_name = 'sponsor/new_sponsor.html'
 
 
-class NewClinicalTrialView(generic.CreateView):
-    model = ClinicalTrial
-    fields = (
-        'id', 'sponsor', 'title', 'objective', 'recruitmentStartDate', 'recruitmentEndDate', 'enrollmentTarget', 'url',
-        'followUp', 'location', 'comments')
-    template_name = 'sponsor/newtrial.html'
+
 
 
 class ViewSponsorView(TemplateView):
