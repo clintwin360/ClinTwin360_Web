@@ -5,7 +5,7 @@ function trial_row(props){
         "<td>"+props.title+"</td>" +
         "<td>"+props.status+"</td>" +
         "<td>"+props.current_recruitment+"</td>" +
-        "<td>"+props.enrollmentStartDate+"</td>" +
+        "<td>"+props.enrollmentTarget+"</td>" +
         "<td>"+props.recruitmentStartDate+"</td>" +
         "<td>"+props.recruitmentEndDate+"</td>" +
         "<td><a class=\"btn btn-info editbtn\" href=\"/sponsor/updatetrial/"+props.id+"\">Edit</td>" +

@@ -19,6 +19,15 @@ class CreateUserView(CreateAPIView):
 
 
 # API
+class ClinicalTrialCriteraViewSet(mixins.ListModelMixin,
+                                 GenericViewSet):
+    """
+    retrieve a list of questions
+    """
+    queryset = ClinicalTrialCriteria.objects.all()
+    serializer_class = ClinicalTrialCriteriaSerializer
+
+
 class ParticipantQuestionViewSet(mixins.ListModelMixin,
                                  GenericViewSet):
     """

@@ -7,6 +7,12 @@ class ParticipantQuestionSerializer(serializers.ModelSerializer):
         model = ParticipantQuestion
         fields = ['id', 'text', 'valueType', 'options']
 
+class ClinicalTrialCriteriaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ClinicalTrialCriteria
+        fields = '__all__'
+
+
 
 class ParticipantSerializer(serializers.ModelSerializer):
     class Meta:

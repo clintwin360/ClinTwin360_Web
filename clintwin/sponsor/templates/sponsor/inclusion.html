@@ -1,12 +1,15 @@
 {% extends "sponsor/base.html" %}
 {% load static %}
+{% block style %}{% endblock %}
+{% block scripts %}
+<script type="text/javascript" src="{% static "sponsor/js/criteria.js"%}?{% now "U" %}"></script>
+{% endblock %}
 {% block title %}Inclusion Criteria{% endblock %}
 {% block content %}
 
 <div class="container-fluid">
     <h2>Inclusion Criteria</h2>
-    <div id="container-fluid" id="fancyform">
-        {% include 'sponsor/form/fancyform.html' %}
+    <div>
     </div>
 </div>
 {% endblock %}
