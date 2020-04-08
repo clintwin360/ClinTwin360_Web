@@ -63,7 +63,7 @@ class Contact(models.Model):
 
 class Sponsor(models.Model):
     organization = models.CharField('Organization Name', max_length=500, help_text='Name of Sponsor')
-    date_joined = models.DateField('Date of Registration', null=True)
+    date_joined = models.DateField('Date of Registration', null=True, auto_now_add=True)
     dateDeregistered = models.DateField('Date of De-Regstration', null=True, blank=True)
     contactPerson = models.CharField('Contact Person', null=True, max_length=500)
     email = models.EmailField('Email', null=True)
@@ -212,3 +212,21 @@ class ClinicalTrialCriteriaResponse(models.Model):
     comparison = models.CharField(max_length=50)
     criteriaType = models.CharField(max_length=50)
     negated = models.BooleanField()
+
+
+
+# NEW
+class QuestionSchema (models.Model):
+    questionText=models.TextField('Question Text',  null=True, blank=True)
+    responseId=models.ForeignKey('ClinicalTrialCriteriaResponse', on_delete=models.SET_NULL, null=True)
+    type=models.CharField('Type', max_length=50, null=True, blank=True)
+    criteria=models.ForeignKey('ClinicalTrialCriteria',on_delete=models.SET_NULL, null=True)
+    nextQuestion=models.CharField ('Next Question', max_length=30, null=True, blank=True)
+
+    def __str__(self):
+        ret = self.questionId
+        return ret
+
+    def get_absolute_url(self):
+        #Returns the url to access a detail record for the Question Schema.
+        return reverse('questionSchema-detail', args=[str(self.id)])
