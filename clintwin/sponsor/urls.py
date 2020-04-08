@@ -28,6 +28,7 @@ urlpatterns = [
     #Trial Views
     path('viewtrials', views.viewTrials, name='viewtrials'),
     re_path(r'^trial/(?P<pk>\d+)$', views.TrialDetailView.as_view(), name='trialdetail'),
+    re_path(r'^pane/(?P<pk>\d+)$', views.TrialPaneView.as_view(), name='trialpane'),
     re_path(r'^updatetrial/(?P<pk>\d+)$', views.TrialUpdateView.as_view(), name='trialupdate'),
     re_path(r'^deletetrial/(?P<pk>\d+)$', views.DeleteTrialView.as_view(), name='trialdelete'),
     path('newtrial', views.NewClinicalTrialView.as_view(), name='newtrial'),

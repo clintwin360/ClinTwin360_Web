@@ -15,7 +15,7 @@
 
 function trial_details(id){
     let template = "" + "<div>" +
-        "<object type=\"text/html\" data=\"/sponsor/trial/"+id+
+        "<object type=\"text/html\" data=\"/sponsor/pane/"+id+
         "\"width=\"800px\" height=\"600px\" style=\"overflow:auto;border:5px ridge blue\" class=\"trial-detail-page\">" +
         "</object></div>"
     return template;

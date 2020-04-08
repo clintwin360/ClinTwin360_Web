@@ -1,0 +1,23 @@
+{% extends "sponsor/base.html" %}
+{% load static %}
+{% block style %}{% endblock %}
+{% block scripts %}{% endblock %}
+{% block title %}Trials Pane{% endblock %}
+
+{% block content %}
+  <br><h2 id="trial-detail-title"><u>Trial Details</u></h2><br>
+  <p><strong>ID:</strong> {{ clinicaltrial.custom_id }}</p>
+  <p><strong>Title:</strong> {{ clinicaltrial.title }}</p>
+  <p><strong>Objective:</strong> {{ clinicaltrial.objective }}</p>
+  <p><strong>Description:</strong> {{ clinicaltrial.description }}</p>
+  <p><strong>Location:</strong> {{ clinicaltrial.location}}</p>
+  <p><strong>Status:</strong> {{ clinicaltrial.status }}</p>
+  <p><strong>Start Date:</strong> {{ clinicaltrial.recruitmentStartDate }}</p>
+  <p><strong>End Date:</strong> {{ clinicaltrial.recruitmentEndDate }}</p>
+  <p><strong>Current Recruitment:</strong> {{ clinicaltrial.current_recruitment }}</p>
+  <p><strong>Target Enrollment:</strong> {{ clinicaltrial.enrollmentTarget }}</p>
+  <p><strong>URL:</strong> <a class="trial-url-link" href="{{ clinicaltrial.url }}">{{ clinicaltrial.url }}</a></p>
+  <p><strong>Comments:</strong> {{ clinicaltrial.comments }}</p>
+  <a class="btn btn-info editbtn" href="/sponsor/updatetrial/{{ clinicaltrial.id }}">Edit Trial</a>
+  <a class="btn btn-danger deletebtn" href="/sponsor/deletetrial/{{ clinicaltrial.id }}">Delete Trial</a>
+{% endblock %}
