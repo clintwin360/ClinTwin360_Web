@@ -1,15 +1,18 @@
 {% extends "sponsor/base.html" %}
 {% load static %}
-<script type="text/javascript" src="{% static "sponsor/js/dummy.js" %}"></script>
-{% block scripts %}
 
+{% block scripts %}
+<script type="text/javascript" src="{% static "sponsor/js/dummy.js" %}"></script>
 {% endblock %}
 {% block content %}
 
-    {% for question in questions %}
-
-        <p>{{ question.text }}</p>
-
-
-    {% endfor %}
+    <div id="dummy_content">
+<table id="dummy_table" style="width:100%">
+  <tr>
+    <th>Firstname</th>
+    <th>Lastname</th>
+    <th>Age</th>
+  </tr>
+</table>
+    </div>
 {% endblock %}

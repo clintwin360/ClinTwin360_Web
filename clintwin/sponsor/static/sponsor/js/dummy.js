@@ -4,15 +4,31 @@
 
 
 
-function textTemplate(props){
-    var template = "<div>" + props.text + "</div>";
+function row_template(props){
+    let template = "" +
+        "<tr id=\"trial-"+ props.id +"\" class=\"clickable-row\">\<" +
+        "td>"+props.title+"</td>" +
+        "<td>"+props.sponsor.organization+"</td>" +
+        "<td>"+props.enrollmentTarget+"</td>" +
+        "</tr>";
     return template;
 }
 
 $(function(){
-  $.getJSON("/sponsor/questions/", function(result){
+    console.log("in this function!")
+  $.getJSON("/api/trials/", function(result){
     $.each(result.results, function(i, field){
-      $("div").append("<div>" + field.text + "</div>");
+        console.log(i,field);
+      $("#dummy_table").append(row_template(field));
     });
   });
+
+
+    $(document).on( "click","tr.clickable-row", function() {
+    console.log("clicked!!" ,$(this).attr('id'));
 });
+
+});
+
+
+
