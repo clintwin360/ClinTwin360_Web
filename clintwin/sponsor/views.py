@@ -79,7 +79,7 @@ class NewClinicalTrialView(generic.CreateView):
         'custom_id', 'sponsor', 'title', 'objective', 'recruitmentStartDate', 'recruitmentEndDate', 'enrollmentTarget', 'url',
         'followUp', 'location', 'comments')
     template_name = 'sponsor/newtrial.html'
-    success_url = reverse_lazy('inclusion')
+    success_url = reverse_lazy('viewtrials')
 
 #Sponsor Views
 def viewSponsors(request):
