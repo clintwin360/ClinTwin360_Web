@@ -20,4 +20,5 @@
   <p><strong>Comments:</strong> {{ clinicaltrial.comments }}</p>
   <a class="btn btn-info returnbtn" href="{% url 'viewtrials' %}">Return to Dashboard</a>
   <a class="btn btn-secondary editbtn" href="/sponsor/updatetrial/{{ clinicaltrial.id }}">Edit Trial</a>
+  <a class="btn btn-danger deletebtn" href="/sponsor/deletetrial/{{ clinicaltrial.id }}">Delete Trial</a>
 {% endblock %}

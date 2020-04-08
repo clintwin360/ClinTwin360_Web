@@ -69,6 +69,10 @@ class TrialUpdateView(generic.UpdateView):
           trialid=self.kwargs['pk']
           return reverse_lazy('trialdetail', kwargs={'pk': trialid})
 
+class DeleteTrialView(generic.DeleteView):
+    model = ClinicalTrial
+    success_url = reverse_lazy('viewtrials')
+
 class NewClinicalTrialView(generic.CreateView):
     model = ClinicalTrial
     fields = (
@@ -92,6 +96,10 @@ class SponsorUpdateView(generic.UpdateView):
     def get_success_url(self):
           sponsorid=self.kwargs['pk']
           return reverse_lazy('sponsordetail', kwargs={'pk': sponsorid})
+
+class DeleteSponsorView(generic.DeleteView):
+    model = Sponsor
+    success_url = reverse_lazy('viewsponsors')
 
 class NewSponsorView(generic.CreateView):
     model = Sponsor

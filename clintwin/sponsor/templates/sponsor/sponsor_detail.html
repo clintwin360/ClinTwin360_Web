@@ -17,4 +17,5 @@
 <p><strong>Notes:</strong> {{ sponsor.notes }}</p>
 <a class="btn btn-info returnbtn" href="{% url 'viewsponsors' %}">Return to Dashboard</a>
 <a class="btn btn-secondary editbtn" href="/sponsor/updateprofile/{{ sponsor.id }}">Edit Sponsor</a>
+<a class="btn btn-danger deletebtn" href="/sponsor/deleteprofile/{{ sponsor.id }}">Delete Sponsor</a>
 {% endblock %}
