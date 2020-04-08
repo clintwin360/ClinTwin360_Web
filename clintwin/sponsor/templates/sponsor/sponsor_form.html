@@ -8,6 +8,7 @@
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Update">
+    <a href="{% url 'viewsponsors' %}" class="btn btn-danger" role="button">Go Back</a>
+    <input class="btn btn-success" type="submit" id="edit_button" value="Edit Sponsor">
 </form>
 {% endblock %}
