@@ -1,7 +1,7 @@
 var tableEntryTemplate = '<td><a class="trial-id-link" href="/sponsor/trial/';
 var tableRowTemplate = '<tr class="trial-element" id=trial_';
 var editButtonOld = '<td><button class="viewbtn" type="button">View</button><button class="editbtn" type="button">Edit</button></td>';
-var editButton = '<td><a class="trial-update-link" href="/sponsor/updatetrial/';
+var editButton = '<td><a class="btn btn-info editbtn" href="/sponsor/updatetrial/';
 
 $(function(){
   $.getJSON("/api/trials/", function(result){
@@ -15,7 +15,7 @@ $(function(){
         field.enrollmentTarget + '</td><td>Started: ' +
         field.recruitmentStartDate + '</td><td>' +
         field.recruitmentEndDate + '</td>' +
-        editButton + field.id.toString() + '">Update</a></td></tr>').appendTo('#trial-list-body') ;
+        editButton + field.id.toString() + '">Edit</a></td></tr>').appendTo('#trial-list-body') ;
     });
   });
 });
