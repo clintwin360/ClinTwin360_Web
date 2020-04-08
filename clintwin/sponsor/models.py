@@ -196,21 +196,3 @@ class ClinicalTrialCriteriaResponse(models.Model):
     comparison = models.CharField(max_length=50)
     criteriaType = models.CharField(max_length=50)
     negated = models.BooleanField()
-
-
-
-# NEW
-class QuestionSchema (models.Model):
-    questionText=models.TextField('Question Text',  null=True, blank=True)
-    responseId=models.ForeignKey('ClinicalTrialCriteriaResponse', on_delete=models.SET_NULL, null=True)
-    type=models.CharField('Type', max_length=50, null=True, blank=True)
-    criteria=models.ForeignKey('ClinicalTrialCriteria',on_delete=models.SET_NULL, null=True)
-    nextQuestion=models.CharField ('Next Question', max_length=30, null=True, blank=True)
-
-    def __str__(self):
-        ret = self.questionId
-        return ret
-
-    def get_absolute_url(self):
-        #Returns the url to access a detail record for the Question Schema.
-        return reverse('questionSchema-detail', args=[str(self.id)])
