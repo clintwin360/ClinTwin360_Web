@@ -1,23 +1,39 @@
-{% extends "sponsor/base.html" %}
-{% load static %}
-{% block style %}{% endblock %}
-{% block scripts %}{% endblock %}
-{% block title %}Trials Pane{% endblock %}
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" rel="stylesheet">
+   	<link href="{% static 'sponsor/css/style.css' %}" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <title>
+		Trial Pane
+	</title>
+</head>
 
-{% block content %}
-  <br><h2 id="trial-detail-title"><u>Trial Details</u></h2><br>
-  <p><strong>ID:</strong> {{ clinicaltrial.custom_id }}</p>
-  <p><strong>Title:</strong> {{ clinicaltrial.title }}</p>
-  <p><strong>Objective:</strong> {{ clinicaltrial.objective }}</p>
-  <p><strong>Description:</strong> {{ clinicaltrial.description }}</p>
-  <p><strong>Location:</strong> {{ clinicaltrial.location}}</p>
-  <p><strong>Status:</strong> {{ clinicaltrial.status }}</p>
-  <p><strong>Start Date:</strong> {{ clinicaltrial.recruitmentStartDate }}</p>
-  <p><strong>End Date:</strong> {{ clinicaltrial.recruitmentEndDate }}</p>
-  <p><strong>Current Recruitment:</strong> {{ clinicaltrial.current_recruitment }}</p>
-  <p><strong>Target Enrollment:</strong> {{ clinicaltrial.enrollmentTarget }}</p>
-  <p><strong>URL:</strong> <a class="trial-url-link" href="{{ clinicaltrial.url }}">{{ clinicaltrial.url }}</a></p>
-  <p><strong>Comments:</strong> {{ clinicaltrial.comments }}</p>
-  <a class="btn btn-info editbtn" href="/sponsor/updatetrial/{{ clinicaltrial.id }}">Edit Trial</a>
-  <a class="btn btn-danger deletebtn" href="/sponsor/deletetrial/{{ clinicaltrial.id }}">Delete Trial</a>
-{% endblock %}
+<body>
+    <main>
+		<div class="container-fluid" id="content">
+            <br><h2 id="trial-detail-title"><u>Trial Details</u></h2><br>
+            <p><strong>ID:</strong> {{ clinicaltrial.custom_id }}</p>
+            <p><strong>Title:</strong> {{ clinicaltrial.title }}</p>
+            <p><strong>Objective:</strong> {{ clinicaltrial.objective }}</p>
+            <p><strong>Description:</strong> {{ clinicaltrial.description }}</p>
+            <p><strong>Location:</strong> {{ clinicaltrial.location}}</p>
+            <p><strong>Status:</strong> {{ clinicaltrial.status }}</p>
+            <p><strong>Start Date:</strong> {{ clinicaltrial.recruitmentStartDate }}</p>
+            <p><strong>End Date:</strong> {{ clinicaltrial.recruitmentEndDate }}</p>
+            <p><strong>Current Recruitment:</strong> {{ clinicaltrial.current_recruitment }}</p>
+            <p><strong>Target Enrollment:</strong> {{ clinicaltrial.enrollmentTarget }}</p>
+            <p><strong>URL:</strong> <a class="trial-url-link" href="{{ clinicaltrial.url }}">{{ clinicaltrial.url }}</a></p>
+            <p><strong>Comments:</strong> {{ clinicaltrial.comments }}</p>
+            <a class="btn btn-info editbtn" href="/sponsor/updatetrial/{{ clinicaltrial.id }}">Edit Trial</a>
+            <a class="btn btn-danger deletebtn" href="/sponsor/deletetrial/{{ clinicaltrial.id }}">Delete Trial</a>
+		</div>
+	</main>
+</body>
+</html>

@@ -13,16 +13,22 @@
     });
 */
 
+
+
 function trial_details(id){
-    let template = "" + "<div>" +
+    let template = "" + "<div id=\"pane\">" +
         "<object type=\"text/html\" data=\"/sponsor/pane/"+id+
-        "\"width=\"800px\" height=\"600px\" style=\"overflow:auto;border:5px ridge blue\" class=\"trial-detail-page\">" +
+        "\" id=\"trial-detail-pane\" class=\"trial-detail-pane\">" +
         "</object></div>"
     return template;
 };
 
 $(document).on( "click","tr.clickable-row", function() {
+    if (document.getElementById('pane')){
+        document.getElementById('pane').parentNode.removeChild(document.getElementById('pane'));
+    }
     var idArray = this.id.toString().split("-");
     var trialId = idArray[1];
-    $("#trial-details").removeClass("trial-detail-page").append(trial_details(trialId));
+    $("#trial-details").append(trial_details(trialId));
+
 });

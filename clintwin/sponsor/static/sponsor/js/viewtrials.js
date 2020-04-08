@@ -1,23 +1,22 @@
 function trial_row(props){
     let percentage = props.current_recruitment / props.enrollmentTarget;
-    let color = "black";
+    let numColor = "black";
     console.log(percentage);
     if (percentage <= .34){
-        color = "red";
+        numColor = "red";
     }
     else if (percentage > .35 && percentage < .70){
-        color = "orange";
+        numColor = "orange";
     }
     else {
-        color = "green";
+        numColor = "green";
     }
     let template = "" +
         "<tr id=\"trial-"+ props.id +"\" class=\"clickable-row trial-element\">" +
         "<td><a class=\"trial-id-link\" href=\"/sponsor/trial/"+ props.id + "\">" + props.custom_id + "</a></td>" +
         "<td>"+props.title+"</td>" +
         "<td>"+props.status+"</td>" +
-        "<td>"+(props.current_recruitment.toString().fontcolor(color))+"</td>" +
-        "<td>"+props.enrollmentTarget+"</td>" +
+        "<td>"+(props.current_recruitment.toString().fontcolor(numColor))+" / "+props.enrollmentTarget+"</td>" +
         "<td>"+props.recruitmentStartDate+"</td>" +
         "<td>"+props.recruitmentEndDate+"</td>" +
         "<td><a class=\"btn btn-info editbtn\" href=\"/sponsor/updatetrial/"+props.id+"\">Edit</td>" +
