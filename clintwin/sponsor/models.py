@@ -1,64 +1,43 @@
 from django.db import models
-#from django.contrib.postgres.fields import ArrayField
+# from django.contrib.postgres.fields import ArrayField
 # New additions
 from django.urls import reverse
 from datetime import date
+from django.contrib.auth.models import User
 import datetime
 from django.utils.timezone import now
 from django.utils import timezone
+
+
 # End of new additions
 
 # Create your models here
 
 
-class UserManager(models.Manager):
-    def validator(self, postData):
-        errors = {}
-        if (postData['first_name'].isalpha()) == False:
-            if len(postData['first_name']) < 2:
-                errors['first_name'] = "First name can not be shorter than 2 characters"
-
-        if (postData['last_name'].isalpha()) == False:
-            if len(postData['last_name']) < 2:
-                errors['last_name'] = "Last name can not be shorter than 2 characters"
-
-        if len(postData['email']) == 0:
-            errors['email'] = "You must enter an email"
-
-        if len(postData['password']) < 8:
-            errors['password'] = "Password is too short!"
-
-        return errors
+def is_clintwin(self):
+    if self.group.filter('clintwin'):
+        return True
+    else:
+        return False
 
 
-class User(models.Model):
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    email = models.CharField(max_length=255)
-    password = models.CharField(max_length=255)
-    created_at = models.DateTimeField(auto_now_add = True)
-    updated_at = models.DateTimeField(auto_now = True)
-    objects = UserManager()
-
-    def isClintwin(self):
-        if self.group.filter('clintwin'):
-            return True
-        else:
-            return False
+def is_sponsor_admin(self):
+    if self.group.filter('sponsor_admin'):
+        return True
+    else:
+        return False
 
 
-    def isSponsorAdmin(self):
-        if self.group.filter('sponsor_admin'):
-            return True
-        else:
-            return False
+User.add_to_class("is_clintwin", is_clintwin)
+
+User.add_to_class("is_sponsor_admin", is_sponsor_admin)
 
 
 class Contact(models.Model):
     first_name = models.CharField(null=True, max_length=50)
     last_name = models.CharField(null=True, max_length=50)
     email = models.EmailField(null=True)
-    comment = models.CharField(max_length=1000, null=True,)
+    comment = models.CharField(max_length=1000, null=True, )
 
 
 class Sponsor(models.Model):
@@ -75,10 +54,11 @@ class Sponsor(models.Model):
         ret = str(self.id) + ',' + self.organization
         return ret
 
-	# New method
+    # New method
     def get_absolute_url(self):
-        #Returns the url to access a detail record for the Sponsor.
+        # Returns the url to access a detail record for the Sponsor.
         return reverse('sponsor-detail', args=[str(self.id)])
+
 
 class SponsorRequest(models.Model):
     sponsor_id = models.CharField(max_length=50)
@@ -109,7 +89,7 @@ class ClinicalTrial(models.Model):
         return ret
 
     def get_absolute_url(self):
-        #Returns the url to access a detail record for the Clinical Trial.
+        # Returns the url to access a detail record for the Clinical Trial.
         return reverse('clinicalTrial-detail', args=[str(self.id)])
 
 
@@ -146,12 +126,12 @@ class ParticipantBasicHealth(models.Model):
     birth_date = models.DateField('Date of Birth', help_text='MM/DD/YY', null=True, blank=True)
 
     def bmi(self):
-        return 703 * (self.weight/(self.height*self.height))
+        return 703 * (self.weight / (self.height * self.height))
 
     def age(self):
         today = date.today()
         return today.year - self.birth_date.year - \
-            ((today.month, today.day) < (self.birth_date.month, self.birth_date.day))
+               ((today.month, today.day) < (self.birth_date.month, self.birth_date.day))
 
     def __str__(self):
         return self.participant.name() + " Basic Health Info"
@@ -165,7 +145,7 @@ class ClinicalTrialMatch(models.Model):
 class ParticipantQuestion(models.Model):
     text = models.TextField()
     valueType = models.CharField(max_length=50)
-    #options = ArrayField(models.CharField(max_length=256))
+    # options = ArrayField(models.CharField(max_length=256))
     options = models.TextField()
     categories = models.ManyToManyField(QuestionCategory)
 
@@ -195,10 +175,10 @@ class ClinicalTrialCriteria(models.Model):
     name = models.CharField(max_length=500)
     valueType = models.CharField(max_length=50)
     options = models.TextField()
-    #options = ArrayField(models.CharField(max_length=256))
+    # options = ArrayField(models.CharField(max_length=256))
     searchable = models.BooleanField()
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, related_name='subcriteria')
-    question = models.ForeignKey(ParticipantQuestion, on_delete=models.CASCADE, null=True,related_name="criteria")
+    question = models.ForeignKey(ParticipantQuestion, on_delete=models.CASCADE, null=True, related_name="criteria")
 
     def __str__(self):
         return self.name
