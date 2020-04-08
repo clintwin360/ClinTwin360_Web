@@ -16,4 +16,5 @@
 <p><strong>Quit Date:</strong> {{ sponsor.dateDeregistered }}</p>
 <p><strong>Notes:</strong> {{ sponsor.notes }}</p>
 <a class="btn btn-info returnbtn" href="{% url 'viewsponsors' %}">Return to Dashboard</a>
+<a class="btn btn-secondary editbtn" href="/sponsor/updateprofile/{{ sponsor.id }}">Edit Sponsor</a>
 {% endblock %}
