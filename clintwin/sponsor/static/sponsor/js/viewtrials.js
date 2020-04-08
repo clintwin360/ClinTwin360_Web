@@ -1,12 +1,3 @@
-var tableEntryTemplate = '<td><a class="trial-id-link" href="/sponsor/trial/';
-//var tableRowTemplate = '<tr class="trial-element" id=trial_';
-var editButtonOld = '<td><button class="viewbtn" type="button">View</button><button class="editbtn" type="button">Edit</button></td>';
-//var editButton = '<td><a class="btn btn-info editbtn" href="/sponsor/updatetrial/';
-var deleteButton = '<a class="btn btn-danger deletebtn" href="/sponsor/deletetrial/';
-
-
-
-
 function trial_row(props){
     let template = "" +
         "<tr id=\"trial-"+ props.id +"\" class=\"clickable-row trial-element\">" +
