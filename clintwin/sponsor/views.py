@@ -81,9 +81,9 @@ class DeleteTrialView(generic.DeleteView):
 
 class NewClinicalTrialView(generic.CreateView):
     model = ClinicalTrial
-    fields = [
-        'custom_id', 'sponsor', 'title', 'objective', 'recruitmentStartDate', 'recruitmentEndDate', 'enrollmentTarget', 'url',
-        'followUp', 'location', 'comments']
+    fields = (
+        'custom_id', 'title', 'sponsor', 'objective', 'recruitmentStartDate', 'recruitmentEndDate', 'enrollmentTarget', 'url',
+        'followUp', 'location', 'comments')
     template_name = 'sponsor/newtrial.html'
     success_url = reverse_lazy('viewtrials')
 

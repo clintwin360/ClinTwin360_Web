@@ -88,7 +88,7 @@ class ClinicalTrial(models.Model):
     comments = models.TextField('Comments', null=True, blank=True)
     createdTimeStamp = models.DateTimeField(auto_now_add=True)
     status = models.CharField('Status', null=True, max_length=100)
-    current_recruitment = models.IntegerField('Current Recruitment', null=True, blank=True)
+    current_recruitment = models.IntegerField('Current Recruitment', default=0, null=True, blank=True)
 
     def __str__(self):
         ret = str(self.id) + ":" + self.title
