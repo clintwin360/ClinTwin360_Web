@@ -56,11 +56,7 @@ def login_success(request):
 
 #Trial Views
 def viewTrials(request):
-<<<<<<< HEAD
     return render(request, "sponsor/viewtrials.html",)
-=======
-    return render(request, "sponsor/viewtrials.html")
->>>>>>> 760e196294b05a8037ff957418cee3f2812fda3b
 
 class TrialPaneView(generic.DetailView):
     model = ClinicalTrial
