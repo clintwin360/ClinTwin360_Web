@@ -224,6 +224,7 @@ def load_data(request):
     call_command('loaddata', 'trial_matches')
     call_command('loaddata', 'participant_responses')
     call_command('loaddata', 'question_flow')
+    call_command('loaddata', 'user_profiles')
     return HttpResponse("Data Loaded!")
 
 # View for contact us form

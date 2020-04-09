@@ -68,6 +68,9 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     sponsor = models.ForeignKey(Sponsor, null=True, on_delete=models.SET_NULL)
 
+    def __str__(self):
+        ret = self.user.username + ":" + self.sponsor.organization
+        return ret
 
 class ClinicalTrial(models.Model):
     custom_id = models.CharField('Trial ID', max_length=100, null=True)
