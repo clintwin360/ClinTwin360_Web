@@ -18,7 +18,7 @@
 <body>
     <main>
 		<div class="container-fluid" id="content">
-            <form method="post">
+            <form method="post" target="_parent">
                 {% csrf_token %}
                 {{form.as_p}}
                 <button class="btn btn-success w-25" type="submit" id="edit_button">Edit Trial</button>
