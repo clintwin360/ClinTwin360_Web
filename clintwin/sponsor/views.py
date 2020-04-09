@@ -54,10 +54,9 @@ def login_success(request):
     else:
         return redirect("viewtrials")
 
-
 #Trial Views
 def viewTrials(request):
-    return render(request, "sponsor/viewtrials.html")
+    return render(request, "sponsor/viewtrials.html",)
 
 class TrialPaneView(generic.DetailView):
     model = ClinicalTrial

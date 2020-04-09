@@ -28,7 +28,7 @@
             <p><strong>End Date:</strong> {{ clinicaltrial.recruitmentEndDate }}</p>
             <p><strong>Current Recruitment:</strong> {{ clinicaltrial.current_recruitment }}</p>
             <p><strong>Target Enrollment:</strong> {{ clinicaltrial.enrollmentTarget }}</p>
-            <p><strong>URL:</strong> <a class="trial-url-link" href="{{ clinicaltrial.url }}">{{ clinicaltrial.url }}</a></p>
+            <p><strong>URL:</strong> <a class="trial-url-link" href="{{ clinicaltrial.url }}" target="_top">{{ clinicaltrial.url }}</a></p>
             <p><strong>Comments:</strong> {{ clinicaltrial.comments }}</p>
             <a class="btn btn-info editbtn" href="/sponsor/updatetrial/{{ clinicaltrial.id }}">Edit Trial</a>
             <a class="btn btn-danger deletebtn" href="/sponsor/deletetrial/{{ clinicaltrial.id }}">Delete Trial</a>
