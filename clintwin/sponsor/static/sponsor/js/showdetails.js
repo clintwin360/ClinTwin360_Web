@@ -12,6 +12,11 @@ $(document).on( "click","tr.clickable-row", function() {
     }
     var idArray = this.id.toString().split("-");
     var trialId = idArray[1];
+    var selected = $(this).hasClass("highlight");
+    $("tr.clickable-row").removeClass("highlight");
+    if(!selected){
+            $(this).addClass("highlight");
+    }
     $("#trial-details").append(trial_details(trialId));
 
 });

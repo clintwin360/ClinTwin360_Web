@@ -36,6 +36,7 @@ $(function(){
     $("#trial-list-body").append(trial_row(field));
     if (i === 0){
         $("#trial-details").append(trial_pane(field.id));
+        $('#trial-'+field.id).addClass("highlight");
     }
     });
   });

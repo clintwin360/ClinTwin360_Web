@@ -1,4 +1,6 @@
 /* Style body color to off-white */
+.highlight { background-color: lightblue; }
+
 body {
   background-color: #fff9f9;
   margin: auto;
