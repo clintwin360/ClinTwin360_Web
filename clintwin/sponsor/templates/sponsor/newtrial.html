@@ -10,7 +10,6 @@
         <form method="post" novalidate>
             {% csrf_token %}
                     {{ form.custom_id|as_crispy_field }}
-                    {{ form.sponsor|as_crispy_field }}
                     {{ form.title|as_crispy_field }}
                     {{ form.url|as_crispy_field }}
               <div class="d-flex justify-content-around">
