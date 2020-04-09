@@ -9,43 +9,42 @@
 {% endblock %}
 {% block title %}Trials Dashboard{% endblock %}
 {% block content %}
-    <br>
-    <h2 id="trial_dashboard">Clinical Trials Dashboard</h2>
-    <br>
-<div class="table_container">
-    <div class="main-cards row">
-          <table class="table table-bordered" id="trials">
+<br>
+<h2 id="trial_dashboard">Clinical Trials Dashboard</h2>
+<br>
+​
+<div class="main-cards row">
+    <div class="row">
+    <div class="col-5">
+    <div class="card">
+        <table class="table table-bordered table-hover" id='trials'>
             <thead class="thead-light">
-              <tr>
-                <th id="trial_id">Trial ID</th>
-                <th>Name</th>
-                <th>Status</th>
-                <th>Recruitment</th>
-                <th id="end_date">Start Date</th>
-                <th id="end_date">End Date</th>
-              </tr>
-          </thead>
+                <tr>
+                    <th id="trial_id">Trial ID</th>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Recruitment</th>
+                    <th id="end_date">Start Date</th>
+                    <th id="end_date">End Date</th>
+                </tr>
+            </thead>
             <tbody id='trial-list-body'>
             </tbody>
-          </table>
-
-<!--
-      <div class="card" id='trialdetails'>Trial Details <br><br>
-        The goal is to click on the trial ID or anywhere on the row and have this section be polulated with the details of the trial. <br>
-        <br>(The previous code is just commented out so feel free to revert it, if this isn't what we want)
-      </div> -->
+        </table>
     </div>
 </div>
-<div class="container-fluid">
-    <div id = "trial-details">
-        <h3> Trial Details </h3>
+<div class="col-7">
+    <div class="card" id='trial-details'>
+            <br>
+        <div id="pane">
+                <p>Click on a trial to view details</p>
+        </div>
     </div>
+</div>
+</div>
 </div>
 
 {% endblock %}
-
-
-
 <!-- <h2>Trial Dashboard</h2>
 <br>
 <div class="row">
@@ -78,35 +77,3 @@
         </div>
     </div>
 </div> -->
-
-
-
-<!--<table class="table table-striped table-bordered table-hover">
-    <thead class="thead-light">
-        <tr>
-            <th scope="col">Trial ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Objective/th>
-            <th scope="col">Description</th>
-            <th scope="col">Start Date</th>
-            <th scope="col">End Date</th>
-            <th scope="col">Target Recruitment</th>
-
-        </tr>
-    </thead>
-    % for trial in trials %
-    <tbody>
-    <tr>
-        <th scope="row"></th>
-        <div id="tabledata">
-        <td>{{ trial.id }}</td>
-        <td>{{ trial.name }}</td>
-        <td>{{ trial.currentRecruitment }}</td>
-        <td>{{ trial.targetRecruitment }}</td>
-        <td>{{ trial.startDate }}</td>
-        <td>{{ trial.endDate}}</td>
-    </div>
-    <td><button class="btn btn-submit" type="button">View</button></td>
-</tr>
-% endfor %
-</table>-->

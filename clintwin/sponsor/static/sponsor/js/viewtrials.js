@@ -19,8 +19,6 @@ function trial_row(props){
         "<td>"+(props.current_recruitment.toString().fontcolor(numColor))+" / "+props.enrollmentTarget+"</td>" +
         "<td>"+props.recruitmentStartDate+"</td>" +
         "<td>"+props.recruitmentEndDate+"</td>" +
-        "<td><a class=\"btn btn-info editbtn\" href=\"/sponsor/updatetrial/"+props.id+"\">Edit</td>" +
-        "<td><a class=\"btn btn-danger deletebtn\" href=\"/sponsor/deletetrial/"+props.id+"\">Delete</td>" +
         "</tr>";
     return template;
 }
@@ -32,3 +30,8 @@ $(function(){
     });
   });
 });
+
+/*
+"<td><a class=\"btn btn-info editbtn\" href=\"/sponsor/updatetrial/"+props.id+"\">Edit</td>" +
+"<td><a class=\"btn btn-danger deletebtn\" href=\"/sponsor/deletetrial/"+props.id+"\">Delete</td>"
+*/
