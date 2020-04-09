@@ -24,10 +24,7 @@ function trial_row(props){
 }
 
 $(function(){
-    console.log("sponsor_id",sponsor_id);
-
-
-  $.getJSON("/api/trials/?sponsor_id=" + sponsor_id, function(result){
+  $.getJSON("/api/trials/" + trial_param, function(result){
     $.each(result.results, function(i, field){
      $("#trial-list-body").append(trial_row(field));
     });

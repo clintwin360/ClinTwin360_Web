@@ -1,5 +1,5 @@
 from django.db import models
-#from django.contrib.postgres.fields import ArrayField
+# from django.contrib.postgres.fields import ArrayField
 # New additions
 from django.urls import reverse
 from datetime import date
@@ -15,11 +15,11 @@ from django.utils import timezone
 
 
 def is_clintwin(self):
-        return self.groups.filter('clintwin')
+    return self.groups.filter(name='clintwin').exists()
 
 
 def is_sponsor_admin(self):
-    if self.groups.filter('sponsor_admin'):
+    if self.groups.filter('sponsor_admin').exists():
         return True
     else:
         return False
@@ -34,7 +34,7 @@ class Contact(models.Model):
     first_name = models.CharField(null=True, max_length=50)
     last_name = models.CharField(null=True, max_length=50)
     email = models.EmailField(null=True)
-    comment = models.CharField(max_length=1000, null=True,)
+    comment = models.CharField(max_length=1000, null=True, )
 
 
 class Sponsor(models.Model):
@@ -51,9 +51,9 @@ class Sponsor(models.Model):
         ret = str(self.id) + ',' + self.organization
         return ret
 
-	# New method
+    # New method
     def get_absolute_url(self):
-        #Returns the url to access a detail record for the Sponsor.
+        # Returns the url to access a detail record for the Sponsor.
         return reverse('sponsor-detail', args=[str(self.id)])
 
 
@@ -71,6 +71,7 @@ class UserProfile(models.Model):
     def __str__(self):
         ret = self.user.username + ":" + self.sponsor.organization
         return ret
+
 
 class ClinicalTrial(models.Model):
     custom_id = models.CharField('Trial ID', max_length=100, null=True)
@@ -94,7 +95,7 @@ class ClinicalTrial(models.Model):
         return ret
 
     def get_absolute_url(self):
-        #Returns the url to access a detail record for the Clinical Trial.
+        # Returns the url to access a detail record for the Clinical Trial.
         return reverse('clinicalTrial-detail', args=[str(self.id)])
 
 
@@ -131,12 +132,12 @@ class ParticipantBasicHealth(models.Model):
     birth_date = models.DateField('Date of Birth', help_text='MM/DD/YY', null=True, blank=True)
 
     def bmi(self):
-        return 703 * (self.weight/(self.height*self.height))
+        return 703 * (self.weight / (self.height * self.height))
 
     def age(self):
         today = date.today()
         return today.year - self.birth_date.year - \
-            ((today.month, today.day) < (self.birth_date.month, self.birth_date.day))
+               ((today.month, today.day) < (self.birth_date.month, self.birth_date.day))
 
     def __str__(self):
         return self.participant.name() + " Basic Health Info"
@@ -150,7 +151,7 @@ class ClinicalTrialMatch(models.Model):
 class ParticipantQuestion(models.Model):
     text = models.TextField()
     valueType = models.CharField(max_length=50)
-    #options = ArrayField(models.CharField(max_length=256))
+    # options = ArrayField(models.CharField(max_length=256))
     options = models.TextField()
     categories = models.ManyToManyField(QuestionCategory)
 
@@ -180,10 +181,10 @@ class ClinicalTrialCriteria(models.Model):
     name = models.CharField(max_length=500)
     valueType = models.CharField(max_length=50)
     options = models.TextField()
-    #options = ArrayField(models.CharField(max_length=256))
+    # options = ArrayField(models.CharField(max_length=256))
     searchable = models.BooleanField()
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, related_name='subcriteria')
-    question = models.ForeignKey(ParticipantQuestion, on_delete=models.CASCADE, null=True,related_name="criteria")
+    question = models.ForeignKey(ParticipantQuestion, on_delete=models.CASCADE, null=True, related_name="criteria")
 
     def __str__(self):
         return self.name

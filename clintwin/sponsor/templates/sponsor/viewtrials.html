@@ -5,7 +5,13 @@
 {% endblock %}
 {% block scripts %}
     <script>
-    let sponsor_id = {{ user.profile.sponsor.id }};
+        let trial_param;
+        {% if user.is_clintwin %}
+            trial_param = "";
+        {%  else %}
+            trial_param = "?sponsor_id=" + {{ user.profile.sponsor.id }};
+        {% endif %}
+
     </script>
 <script type="text/javascript" src="{% static "sponsor/js/viewtrials.js"%}?{% now "U" %}"></script>
 <script type="text/javascript" src="{% static "sponsor/js/showdetails.js"%}?{% now "U" %}"></script>
