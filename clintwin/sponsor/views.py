@@ -81,25 +81,20 @@ class DeleteTrialView(generic.DeleteView):
 
 class NewClinicalTrialView(generic.CreateView):
     model = ClinicalTrial
-    fields = (
+    fields = [
         'custom_id', 'sponsor', 'title', 'objective', 'recruitmentStartDate', 'recruitmentEndDate', 'enrollmentTarget', 'url',
-        'followUp', 'location', 'comments')
+        'followUp', 'location', 'comments']
     template_name = 'sponsor/newtrial.html'
     success_url = reverse_lazy('viewtrials')
 
-    def form_valid(self, form):
-        print('form_valid called')
-        form.instance.user = self.request.user
-        return super(CreateEmailTemplateView, self).form_valid(form)
+    def get_initial(self, *args, **kwargs):
+        if not (self.request.user.groups.filter('clintwin')):
+            initial = {}
+            initial['sponsor'] = self.request.user.profile.sponsor.id
+            return initial
 
-    def form_invalid(self, form):
-        print("FORM INVALID")
-        print(form.errors)
-        response = super().form_invalid(form)
-        if self.request.is_ajax():
-            return JsonResponse(form.errors, status=400)
         else:
-            return response
+            return self.initial.copy()
 
     #def get_form(self):
     #    print(self.request.POST)
@@ -133,7 +128,7 @@ class DeleteSponsorView(generic.DeleteView):
 
 class NewSponsorView(generic.CreateView):
     model = Sponsor
-    fields = ('organization', 'contactPerson', 'location', 'phone', 'email', 'notes')
+    fields = ['organization', 'contactPerson', 'location', 'phone', 'email', 'notes']
     template_name = 'sponsor/new_sponsor.html'
     success_url = reverse_lazy('viewsponsors')
 
@@ -277,18 +272,6 @@ class DirectionsPageView(TemplateView):
 # Static page for Message display
 class MessagePageView(TemplateView):
     template_name = 'messages.html'
-
-
-class NewTrialView(TemplateView):
-    template_name = 'sponsor/newtrial.html'
-
-
-class TrialsView(TemplateView):
-    template_name = 'sponsor/viewtrials.html'
-
-
-class CriteriaView(TemplateView):
-    template_name = 'sponsor/criteria.html'
 
 
 # Static pages for Admin
