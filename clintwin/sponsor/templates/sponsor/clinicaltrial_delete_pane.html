@@ -11,21 +11,20 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <title>
-		Trial Update Pane
+		Trial Delete Pane
 	</title>
 </head>
 
 <body>
     <main>
-		<div class="container-fluid" id="content">
+        <div class="container-fluid" id="content">
             <form method="post">
                 {% csrf_token %}
-                {{form.as_p}}
-                <button class="btn btn-success w-25" type="submit" id="edit_button">Edit Trial</button>
+                <p>Are you sure you want to delete "{{ clinicaltrial.title }}"?</p>
+                <a class="btn btn-success editbtn" href="/sponsor/pane/{{ clinicaltrial.id }}">Return</a>
+                <input class ="btn btn-danger" type="submit" value="Confirm Delete" />
             </form>
-            <br>
-            <br>
         </div>
-	</main>
+    </main>
 </body>
 </html>

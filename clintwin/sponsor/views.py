@@ -71,7 +71,7 @@ class TrialUpdateView(generic.UpdateView):
     fields = '__all__'
     def get_success_url(self):
           trialid=self.kwargs['pk']
-          return reverse_lazy('trialpane', kwargs={'pk': trialid})
+          return reverse_lazy('trialdetail', kwargs={'pk': trialid})
 
 class TrialUpdatePaneView(generic.UpdateView):
     model = ClinicalTrial
@@ -80,13 +80,17 @@ class TrialUpdatePaneView(generic.UpdateView):
 
     def get_success_url(self):
           trialid=self.kwargs['pk']
-          return reverse_lazy('trialdetail', kwargs={'pk': trialid})
+          return reverse_lazy('trialpane', kwargs={'pk': trialid})
 
 
 class DeleteTrialView(generic.DeleteView):
     model = ClinicalTrial
     success_url = reverse_lazy('viewtrials')
 
+class DeleteTrialPaneView(generic.DeleteView):
+    model = ClinicalTrial
+    success_url = reverse_lazy('viewtrials')
+    template_name_suffix = '_delete_pane'
 
 class NewClinicalTrialView(generic.CreateView):
     model = ClinicalTrial
