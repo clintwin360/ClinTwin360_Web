@@ -1,7 +1,7 @@
 function trial_pane(id){
     let windowTemplate = "" + "<div id=\"pane\">" +
         "<object type=\"text/html\" data=\"/sponsor/pane/"+id+
-        "\" id=\"trial-detail-pane\" class=\"trial-detail-pane\" width=\"800px\" height=\"650px\" style=\"overflow:auto;\">" +
+        "\" id=\"trial-detail-pane\" class=\"trial-detail-pane\" width=\"900px\" height=\"600px\" style=\"overflow:auto;\">" +
         "</object></div>"
     return windowTemplate;
 };
