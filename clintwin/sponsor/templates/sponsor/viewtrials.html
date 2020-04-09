@@ -4,6 +4,9 @@
 <!-- <link href="{% static 'sponsor/css/viewtrials.css' %}" rel="stylesheet"> -->
 {% endblock %}
 {% block scripts %}
+    <script>
+    let sponsor_id = {{ user.profile.sponsor.id }};
+    </script>
 <script type="text/javascript" src="{% static "sponsor/js/viewtrials.js"%}?{% now "U" %}"></script>
 <script type="text/javascript" src="{% static "sponsor/js/showdetails.js"%}?{% now "U" %}"></script>
 {% endblock %}
