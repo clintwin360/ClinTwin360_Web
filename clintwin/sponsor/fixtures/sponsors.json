@@ -10,7 +10,7 @@
       "email": "berto@amcuva.edu",
       "phone": "5555555555",
       "location": "Amsterdam",
-      "notes": "blah blah blah"
+      "notes": "Koningsdag"
     }
   },
   {
@@ -20,11 +20,11 @@
       "organization": "Kaiser Permanente",
       "date_joined": "2020-03-25",
       "dateDeregistered": null,
-      "contactPerson": "Kaiser Soze",
+      "contactPerson": "Keyser Soze",
       "email": "kaiser@kaiserpermanente.com",
       "phone": "5555555555",
       "location": "California",
-      "notes": "blah blah blah"
+      "notes": "A Usual Suspect"
     }
   },
   {
@@ -38,7 +38,7 @@
       "email": "eli@genentech.edu",
       "phone": "5555555555",
       "location": "Pittsburgh",
-      "notes": "blah blah blah"
+      "notes": "Panther Fan"
     }
   }
 ]
