@@ -1,7 +1,14 @@
+function trial_pane(id){
+    let windowTemplate = "" + "<div id=\"pane\">" +
+        "<object type=\"text/html\" data=\"/sponsor/pane/"+id+
+        "\" id=\"trial-detail-pane\" class=\"trial-detail-pane\" width=\"800px\" height=\"650px\" style=\"overflow:auto;\">" +
+        "</object></div>"
+    return windowTemplate;
+};
+
 function trial_row(props){
     let percentage = props.current_recruitment / props.enrollmentTarget;
     let numColor = "black";
-    console.log(percentage);
     if (percentage <= .34){
         numColor = "red";
     }
@@ -26,12 +33,12 @@ function trial_row(props){
 $(function(){
   $.getJSON("/api/trials/" + trial_param, function(result){
     $.each(result.results, function(i, field){
-     $("#trial-list-body").append(trial_row(field));
+    $("#trial-list-body").append(trial_row(field));
+    if (i === 0){
+        $("#trial-details").append(trial_pane(field.id));
+    }
     });
   });
-  if (document.getElementById('emptypane') !== null){
-      window.location.reload();
-  }
 });
 
 /*
