@@ -57,8 +57,7 @@ def login_success(request):
 
 #Trial Views
 def viewTrials(request):
-    trials = ClinicalTrial.objects.all()  # filter(sponsorId=request.user.sponsor_id)
-    return render(request, "sponsor/viewtrials.html", {"trials": trials})
+    return render(request, "sponsor/viewtrials.html")
 
 class TrialPaneView(generic.DetailView):
     model = ClinicalTrial
@@ -301,6 +300,7 @@ class CriteriaView(TemplateView):
 
 # Test views
 def dummy(request):
+    return HttpResponse(request.user.profile.sponsor.id)
     questions = ParticipantQuestion.objects.all()
     return render(request, 'sponsor/dummy.html', {"questions": questions})
 
