@@ -14,7 +14,7 @@ function trial_row(props){
     let template = "" +
         "<tr id=\"trial-"+ props.id +"\" class=\"clickable-row trial-element\">" +
         "<td><a class=\"trial-id-link\" href=\"/sponsor/trial/"+ props.id + "\">" + props.custom_id + "</a></td>" +
-        "<td>"+props.title+"</td>" +
+        //"<td>"+props.title+"</td>" +
         "<td>"+props.status+"</td>" +
         "<td>"+(props.current_recruitment.toString().fontcolor(numColor))+" / "+props.enrollmentTarget+"</td>" +
         "<td>"+props.recruitmentStartDate+"</td>" +
