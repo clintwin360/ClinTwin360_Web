@@ -88,9 +88,12 @@ class NewClinicalTrialView(generic.CreateView):
     success_url = reverse_lazy('viewtrials')
 
     def get_initial(self, *args, **kwargs):
+        if not (self.request.user.is_clintwin):
             initial = {}
             initial['sponsor'] = self.request.user.profile.sponsor.id
             return initial
+        else:
+            return self.initial.copy()
 
 
     #def get_form(self):

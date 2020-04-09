@@ -11,7 +11,6 @@
         {%  else %}
             trial_param = "?sponsor_id=" + {{ user.profile.sponsor.id }};
         {% endif %}
-
     </script>
 <script type="text/javascript" src="{% static "sponsor/js/viewtrials.js"%}?{% now "U" %}"></script>
 <script type="text/javascript" src="{% static "sponsor/js/showdetails.js"%}?{% now "U" %}"></script>
