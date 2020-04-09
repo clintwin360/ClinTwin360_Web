@@ -103,7 +103,7 @@ class NewClinicalTrialView(generic.CreateView):
     def get_initial(self, *args, **kwargs):
         if not (self.request.user.is_clintwin):
             initial = {}
-            initial['sponsor'] = self.request.user.profile.sponsor.id
+            initial['sponsor'] = self.request.user.profile.sponsor
             return initial
         else:
             return self.initial.copy()
