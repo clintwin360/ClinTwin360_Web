@@ -89,7 +89,7 @@ class DeleteTrialView(generic.DeleteView):
 
 class DeleteTrialPaneView(generic.DeleteView):
     model = ClinicalTrial
-    success_url = reverse_lazy('viewtrials')
+    success_url = reverse_lazy('emptypane')
     template_name_suffix = '_delete_pane'
 
 class NewClinicalTrialView(generic.CreateView):
@@ -286,7 +286,8 @@ class DirectionsPageView(TemplateView):
 class MessagePageView(TemplateView):
     template_name = 'messages.html'
 
-
+def emptyPane(request):
+    return render(request, "sponsor/emptypane.html",)
 # Static pages for Admin
 # class NewCriterionView(TemplateView):
 #     template_name = 'new_criterion.html'

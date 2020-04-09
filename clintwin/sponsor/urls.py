@@ -48,6 +48,7 @@ urlpatterns = [
     path('how_works', views.HowWorksPageView.as_view(), name='how_works'),
     path('contact', views.ContactPageView.as_view(), name='contact'),
     path('directions', views.DirectionsPageView.as_view(), name='directions'),
+    path('emptypane', views.emptyPane, name='emptypane'),
     # path('accounts/logout/', auth_views.LogoutView.as_view(template_name= 'registration/logged_out.html'), name='LogOut'),
     # path('accounts/', include('django.contrib.auth.urls')),
     # path('register/', TemplateView.as_view(template_name='sponsor/register.html'), name='signup'),
