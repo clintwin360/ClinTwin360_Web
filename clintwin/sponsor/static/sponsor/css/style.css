@@ -143,7 +143,7 @@ button.reset_btn, #id_email, #id_phone {
     column-count: 2;
     column-gap: 10px;
     display: inline-block;
-  }
+  
 ​
   .row {
     width: 100%;
