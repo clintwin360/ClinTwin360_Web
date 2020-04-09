@@ -88,9 +88,18 @@ class NewClinicalTrialView(generic.CreateView):
     success_url = reverse_lazy('viewtrials')
 
     def get_initial(self, *args, **kwargs):
-        initial = {}
-        initial['sponsor'] = self.request.user.profile.sponsor.id
-        return initial
+        if not (self.request.user.groups.filter('clintwin')):
+            initial = {}
+            initial['sponsor'] = self.request.user.profile.sponsor.id
+            return initial
+
+        else:
+            return self.initial.copy()
+
+    #def get_form(self):
+    #    print(self.request.POST)
+    #    self.object = self.get_object()
+    #    return self.form_class(for_list=self.object, data=self.request.POST)
 
 
 #Sponsor Views
@@ -119,7 +128,7 @@ class DeleteSponsorView(generic.DeleteView):
 
 class NewSponsorView(generic.CreateView):
     model = Sponsor
-    fields = ('organization', 'contactPerson', 'location', 'phone', 'email', 'notes')
+    fields = ['organization', 'contactPerson', 'location', 'phone', 'email', 'notes']
     template_name = 'sponsor/new_sponsor.html'
     success_url = reverse_lazy('viewsponsors')
 
@@ -263,18 +272,6 @@ class DirectionsPageView(TemplateView):
 # Static page for Message display
 class MessagePageView(TemplateView):
     template_name = 'messages.html'
-
-
-class NewTrialView(TemplateView):
-    template_name = 'sponsor/newtrial.html'
-
-
-class TrialsView(TemplateView):
-    template_name = 'sponsor/viewtrials.html'
-
-
-class CriteriaView(TemplateView):
-    template_name = 'sponsor/criteria.html'
 
 
 # Static pages for Admin
