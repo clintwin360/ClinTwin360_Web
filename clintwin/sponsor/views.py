@@ -54,11 +54,9 @@ def login_success(request):
     else:
         return redirect("viewtrials")
 
-
 #Trial Views
 def viewTrials(request):
-    trials = ClinicalTrial.objects.all()  # filter(sponsorId=request.user.sponsor_id)
-    return render(request, "sponsor/viewtrials.html", {"trials": trials})
+    return render(request, "sponsor/viewtrials.html",)
 
 class TrialPaneView(generic.DetailView):
     model = ClinicalTrial
