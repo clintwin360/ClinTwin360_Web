@@ -82,29 +82,15 @@ class DeleteTrialView(generic.DeleteView):
 class NewClinicalTrialView(generic.CreateView):
     model = ClinicalTrial
     fields = (
-        'custom_id', 'sponsor', 'title', 'objective', 'recruitmentStartDate', 'recruitmentEndDate', 'enrollmentTarget', 'url',
+        'custom_id', 'title', 'sponsor', 'objective', 'recruitmentStartDate', 'recruitmentEndDate', 'enrollmentTarget', 'url',
         'followUp', 'location', 'comments')
     template_name = 'sponsor/newtrial.html'
     success_url = reverse_lazy('viewtrials')
 
-    def form_valid(self, form):
-        print('form_valid called')
-        form.instance.user = self.request.user
-        return super(CreateEmailTemplateView, self).form_valid(form)
-
-    def form_invalid(self, form):
-        print("FORM INVALID")
-        print(form.errors)
-        response = super().form_invalid(form)
-        if self.request.is_ajax():
-            return JsonResponse(form.errors, status=400)
-        else:
-            return response
-
-    #def get_form(self):
-    #    print(self.request.POST)
-    #    self.object = self.get_object()
-    #    return self.form_class(for_list=self.object, data=self.request.POST)
+    def get_initial(self, *args, **kwargs):
+        initial = {}
+        initial['sponsor'] = self.request.user.profile.sponsor.id
+        return initial
 
 
 #Sponsor Views
