@@ -1,28 +1,17 @@
-/*function clickTrial() {
-    console.log(this);
-    var idArray = this.id.toString().split("_");
-    var trialId = idArray[1];
-    $.getJSON("/api/trial/?id=" + trialId, function(result){
-        $('#trial-details').append('<p>The trial selected has a pk of ' + trialId + '</p><br>');
-    });
-};
-
-        /*
-
-        });
-    });
-*/
-
 function trial_details(id){
-    let template = "" + "<div>" +
-        "<object type=\"text/html\" data=\"/sponsor/trial/"+id+
-        "\"width=\"800px\" height=\"600px\" style=\"overflow:auto;border:5px ridge blue\" class=\"trial-detail-page\">" +
+    let template = "" + "<div id=\"pane\">" +
+        "<object type=\"text/html\" data=\"/sponsor/pane/"+id+
+        "\" id=\"trial-detail-pane\" class=\"trial-detail-pane\" width=\"800px\" height=\"650px\" style=\"overflow:auto;\">" +
         "</object></div>"
     return template;
 };
 
 $(document).on( "click","tr.clickable-row", function() {
+    if (document.getElementById('pane')){
+        document.getElementById('pane').parentNode.removeChild(document.getElementById('pane'));
+    }
     var idArray = this.id.toString().split("-");
     var trialId = idArray[1];
-    $("#trial-details").removeClass("trial-detail-page").append(trial_details(trialId));
+    $("#trial-details").append(trial_details(trialId));
+
 });
