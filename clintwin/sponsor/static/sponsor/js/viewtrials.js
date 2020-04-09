@@ -29,6 +29,9 @@ $(function(){
      $("#trial-list-body").append(trial_row(field));
     });
   });
+  if (document.getElementById('emptypane') !== null){
+      window.location.reload();
+  }
 });
 
 /*
