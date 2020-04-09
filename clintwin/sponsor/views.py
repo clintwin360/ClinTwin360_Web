@@ -213,6 +213,7 @@ def question_flow(request):
 
 def load_data(request):
     call_command('loaddata', 'participant_questions')
+    call_command('loaddata', 'groups')
     call_command('loaddata', 'users')
     call_command('loaddata', 'participants')
     call_command('loaddata', 'trial_criteria')
