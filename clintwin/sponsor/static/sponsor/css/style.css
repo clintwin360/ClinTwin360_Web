@@ -143,19 +143,20 @@ button.reset_btn, #id_email, #id_phone {
     column-count: 2;
     column-gap: 10px;
     display: inline-block;
-  
-​
-  .row {
+    align-items: center;
+}
+
+  .card-row {
     width: 100%;
     margin: auto;
   }
-​
-  .card,#trial-table,#trial-details{
+
+  .ad-card,#trial-table,#trial-details{
     display: inline-block;
     border-radius: 4px;
     flex-direction: column;
     align-items: center;
-     width: 50%;
+    width: 50%;
     background-color: white;
     margin-bottom: 20px;
     -webkit-column-break-inside: avoid;
@@ -179,7 +180,5 @@ button.reset_btn, #id_email, #id_phone {
     width: 18%;
   }
 ​
-  }
-
 </style>
 /* Styling for the Create New Trial Page */
