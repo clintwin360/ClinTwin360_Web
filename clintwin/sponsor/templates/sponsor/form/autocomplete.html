@@ -7,14 +7,12 @@
 {% endblock %}
 <form autocomplete="off" id="criteria-form">
     <div class="autocomplete" style="width:300px;">
-        <input id="criteriaType" type="text" name="criteriaType" placeholder="Criteria type">
+        <input id="criteriaType" type="text" name="criteriaType" placeholder="Search for a criteria">
     </div>
-    <span class="input-group-btn">
         <button class="btn btn-add btn-success" type="button" id="choose">
-            <span class="fas fa-arrow-right"></span>
+            <i class="fas fa-plus fa-2x btn-add"></i>
         </button>
-    </span>
 </form>
 <script>
-    autocomplete(document.getElementById("criteriaType"), categories);
+    autocomplete(document.getElementById("criteriaType"), searchableCriteria);
 </script>

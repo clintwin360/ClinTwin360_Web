@@ -60,6 +60,9 @@ def viewTrials(request):
     trials = ClinicalTrial.objects.all()  # filter(sponsorId=request.user.sponsor_id)
     return render(request, "sponsor/viewtrials.html", {"trials": trials})
 
+class TrialPaneView(generic.DetailView):
+    model = ClinicalTrial
+    template_name_suffix = '_pane'
 
 class TrialDetailView(generic.DetailView):
     model = ClinicalTrial
