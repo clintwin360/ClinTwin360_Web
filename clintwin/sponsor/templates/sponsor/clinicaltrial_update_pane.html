@@ -2,12 +2,16 @@
 {% load static %}
 {% block style %}{% endblock %}
 {% block scripts %}{% endblock %}
-{% block title %}Trials Update{% endblock %}
+{% block title %}Trial Update Pane{% endblock %}
 
 {% block content %}
 <form method="post">
     {% csrf_token %}
     {{form.as_p}}
+    <div id="buttons">
+    <a href="{% url 'viewtrials' %}" class="btn btn-info" role="button">Go Back</a>
+    <a href="/sponsor/deletetrial/" class="btn btn-danger" role="button">Delete Trial</a>
+    </div>
     <button class="btn btn-success w-25" type="submit" id="edit_button">Edit Trial</button>
 </form>
 <br>
