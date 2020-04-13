@@ -13,6 +13,16 @@ To run the docker-compose in daemon mode,
 
 Once the application is running, you can access the application using the url
 
-```http://127.0.0.1/api```
+```http://127.0.0.1/```
+
+To load test data in the application, access the URL from any browser
+
+```http://127.0.0.1:8000/sponsor/loaddata/ ```
+
+Once the above call returns, it creates an admin user with credentials ```username: admin, password:admin``` and test sponsors with credentials,
+```username: pitt, password:blackandgold```
+```username:amsterdam,password:redlight```
+```username:kaiser,password:permanente```
+
 
 The docker image runs by mouting the code files on the docker image, any changes made to the source files will be effective immediately.
