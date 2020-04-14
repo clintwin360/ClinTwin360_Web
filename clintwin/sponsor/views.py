@@ -155,11 +155,14 @@ def compare_values(a, op, b):
     if op == 'lte':
         return float(a) <= float(b)
 
-def calculate_trial_matches(request):
-    participant = Participant.objects.get(id=1)
+
+def calculate_trial_matches(participant):
+    #participant = Participant.objects.get(id=1)
     responses = participant.responses.all()
-    trials = ClinicalTrial.objects.all()
-    data = {'matches': [], 'questions': []}
+    current_matches = [x.clinical_trial.id for x in participant.trial_matches.select_related('clinical_trial')]
+    trials = ClinicalTrial.objects.all().exclude(id__in=current_matches)
+    #return JsonResponse({"data": [x.title for x in trials]})
+    new_matches = 0
     for trial in trials:
         trial_match = True
         criteria = trial.criteria.all()
@@ -170,22 +173,28 @@ def calculate_trial_matches(request):
                 criterion_type = criterion.criteriaType
                 question = criterion.criteria.question
                 print(question.text)
-                response = responses.get(question__id=question.id)
-                response_value = response.value
-                value_match = compare_values(response_value, comparison, criterion_value)
-                data['questions'].append({'text': question.text, 'expected': criterion_value,
-                                          'comparison': comparison, 'type': criterion_type,
-                                          'response': response_value, 'status': value_match})
-                if value_match and criterion_type == "inclusion" or not value_match and criterion_type == "exclusion":
-                    continue
-                else:  # this will not match if value_match is not true or if type is exclusion, we may want to separate cases
+                if responses.filter(question__id=question.id).exists():
+                    response = responses.get(question__id=question.id)
+                else:
+                    response = None
+                if not response:
                     trial_match = False
                     continue
+                else:
+                    response_value = response.value
+                    value_match = compare_values(response_value, comparison, criterion_value)
+                    if value_match and criterion_type == "inclusion" or not value_match and criterion_type == "exclusion":
+                        continue
+                    else:  # this will not match if value_match is not true or if type is exclusion, we may want to separate cases
+                        trial_match = False
+                        continue
         if trial_match:
-            data['matches'].append(trial.title)
-    data['participant'] = participant.name()
-    data['responses'] = [x.question.text for x in participant.responses.all()]
-    return JsonResponse(data)
+            ClinicalTrialMatch.objects.create(participant=participant, clinical_trial=trial, match=True)
+            new_matches += 1
+        else:
+            ClinicalTrialMatch.objects.create(participant=participant, clinical_trial=trial, match=False)
+    #return JsonResponse({"data": new_matches})
+    return new_matches
 
 
 def question_rank(questions):

@@ -12,4 +12,5 @@ admin.site.register(ClinicalTrialCriteriaResponse)
 admin.site.register(ParticipantQuestion)
 admin.site.register(QuestionFlow)
 admin.site.register(UserProfile)
+admin.site.register(ClinicalTrialMatch)
 

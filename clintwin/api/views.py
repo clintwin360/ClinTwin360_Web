@@ -6,6 +6,7 @@ from rest_framework.viewsets import GenericViewSet
 from .serializers import UserSerializer
 from sponsor.serializers import *
 from sponsor.models import *
+from sponsor.views import calculate_trial_matches
 from rest_framework import viewsets, mixins
 from rest_framework import permissions
 
@@ -96,7 +97,8 @@ class ClinicalTrialMatchViewSet(mixins.ListModelMixin,
         participant_id = self.request.query_params.get('participant')
         if participant_id:
             participant = Participant.objects.get(id=participant_id)
-            queryset = ClinicalTrialMatch.objects.filter(participant=participant)
+            calculate_trial_matches(participant)
+            queryset = ClinicalTrialMatch.objects.filter(participant=participant, match=True)
         else:
             queryset = ClinicalTrialMatch.objects.none()
 

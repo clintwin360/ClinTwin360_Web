@@ -146,6 +146,10 @@ class ParticipantBasicHealth(models.Model):
 class ClinicalTrialMatch(models.Model):
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE, related_name='trial_matches')
     clinical_trial = models.ForeignKey(ClinicalTrial, on_delete=models.CASCADE, related_name='trial_matches')
+    match = models.BooleanField(null=True)
+
+    def __str__(self):
+        return self.participant.name() + ":" + self.clinical_trial.title + ">>" + self.match
 
 
 class ParticipantQuestion(models.Model):
