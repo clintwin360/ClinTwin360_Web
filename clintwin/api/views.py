@@ -103,21 +103,8 @@ class ClinicalTrialMatchViewSet(mixins.ListModelMixin,
         return queryset
 
 
-class ClinicalTrialDetailsViewSet(mixins.RetrieveModelMixin,
-                                  GenericViewSet):
-    """
-    Get the details for a specific Clinical Trial
-    """
-    serializer_class = ClinicalTrialDetailSerializer
-
-    def get_queryset(self):
-        trial_id = self.request.query_params.get('id')
-        queryset = ClinicalTrial.objects.filter(id=trial_id)
-
-        return queryset
-
-
-class ClinicalTrialViewSet(mixins.ListModelMixin,
+class ClinicalTrialViewSet(mixins.RetrieveModelMixin,
+                           mixins.ListModelMixin,
                            GenericViewSet):
     """
     List all Clinical Trials or List trials by sponsor_id
