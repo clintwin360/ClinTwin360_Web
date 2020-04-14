@@ -180,6 +180,9 @@ class ParticipantResponse(models.Model):
     def __str__(self):
         return self.question.text
 
+    class Meta:
+        unique_together = ('question', 'participant')
+
 
 class ClinicalTrialCriteria(models.Model):
     name = models.CharField(max_length=500)
