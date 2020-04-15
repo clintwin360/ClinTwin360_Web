@@ -4,7 +4,8 @@
     "pk": 1, 
     "fields": {
       "participant": "1",
-      "clinical_trial": "1"
+      "clinical_trial": "1",
+      "match": "True"
     }
   }
 ]
