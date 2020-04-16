@@ -1,7 +1,7 @@
-* { box-sizing: border-box; }
-body {
+/* * { box-sizing: border-box; } */
+/* body {
   font: 16px Arial;
-}
+} */
 .autocomplete {
   /*the container must be positioned relative:*/
   position: relative;
@@ -46,4 +46,13 @@ input[type=submit] {
   /*when navigating through the items using the arrow keys:*/
   background-color: DodgerBlue !important;
   color: #ffffff;
+}
+
+/* Styling for Eligibility Criteria */
+#add_btn {
+  float: right;
+}
+
+#criteria_inc {
+  float: left;
 }

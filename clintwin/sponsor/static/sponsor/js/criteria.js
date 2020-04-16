@@ -20,6 +20,6 @@ $(function(){
                 });
       });
     }
-    console.log(searchableCriteria);
+    return searchableCriteria;
     });
     });
