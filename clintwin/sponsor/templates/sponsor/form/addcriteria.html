@@ -1,0 +1,35 @@
+{% load static %}
+{% block style %}
+<!-- <link href="{% static 'sponsor/css/style.css' %}" rel="stylesheet"> -->
+{% endblock %}
+{% load crispy_forms_tags %}
+{% block scripts %}
+<script src="{% static 'sponsor/js/dynamicform.js' %}"></script>
+<script src="{% static 'sponsor/js/addcriteria.js' %}"></script>
+{% endblock %}
+
+<div class="container-fluid"><br>
+    <h2 id="create-criteria">Add Criterion Details</h2>
+
+
+  <div class="modal-body">
+    <div id="new_criteria_form">
+        <form method="post" novalidate>
+            {% csrf_token %}
+                    {{ form.criteria|as_crispy_field }}
+                    {{ form.trial|as_crispy_field }}
+                    {{ form.value|as_crispy_field }}
+                    {{ form.comparison|as_crispy_field }}
+                    {{ form.criteriaType|as_crispy_field }}
+                    {{ form.negated|as_crispy_field }}
+            <br>
+            <br>
+            <button class="btn btn-primary" type="submit" id="create_button">Add Criteria</button>
+
+        </form>
+        <br><br>
+    </div>
+  </div>
+
+    <a class="btn btn-info returnbtn" href="{% url 'exclusion' %}">Back to Eligibility Criteria</a>
+</div>

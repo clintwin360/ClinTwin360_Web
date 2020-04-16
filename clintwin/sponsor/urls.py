@@ -32,6 +32,10 @@ urlpatterns = [
     path('newtrial', views.NewClinicalTrialView.as_view(), name='newtrial'),
     path('newtrial/inclusion', TemplateView.as_view(template_name='sponsor/inclusion.html'), name='inclusion'),
     path('newtrial/exclusion', TemplateView.as_view(template_name='sponsor/exclusion.html'), name='exclusion'),
+
+    #For criteria
+    path('newtrial/exclusion/addcriteria', views.NewEligibilityCriteriaView.as_view(), name='add_criteria'),
+
     #Sponsor Views
     path('newsponsor', views.NewSponsorView.as_view(), name='newsponsor'),
     path('viewsponsors', views.viewSponsors, name='viewsponsors'),
