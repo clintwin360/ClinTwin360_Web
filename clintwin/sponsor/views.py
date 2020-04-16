@@ -18,10 +18,8 @@ from rest_framework.decorators import api_view, permission_classes
 from .models import Contact, Sponsor, Participant, ClinicalTrial, ClinicalTrialCriteriaResponse, \
     ParticipantQuestion
 from django.contrib.auth.models import User
-from django.contrib.auth import get_user
 from .serializers import *
 from django.core.management import call_command
-from rest_framework.authtoken.models import Token
 from django.shortcuts import redirect
 from django.contrib.auth import views as auth_views
 from rest_framework.renderers import TemplateHTMLRenderer
@@ -31,6 +29,7 @@ from django.db.models import Count
 from django.views.generic import ListView
 from django_tables2 import SingleTableView
 from .tables import ClinicalTrialTable
+import ast
 from rest_framework import pagination
 
 
@@ -142,11 +141,6 @@ class NewSponsorView(generic.CreateView):
     success_url = reverse_lazy('viewsponsors')
 
 #Other views
-def get_token(request):
-    x = get_user(request)
-    token = Token.objects.create(user=x)
-    return HttpResponse(token)
-
 def compare_values(a, op, b):
     if op == "equals":
         return a == b
@@ -208,8 +202,16 @@ def question_rank(questions):
     #data['questions'].sort(key=lambda x: x['rank'], reverse=True)
     return ranks
 
+
 def question_flow(request):
+    participant_id = request.GET.get('participant_id')
     questions = ParticipantQuestion.objects.all()
+    if participant_id:
+        print("WE PARTICPANT {}".format(participant_id))
+        responses = ParticipantResponse.objects.filter(participant__id=participant_id)
+        answered_questions = [x.question.id for x in responses]
+        questions = questions.exclude(id__in=answered_questions)
+
     ranks = question_rank(questions)
     data = {'questions': []}
     for question in questions:
@@ -220,9 +222,11 @@ def question_flow(request):
                                   'is_followup': is_followup,
                                   'rank': ranks[question.id],
                                   'value_type': question.valueType,
-                                  'options':
-                                      [{'value': x.response, 'next_question': x.next_question.id} for x in flow]})
+                                  'options': ast.literal_eval(question.options),
+                                  'followups':
+                                      [{'response': x.response, 'next_question': x.next_question.id} for x in flow]})
     return JsonResponse(data)
+
 
 def load_data(request):
     call_command('loaddata', 'participant_questions')
@@ -238,6 +242,7 @@ def load_data(request):
     call_command('loaddata', 'question_flow')
     call_command('loaddata', 'user_profiles')
     return HttpResponse("Data Loaded!")
+
 
 # View for contact us form
 #@api_view(['GET, POST'])

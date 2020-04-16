@@ -4,7 +4,7 @@
     "pk": "1", 
     "fields": {
       "text": "What is your height? (ft.)", 
-      "options": "[\"3ft. 1in.\", \"3ft 2in.\", \"3ft 3in.\", \"3ft 4in.\", \"3ft 5in.\", \"3ft 6in.\",\"3ft 7in.\",\"3ft 8in.\", \"3ft 8in.\", \"3ft 9in.\", \"3ft 10in.\", \"3ft 11in.\", \"4ft\", \"3ft. 1in.\", \"3ft 2in.\", \"3ft 3in.\", \"3ft 4in.\", \"3ft 5in.\", \"3ft 6in.\",\"3ft 7in.\",\"3ft 8in.\", \"3ft 8in.\", \"3ft 9in.\", \"3ft 10in.\", \"3ft 11in.\", \"4ft\", \"4ft. 1in.\", \"4ft 2in.\", \"4ft 3in.\", \"4ft 4in.\", \"4ft 5in.\", \"4ft 6in.\",\"4ft 7in.\",\"4ft 8in.\", \"4ft 8in.\", \"4ft 9in.\", \"4ft 10in.\", \"4ft 11in.\", \"5ft\", \"5ft. 1in.\", \"5ft 2in.\", \"5ft 3in.\", \"5ft 4in.\", \"5ft 5in.\", \"5ft 6in.\",\"5ft 7in.\",\"5ft 8in.\", \"5ft 8in.\", \"5ft 9in.\", \"5ft 10in.\", \"5ft 11in.\", \"4ft\", \"3ft. 1in.\", \"6ft 2in.\", \"6ft 3in.\", \"6ft 4in.\", \"6ft 5in.\", \"6ft 6in.\",\"6ft 7in.\",\"6ft 8in.\", \"6ft 8in.\", \"6ft 9in.\", \"6ft 10in.\", \"6ft 11in.\", \"7ft\", \"7ft. 1in.\", \"7ft 2in.\", \"7ft 3in.\", \"7ft 4in.\", \"7ft 5in.\", \"7ft 6in.\",\"7ft 7in.\",\"7ft 8in.\", \"7ft 8in.\", \"7ft 9in.\", \"7ft 10in.\", \"7ft 11in.\", \"8ft\",]", 
+      "options": "{\"min\":30,\"max\":100,\"increment\":1,\"unit\":\"lbs\"}", 
       "valueType": "large_option_set"
     }
   }, 
@@ -13,7 +13,7 @@
     "pk": "2", 
     "fields": {
       "text": "What is your weight? (lbs.)", 
-      "options": "[\"100\", \"101\", ..., \"190\"] ", 
+      "options": "{\"min\":1,\"max\":1000,\"increment\":.5,\"unit\":\"inches\"}", 
       "valueType": "large_option_set"
     }
   }, 
@@ -22,7 +22,7 @@
     "pk": "3", 
     "fields": {
       "text": "How old are you?", 
-      "options": "[\"under 18\", \"18\", \"19\", ...\"140\"]", 
+      "options": "{\"min\":0,\"max\":140,\"increment\":1,\"unit\":\"years\"}", 
       "valueType": "large_option_set"
     }
   }, 
@@ -30,7 +30,7 @@
     "model": "sponsor.ParticipantQuestion", 
     "pk": "4", 
     "fields": {
-      "text": "What race of ethnicity do you identify with?", 
+      "text": "What race or ethnicity do you identify with?", 
       "options": "[\"American Indian or Alaska Native\",\"Black or African American\", \"Hispanic or Latino\", \"Native Hawaiian or Other Pacific Islander\", \"White\"]", 
       "valueType": "pick_one"
     }
@@ -49,8 +49,8 @@
     "pk": "6", 
     "fields": {
       "text": "What is your zipcode?", 
-      "options": "[\"xxxxx\",...]", 
-      "valueType": "large_option_set"
+      "options": "\"\"", 
+      "valueType": "enter_val"
     }
   }, 
   {
@@ -58,7 +58,7 @@
     "pk": "7", 
     "fields": {
       "text": "Marital Status", 
-      "options": "[\"single\", \"married\", \"widowed\", \"divorced\", \"separated\", \"registered partnership\"]", 
+      "options": "[\"Single\", \"Married\", \"Widowed\", \"Divorced\", \"Separated\", \"Registered partnership\"]", 
       "valueType": "pick_one"
     }
   }, 
@@ -67,7 +67,7 @@
     "pk": "8", 
     "fields": {
       "text": "Living Situation", 
-      "options": "[\"own a home\", \"rent\", \"live with parents\", \"live with roommates\", \"homeless\"]", 
+      "options": "[\"Own a home\", \"Rent\", \"Live with parents\", \"Live with roommates\", \"Homeless\"]", 
       "valueType": "pick_one"
     }
   }, 
@@ -130,7 +130,7 @@
     "pk": "15", 
     "fields": {
       "text": "How often?", 
-      "options": "[\"1 per day\", \"2-5 per day\", \"5-10 per day\", \"more than 10 per day\"]", 
+      "options": "[\"1 per day\", \"2-5 per day\", \"5-10 per day\", \"More than 10 per day\"]", 
       "valueType": "pick_one"
     }
   }, 
@@ -139,7 +139,7 @@
     "pk": "16", 
     "fields": {
       "text": "How long have you used tobacco?", 
-      "options": "[\"less than 6 months\", \"1-2 years\", \"2-5 years\", \"over 5 years\"]", 
+      "options": "[\"Less than 6 months\", \"1-2 years\", \"2-5 years\", \"Over 5 years\"]", 
       "valueType": "pick_one"
     }
   }, 
@@ -147,8 +147,8 @@
     "model": "sponsor.ParticipantQuestion", 
     "pk": "17", 
     "fields": {
-      "text": "Do you use smokeless or smoke tobacco?", 
-      "options": "[\"smokeless\", \"smoke tobacco\"]", 
+      "text": "Do you use smokeless or do you smoke tobacco?", 
+      "options": "[\"Smokeless\", \"Smoke tobacco\"]", 
       "valueType": "list"
     }
   }, 
@@ -157,7 +157,7 @@
     "pk": "18", 
     "fields": {
       "text": "When did you quit?", 
-      "options": "[\"less than 6 months\", \"1-2 years\", \"2-5 years\", \"over 5 years\"]", 
+      "options": "[\"Less than 6 months\", \"1-2 years\", \"2-5 years\", \"Over 5 years\"]", 
       "valueType": "pick_one"
     }
   }, 
@@ -193,7 +193,7 @@
     "pk": "22", 
     "fields": {
       "text": "How long is each exercise period?", 
-      "options": "[\"less than 30 minutes\", \"30-45 minutes\", \"45 minutes - 1 hour\", \"over 1 hour\"]", 
+      "options": "[\"Less than 30 minutes\", \"30-45 minutes\", \"45 minutes - 1 hour\", \"Over 1 hour\"]", 
       "valueType": "pick_one"
     }
   }, 
@@ -202,7 +202,7 @@
     "pk": "23", 
     "fields": {
       "text": "What form of exercise do you do?", 
-      "options": "[\"balance exercises\", \"strength training\", \"aerobics\", \"flexibility exercises\"]", 
+      "options": "[\"Balance exercises\", \"Strength training\", \"Aerobics\", \"Flexibility exercises\"]", 
       "valueType": "list"
     }
   }, 
@@ -220,7 +220,7 @@
     "pk": "25", 
     "fields": {
       "text": "Average number of glasses of alcohol per week?", 
-      "options": "[\"1\", \"2\", \"3\", \"4\", \"more than 5\"]", 
+      "options": "[\"1\", \"2\", \"3\", \"4\", \"More than 5\"]", 
       "valueType": "pick_one"
     }
   }, 
@@ -237,7 +237,7 @@
     "model": "sponsor.ParticipantQuestion", 
     "pk": "27", 
     "fields": {
-      "text": "What form of allergies do you have?", 
+      "text": "What form(s) of allergies do you have?", 
       "options": "[\"Drugs\", \"Chemicals\", \"Food\", \"Seasonal\"]", 
       "valueType": "list"
     }
@@ -247,7 +247,7 @@
     "pk": "28", 
     "fields": {
       "text": "Drug and Chemial Allergies:(Please check all that apply)", 
-      "options": "[\"amoxicillin\", \"ampicillin\", \"penicillin\", \"tetracycline\", \"ibuprofen\", \"naproxen\", \"'aspirin\", \"cetuximab (Erbitux)\", \"rituximab (Rituxian)\", \"Insulin\", \"carbamazepine (Tegretol)\", \"lamotrigine (Lamictal)\", \"phenytoin\", \"atracurium\", \"succinylcholine\", \"vecuronium\"]", 
+      "options": "[\"Amoxicillin\", \"Ampicillin\", \"Penicillin\", \"Tetracycline\", \"Ibuprofen\", \"Naproxen\", \"'Aspirin\", \"Cetuximab (Erbitux)\", \"Rituximab (Rituxian)\", \"Insulin\", \"Carbamazepine (Tegretol)\", \"Lamotrigine (Lamictal)\", \"Phenytoin\", \"Atracurium\", \"Succinylcholine\", \"Vecuronium\"]", 
       "valueType": "list"
     }
   }, 
@@ -256,7 +256,7 @@
     "pk": "29", 
     "fields": {
       "text": "What allergy symptoms do you experience?", 
-      "options": "[Blurred vision\", \"Pain/redness in eyes\", \"Itchy eyes\", \"Watery eyes\"', \"Hoarsness\", \"Smell or taste change\", \"Dizziness\", \"Drainage\", \"Itching throat\", \"Snoring\", \"Ringing in ears\", \"Headaches\", \"Itching (general)\", \"Rash\", \"Hives\", \"Depression\", \"Tremor\", \"Anxiety\", \"Persitent cough\", \"Wheezing\", \"Shortness of breath\", \"Chest pain\", \"Palpitation\", \"No sleep/Insomnia\"]", 
+      "options": "[\"Blurred vision\", \"Pain/redness in eyes\", \"Itchy eyes\", \"Watery eyes\", \"Hoarsness\", \"Smell or taste change\", \"Dizziness\", \"Drainage\", \"Itching throat\", \"Snoring\", \"Ringing in ears\", \"Headaches\", \"Itching (general)\", \"Rash\", \"Hives\", \"Depression\", \"Tremor\", \"Anxiety\", \"Persitent cough\", \"Wheezing\", \"Shortness of breath\", \"Chest pain\", \"Palpitation\", \"No sleep/Insomnia\"]", 
       "valueType": "list"
     }
   }, 
@@ -265,7 +265,7 @@
     "pk": "30", 
     "fields": {
       "text": "When was your last visit to see a doctor?", 
-      "options": "[\"less than 1 month\", \"1-3 months\", \"3-6 months\", \"6 months - 1 year\", \"over 1 year\"]", 
+      "options": "[\"Less than 1 month ago\", \"1-3 months ago\", \"3-6 months ago\", \"6 months - 1 year ago\", \"Over 1 year ago\"]", 
       "valueType": "pick_one"
     }
   }, 
@@ -283,7 +283,7 @@
     "pk": "32", 
     "fields": {
       "text": "Do you have any of these medical problems?", 
-      "options": "[\"weight loss and fatigue\", \"Eye Problems: e.g. glaucoma\", \"Ear, Nose, Throat, Mouth\", \"Cardiovascular: e.g. angina, chest pain, heart attack, high blood pressure\",\"Respiratory: e.g. embolism, tuberculosis\", \"GI: e.g trouble swallowing, heartburn, reflux\", \"Urinary track infections or recurring problems\", \"Musculoskeletal: e.g. arthritis, osteoporosis\", \"Skin Problems: e.g. rashes, acne, psoriasis\", \"Neurological: e.g.headache, stroke\", \"Endocrine: e.g. diabetes, thyroid disease\", \"Psychiatric/Emotional: e.g. depression, eating disorders\", \"Hematologic Lymphatic: e.g. anemia, enlarged lymph nodes\"]", 
+      "options": "[\"Weight loss and fatigue\", \"Eye Problems e.g. glaucoma\", \"Cardiovascular e.g. chest pain, high blood pressure\",\"Respiratory e.g. embolism, tuberculosis\", \"GI e.g trouble swallowing, heartburn\", \"Urinary track infections\", \"Musculoskeletal e.g. arthritis, osteoporosis\", \"Skin Problems e.g. rashes, acne, psoriasis\", \"Neurological e.g.headache, stroke\", \"Endocrine e.g. diabetes, thyroid disease\", \"Psychiatric/Emotional e.g. depression, eating disorders\", \"Hematologic Lymphatic: e.g. anemia, enlarged lymph nodes\"]", 
       "valueType": "list"
     }
   }, 
@@ -319,7 +319,7 @@
     "pk": "36", 
     "fields": {
       "text": "What type of wearable device do you use?", 
-      "options": "[\"Fitbit\", \"Apple Watch\", \"Garmin\", \"Misfit\", \"Pebble\"]", 
+      "options": "[\"Fitbit\", \"Apple Watch\", \"Garmin\", \"Misfit\", \"Pebble\", \"Other\"]", 
       "valueType": "list"
     }
   }, 
@@ -336,7 +336,7 @@
     "model": "sponsor.ParticipantQuestion", 
     "pk": "38", 
     "fields": {
-      "text": "Are you pregnant or breastfeeding?", 
+      "text": "Are you pregnant?", 
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no"
     }
@@ -346,7 +346,7 @@
     "pk": "39", 
     "fields": {
       "text": "What type of cardiovascular disease do you have?", 
-      "options": "[\"Congenital heart disease\", \"Arrhythmia\", \"Coronary artery disease\", \"Dilated cardiomyopathy\", \"Myocardial infarction\", \"Heart failure\", \"Hypertrophic cardiomyopathy\", Mitral regurgitation\", \"Mitral valve prolapse\", \"Pulmonary stenosis\"]", 
+      "options": "[\"Congenital heart disease\", \"Arrhythmia\", \"Coronary artery disease\", \"Dilated cardiomyopathy\", \"Myocardial infarction\", \"Heart failure\", \"Hypertrophic cardiomyopathy\", \"Mitral regurgitation\", \"Mitral valve prolapse\", \"Pulmonary stenosis\"]", 
       "valueType": "list"
     }
   }, 
@@ -364,7 +364,7 @@
     "pk": "41", 
     "fields": {
       "text": "When was your last cardiovascular event and/or precedure?", 
-      "options": "[\"less than 1 month ago\", \"1-3 months ago\", \"3-6 months ago\", \"6-12 months ago\", \"more than 1 year ago\"]", 
+      "options": "[\"Less than 1 month ago\", \"1-3 months ago\", \"3-6 months ago\", \"6-12 months ago\", \"More than 1 year ago\"]", 
       "valueType": "pick_one"
     }
   }, 
@@ -382,7 +382,7 @@
     "pk": "43", 
     "fields": {
       "text": "Select healthcare provider", 
-      "options": "[\"Anthem\", \"Kaiser Permanente\", \"Aetna\", \"UnitedHealth Group\", \"Cardinal Health\"]", 
+      "options": "[\"Anthem\", \"Kaiser Permanente\", \"Aetna\", \"UnitedHealth Group\", \"Cardinal Health\", \"Other\"]", 
       "valueType": "pick_one"
     }
   }, 
@@ -418,7 +418,7 @@
     "pk": "47", 
     "fields": {
       "text": "Check any upcoming medical procedures that apply", 
-      "options": "[\"hemodialysis\", \"peritoneal dialysis\", \"prandial insulin therapy\", \"surgery including the use of anesthesia\"]", 
+      "options": "[\"Hemodialysis\", \"Peritoneal dialysis\", \"Prandial insulin therapy\", \"Surgery using anesthesia\"]", 
       "valueType": "list"
     }
   }, 
@@ -427,7 +427,7 @@
     "pk": "48", 
     "fields": {
       "text": "When is the upcoming medical procedure scheduled for?", 
-      "options": "[\"in less than 3 months\", \"in 3-6 months\", \"in 6-12 months\"]", 
+      "options": "[\"In less than 3 months\", \"In 3-6 months\", \"In 6-12 months\"]", 
       "valueType": "pick_one"
     }
   }, 
@@ -444,8 +444,8 @@
     "model": "sponsor.ParticipantQuestion", 
     "pk": "50", 
     "fields": {
-      "text": "Check any medications that you are currently using", 
-      "options": "[\"vitamins\", \"diet supplements\", \"herbal supplements\", \"glucocorticoid\", \"aspirin\", \"insulin\", \"other over-the-counter medications\", \"plavix/clopidogrel (for heart disease)\", \"coumadin/warfarin (blood thinners)\"]", 
+      "text": "Check any medication(s) that you are currently using", 
+      "options": "[\"Vitamins\", \"Diet supplements\", \"Herbal supplements\", \"Glucocorticoid\", \"Aspirin\", \"Insulin\", \"Over-the-counter medication\", \"Plavix/Clopidogrel (for heart disease)\", \"Coumadin/Warfarin (blood thinners)\"]", 
       "valueType": "list"
     }
   }, 
@@ -463,7 +463,7 @@
     "pk": "52", 
     "fields": {
       "text": "What types of diabetes do you have?", 
-      "options": "[\"type 1\", \"type 2, \"gestational\", \"prediabetes\", \"secondary\"]", 
+      "options": "[\"Type 1\", \"Type 2\", \"Gestational\", \"Prediabetes\", \"Secondary\"]", 
       "valueType": "pick_one"
     }
   }, 
@@ -472,7 +472,7 @@
     "pk": "53", 
     "fields": {
       "text": "How long have you been diagnosed with diabetes?", 
-      "options": "[\"less than 6 months\", \"1-2 years\", \"2-5 years\", \"over 5 years\"]", 
+      "options": "[\"Less than 3 months ago\", \"3-12 months ago\", \"1-2 years ago\", \"2-5 years ago\", \"Over 5 years ago\"]", 
       "valueType": "pick_one"
     }
   }, 
@@ -489,8 +489,8 @@
     "model": "sponsor.ParticipantQuestion", 
     "pk": "55", 
     "fields": {
-      "text": "When was the last change in your diabetes medication or dasage?", 
-      "options": "[\"less than 3 months ago\", \"3-6 months ago\", \"1-2 years ago\", \"2-5 years ago\", \"over 5 years ago\"]", 
+      "text": "When was the last change in your diabetes medication or dosage?", 
+      "options": "[\"Less than 3 months ago\", \"3-12 months ago\", \"1-2 years ago\", \"2-5 years ago\", \"Over 5 years ago\"]", 
       "valueType": "pick_one"
     }
   }, 
@@ -553,7 +553,7 @@
     "pk": "62", 
     "fields": {
       "text": "What type of Genitourinary Cancer?", 
-      "options": "[\"Bladder Cancer\", \"Kidney (Renal Cell) Cancer\", \"Penile Cancer\", \"Prostate Cancer\", \"Renal Pelvis and Ureter Cancer\", \"Transitional Cell\", Testicular Cancer\", \"Urethral Cancer\", \"Wilms Tumor\"]", 
+      "options": "[\"Bladder Cancer\", \"Kidney (Renal Cell) Cancer\", \"Penile Cancer\", \"Prostate Cancer\", \"Renal Pelvis and Ureter Cancer\", \"Transitional Cell\", \"Testicular Cancer\", \"Urethral Cancer\", \"Wilms Tumor\"]", 
       "valueType": "list"
     }
   }, 
@@ -633,7 +633,7 @@
     "model": "sponsor.ParticipantQuestion", 
     "pk": "71", 
     "fields": {
-      "text": "Are you currently receiving any investigational agents for cancer clinical trial?", 
+      "text": "Are you currently receiving any investigational agents for a cancer clinical trial?", 
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no"
     }
@@ -678,7 +678,7 @@
     "model": "sponsor.ParticipantQuestion", 
     "pk": "76", 
     "fields": {
-      "text": "Are you able to be evaluated by a Radiation or Medical Oncologist and Otolaryngologist prior to enrolling on study?", 
+      "text": "Are you able to be evaluated by a radiation or medical oncologist and otolaryngologist prior to enrolling on study?", 
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no"
     }
@@ -724,7 +724,7 @@
     "pk": "81", 
     "fields": {
       "text": "How long were you disease-free post diagnosis of any malignancy?", 
-      "options": "[\"less than 1 year\", \"1-2 years\", \"3-5 years\", \"more than 5 years\"]", 
+      "options": "[\"Less than 1 year\", \"1-2 years\", \"3-5 years\", \"5-10 years\", \"More than 10 years\"]", 
       "valueType": "pick_one"
     }
   }, 
@@ -742,7 +742,7 @@
     "pk": "83", 
     "fields": {
       "text": "How far back did the major surgical procedure, open biopsy, or significant traumatic injury happen?", 
-      "options": "[\"less than a month ago\", \"1-3 months\", \"3-6 months\", \"6-12 months\", \"more than 1 year\"]", 
+      "options": "[\"Less than a month ago\", \"1-3 months ago\", \"3-6 months ago\", \"6-12 months ago\", \"More than 1 year ago\"]", 
       "valueType": "pick_one"
     }
   }, 
@@ -760,7 +760,7 @@
     "pk": "85", 
     "fields": {
       "text": "Food Allergies:(Please check all that apply)", 
-      "options": "[\"Milk\", \"Eggs\", \"Fish\", \"shellfish\", \"tree nuts\", \"Peanuts\", \"Wheat\", \"Soybeans\"]", 
+      "options": "[\"Milk\", \"Eggs\", \"Fish\", \"Shellfish\", \"Tree nuts\", \"Peanuts\", \"Wheat\", \"Soybeans\"]", 
       "valueType": "list"
     }
   }, 
@@ -769,7 +769,7 @@
     "pk": "86", 
     "fields": {
       "text": "Seasonal Allergies:(Please check all that apply)", 
-      "options": "[\"Birch pollen\", \"oak pollen\", \"grass pollen\", \"ragweed pollen\"]", 
+      "options": "[\"Birch pollen\", \"Oak pollen\", \"Grass pollen\", \"Ragweed pollen\"]", 
       "valueType": "list"
     }
   }, 
@@ -780,6 +780,24 @@
       "text": "What is your BMI?", 
       "options": "\"\"", 
       "valueType": "calc_val"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "88", 
+    "fields": {
+      "text": "What stage is the cancer?", 
+      "options": "[\"Stage 0\", \"Stage 1\", \"Stage 2\", \"Stage 3\", \"Stage 4\"]", 
+      "valueType": "pick_one"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "89", 
+    "fields": {
+      "text": "Are you breastfeeding?", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
     }
   }
 ]
