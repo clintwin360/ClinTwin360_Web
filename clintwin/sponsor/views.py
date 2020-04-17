@@ -103,6 +103,21 @@ class NewClinicalTrialView(generic.CreateView):
         else:
             return self.initial.copy()
 
+class NewEligibilityCriteriaView(generic.CreateView):
+    model = ClinicalTrialCriteriaResponse
+    fields = (
+        'criteria', 'trial', 'value', 'comparison', 'criteriaType', 'negated')
+    template_name = 'sponsor/form/addcriteria.html'
+    success_url = reverse_lazy('add_criteria')
+
+    def get_initial(self, *args, **kwargs):
+        if not (self.request.user.is_clintwin()):
+            initial = {}
+            initial['sponsor'] = self.request.user.profile.sponsor
+            return initial
+        else:
+            return self.initial.copy()
+
 
     #def get_form(self):
     #    print(self.request.POST)

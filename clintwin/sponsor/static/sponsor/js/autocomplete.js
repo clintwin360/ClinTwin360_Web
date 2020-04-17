@@ -95,7 +95,8 @@ document.addEventListener("click", function (e) {
 });
 }
 
-var categories = ["Conditions", "BMI", "Activity", "Nutrition", "Allergies", "Conditions", "Treatments", "Age", "Weight", "Height", "Smoking"];
+// Used for testing but no longer relevant now
+// var categories = ["Conditions", "BMI", "Activity", "Nutrition", "Allergies", "Conditions", "Treatments", "Age", "Weight", "Height", "Smoking"];
 
 //$.getJSON("/sponsor/trial/?id=12345", function(result){
   //$.each(result.results, function(i, field){
