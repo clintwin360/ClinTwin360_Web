@@ -15,17 +15,18 @@
 
 <div id="inclusion">
     <div class="row">
-      <label id="field">Inclusion Criteria
+      <label id="field">Inclusion and Exclusion Criteria
         <form role="form" autocomplete="off" id="inclusion-form" action="{% url 'add_criteria' %}">
           <div class="entry input-group col-xs-3">
-              <input class="form-control" type="text" placeholder="Enter a criteria" id="criteria_inc" />
+              <input class="form-control" type="text" placeholder="Enter an eligibility criteria" id="criteria_inc" />
               <button id="add_btn" class="btn btn-primary" type="submit">Add</button>
             </div>
         </form>
     </div>
 </div>
 
-<div id="exclusion">
+<!-- Commented out because the nagation of an inclusion criteria makes an exclusion criteria -->
+<!-- <div id="exclusion">
   <div class="row">
     <label id="field">Exclusion Criteria
       <form role="form" autocomplete="off" id="exclusion-form" action="{% url 'add_criteria' %}">
@@ -35,7 +36,7 @@
         </div>
       </form>
   </div>
-</div>
+</div> -->
 <br>
 <br>
 
