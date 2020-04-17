@@ -79,6 +79,28 @@ class TrialUpdatePaneView(generic.UpdateView):
     template_name_suffix = '_update_pane'
     success_url = reverse_lazy('viewtrials')
 
+# NEW
+def TrialStartView(request, pk):
+	trial = ClinicalTrial.objects.get(pk=pk)
+	if trial.status != 'Started':
+	   trial.status = 'Started'
+	   trial.save(update_fields=['status'])
+        
+	   #return reverse_lazy('viewtrials')
+	   return redirect("viewtrials")
+	
+#NEW	
+def TrialEndView(request, pk):
+	trial = ClinicalTrial.objects.get(pk=pk)
+	if trial.status == 'Started':
+	   trial.status = 'Ended'
+	   trial.save(update_fields=['status'])
+	
+	   #return reverse_lazy('viewtrials')
+	   return redirect("viewtrials")
+ 
+
+	
 class DeleteTrialView(generic.DeleteView):
     model = ClinicalTrial
     success_url = reverse_lazy('viewtrials')
