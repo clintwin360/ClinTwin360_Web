@@ -1,0 +1,17 @@
+
+
+#dashboard-title{
+    font-size: 48px;
+    font-family: Helvetica Light, sans-serif;
+    color: #4bc5ef;
+}
+
+.card {
+    background: #eee;
+    border-top: 1px solid transparent;
+}
+
+.card:hover {
+    background: #e1e1e1;
+    border-top: 1px solid #d0d0d0;
+}

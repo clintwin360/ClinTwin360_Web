@@ -307,9 +307,7 @@ def emptyPane(request):
 
 # Test views
 def dummy(request):
-    return HttpResponse(request.user.profile.sponsor.id)
-    questions = ParticipantQuestion.objects.all()
-    return render(request, 'sponsor/dummy.html', {"questions": questions})
+    return render(request, 'sponsor/dummy.html')
 
 
 class ViewSponsorView(TemplateView):

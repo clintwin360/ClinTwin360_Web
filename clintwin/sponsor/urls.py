@@ -12,6 +12,7 @@ schema_view = get_swagger_view(title='Pastebin API')
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('dummy/', views.dummy, name='dummy'),
     path('openapi2', schema_view),
     path('login_success/', views.login_success, name='login_success'),
     # Move to API app
@@ -45,5 +46,4 @@ urlpatterns = [
     path('contact', views.ContactPageView.as_view(), name='contact'),
     path('directions', views.DirectionsPageView.as_view(), name='directions'),
     path('emptypane', views.emptyPane, name='emptypane'),
-    path('dummy/', views.dummy, name='dummy'),
 ]

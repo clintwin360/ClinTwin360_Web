@@ -2,17 +2,45 @@
 {% load static %}
 
 {% block scripts %}
-<script type="text/javascript" src="{% static "sponsor/js/dummy.js" %}"></script>
+    <link href="{% static 'sponsor/css/dummy.css' %}" rel="stylesheet">
+    <script type="text/javascript" src="{% static "sponsor/js/dummy.js" %}"></script>
 {% endblock %}
 {% block content %}
 
-    <div id="dummy_content">
-<table id="dummy_table" style="width:100%">
-  <tr>
-    <th>Firstname</th>
-    <th>Lastname</th>
-    <th>Age</th>
-  </tr>
-</table>
+
+<div class="container-fluid">
+    <div class="row">
+
+
+
+
+        <div class="col">
+            {% include "sponsor/components/trial_dashboard/navbar.html" %}
+            {% include "sponsor/components/trial_dashboard/trialcard.html" %}
+            {% include "sponsor/components/trial_dashboard/trialcard.html" %}
+            {% include "sponsor/components/trial_dashboard/trialcard.html" %}
+            {% include "sponsor/components/trial_dashboard/trialcard.html" %}
+            {% include "sponsor/components/trial_dashboard/trialcard.html" %}
+
+        </div>
+
+
+
+
+        <div class="col">
+            Container Right
+        </div>
+
+
+
+
+
+
+
+
+
     </div>
+</div>
+
+
 {% endblock %}
