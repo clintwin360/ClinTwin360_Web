@@ -1,14 +1,24 @@
-from rest_framework import permissions
+from rest_framework import permissions, status
 from django.contrib.auth import get_user_model
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.generics import CreateAPIView
+from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
-
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
+from rest_framework.authtoken.models import Token
 from .serializers import UserSerializer
 from sponsor.serializers import *
 from sponsor.models import *
 from sponsor.views import calculate_trial_matches
 from rest_framework import viewsets, mixins
 from rest_framework import permissions
+from django.contrib.auth import get_user
+
+
+def get_token(request):
+    x = get_user(request)
+    token = Token.objects.create(user=x)
+    return HttpResponse(token)
 
 
 class CreateUserView(CreateAPIView):
@@ -21,7 +31,7 @@ class CreateUserView(CreateAPIView):
 
 # API
 class ClinicalTrialCriteraViewSet(mixins.ListModelMixin,
-                                 GenericViewSet):
+                                  GenericViewSet):
     """
     retrieve a list of questions
     """
@@ -121,3 +131,13 @@ class ClinicalTrialViewSet(mixins.RetrieveModelMixin,
             queryset = ClinicalTrial.objects.all()
 
         return queryset
+
+
+@api_view(('POST',))
+@permission_classes((permissions.AllowAny,))
+def logout(request):
+    try:
+        request.user.auth_token.delete()
+    except:
+        pass
+    return Response(status=status.HTTP_200_OK)

@@ -1,17 +1,21 @@
 {% extends "sponsor/base.html" %}
 {% load static %}
-{% block title %}Exclusion Criteria{% endblock %}
+{% block title %}Add Eligibility Criteria{% endblock %}
 {% block content %}
-    <h2>Exclusion Criteria</h2>
-    <div class="container-fluid" id="dual-lists">
-        {% include 'sponsor/form/duallist.html' %}
-    </div>
-    <div id="container-fluid" id="fancyform">
+<br>
+<h2 id="add_criteria">Add Eligibility Criteria</h2>
+  <div class="container-fluid" id="dual-lists">
+    {% include 'sponsor/form/duallist.html' %}
+  </div>
+
+<!-- Removed fancyform.html for now -->
+
+    <!-- <div id="container-fluid" id="fancyform">
         {% include 'sponsor/form/fancyform.html' %}
-    </div>
-    <div class="container-fluid" id="radios">
+    </div> -->
+    <!-- <div class="container-fluid" id="radios">
         {% include 'sponsor/form/radionegate.html' %}
-    </div>
+    </div> -->
 {% endblock %}
 
 

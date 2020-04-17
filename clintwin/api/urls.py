@@ -4,7 +4,9 @@ from . import views
 from rest_framework import routers
 from rest_framework_swagger.views import get_swagger_view
 from rest_framework.schemas import get_schema_view
+from sponsor.views import question_flow
 schema_view = get_swagger_view(title='Pastebin API')
+
 
 
 router = routers.DefaultRouter()
@@ -19,7 +21,10 @@ router.register(r'trials', views.ClinicalTrialViewSet, basename='ClinicalTrial')
 
 urlpatterns = [
     path('auth-token/', obtain_auth_token, name='api_token_auth'),
+    path('question_flow/', question_flow, name='question_flow'),
     path('register/', views.CreateUserView.as_view(), name='register'),
+    path('token/', views.get_token, name='token'),
+    path('logout/', views.logout, name='api_logout'),
     path('', include(router.urls)),
     path('openapi', get_schema_view(
         title="Your Project",

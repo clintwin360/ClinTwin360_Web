@@ -120,7 +120,8 @@ button.reset_btn, #id_email, #id_phone {
 /* Styling for page headers */
 #about_us, #our_location, #how_it_works,
 #contact, #trial_dashboard, #create-trial,
-#new-sponsor, #sponsor-req {
+#new-sponsor, #sponsor-req, #add_criteria,
+#create-criteria {
   color: #55666f;
   text-align: center;
 }
@@ -138,7 +139,44 @@ button.reset_btn, #id_email, #id_phone {
   height:90%;
 }
 
-/* Styling for Trial Dashboard */
+
+/* Styling for Criteria Page */
+#field {
+  width: 40%;
+  /* align-items: center; */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+button, #create_button, #add_btn {
+  background-color: #4bc5ef;
+  border-radius: 4px;
+  color: white;
+  padding: 3px 5px;
+  margin: 0px 8px;
+  border: 1px;
+  cursor: pointer;
+  width: 20%;
+}
+
+#back_cri {
+  background-color: #85929E;
+  border-radius: 4px;
+  color: white;
+  padding: 3px 5px;
+  margin: 0px 8px;
+  border: 1px;
+  cursor: pointer;
+  width: 20%;
+}
+
+#criteria-list {
+  width: 90%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* Styling for Trial Dashboard */
 <style>
   .main-cards {

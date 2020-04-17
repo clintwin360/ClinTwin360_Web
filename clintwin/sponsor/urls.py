@@ -12,14 +12,12 @@ schema_view = get_swagger_view(title='Pastebin API')
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('criteria_investigation/', views.criteria_investigation, name='criteria_investigation'),
+    path('dummy/', views.dummy, name='dummy'),
     path('openapi2', schema_view),
     path('login_success/', views.login_success, name='login_success'),
     # Move to API app
     path('loaddata/', views.load_data, name='load_data'),
-    path('trial_match/', views.calculate_trial_matches, name='trial_matches'),
-    path('question_rank/', views.question_rank, name='question_rank'),
-    path('question_flow/', views.question_flow, name='question_flow'),
-    path('token/', views.get_token, name='token'),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     #Login/Password Views
     path('accounts/', include('django.contrib.auth.urls')),
@@ -41,6 +39,10 @@ urlpatterns = [
     path('newtrial', views.NewClinicalTrialView.as_view(), name='newtrial'),
     path('newtrial/inclusion', TemplateView.as_view(template_name='sponsor/inclusion.html'), name='inclusion'),
     path('newtrial/exclusion', TemplateView.as_view(template_name='sponsor/exclusion.html'), name='exclusion'),
+
+    #For criteria
+    path('newtrial/exclusion/addcriteria', views.NewEligibilityCriteriaView.as_view(), name='add_criteria'),
+
     #Sponsor Views
     path('newsponsor', views.NewSponsorView.as_view(), name='newsponsor'),
     path('viewsponsors', views.viewSponsors, name='viewsponsors'),
@@ -54,16 +56,4 @@ urlpatterns = [
     path('contact', views.ContactPageView.as_view(), name='contact'),
     path('directions', views.DirectionsPageView.as_view(), name='directions'),
     path('emptypane', views.emptyPane, name='emptypane'),
-    # path('accounts/logout/', auth_views.LogoutView.as_view(template_name= 'registration/logged_out.html'), name='LogOut'),
-    # path('accounts/', include('django.contrib.auth.urls')),
-    # path('register/', TemplateView.as_view(template_name='sponsor/register.html'), name='signup'),
-    # path('signup/', views.SignUp.as_view(), name='signup'),
-    # path('admin/', admin.site.urls),
-    # path('newcriterion', TemplateView.as_view(template_name='sponsor/new_criterion.html'), name='new_criterion'),
-    # path('viewcriteria', TemplateView.as_view(template_name='sponsor/view_criterian.html'), name='view_criteria'),
-    # path('contactform', views.contact, name='contactform'),
-    path("clinicaltrial_list2", views.ClinicalTrialListView2.as_view(), name='clinicaltrial_list2'),
-    # NEW: for clinicaltrial_list2
-    #path('trial_view', views.TrialView.as_view(), name='trial_view'),  # NEW: for clinicaltrial_list2
-    path('dummy/', views.dummy, name='dummy'),
 ]
