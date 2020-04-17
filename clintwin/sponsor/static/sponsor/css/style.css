@@ -143,7 +143,9 @@ button.reset_btn, #id_email, #id_phone {
 /* Styling for Criteria Page */
 #field {
   width: 40%;
-  align-items: center;
+  /* align-items: center; */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 button, #create_button, #add_btn {
