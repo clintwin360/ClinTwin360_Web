@@ -325,6 +325,9 @@ def dummy(request):
     return render(request, 'sponsor/dummy.html')
 
 
+def criteria_investigation(request):
+    return render(request, 'sponsor/criteria_investigation.html')
+
 class ViewSponsorView(TemplateView):
     template_name = 'sponsor/view_sponsor.html'
 
