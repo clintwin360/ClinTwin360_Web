@@ -1,9 +1,12 @@
 {% extends "sponsor/base.html" %}
 {% load static %}
 {% block title %}Add Eligibility Criteria{% endblock %}
+{% load crispy_forms_tags %}
 {% block content %}
 <br>
-<h2 id="add_criteria">Add Eligibility Criteria</h2>
+<h3 id="add_criteria"><strong>Add Eligibility Criteria for Trial ID:</strong> {{ clinicaltrial.custom_id }}</h3>
+<h4 id="add_criteria"><strong>Trial Name:</strong> {{ clinicaltrial.title }}</h4>
+<!-- <h2 id="add_criteria">Add Eligibility Criteria</h2> -->
   <div class="container-fluid" id="dual-lists">
     {% include 'sponsor/form/duallist.html' %}
   </div>

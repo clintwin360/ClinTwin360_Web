@@ -73,8 +73,9 @@ div.footer {
   height:25%;
 }
 
+
 /* Center the new trial form */
-#new_trial_form, #new_sponsor_form {
+#new_trial_form, #new_sponsor_form, #new_criteria_form {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -141,14 +142,14 @@ button.reset_btn, #id_email, #id_phone {
 
 
 /* Styling for Criteria Page */
-#field {
+#field, #selected-criteria {
   width: 40%;
   /* align-items: center; */
   margin-left: auto;
   margin-right: auto;
 }
 
-button, #create_button, #add_btn {
+button, #create_button, #add_btn, #add_cri {
   background-color: #4bc5ef;
   border-radius: 4px;
   color: white;
@@ -160,6 +161,7 @@ button, #create_button, #add_btn {
 }
 
 #back_cri {
+  float: right;
   background-color: #85929E;
   border-radius: 4px;
   color: white;
@@ -167,7 +169,7 @@ button, #create_button, #add_btn {
   margin: 0px 8px;
   border: 1px;
   cursor: pointer;
-  width: 20%;
+  width: 30%;
 }
 
 #criteria-list {

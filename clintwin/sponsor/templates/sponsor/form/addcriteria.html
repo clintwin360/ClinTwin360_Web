@@ -4,16 +4,8 @@
 <!-- <link href="{% static 'sponsor/css/style.css' %}" rel="stylesheet"> -->
 {% load crispy_forms_tags %}
 {% block scripts %}
-<script>
-    let trial_param;
-    {% if user.is_clintwin %}
-        trial_param = "";
-    {%  else %}
-        trial_param = "?sponsor_id=" + {{ user.profile.sponsor.id }};
-    {% endif %}
-</script>
 <script src="{% static 'sponsor/js/dynamicform.js' %}"></script>
-<!-- <script src="{% static 'sponsor/js/addcriteria.js' %}"></script> -->
+<script src="{% static 'sponsor/js/addcriteria.js' %}"></script>
 <script type="text/javascript" src="{% static "sponsor/js/addcriteria.js"%}?{% now "U" %}"></script>
 {% endblock %}
 
@@ -32,7 +24,7 @@
                     {{ form.criteriaType|as_crispy_field }}
                     {{ form.negated|as_crispy_field }}
             <br>
-            <button class="btn btn-primary" type="submit" id="create_button">Add Criteria</button>
+            <button class="btn btn-primary" type="submit" id="add_cri">Add Criteria</button>
             <a class="btn btn-secondary deletebtn" id="back_cri" class="btn btn-info returnbtn" href="{% url 'exclusion' %}">Back to Eligibility Criteria</a>
         </form>
         <br>

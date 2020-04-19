@@ -7,23 +7,33 @@
 {% endblock %}
 {% block scripts %}
 <!-- <script src='https://clinicaltables.nlm.nih.gov/autocomplete-lhc-versions/17.0.2/autocomplete-lhc.min.js'></script> -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="{% static 'sponsor/js/criteria.js' %}"></script>
 <script src="{% static 'sponsor/js/autocomplete.js' %}"></script>
-<script src="{% static 'sponsor/js/dynamicform.js' %}"></script>
-<script src="{% static 'sponsor/js/addcriteria.js' %}"></script>
+<script src="{% static 'sponsor/js/criteria_investigation.js' %}"></script>
 {% endblock %}
+
 <br>
-<div id="inclusion">
-    <div class="row">
-      <label id="field">Inclusion and Exclusion Criteria
-        <form role="form" autocomplete="off" id="inclusion-form" action="{% url 'add_criteria' %}">
+
+    <div class="row" id="criteria-search">
+      <label id="field" for="criteria-lookup">Choose an Inclusion or Exclusion Criteria
+        <form role="form" autocomplete="off" id="criteria-lookup-form">
           <div class="entry input-group col-xs-3">
-              <input class="form-control" type="text" placeholder="Enter an eligibility criteria" id="criteria_inc" />
-              <button id="add_btn" class="btn btn-primary" type="submit">Add</button>
+              <input class="form-control" type="text" placeholder="Enter an eligibility criteria" id="criteria-lookup">
+              <input type="submit" value="Select" id="add_btn">
             </div>
         </form>
     </div>
-</div>
+    <br>
+
+    <div class="row-3"
+    <div id="selected-criteria">
+        <form id="selected-criteria-form">
+            <p><strong>Selected Criteria</strong></p>
+        </form>
+    </div>
+    </div>
+
 
 <!-- Commented out because the nagation of an inclusion criteria makes an exclusion criteria -->
 <!-- <div id="exclusion">
@@ -45,7 +55,6 @@
   <table class="table table-bordered table-hover" id='criteria-table'>
       <thead class="thead-light">
           <tr>
-              <th id="trial_id">Trial ID</th>
               <th id="criteria-name">Criteria Name</th>
               <th>Value</th>
               <th>Comparison</th>
@@ -60,6 +69,7 @@
 <br>
 
 <script>
-autocomplete(document.getElementById("criteria_inc"), searchableCriteria);
-autocomplete(document.getElementById("criteria_exc"), searchableCriteria);
+autocomplete(document.getElementById("criteria-lookup"), searchableCriteria);
+// autocomplete(document.getElementById("criteria-lookup"), searchableCriteria);
+
 </script>
