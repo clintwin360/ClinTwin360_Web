@@ -87,6 +87,12 @@ def TrialStartView(request, pk):
         
 	   #return reverse_lazy('viewtrials')
 	   return redirect("viewtrials")
+	   #return render("viewtrials")
+	   #return render(request, "sponsor/viewtrials.html", context)
+	   #reverse('sponsor : viewtrials')
+	   #return reverse_lazy('trialdetail', kwargs={'pk': pk})
+	   #return HttpResponseRedirect(reverse('viewtrials'))
+	   
 	
 #NEW	
 def TrialEndView(request, pk):

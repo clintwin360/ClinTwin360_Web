@@ -22,6 +22,8 @@
   <a class="btn btn-info returnbtn" href="{% url 'viewtrials' %}">Return to Dashboard</a>
   <a class="btn btn-secondary editbtn" href="/sponsor/updatetrial/{{ clinicaltrial.id }}">Edit Trial</a>
   <a class="btn btn-danger deletebtn" href="/sponsor/deletetrial/{{ clinicaltrial.id }}">Delete Trial</a>
+  <a class="btn btn-success startbtn" type="submit" href="/sponsor/starttrial/{{ clinicaltrial.id }}">Start Trial</a>
+  <a class="btn btn-warning endbtn" type="submit" href="/sponsor/endtrial/{{ clinicaltrial.id }}">End Trial</a>
     
   </br>
   </br>
