@@ -47,6 +47,10 @@ def index(request):
         return redirect('login_success')
 
 
+def trial_criteria(request, pk):
+    clinicaltrial = ClinicalTrial.objects.get(pk=pk)
+    return render(request, "sponsor/trial_criteria.html", {"clinicaltrial": clinicaltrial})
+
 def login_success(request):
     if request.user.groups.filter(name='clintwin'):
         return redirect("viewsponsors")
@@ -55,7 +59,7 @@ def login_success(request):
 
 #Trial Views
 def viewTrials(request):
-    return render(request, "sponsor/viewtrials.html",)
+    return render(request, "sponsor/viewtrials.html")
 
 
 def submit_criteria(request):
