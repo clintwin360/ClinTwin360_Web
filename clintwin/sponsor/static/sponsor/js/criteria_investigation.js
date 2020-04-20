@@ -1,30 +1,40 @@
 function formElement(props){
-      return `<br><label class="criteria-response" id="comparison-${props.index}" for="comparison-${props.index}">${props.title} </label>` +
+      return `<form name="criteria_x" id="criteria_x">` +
+          `<label class="criteria-response" id="comparison-${props.index}" for="comparison-${props.index}">${props.title} </label>` +
           `<select id="comparison-selected" name="comparison">`+
-                 `<option value="gte">Greater than or equal to</option>`+
-                 `<option value="lte">Less than or equal to</option>`+
-                 `<option value="e">Equals</option>`+
-                 `<option value="nte">Does not Equal</option>`+
+                 `<option value=">=">Greater than or equal to</option>`+
+                 `<option value="<=">Less than or equal to</option>`+
+                 `<option value="=">Equals</option>`+
+                 `<option value="≠">Does not Equal</option>`+
             `</select>`+
-          `<input type="text" id="criteria-response-${props.index}" name="criteria-response-${props.index}"><br><br>` +
-          `<input type="submit" value="Add Criteria" id="add_cri"><br>`
+          `<input type="text" id="criteria-response-${props.index}" name="criteria-response-${props.index}"><br>` +
+          `<br><input type="checkbox" id="negation-maker" name="negated">` +
+          `<label for="negation-maker">Exclusion?</label><br>` +
+          `<input type="button" value="Add Criteria" id="add_cri" onclick="updateForm()">` +
+          `</form><br>`
 }
 
 function formElement_text(props, criteria_values){
   var count = criteria_values.length;
   var criteria_x = props.title;
   var i = 0;
+  var val_1 = criteria_values[0];
+  var val_2 = criteria_values[1];
   // console.log(props.title, "IS IT!"); //DEBUG--
   // console.log(criteria_values, "used"); //DEBUG--
 
   //Selector for Yes/No
   if (count == 2 && (criteria_values[0] == "Yes" || criteria_values[0] == "No")) {
-    return `<br><label class="criteria-response" id="comparison-${props.index}" for="comparison-${props.index}">${props.title} </label>` +
-      `<select id="comparison-${props.index}" name="comparison">`+
-      `<option value="0" id="criteria-response-${props.index}">`+ criteria_values[0]+ `</option>`+
-      `<option value="1" id="criteria-response-${props.index}">`+ criteria_values[1]+ `</option>`+
+    return `<form name="criteria_x" id="criteria_x">` +
+      `<br><label class="criteria-response" id="comparison-${props.index}" for="comparison-${props.index}">${props.title} </label>` +
+      `<select id="criteria-response-${props.index}" name="comparison">`+
+      `<option value="` + val_1 + `" id="criteria-response-${props.index}">`+ criteria_values[0]+ `</option>`+
+      `<option value="` + val_2 + `" id="criteria-response-${props.index}">`+ criteria_values[1]+ `</option>`+
       `</select>`+
-      `<br><input type="submit" value="Add Criteria" id="add_cri"><br>`
+      `<br><input type="checkbox" id="negation-maker" name="negated">` +
+      `<label for="negation-maker">Exclusion?</label><br>` +
+        `<input type="button" value="Add Criteria" id="add_cri" onclick="updateForm()">` +
+        `</form><br>`
   }
   //Selector for multiple selects
   else {
@@ -40,14 +50,16 @@ function formElement_text(props, criteria_values){
         }
         // console.log(start);
   }
-    return `<br><label class="criteria-response" id="comparison-${props.index}" for="comparison-${props.index}" class="mdb-main-label">${props.title} </label>` +
-    `<select class="mdb-select md-form colorful-select dropdown-danger" multiple id="comparison-${props.index}" name="comparison" size="` + count +`">`+
+    return `<form name="criteria_x" id="criteria_x">` +
+    `<br><label class="criteria-response" id="comparison-${props.index}" for="comparison-${props.index}" class="mdb-main-label">${props.title} </label>` +
+    `<select class="mdb-select md-form colorful-select dropdown-danger" multiple id="criteria-response-${props.index}" name="comparison" size="` + count +`">`+
     `<option value="" disabled selected>Select values that apply</option>` +
       start +
       `</select>`+
       `<br><input type="checkbox" id="negation-maker" name="negated">` +
-      `<label for="negation-maker"> Does not have</label><br>` +
-      `<br><input type="submit" value="Add Criteria" id="add_cri"><br>`
+      `<label for="negation-maker">Exclusion?</label><br>` +
+      `<input type="button" value="Add Criteria" id="add_cri" onclick="updateForm()">` +
+      `</form><br>`
 
 }
 }

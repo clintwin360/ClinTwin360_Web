@@ -93,28 +93,32 @@ def TrialStartView(request, pk):
 	if trial.status != 'Started':
 	   trial.status = 'Started'
 	   trial.save(update_fields=['status'])
-        
+
 	   #return reverse_lazy('viewtrials')
 	   return redirect("viewtrials")
+
+#NEW
+
 	   #return render("viewtrials")
 	   #return render(request, "sponsor/viewtrials.html", context)
 	   #reverse('sponsor : viewtrials')
 	   #return reverse_lazy('trialdetail', kwargs={'pk': pk})
 	   #return HttpResponseRedirect(reverse('viewtrials'))
-	   
-	
-#NEW	
+
+
+#NEW
+
 def TrialEndView(request, pk):
 	trial = ClinicalTrial.objects.get(pk=pk)
 	if trial.status == 'Started':
 	   trial.status = 'Ended'
 	   trial.save(update_fields=['status'])
-	
+
 	   #return reverse_lazy('viewtrials')
 	   return redirect("viewtrials")
- 
 
-	
+
+
 class DeleteTrialView(generic.DeleteView):
     model = ClinicalTrial
     success_url = reverse_lazy('viewtrials')
@@ -131,21 +135,6 @@ class NewClinicalTrialView(generic.CreateView):
         'followUp', 'location', 'comments')
     template_name = 'sponsor/newtrial.html'
     success_url = reverse_lazy('viewtrials')
-
-    def get_initial(self, *args, **kwargs):
-        if not (self.request.user.is_clintwin()):
-            initial = {}
-            initial['sponsor'] = self.request.user.profile.sponsor
-            return initial
-        else:
-            return self.initial.copy()
-
-class NewEligibilityCriteriaView(generic.CreateView):
-    model = ClinicalTrialCriteriaResponse
-    fields = (
-        'criteria', 'trial', 'value', 'comparison', 'criteriaType', 'negated')
-    template_name = 'sponsor/form/addcriteria.html'
-    success_url = reverse_lazy('add_criteria')
 
     def get_initial(self, *args, **kwargs):
         if not (self.request.user.is_clintwin()):
