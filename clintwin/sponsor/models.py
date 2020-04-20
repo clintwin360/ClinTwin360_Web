@@ -1,18 +1,17 @@
-from datetime import date
-
-from django.contrib.auth.models import User
 from django.db import models
 # from django.contrib.postgres.fields import ArrayField
 # New additions
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 from django.urls import reverse
-from push_notifications.models import APNSDevice
+from datetime import date
+from django.contrib.auth.models import User
+import datetime
+from django.utils.timezone import now
+from django.utils import timezone
+
 
 # End of new additions
 
 # Create your models here
-
 
 
 def is_clintwin(self):
@@ -207,27 +206,3 @@ class ClinicalTrialCriteriaResponse(models.Model):
     comparison = models.CharField(max_length=50)
     criteriaType = models.CharField(max_length=50)
     negated = models.BooleanField()
-
-# Code to send push notifications
-class PushNotification(models.Model):
-    recipient = models.ForeignKey(User, related_name='received_messages', on_delete=models.CASCADE)
-    content = models.CharField(max_length=512)
-
-
-@receiver(post_save, sender=PushNotification)
-def send_new_message_notification(sender, **kwargs):
-    message = kwargs['instance']
-    send_new_message_push_notification(recipient=message.recipient,
-                                       content=message.content)
-
-
-def send_new_message_push_notification(**kwargs):
-    content = kwargs.get("content")
-
-    device = APNSDevice.objects.filter(name=kwargs.get("recipient").username)
-    if not device:
-        print('Unable to retrieve a device for the user!')
-    else:
-        return device.send_message(content)
-
-# End code to send push notifications
