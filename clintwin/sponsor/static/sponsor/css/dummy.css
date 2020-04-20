@@ -1,9 +1,16 @@
-
-
 #dashboard-title{
     font-size: 48px;
     font-family: Helvetica Light, sans-serif;
     color: #4bc5ef;
+}
+
+.selected-trial-header{
+    height: 91px;
+    display: flex;
+}
+
+.selected-trial-title{
+    align-self: flex-end;
 }
 
 .card {
@@ -14,4 +21,28 @@
 .card:hover {
     background: #e1e1e1;
     border-top: 1px solid #d0d0d0;
+}
+
+.page-container {
+    height: 90vh;
+    margin: 0;
+    padding: 50;
+}
+
+.trial-cards {
+    height: 77vh;
+    overflow: hidden;
+    overflow-y: auto;
+    border: 1px solid blue;
+    padding: 20px;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.container-fluid {
+    margin: 0;
+    padding: 0;
 }

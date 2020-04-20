@@ -1,9 +1,3 @@
-
-
-
-
-
-
 function row_template(props){
     let template = "" +
         "<tr id=\"trial-"+ props.id +"\" class=\"clickable-row\">\<" +

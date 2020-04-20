@@ -3,7 +3,13 @@
 
 body {
   background-color: #fff9f9;
-  margin: auto;
+  margin: 0;
+  padding: 0;
+}
+
+.container-fluid {
+    margin: 0;
+    padding: 0;
 }
 
 /* Style navbar elements */
@@ -221,6 +227,5 @@ button, #create_button, #add_btn, #add_cri {
   #end_date {
     width: 18%;
   }
-​
-</style>
+
 /* Styling for the Create New Trial Page */

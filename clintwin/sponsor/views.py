@@ -57,6 +57,15 @@ def login_success(request):
 def viewTrials(request):
     return render(request, "sponsor/viewtrials.html",)
 
+
+def submit_criteria(request):
+    submission = request.POST
+    if not submission:
+        return JsonResponse({"error": "received an empty post request!"})
+    else:
+        return JsonResponse(submission)
+
+
 class TrialPaneView(generic.DetailView):
     model = ClinicalTrial
     template_name_suffix = '_pane'
