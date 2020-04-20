@@ -20,6 +20,7 @@ router.register(r'responses', views.ParticipantResponseViewSet)
 router.register(r'profile', views.SponsorProfileViewSet)
 router.register(r'matches', views.ClinicalTrialMatchViewSet, basename='ClinicalTrialMatch')
 router.register(r'trials', views.ClinicalTrialViewSet, basename='ClinicalTrial')
+router.register(r'criteria_response', views.ClinicalTrialCriteriaResponseViewSet)
 router.register(r'device/apns', APNSDeviceAuthorizedViewSet)
 
 urlpatterns = [

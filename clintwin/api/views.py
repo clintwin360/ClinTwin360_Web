@@ -133,6 +133,19 @@ class ClinicalTrialViewSet(mixins.RetrieveModelMixin,
         return queryset
 
 
+class ClinicalTrialCriteriaResponseViewSet(mixins.CreateModelMixin,
+                                           mixins.UpdateModelMixin,
+                                           mixins.RetrieveModelMixin,
+                                           mixins.ListModelMixin,
+                                           GenericViewSet):
+    """
+    List all Clinical Trials or List trials by sponsor_id
+    """
+    serializer_class = ClinicalTrialCriteriaResponseSerializer
+    queryset = ClinicalTrialCriteriaResponse.objects.all()
+
+
+
 @api_view(('POST',))
 @permission_classes((permissions.AllowAny,))
 def logout(request):

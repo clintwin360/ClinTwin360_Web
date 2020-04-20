@@ -69,3 +69,11 @@ class ClinicalTrialMatchSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClinicalTrialMatch
         fields = ['clinical_trial']
+
+
+class ClinicalTrialCriteriaResponseSerializer(serializers.ModelSerializer):
+    clinical_trial = ClinicalTrialDetailSerializer(read_only=True)
+
+    class Meta:
+        model = ClinicalTrialCriteriaResponse
+        fields = '__all__'
