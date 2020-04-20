@@ -2,7 +2,7 @@ var qtyTotal = 0;
 var priceTotal = 0;
 
 function updateForm() {
-    var criteria = document.getElementById("comparison-0").value;
+    var criteria = document.getElementById("comparison-0").textContent;
     // console.log(criteria);
     var value = document.getElementById("criteria-response-0").value;
     // console.log(value);

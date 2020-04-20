@@ -87,19 +87,18 @@ def TrialStartView(request, pk):
 
 	   #return reverse_lazy('viewtrials')
 	   return redirect("viewtrials")
-<<<<<<< HEAD
 
 #NEW
-=======
+
 	   #return render("viewtrials")
 	   #return render(request, "sponsor/viewtrials.html", context)
 	   #reverse('sponsor : viewtrials')
 	   #return reverse_lazy('trialdetail', kwargs={'pk': pk})
 	   #return HttpResponseRedirect(reverse('viewtrials'))
-	   
-	
-#NEW	
->>>>>>> 3966107ae73c21e6414ae1668ba024a3124095b4
+
+
+#NEW
+
 def TrialEndView(request, pk):
 	trial = ClinicalTrial.objects.get(pk=pk)
 	if trial.status == 'Started':
