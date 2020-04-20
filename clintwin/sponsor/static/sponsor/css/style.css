@@ -133,6 +133,11 @@ button.reset_btn, #id_email, #id_phone {
   text-align: center;
 }
 
+#sel_criteria {
+  color: #55666f;
+  text-align: left;
+}
+
 /* Styling for "how it works" page */
 #iframe_works {
   margin: 0 auto;
