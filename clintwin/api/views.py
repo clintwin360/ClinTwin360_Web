@@ -142,7 +142,15 @@ class ClinicalTrialCriteriaResponseViewSet(mixins.CreateModelMixin,
     List all Clinical Trials or List trials by sponsor_id
     """
     serializer_class = ClinicalTrialCriteriaResponseSerializer
-    queryset = ClinicalTrialCriteriaResponse.objects.all()
+
+    def get_queryset(self):
+        trial_id = self.request.query_params.get('trial', None)
+        if trial_id:
+            queryset = ClinicalTrialCriteriaResponse.objects.filter(trial__id=trial_id)
+        else:
+            queryset = ClinicalTrialCriteriaResponse.objects.all()
+
+        return queryset
 
 
 
