@@ -1,20 +1,18 @@
-var qtyTotal = 0;
-var priceTotal = 0;
-
 function updateForm() {
     var criteria = document.getElementById("comparison-0").textContent;
     // console.log(criteria);
     var value = document.getElementById("criteria-response-0").value;
-    // console.log(value);
+    console.log(value, "value");
     var comparison;
 
-    // For yes/no questions set comparison to "---"
-    if (value != ">=" || value != "<="  || value != "=" || value != "≠") {
-      comparison = "---";
-    } else {
-      comparison = document.getElementById("comparison-selected").value;
-    }
-
+    // Check if first character in value is between 1-10
+    if (value.charAt(0) == "1" || value.charAt(0) == "2" || value.charAt(0) == "3" || value.charAt(0) == "4"
+      || value.charAt(0) == "5" || value.charAt(0) == "6" || value.charAt(0) == "7" || value.charAt(0) == "8"
+      || value.charAt(0) == "9" || value.charAt(0) == "0"){
+        comparison = document.getElementById("comparison-selected").value;
+      } else { // For yes/no OR multi-select questions set comparison to "---"
+        comparison = "=";
+      }
     // console.log(comparison);
 
     var exclusion_var = document.getElementById("negation-maker").checked;
@@ -41,5 +39,7 @@ function updateForm() {
 
     //Remove the form for the criteria
     $('#criteria_x').remove();
+
+    //Either do a proper POST - send to criteria_response to then call
 
 }
