@@ -2,27 +2,24 @@
 {% load static %}
 {% block title %}Add Eligibility Criteria{% endblock %}
 {% load crispy_forms_tags %}
-{% load static %}
 {% block style %}
 <link href="{% static 'sponsor/css/duallist.css' %}" rel="stylesheet">
-<!-- <link href="{% static 'sponsor/css/fancyform.css' %}" rel="stylesheet"> -->
 <link href="{% static 'sponsor/css/autocomplete.css' %}" rel="stylesheet">
-<link href='https://clinicaltables.nlm.nih.gov/autocomplete-lhc-versions/17.0.2/autocomplete-lhc.min.css' rel="stylesheet">
 {% endblock %}
+
 {% block scripts %}
-<!-- <script src='https://clinicaltables.nlm.nih.gov/autocomplete-lhc-versions/17.0.2/autocomplete-lhc.min.js'></script> -->
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="{% static 'sponsor/js/criteria.js' %}"></script>
 <script src="{% static 'sponsor/js/autocomplete.js' %}"></script>
-<script src="{% static 'sponsor/js/criteria_investigation.js' %}"></script>
 {% endblock %}
+
 {% block content %}
 <br>
 <h3 id="criteria_trial_id"><strong>Eligibility Criteria for Trial ID:</strong> {{ clinicaltrial.custom_id }}</h3>
 <h4 id="criteria_trial_name"><strong>Trial Name:</strong> {{ clinicaltrial.title }}</h4>
 <p hidden id="criteria_trial_ID">{{ clinicaltrial.id }}</p>
 
-<!-- <h2 id="add_criteria">Add Eligibility Criteria</h2> -->
+
 
 <br>
 
@@ -78,17 +75,8 @@
 
 <script>
 autocomplete(document.getElementById("criteria-lookup"), searchableCriteria);
-// autocomplete(document.getElementById("criteria-lookup"), searchableCriteria);
 </script>
 
-<!-- Removed fancyform.html for now -->
-
-    <!-- <div id="container-fluid" id="fancyform">
-        {% include 'sponsor/form/fancyform.html' %}
-    </div> -->
-    <!-- <div class="container-fluid" id="radios">
-        {% include 'sponsor/form/radionegate.html' %}
-    </div> -->
 {% endblock %}
 
 
