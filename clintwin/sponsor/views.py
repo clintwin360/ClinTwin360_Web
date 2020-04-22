@@ -57,8 +57,12 @@ def trial_criteria(request, pk):
         criteria = request.POST["criteria"]
         criteria = ClinicalTrialCriteria.objects.all().filter(name=criteria)[0]
         negated = request.POST.get("negated", "off") == "on"
+        if (negated == "on"):
+            criteriaType = "exclusion"
+        else:
+            criteriaType = "inclusion"
         new_criteria = ClinicalTrialCriteriaResponse.objects.create(
-            trial=trial, value=value, comparison=comparison, negated=negated, criteria=criteria)
+            trial=trial, value=value, comparison=comparison, criteriaType=criteriaType, negated=negated, criteria=criteria)
         new_criteria.save()
     trial_criterias = ClinicalTrialCriteriaResponse.objects.all().filter(trial=pk)
     return render(request, "sponsor/trial_criteria.html", {"trial_criterias": trial_criterias, "clinicaltrial": trial})
