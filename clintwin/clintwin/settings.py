@@ -42,9 +42,16 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'crispy_forms',
     'django_tables2',
-    'rest_framework_swagger'
-
+    'rest_framework_swagger',
+    'push_notifications'
 ]
+
+PUSH_NOTIFICATIONS_SETTINGS = {
+        "APNS_CERTIFICATE": "certificate.pem",
+        "APNS_TOPIC": "com.cscie599.ClinTwin360",
+        "APNS_USE_SANDBOX": True,
+        "UPDATE_ON_DUPLICATE_REG_ID": True,
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -165,3 +172,5 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
 # NEW
 DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap4.html"
+
+#Push notifications

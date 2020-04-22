@@ -23,3 +23,4 @@ sqlparse==0.3.1
 uritemplate==3.0.1
 urllib3==1.25.8
 uWSGI==2.0.18
+django-push-notifications

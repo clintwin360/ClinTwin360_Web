@@ -5,6 +5,8 @@ from rest_framework import routers
 from rest_framework_swagger.views import get_swagger_view
 from rest_framework.schemas import get_schema_view
 from sponsor.views import question_flow
+from push_notifications.api.rest_framework import APNSDeviceAuthorizedViewSet
+
 schema_view = get_swagger_view(title='Pastebin API')
 
 
@@ -19,6 +21,7 @@ router.register(r'profile', views.SponsorProfileViewSet)
 router.register(r'matches', views.ClinicalTrialMatchViewSet, basename='ClinicalTrialMatch')
 router.register(r'trials', views.ClinicalTrialViewSet, basename='ClinicalTrial')
 router.register(r'criteria_response', views.ClinicalTrialCriteriaResponseViewSet, basename='ClinicalTrialCriteriaResponse')
+router.register(r'device/apns', APNSDeviceAuthorizedViewSet)
 
 urlpatterns = [
     path('auth-token/', obtain_auth_token, name='api_token_auth'),

@@ -1,16 +1,18 @@
 function formElement(props){
-      return `<form name="criteria_x" id="criteria_x">` +
-          `<label class="criteria-response" id="comparison-${props.index}" for="comparison-${props.index}">${props.title} </label>` +
-          `<select id="comparison-selected" name="comparison">`+
-                 `<option value=">=">Greater than or equal to</option>`+
-                 `<option value="<=">Less than or equal to</option>`+
-                 `<option value="=">Equals</option>`+
-                 `<option value="≠">Does not Equal</option>`+
+      return `<form name="criteria_x" id="criteria_x" action="" method="post" novalidate>` +
+        `<input type="hidden" name="csrfmiddlewaretoken" value="vdTE47lvClf6IEfNtzoaE1XQPT4RkdmT6nwZ0ymKDKeVEzcde5wKPmo5H5FKMxpS">` +
+          `<label class="criteria-response" for="comparison-${props.index}">${props.title} </label>` +
+          `<input type="hidden" id="criteria" name="criteria" value="${props.title}"><br>` +
+          `<select id="comparison" name="comparison">`+
+                 `<option value="gte">Greater than or equal to</option>`+
+                 `<option value="lte>Less than or equal to</option>`+
+                 `<option value="equals">Equals</option>`+
+                 `<option value="ne">Does not Equal</option>`+
             `</select>`+
-          `<input type="text" id="criteria-response-${props.index}" name="criteria-response-${props.index}"><br>` +
-          `<br><input type="checkbox" id="negation-maker" name="negated">` +
+          `<input type="text" id="value" name="value"><br>` +
+          `<br><input type="checkbox" id="negated" name="negated">` +
           `<label for="negation-maker">Exclusion?</label><br>` +
-          `<input type="button" value="Add Criteria" id="add_cri" onclick="updateForm()">` +
+          `<input type="submit" value="Add Criteria" id="add_cri">` +
           `</form><br>`
 }
 
@@ -25,15 +27,17 @@ function formElement_text(props, criteria_values){
 
   //Selector for Yes/No
   if (count == 2 && (criteria_values[0] == "Yes" || criteria_values[0] == "No")) {
-    return `<form name="criteria_x" id="criteria_x">` +
-      `<br><label class="criteria-response" id="comparison-${props.index}" for="comparison-${props.index}">${props.title} </label>` +
-      `<select id="criteria-response-${props.index}" name="comparison">`+
-      `<option value="` + val_1 + `" id="criteria-response-${props.index}">`+ criteria_values[0]+ `</option>`+
-      `<option value="` + val_2 + `" id="criteria-response-${props.index}">`+ criteria_values[1]+ `</option>`+
+    return `<form name="criteria_x" id="criteria_x" action="" method="post">` +
+      `<input type="hidden" name="csrfmiddlewaretoken" value="vdTE47lvClf6IEfNtzoaE1XQPT4RkdmT6nwZ0ymKDKeVEzcde5wKPmo5H5FKMxpS">` +
+      `<br><label class="criteria-response" for="comparison-${props.index}">${props.title} </label>` +
+      `<input type="hidden" id="criteria" name="criteria" value="${props.title}"><br>` +
+      `<select id="value" name="value">`+
+      `<option value="` + val_1 + `" id="value">`+ criteria_values[0]+ `</option>`+
+      `<option value="` + val_2 + `" id="value">`+ criteria_values[1]+ `</option>`+
       `</select>`+
-      `<br><input type="checkbox" id="negation-maker" name="negated">` +
+      `<br><input type="checkbox" id="negated" name="negated">` +
       `<label for="negation-maker">Exclusion?</label><br>` +
-        `<input type="button" value="Add Criteria" id="add_cri" onclick="updateForm()">` +
+        `<input type="submit" value="Add Criteria" id="add_cri">` +
         `</form><br>`
   }
   //Selector for multiple selects
@@ -50,15 +54,17 @@ function formElement_text(props, criteria_values){
         }
         // console.log(start);
   }
-    return `<form name="criteria_x" id="criteria_x">` +
-    `<br><label class="criteria-response" id="comparison-${props.index}" for="comparison-${props.index}" class="mdb-main-label">${props.title} </label>` +
-    `<select class="mdb-select md-form colorful-select dropdown-danger" multiple id="criteria-response-${props.index}" name="comparison" size="` + count +`">`+
+    return `<form name="criteria_x" id="criteria_x" action="" method="post">` +
+      `<input type="hidden" name="csrfmiddlewaretoken" value="vdTE47lvClf6IEfNtzoaE1XQPT4RkdmT6nwZ0ymKDKeVEzcde5wKPmo5H5FKMxpS">` +
+    `<br><label class="criteria-response" id="criteria" for="comparison-${props.index}" class="mdb-main-label">${props.title} </label>` +
+    `<input type="hidden" id="criteria" name="criteria" value="${props.title}"><br>` +
+    `<select class="mdb-select md-form colorful-select dropdown-danger" multiple id="value" name="value" size="` + count +`">`+
     `<option value="" disabled selected>Select values that apply</option>` +
       start +
       `</select>`+
-      `<br><input type="checkbox" id="negation-maker" name="negated">` +
+      `<br><input type="checkbox" id="negated" name="negated">` +
       `<label for="negation-maker">Exclusion?</label><br>` +
-      `<input type="button" value="Add Criteria" id="add_cri" onclick="updateForm()">` +
+      `<input type="submit" value="Add Criteria" id="add_cri">` +
       `</form><br>`
 
 }
@@ -125,12 +131,10 @@ $(function(){
       (criteriaCategory.localeCompare("weight") == 0) || (criteriaCategory.localeCompare("BMI") == 0)) {
         $("#selected-criteria-form").append(formElement({'title':criteriaCategory,'index':criteriaCount}))
         e.preventDefault();
-        criteriaCount++;
       } // Other criteria get selecor shwoing values from criteria value list
       else {
         get_criteria_options({'title':criteriaCategory,'index':criteriaCount})
         e.preventDefault();
-        criteriaCount++;
       }
 
   });
