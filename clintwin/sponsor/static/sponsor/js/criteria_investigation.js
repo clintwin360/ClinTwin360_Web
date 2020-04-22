@@ -1,6 +1,6 @@
 function formElement(props){
       return `<form name="criteria_x" id="criteria_x" action="" method="post" novalidate>` +
-        `<input type="hidden" name="csrfmiddlewaretoken" value="`+ getCookie('csrftoken') +`">` +
+      `<input type="hidden" name="csrfmiddlewaretoken" value="${getCookie('csrftoken')}">` +
           `<label class="criteria-response" for="comparison-${props.index}">${props.title} </label>` +
           `<input type="hidden" id="criteria" name="criteria" value="${props.title}"><br>` +
           `<select id="comparison" name="comparison">`+
@@ -15,6 +15,10 @@ function formElement(props){
           `<input type="submit" value="Add Criteria" id="add_cri">` +
           `</form><br>`
 }
+
+
+
+
 
 function formElement_text(props, criteria_values){
   var count = criteria_values.length;

@@ -13,7 +13,7 @@ schema_view = get_swagger_view(title='Pastebin API')
 
 router = routers.DefaultRouter()
 router.register(r'questions', views.ParticipantQuestionViewSet)
-router.register(r'criteria', views.ClinicalTrialCriteraViewSet, basename='ClinicalTrialCriteria')
+router.register(r'criteria', views.ClinicalTrialCriteriaViewSet, basename='ClinicalTrialCriteria')
 router.register(r'participants', views.ParticipantViewSet)
 router.register(r'health', views.ParticipantBasicHealthViewSet)
 router.register(r'responses', views.ParticipantResponseViewSet)

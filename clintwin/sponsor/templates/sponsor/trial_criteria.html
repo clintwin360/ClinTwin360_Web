@@ -4,13 +4,13 @@
 {% load crispy_forms_tags %}
 {% block style %}
 <link href="{% static 'sponsor/css/duallist.css' %}" rel="stylesheet">
-<link href="{% static 'sponsor/css/autocomplete.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 {% endblock %}
 
 {% block scripts %}
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="{% static 'sponsor/js/criteria.js' %}"></script>
-<script src="{% static 'sponsor/js/autocomplete.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -73,9 +73,6 @@
 <br>
 <br>
 
-<script>
-autocomplete(document.getElementById("criteria-lookup"), searchableCriteria);
-</script>
 
 {% endblock %}
 

@@ -13,6 +13,7 @@ from sponsor.views import calculate_trial_matches
 from rest_framework import viewsets, mixins
 from rest_framework import permissions
 from django.contrib.auth import get_user
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 def get_token(request):
@@ -30,13 +31,15 @@ class CreateUserView(CreateAPIView):
 
 
 # API
-class ClinicalTrialCriteraViewSet(mixins.ListModelMixin,
+class ClinicalTrialCriteriaViewSet(mixins.ListModelMixin,
                                   GenericViewSet):
     """
     retrieve a list of questions
     """
     queryset = ClinicalTrialCriteria.objects.all()
     serializer_class = ClinicalTrialCriteriaSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['searchable']
 
 
 class ParticipantQuestionViewSet(mixins.ListModelMixin,

@@ -53,7 +53,7 @@ def trial_criteria(request, pk):
     if request.method == 'POST':
         # print(request.POST) //DEBUG--
         comparison = request.POST.get("comparison", "equals")
-        value = request.POST["value"]
+        value = request.POST["criteria-option"]
         criteria = request.POST["criteria"]
         criteria = ClinicalTrialCriteria.objects.all().filter(name=criteria)[0]
         negated = request.POST.get("negated", "off") == "on"

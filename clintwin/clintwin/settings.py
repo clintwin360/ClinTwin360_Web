@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django_tables2',
     'rest_framework_swagger',
-    'push_notifications'
+    'push_notifications',
+    'django_filters'
 ]
 
 PUSH_NOTIFICATIONS_SETTINGS = {

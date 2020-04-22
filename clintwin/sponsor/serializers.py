@@ -1,5 +1,7 @@
 from .models import *
 from rest_framework import serializers
+import ast
+from rest_framework.renderers import JSONRenderer
 
 
 class ParticipantQuestionSerializer(serializers.ModelSerializer):
@@ -7,11 +9,23 @@ class ParticipantQuestionSerializer(serializers.ModelSerializer):
         model = ParticipantQuestion
         fields = ['id', 'text', 'valueType', 'options']
 
+
+
 class ClinicalTrialCriteriaSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClinicalTrialCriteria
         fields = '__all__'
 
+    def to_representation(self, instance):
+        return {
+            "id": instance.id,
+            "name": instance.name,
+            "valueType": instance.valueType,
+            "options": ast.literal_eval(instance.options),
+            "searchable": instance.searchable,
+            "parent": instance.parent.id if instance.parent else None,
+            "question": instance.question.id if instance.question else None
+        }
 
 
 class ParticipantSerializer(serializers.ModelSerializer):
@@ -21,7 +35,6 @@ class ParticipantSerializer(serializers.ModelSerializer):
 
 
 class ParticipantBasicHealthSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = ParticipantBasicHealth
         fields = ['participant', 'gender', 'weight', 'height', 'birth_date']
@@ -51,7 +64,8 @@ class ClinicalTrialListSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClinicalTrial
         fields = ['title', 'objective', 'id', 'sponsor', 'recruitmentStartDate',
-                  'recruitmentEndDate', 'enrollmentTarget', 'description', 'url', 'current_recruitment', 'status', 'custom_id',]
+                  'recruitmentEndDate', 'enrollmentTarget', 'description', 'url', 'current_recruitment', 'status',
+                  'custom_id', ]
 
 
 class ClinicalTrialDetailSerializer(serializers.ModelSerializer):
@@ -60,7 +74,7 @@ class ClinicalTrialDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClinicalTrial
         fields = ['title', 'objective', 'description', 'recruitmentStartDate',
-                  'recruitmentEndDate', 'id', 'sponsor', 'url',  'current_recruitment', 'status', 'custom_id',]
+                  'recruitmentEndDate', 'id', 'sponsor', 'url', 'current_recruitment', 'status', 'custom_id', ]
 
 
 class ClinicalTrialMatchSerializer(serializers.ModelSerializer):
