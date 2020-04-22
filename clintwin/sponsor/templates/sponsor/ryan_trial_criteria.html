@@ -1,0 +1,71 @@
+{% extends "sponsor/base.html" %}
+{% load static %}
+{% block title %}Add Eligibility Criteria{% endblock %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block style %}
+<link href="{% static 'sponsor/css/duallist.css' %}" rel="stylesheet">
+<link href="{% static 'sponsor/css/autocomplete.css' %}" rel="stylesheet">
+{% endblock %}
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="{% static 'sponsor/js/criteria.js' %}"></script>
+<script src="{% static 'sponsor/js/autocomplete.js' %}"></script>
+<script src="{% static 'sponsor/js/criteria_investigation.js' %}"></script>
+<script src="{% static 'sponsor/js/view_criteria.js' %}"></script>
+{% endblock %}
+{% block content %}
+<br>
+<h3 id="add_criteria"><strong>Eligibility Criteria for Trial ID:</strong> {{ clinicaltrial.custom_id }}</h3>
+<h4 id="add_criteria"><strong>Trial Name:</strong> {{ clinicaltrial.title }}</h4>
+
+<br>
+    <label id="field">Choose an Inclusion or Exclusion Criteria</label>
+    <div class="row" id="criteria-search">
+
+        <form role="form" autocomplete="off" id="criteria-lookup-form">
+          <div class="entry input-group col-xs-3">
+
+              <input class="form-control" type="text" placeholder="Enter an eligibility criteria" id="criteria-lookup">
+              <input type="submit" value="Select" id="add_btn">
+            </div>
+        </form>
+    </div>
+    <br>
+
+    <div class="row-3">
+    <div id="selected-criteria">
+        <div id="selected-criteria-form">
+            <p id="sel_criteria"><strong>Selected Criteria</strong></p>
+        </div>
+    </div>
+    </div>
+
+<br>
+<br>
+
+<!-- Table showing list of all criteria added to trial -->
+<div class="ad-card" id="criteria-list">
+  <table class="table table-bordered table-hover" id='criteria-table'>
+      <thead class="thead-light">
+          <tr>
+              <th id="criteria-name">Criteria Name</th>
+              <th>Value</th>
+              <th>Comparison</th>
+              <th>Inclusion or Exclusion</th>
+          </tr>
+      </thead>
+      <tbody id='criteria-list-body'>
+      </tbody>
+  </table>
+</div>
+<br>
+<br>
+
+<script>
+autocomplete(document.getElementById("criteria-lookup"), searchableCriteria);
+</script>
+
+
+
+{% endblock %}
