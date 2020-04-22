@@ -1,23 +1,40 @@
 var criteria_list = [];
 
 
-function form_yes_no(props) {
+function selected_option(option_value,default_value){
+    if (option_value === default_value){
+        return `selected`
+    } else{
+        return ``
+    }
+}
+
+function form_yes_no(props,defaults) {
+    console.log(defaults);
+    let default_comparison = null;
+    let default_value = '';
+    let submit_text = 'Add Criteria'
+    if (defaults){
+        default_comparison = defaults.comparison;
+        default_value = defaults.value;
+        submit_text = 'Update';
+    }
+
     return `<form name="add-criteria" id="add-criteria" data-criteria="${props.id}" action="">` +
-      `<input type="hidden" name="csrfmiddlewaretoken" value="${getCookie('csrftoken')}">` +
       `<br><label class="criteria-response" for="criteria">${props.name} </label>` +
       `<input type="hidden" id="criteria" name="criteria" value="${props.name}"><br>` +
       `<select id="criteria-value" name="criteria-value">`+
-      `<option value="${props.options[0]}" id="value">${props.options[0]}</option>`+
-      `<option value="${props.options[1]}" id="value">${props.options[1]}</option>`+
+      `<option value="Yes" id="value" ${selected_option("Yes",default_value)}>Yes</option>`+
+      `<option value="No" id="value" ${selected_option("No",default_value)}>No</option>`+
       `</select>`+
       `<br><input type="checkbox" id="negated" name="negated">` +
       `<label for="negation-maker">Exclusion?</label><br>` +
-        `<input type="submit" value="Add Criteria" id="add_cri">` +
+        `<input type="submit" value="${submit_text}" id="add_cri">` +
         `</form><br>`
 }
 
 //add conditions to allow for multiple select
-function form_select(props){
+function form_select(props,defaults){
     let select_type = '';
     let option_class = '';
     if (props.valueType === 'list') {
@@ -26,7 +43,6 @@ function form_select(props){
     }
 
     return `<form name="add-criteria" id="add-criteria" data-criteria="${props.id}"  action="" method="post">` +
-      `<input type="hidden" name="csrfmiddlewaretoken" value="${getCookie('csrftoken')}">` +
     `<br><label class="criteria-response" for="criteria" class="mdb-main-label">${props.name} </label>` +
     `<input type="hidden" id="criteria" name="criteria" value="${props.name}"><br>` +
     `<select ${select_type} id="criteria-value" name="criteria-value">`+
@@ -40,21 +56,39 @@ function form_select(props){
 }
 
 
-function form_comparison(props){
+
+function selected_comp(option_value,default_value){
+    if (option_value === default_value){
+        return `selected`
+    } else{
+        return ``
+    }
+}
+
+
+function form_comparison(props,defaults){
+    let default_comparison = null;
+    let default_value = '';
+    let submit_text = 'Add Criteria'
+    if (defaults){
+        default_comparison = defaults.comparison;
+        default_value = defaults.value;
+        submit_text = 'Update';
+    }
+
       return `<form name="add-criteria" id="add-criteria" data-criteria="${props.id}"  action="" method="post" novalidate>` +
-      `<input type="hidden" name="csrfmiddlewaretoken" value="`+ getCookie('csrftoken') +`">` +
           `<label class="criteria-response" for="criteria">${props.name} </label>` +
           `<input type="hidden" id="criteria" name="criteria" value="${props.name}"><br>` +
           `<select id="comparison" name="comparison">`+
-                 `<option value="gte">Greater than or equal to</option>`+
-                 `<option value="lte>Less than or equal to</option>`+
-                 `<option value="equals">Equals</option>`+
-                 `<option value="ne">Does not Equal</option>`+
+                 `<option value="gte" ${selected_option("gte",default_comparison)}>Greater than or equal to</option>`+
+                 `<option value="lte" ${selected_option("lte",default_comparison)}>Less than or equal to</option>`+
+                 `<option value="equals" ${selected_option("equals",default_comparison)}>Equals</option>`+
+                 `<option value="ne" ${selected_option("ne",default_comparison)}>Does not Equal</option>`+
             `</select>`+
-          `<input type="text" id="criteria-value" name="criteria-value"><br>` +
+          `<input type="text" id="criteria-value" name="criteria-value" value="${default_value}"><br>` +
           `<br><input type="checkbox" id="negated" name="negated">` +
           `<label for="negation-maker">Exclusion?</label><br>` +
-          `<input type="submit" value="Add Criteria" id="add_cri">` +
+          `<input type="submit" value="${submit_text}" id="add_cri">` +
           `</form><br>`
 }
 
@@ -82,15 +116,17 @@ function csrfSafeMethod(method) {
     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
 }
 
-//Document Ready
-$(function(){
 
+
+function setupAjaxWithCSRF(){
     $.ajaxSetup({
         beforeSend: function(xhr, settings) {
             xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
         }
     });
+}
 
+function loadCriteria(){
     //Get Searchable Criteria List
     $.getJSON("/api/criteria/?searchable=true", function(result){
           criteria_list = result.results;
@@ -99,8 +135,9 @@ $(function(){
             source: criteria_list.map(item=>item.name)
     });
     });
+}
 
-
+function handleLookupFormSubmission(){
     //Figure out which widget form to show when lookup is submitted
     $("#criteria-lookup-form").submit(function(e) {
         e.preventDefault();
@@ -135,16 +172,49 @@ $(function(){
 
         return false;
     });
+}
 
 
-    //Editing a Criteria
+function handleEditCriteria(){
+        //Editing a Criteria
     $(document).on( "click",".edit-criteria", function(e) {
         e.preventDefault();
-        console.log($(this).parent());
+        let criteria = $(this).data('criteria');
+        $.getJSON(`/api/criteria_response/${criteria}`, function(result){
+            $("#selected-criteria-form").empty();
+
+            let criteria_id = result.criteria;
+            let criteria_item = criteria_list.find(item=>criteria_id === item.id);
+            let form_template = null;
+
+            if (criteria_item.valueType === 'enter_val_comp'){
+                form_template = form_comparison(criteria_item,result)
+            }
+
+            if (criteria_item.valueType === 'enter_val_fixed'){
+                form_template = form_comparison(criteria_item,result)
+            }
+
+            if (criteria_item.valueType ==='yes_no'){
+                form_template = form_yes_no(criteria_item,result)
+            }
+
+            if (criteria_item.valueType === 'pick_one'){
+                form_template = form_select(criteria_item,result)
+            }
+
+            if (criteria_item.valueType === 'list'){
+                form_template = form_select(criteria_item,result)
+            }
+
+            $("#selected-criteria-form").append(form_template);
+
+        });
     });
+}
 
-
-    //Submitting a Criteria
+function handleAddCriteria(){
+       //Submitting a Criteria
     $(document).on( "submit","#add-criteria", function(e) {
         e.preventDefault();
         let trial_id = $( "#criteria-lookup-form" ).data('trial');
@@ -162,11 +232,12 @@ $(function(){
         }
 
         let criteria_comparison = 'equals';
-        if (serialized_data.includes(item=>item.name==='comparison')){
+
+        //check for a comparison value
+        if (serialized_data.filter(item=>item.name==='comparison').length > 0){
             let comparison = serialized_data.find(item=>item.name==='comparison');
             criteria_comparison = comparison.value;
         }
-
 
         let criteria_data = {
             "value": criteria_value,
@@ -195,17 +266,18 @@ $(function(){
         return false
     });
 
+}
 
-
-
-    $(document).on( "click",".delete-criteria", function(e) {
+function handleDeleteCriteria(){
+        $(document).on( "click",".delete-criteria", function(e) {
         e.preventDefault();
-        let id = $(this).data('id');
+        $("#selected-criteria-form").empty();
+        let criteria = $(this).data('criteria');
         let row = $(this).parent().parent();
         //Delete
 
         $.ajax({
-            url: `/api/criteria_response/${id}`,
+            url: `/api/criteria_response/${criteria}`,
             type: 'DELETE',
             success: function(result) {
                 //Remove Row
@@ -214,9 +286,15 @@ $(function(){
             }
         });
     });
+}
 
 
-
-
-
+//Document Ready
+$(function(){
+    setupAjaxWithCSRF();
+    loadCriteria();
+    handleLookupFormSubmission();
+    handleEditCriteria();
+    handleAddCriteria();
+    handleDeleteCriteria();
 });
