@@ -1,6 +1,6 @@
 function formElement(props){
       return `<form name="criteria_x" id="criteria_x" action="" method="post" novalidate>` +
-        `<input type="hidden" name="csrfmiddlewaretoken" value="vdTE47lvClf6IEfNtzoaE1XQPT4RkdmT6nwZ0ymKDKeVEzcde5wKPmo5H5FKMxpS">` +
+        `<input type="hidden" name="csrfmiddlewaretoken" value="`+ getCookie('csrftoken') +`">` +
           `<label class="criteria-response" for="comparison-${props.index}">${props.title} </label>` +
           `<input type="hidden" id="criteria" name="criteria" value="${props.title}"><br>` +
           `<select id="comparison" name="comparison">`+
@@ -28,7 +28,7 @@ function formElement_text(props, criteria_values){
   //Selector for Yes/No
   if (count == 2 && (criteria_values[0] == "Yes" || criteria_values[0] == "No")) {
     return `<form name="criteria_x" id="criteria_x" action="" method="post">` +
-      `<input type="hidden" name="csrfmiddlewaretoken" value="vdTE47lvClf6IEfNtzoaE1XQPT4RkdmT6nwZ0ymKDKeVEzcde5wKPmo5H5FKMxpS">` +
+      `<input type="hidden" name="csrfmiddlewaretoken" value="`+ getCookie('csrftoken') +`">` +
       `<br><label class="criteria-response" for="comparison-${props.index}">${props.title} </label>` +
       `<input type="hidden" id="criteria" name="criteria" value="${props.title}"><br>` +
       `<select id="value" name="value">`+
@@ -55,7 +55,7 @@ function formElement_text(props, criteria_values){
         // console.log(start);
   }
     return `<form name="criteria_x" id="criteria_x" action="" method="post">` +
-      `<input type="hidden" name="csrfmiddlewaretoken" value="vdTE47lvClf6IEfNtzoaE1XQPT4RkdmT6nwZ0ymKDKeVEzcde5wKPmo5H5FKMxpS">` +
+      `<input type="hidden" name="csrfmiddlewaretoken" value="`+ getCookie('csrftoken') +`">` +
     `<br><label class="criteria-response" id="criteria" for="comparison-${props.index}" class="mdb-main-label">${props.title} </label>` +
     `<input type="hidden" id="criteria" name="criteria" value="${props.title}"><br>` +
     `<select class="mdb-select md-form colorful-select dropdown-danger" multiple id="value" name="value" size="` + count +`">`+
@@ -69,6 +69,23 @@ function formElement_text(props, criteria_values){
 
 }
 }
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
 
 
 // Function to split criteria values
