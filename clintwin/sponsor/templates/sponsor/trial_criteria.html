@@ -15,14 +15,14 @@
 <script src="{% static 'sponsor/js/criteria.js' %}"></script>
 <script src="{% static 'sponsor/js/autocomplete.js' %}"></script>
 <script src="{% static 'sponsor/js/criteria_investigation.js' %}"></script>
-<script src="{% static 'sponsor/js/view_criteria.js' %}"></script>
 {% endblock %}
 {% block content %}
 <br>
-<h3 id="add_criteria"><strong>Eligibility Criteria for Trial ID:</strong> {{ clinicaltrial.custom_id }}</h3>
-<h4 id="add_criteria"><strong>Trial Name:</strong> {{ clinicaltrial.title }}</h4>
-<!-- <h2 id="add_criteria">Add Eligibility Criteria</h2> -->
+<h3 id="criteria_trial_id"><strong>Eligibility Criteria for Trial ID:</strong> {{ clinicaltrial.custom_id }}</h3>
+<h4 id="criteria_trial_name"><strong>Trial Name:</strong> {{ clinicaltrial.title }}</h4>
+<p hidden id="criteria_trial_ID">{{ clinicaltrial.id }}</p>
 
+<!-- <h2 id="add_criteria">Add Eligibility Criteria</h2> -->
 
 <br>
 
@@ -36,6 +36,8 @@
         </form>
     </div>
     <br>
+
+
 
     <div class="row-3"
     <div id="selected-criteria">
@@ -60,6 +62,14 @@
           </tr>
       </thead>
       <tbody id='criteria-list-body'>
+        {% for item in trial_criterias %}
+        <tr>
+            <td>{{ item.criteria }}</td>
+            <td>{{ item.value }}</td>
+            <td>{{ item.comparison }}</td>
+            <td>{{ item.negated }}</td>
+        </tr>
+        {% endfor %}
       </tbody>
   </table>
 </div>
@@ -69,9 +79,7 @@
 <script>
 autocomplete(document.getElementById("criteria-lookup"), searchableCriteria);
 // autocomplete(document.getElementById("criteria-lookup"), searchableCriteria);
-
 </script>
-
 
 <!-- Removed fancyform.html for now -->
 
@@ -88,7 +96,5 @@ autocomplete(document.getElementById("criteria-lookup"), searchableCriteria);
 
 
 <!--
-
 <button onclick="categoryFunction()" class="btn btn-success btn-add" type="button">
-
 -->

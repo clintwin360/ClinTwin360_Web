@@ -47,9 +47,21 @@ def index(request):
         return redirect('login_success')
 
 
+# Updated to post trial criteria to API endpoint
 def trial_criteria(request, pk):
-    clinicaltrial = ClinicalTrial.objects.get(pk=pk)
-    return render(request, "sponsor/trial_criteria.html", {"clinicaltrial": clinicaltrial})
+    trial = ClinicalTrial.objects.get(pk=pk)
+    if request.method == 'POST':
+        # print(request.POST) //DEBUG--
+        comparison = request.POST.get("comparison", "equals")
+        value = request.POST["value"]
+        criteria = request.POST["criteria"]
+        criteria = ClinicalTrialCriteria.objects.all().filter(name=criteria)[0]
+        negated = request.POST.get("negated", "off") == "on"
+        new_criteria = ClinicalTrialCriteriaResponse.objects.create(
+            trial=trial, value=value, comparison=comparison, negated=negated, criteria=criteria)
+        new_criteria.save()
+    trial_criterias = ClinicalTrialCriteriaResponse.objects.all().filter(trial=pk)
+    return render(request, "sponsor/trial_criteria.html", {"trial_criterias": trial_criterias, "clinicaltrial": trial})
 
 def login_success(request):
     if request.user.groups.filter(name='clintwin'):

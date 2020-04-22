@@ -127,11 +127,13 @@ button.reset_btn, #id_email, #id_phone {
 /* Styling for page headers */
 #about_us, #our_location, #how_it_works,
 #contact, #trial_dashboard, #create-trial,
-#new-sponsor, #sponsor-req, #add_criteria,
-#create-criteria {
+#new-sponsor, #sponsor-req, #criteria_trial_name,
+#create-criteria, #criteria_trial_id {
   color: #55666f;
   text-align: center;
 }
+
+
 
 #sel_criteria {
   color: #55666f;
