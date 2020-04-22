@@ -5,5 +5,12 @@
     "fields": {
         "name": "clintwin"
     }
+},
+{
+    "model": "auth.group",
+    "pk": 2,
+    "fields": {
+        "name": "sponsor"
+    }
 }
 ]

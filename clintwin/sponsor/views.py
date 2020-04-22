@@ -67,11 +67,13 @@ def trial_criteria(request, pk):
     trial_criterias = ClinicalTrialCriteriaResponse.objects.all().filter(trial=pk)
     return render(request, "sponsor/trial_criteria.html", {"trial_criterias": trial_criterias, "clinicaltrial": trial})
 
+
 def login_success(request):
     if request.user.groups.filter(name='clintwin'):
         return redirect("viewsponsors")
     else:
         return redirect("viewtrials")
+
 
 #Trial Views
 def viewTrials(request):

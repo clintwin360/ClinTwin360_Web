@@ -25,7 +25,7 @@
 
     <div class="row" id="criteria-search">
       <label id="field" for="criteria-lookup">Choose an Inclusion or Exclusion Criteria
-        <form role="form" autocomplete="off" id="criteria-lookup-form">
+        <form role="form" autocomplete="off" id="criteria-lookup-form" data-trial="{{ clinicaltrial.id}}">
           <div class="entry input-group col-xs-3">
               <input class="form-control" type="text" placeholder="Enter an eligibility criteria" id="criteria-lookup">
               <input type="submit" value="Select" id="add_btn">
@@ -77,11 +77,3 @@
 
 
 {% endblock %}
-
-
-
-
-
-<!--
-<button onclick="categoryFunction()" class="btn btn-success btn-add" type="button">
--->
