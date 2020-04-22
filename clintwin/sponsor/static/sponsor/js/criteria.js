@@ -52,6 +52,14 @@ function form_comparison(props){
 }
 
 
+function editCriteria(){
+    console.log("editing!",$(this))
+}
+
+function deleteCriteria(){
+    console.log("deleting!")
+}
+
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -68,9 +76,20 @@ function getCookie(name) {
     return cookieValue;
 }
 
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+
 //Document Ready
 $(function(){
 
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+        }
+    });
 
     //Get Searchable Criteria List
     $.getJSON("/api/criteria/?searchable=true", function(result){
@@ -85,16 +104,12 @@ $(function(){
     //Figure out which widget form to show when lookup is submitted
     $("#criteria-lookup-form").submit(function(e) {
         e.preventDefault();
-        console.log($("#criteria-lookup").val(),"form was submitted");
-
 
         let criteriaCategory = $("#criteria-lookup").val();
         let criteria_item = criteria_list.find(item=>criteriaCategory == item.name);
-        console.log(criteria_item);
         let form_template = null;
 
         if (criteria_item.valueType == 'enter_val_comp'){
-            console.log("HERE")
             form_template = form_comparison(criteria_item)
         }
 
@@ -128,5 +143,29 @@ $(function(){
     });
 
 
+    $('.edit-criteria').on('click', function(e) {
+    e.preventDefault();
+    console.log($(this).parent());
+    });
+
+    $('.delete-criteria').on('click', function(e) {
+        e.preventDefault();
+        let id = $(this).data('id');
+        let row = $(this).parent().parent();
+        //Delete
+
+        $.ajax({
+            url: `/api/criteria_response/${id}`,
+            type: 'DELETE',
+            success: function(result) {
+                //Remove Row
+                console.log("succes!",result);
+                row.remove();
+            }
+        });
 
     });
+
+
+
+});

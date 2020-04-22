@@ -32,7 +32,7 @@ class CreateUserView(CreateAPIView):
 
 # API
 class ClinicalTrialCriteriaViewSet(mixins.ListModelMixin,
-                                  GenericViewSet):
+                                   GenericViewSet):
     """
     retrieve a list of questions
     """
@@ -138,6 +138,7 @@ class ClinicalTrialViewSet(mixins.RetrieveModelMixin,
 
 class ClinicalTrialCriteriaResponseViewSet(mixins.CreateModelMixin,
                                            mixins.UpdateModelMixin,
+                                           mixins.DestroyModelMixin,
                                            mixins.RetrieveModelMixin,
                                            mixins.ListModelMixin,
                                            GenericViewSet):
@@ -154,7 +155,6 @@ class ClinicalTrialCriteriaResponseViewSet(mixins.CreateModelMixin,
             queryset = ClinicalTrialCriteriaResponse.objects.all()
 
         return queryset
-
 
 
 @api_view(('POST',))
