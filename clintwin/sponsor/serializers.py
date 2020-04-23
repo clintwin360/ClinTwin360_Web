@@ -10,7 +10,6 @@ class ParticipantQuestionSerializer(serializers.ModelSerializer):
         fields = ['id', 'text', 'valueType', 'options']
 
 
-
 class ClinicalTrialCriteriaSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClinicalTrialCriteria
@@ -95,3 +94,19 @@ class ClinicalTrialCriteriaResponseSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClinicalTrialCriteriaResponse
         fields = '__all__'
+
+    def to_representation(self, instance):
+        if '[' in instance.value:
+            value = ast.literal_eval(instance.value)
+        else:
+            value = instance.value
+
+        return {
+            "id": instance.id,
+            "value": value,
+            "criteriaType": instance.criteriaType,
+            "comparison": instance.comparison,
+            "negated": instance.negated,
+            "criteria": instance.criteria.id,
+            "trial": instance.trial.id
+        }
