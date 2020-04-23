@@ -1,3 +1,5 @@
+from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.sites.shortcuts import get_current_site
 from rest_framework import permissions, status
 from django.contrib.auth import get_user_model
 from rest_framework.decorators import api_view, permission_classes
@@ -172,4 +174,13 @@ def logout(request):
         request.user.auth_token.delete()
     except:
         pass
+    return Response(status=status.HTTP_200_OK)
+
+
+@api_view(('POST',))
+@permission_classes((permissions.AllowAny,))
+def password_reset(request):
+    form = PasswordResetForm()
+    form.cleaned_data = request.POST
+    form.save(get_current_site(request))
     return Response(status=status.HTTP_200_OK)
