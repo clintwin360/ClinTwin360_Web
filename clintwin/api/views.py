@@ -181,6 +181,6 @@ def logout(request):
 @permission_classes((permissions.AllowAny,))
 def password_reset(request):
     form = PasswordResetForm()
-    form.cleaned_data = request.POST
+    form.cleaned_data = request.data
     form.save(get_current_site(request))
     return Response(status=status.HTTP_200_OK)
