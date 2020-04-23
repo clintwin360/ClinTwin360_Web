@@ -109,6 +109,9 @@ class TrialUpdatePaneView(generic.UpdateView):
     template_name_suffix = '_update_pane'
     success_url = reverse_lazy('viewtrials')
 
+def vt_question_upload(request):
+    return render(request, 'sponsor/vt_question_upload.html')
+
 # NEW
 def TrialStartView(request, pk):
 	trial = ClinicalTrial.objects.get(pk=pk)
@@ -203,16 +206,24 @@ class NewSponsorView(generic.CreateView):
     template_name = 'sponsor/new_sponsor.html'
     success_url = reverse_lazy('viewsponsors')
 
-class SponsorRequestView(generic.CreateView):
+#Request Views
+def viewSponsorReq(request):
+    query_results = SponsorRequest.objects.all()
+    return render(request, "sponsor/view_sponsor_req.html")
+
+class SponsorRequestDetailView(generic.DetailView):
     model = SponsorRequest
-    fields = ['sponsor_id', 'criterion_req', 'values', 'notes',]
+
+class NewSponsorRequestView(generic.CreateView):
+    model = SponsorRequest
+    fields = ['sponsor', 'criterion_req', 'values', 'notes']
     template_name = 'sponsor/request_criteria.html'
     success_url = reverse_lazy('viewtrials')
 
     def get_initial(self, *args, **kwargs):
         if not (self.request.user.is_clintwin()):
             initial = {}
-            initial['sponsor_id'] = self.request.user.profile.sponsor
+            initial['sponsor'] = self.request.user.profile.sponsor
             return initial
         else:
             return self.initial.copy()
@@ -349,10 +360,6 @@ class ClinicalTrialCreateView(generic.CreateView):
         'followUp', 'location', 'comments')
     template_name = 'create_trial_form.html'
 
-def viewSponsorReq(request):
-    query_results = SponsorRequest.objects.all()
-    return render(request, "sponsor/view_sponsor_req.html")
-
 # Supplementary Views
 # Static page for About us
 class AboutPageView(TemplateView):
@@ -390,6 +397,8 @@ def dummy(request):
 
 def criteria_investigation(request):
     return render(request, 'sponsor/criteria_investigation.html')
+
+
 
 class ViewSponsorView(TemplateView):
     template_name = 'sponsor/view_sponsor.html'

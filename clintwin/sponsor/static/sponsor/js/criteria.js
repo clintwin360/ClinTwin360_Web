@@ -22,13 +22,19 @@ function form_yes_no(props,defaults) {
     let default_comparison = null;
     let default_value = '';
     let submit_text = 'Add Criteria'
+    let method = "post";
+    let id = "add-criteria";
+    let data_id = "";
     if (defaults){
         default_comparison = defaults.comparison;
         default_value = defaults.value;
         submit_text = 'Update';
+        method = "put";
+        id = "edit-criteria";
+        data_id = `data-id="${defaults.id}"`
     }
 
-    return `<form name="add-criteria" id="add-criteria" data-criteria="${props.id}" action="">` +
+    return `<form name="${id}" id="${id}" data-criteria="${props.id}" ${data_id} action="" method="${method}">` +
       `<br><label class="criteria-response" for="criteria">${props.name} </label>` +
       `<input type="hidden" id="criteria" name="criteria" value="${props.name}"><br>` +
       `<select id="criteria-value" name="criteria-value">`+
@@ -37,7 +43,7 @@ function form_yes_no(props,defaults) {
       `</select>`+
       `<br><input type="checkbox" id="negated" name="negated">` +
       `<label for="negation-maker">Exclusion?</label><br>` +
-        `<button type="button" value="Cancel" id="add_cri">Cancel</button>` +
+        `<button type="button" value="Cancel" id="cancel-criteria">Cancel</button>` +
         `<input type="submit" value="${submit_text}" id="add_cri">` +
         `</form><br>`
 }
@@ -53,14 +59,20 @@ function form_select(props,defaults){
 
     let default_comparison = null;
     let default_value = '';
-    let submit_text = 'Add Criteria'
+    let submit_text = 'Add Criteria';
+    let method = "post";
+    let id = "add-criteria";
+    let data_id = "";
     if (defaults){
         default_comparison = defaults.comparison;
         default_value = defaults.value;
         submit_text = 'Update';
+        method = "put";
+        id = "edit-criteria";
+        data_id = `data-id="${defaults.id}"`
     }
 
-    return `<form name="add-criteria" id="add-criteria" data-criteria="${props.id}"  action="" method="post">` +
+    return `<form name="${id}" id="${id}" data-criteria="${props.id}" ${data_id} action="" method="${method}">` +
     `<br><label class="criteria-response" for="criteria" class="mdb-main-label">${props.name} </label>` +
     `<input type="hidden" id="criteria" name="criteria" value="${props.name}"><br>` +
     `<select ${select_type} id="criteria-value" name="criteria-value">`+
@@ -69,7 +81,7 @@ function form_select(props,defaults){
     `</select>`+
     `<br><input type="checkbox" id="negated" name="negated">` +
     `<label for="negation-maker">Exclusion?</label><br>` +
-    `<button type="button" value="Cancel" id="add_cri">Cancel</button>` +
+    `<button type="button" value="Cancel" id="cancel-criteria">Cancel</button>` +
     `<button type="submit" value="${submit_text}" id="add_cri">${submit_text}</button>` +
     `</form><br>`
 }
@@ -79,13 +91,19 @@ function form_comparison(props,defaults){
     let default_comparison = null;
     let default_value = '';
     let submit_text = 'Add Criteria'
+    let method = "post";
+    let id = "add-criteria";
+    let data_id = "";
     if (defaults){
         default_comparison = defaults.comparison;
         default_value = defaults.value;
         submit_text = 'Update';
+        method = "put";
+        id = "edit-criteria";
+        data_id = `data-id="${defaults.id}"`
     }
 
-      return `<form name="add-criteria" id="add-criteria" data-criteria="${props.id}"  action="" method="post" novalidate>` +
+      return `<form name="${id}" id="${id}" data-criteria="${props.id}" ${data_id} action="" method="${method}" novalidate>` +
           `<label class="criteria-response" for="criteria">${props.name} </label>` +
           `<input type="hidden" id="criteria" name="criteria" value="${props.name}"><br>` +
           `<select id="comparison" name="comparison">`+
@@ -97,7 +115,7 @@ function form_comparison(props,defaults){
           `<input type="text" id="criteria-value" name="criteria-value" value="${default_value}"><br>` +
           `<br><input type="checkbox" id="negated" name="negated">` +
           `<label for="negation-maker">Exclusion?</label><br>` +
-          `<button type="button" value="Cancel" id="add_cri">Cancel</button>` +
+          `<button type="button" value="Cancel" id="cancel-criteria">Cancel</button>` +
           `<input type="submit" value="${submit_text}" id="add_cri">` +
           `</form><br>`
 }
@@ -227,8 +245,6 @@ function handleAddCriteria(){
        //Submitting a Criteria
     $(document).on( "submit","#add-criteria", function(e) {
         e.preventDefault();
-        console.log(e)
-        return false
         let trial_id = $( "#criteria-lookup-form" ).data('trial');
         let criteria_id = $(this).data('criteria');
 
@@ -280,6 +296,68 @@ function handleAddCriteria(){
 
 }
 
+function handleUpdateCriteria(){
+       //Submitting a Criteria
+    $(document).on( "submit","#edit-criteria", function(e) {
+        e.preventDefault();
+
+        let trial_id = $( "#criteria-lookup-form" ).data('trial');
+        let criteria_id = $(this).data('criteria');
+        let id = $(this).data('id');
+
+        let serialized_data = $(this).serializeArray();
+
+        let criteria_value = serialized_data.filter(item=>item.name==='criteria-value')
+
+        if (criteria_value.length > 1){
+            criteria_value = criteria_value.map(item=>item.value);
+            criteria_value = JSON.stringify(criteria_value)
+        }else{
+            criteria_value = criteria_value[0].value
+        }
+
+        let criteria_comparison = 'equals';
+
+        //check for a comparison value
+        if (serialized_data.filter(item=>item.name==='comparison').length > 0){
+            let comparison = serialized_data.find(item=>item.name==='comparison');
+            criteria_comparison = comparison.value;
+        }
+
+        let criteria_data = {
+            "id": id,
+            "value": criteria_value,
+            "comparison": criteria_comparison,
+            "criteriaType": "inclusion",
+            "negated": false,
+            "criteria": criteria_id,
+            "trial": trial_id
+        };
+
+        console.log(criteria_data);
+
+        $.ajax({
+            type: "PUT",
+            url: `/api/criteria_response/${id}/`,
+            data: JSON.stringify(criteria_data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function(data){
+                location.reload();
+            },
+            failure: function(errMsg) {
+                console.error(errMsg);
+            }
+        });
+        return false
+    });
+
+}
+
+
+
+
+
 function handleDeleteCriteria(){
         $(document).on( "click",".delete-criteria", function(e) {
         e.preventDefault();
@@ -300,6 +378,13 @@ function handleDeleteCriteria(){
     });
 }
 
+function handleCancel() {
+    $(document).on( "click","#cancel-criteria", function(e) {
+        e.preventDefault();
+        $("#selected-criteria-form").empty();
+});
+}
+
 
 //Document Ready
 $(function(){
@@ -308,5 +393,7 @@ $(function(){
     handleLookupFormSubmission();
     handleEditCriteria();
     handleAddCriteria();
+    handleUpdateCriteria();
+    handleCancel();
     handleDeleteCriteria();
 });

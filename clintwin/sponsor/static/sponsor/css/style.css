@@ -81,7 +81,8 @@ div.footer {
 
 
 /* Center the new trial form */
-#new_trial_form, #new_sponsor_form, #new_criteria_form {
+#new_trial_form, #new_sponsor_form, #new_criteria_form,
+#request_criteria_form, #upload-question {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -162,7 +163,7 @@ button.reset_btn, #id_email, #id_phone {
   margin-right: auto;
 }
 
-button, #create_button, #add_btn, #add_cri {
+button, #create_button, #add_btn, #add_cri #cancel-criteria{
   background-color: #4bc5ef;
   border-radius: 4px;
   color: white;

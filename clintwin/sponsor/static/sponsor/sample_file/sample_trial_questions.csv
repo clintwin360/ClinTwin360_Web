@@ -1,0 +1,3 @@
+﻿id,text,valueType,options
+1,What is your marital_status?,pick_one,"\""Single\"", \""Married\"", \""Widowed\"", \""Divorced\"", \""Separated\"", \""Registered partnership\"""
+2,Do you have a healthcare provider?,yes_no,"\""Yes\"", \""No\"""

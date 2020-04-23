@@ -1,0 +1,27 @@
+{% extends "sponsor/base.html" %}
+{% load static %}
+
+{% block scripts %}
+<script src="{% static 'sponsor/js/vt_question_upload.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<br>
+<h2 id="create-trial">Upload a CSV file containing trial questions</h2>
+<br><br>
+<div id="upload-question">
+      <form id="upload-file" action="" method="post">
+        <label for="files">Select files:</label>
+        <input type="file" id="file-uploaded" name="fileUploaded" accept=".cvs, text/plain"><br>
+        <input type="submit" value="Upload">
+      </form><br><br>
+
+      <h3 id="create-trial">Instructions for File Upload</h3><br>
+        1. TO BE DONE <br>
+        2. Some useful tips here etc.<br><br>
+      <label for="files">Download Sample File:</label><br>
+      <button id="download">Download</button>
+</div>
+
+
+{% endblock %}
