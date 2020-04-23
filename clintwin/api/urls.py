@@ -32,6 +32,7 @@ urlpatterns = [
     path('register/', views.CreateUserView.as_view(), name='register'),
     path('token/', views.get_token, name='token'),
     path('logout/', views.logout, name='api_logout'),
+    path('password_reset/', views.password_reset, name='password_reset'),
     path('', include(router.urls)),
     path('openapi', get_schema_view(
         title="Your Project",
