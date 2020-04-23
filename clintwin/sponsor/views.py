@@ -32,6 +32,8 @@ from .tables import ClinicalTrialTable
 import ast
 from rest_framework import pagination
 
+from bootstrap_datepicker_plus import DatePickerInput
+
 
 # Create your views here.
 
@@ -158,9 +160,16 @@ class NewClinicalTrialView(generic.CreateView):
     fields = (
         'custom_id', 'title', 'sponsor', 'objective', 'recruitmentStartDate', 'recruitmentEndDate', 'enrollmentTarget', 'url',
         'followUp', 'location', 'comments')
+    
     template_name = 'sponsor/newtrial.html'
     success_url = reverse_lazy('viewtrials')
 
+    def get_form(self):
+         form = super().get_form()
+         form.fields['recruitmentStartDate'].widget = DatePickerInput(format='%m/%d/%Y')
+         form.fields['recruitmentEndDate'].widget = DatePickerInput(format='%m/%d/%Y')
+         return form
+		 
     def get_initial(self, *args, **kwargs):
         if not (self.request.user.is_clintwin()):
             initial = {}

@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 from .models import ClinicalTrial
+from bootstrap_datepicker_plus import DatePickerInput
 
 class NewUserForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -28,6 +29,10 @@ class NewTrialForm(forms.ModelForm):
     targetRecruitment = forms.IntegerField()
     startDate = forms.DateField()
     endDate = forms.DateField()
+    widgets = {
+             'startDate': DatePickerInput(format='%m/%d/%Y'), 
+             'endDate': DatePickerInput(format='%m/%d/%Y'), 
+         }
 
 
 class NewSponsorForm(forms.ModelForm):

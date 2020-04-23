@@ -44,7 +44,9 @@ INSTALLED_APPS = [
     'django_tables2',
     'rest_framework_swagger',
     'push_notifications',
-    'django_filters'
+    'django_filters',
+	"bootstrap4",
+	"bootstrap_datepicker_plus",
 ]
 
 PUSH_NOTIFICATIONS_SETTINGS = {
@@ -173,5 +175,8 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
 # NEW
 DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap4.html"
+BOOTSTRAP4 = {
+    'include_jquery': True,
+}
 
 #Push notifications
