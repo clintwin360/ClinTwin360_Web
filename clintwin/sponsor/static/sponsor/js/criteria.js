@@ -2,10 +2,18 @@ var criteria_list = [];
 
 
 function selected_option(option_value,default_value){
-    if (option_value === default_value){
-        return `selected`
+    if (Array.isArray(default_value)){
+        if (default_value.includes(option_value)){
+            return `selected`
+        } else{
+            return ``
+        }
     } else{
-        return ``
+        if (option_value === default_value){
+            return `selected`
+        } else{
+            return ``
+        }
     }
 }
 
@@ -29,6 +37,7 @@ function form_yes_no(props,defaults) {
       `</select>`+
       `<br><input type="checkbox" id="negated" name="negated">` +
       `<label for="negation-maker">Exclusion?</label><br>` +
+        `<button type="button" value="Cancel" id="add_cri">Cancel</button>` +
         `<input type="submit" value="${submit_text}" id="add_cri">` +
         `</form><br>`
 }
@@ -42,27 +51,27 @@ function form_select(props,defaults){
         option_class = 'multi-option'
     }
 
+    let default_comparison = null;
+    let default_value = '';
+    let submit_text = 'Add Criteria'
+    if (defaults){
+        default_comparison = defaults.comparison;
+        default_value = defaults.value;
+        submit_text = 'Update';
+    }
+
     return `<form name="add-criteria" id="add-criteria" data-criteria="${props.id}"  action="" method="post">` +
     `<br><label class="criteria-response" for="criteria" class="mdb-main-label">${props.name} </label>` +
     `<input type="hidden" id="criteria" name="criteria" value="${props.name}"><br>` +
     `<select ${select_type} id="criteria-value" name="criteria-value">`+
     `<option value="" disabled selected>Select values that apply</option>` +
-      props.options.map(option=>`<option class="${option_class}" value="${option}">${option}</option>`) +
-      `</select>`+
-      `<br><input type="checkbox" id="negated" name="negated">` +
-      `<label for="negation-maker">Exclusion?</label><br>` +
-      `<input type="submit" value="Add Criteria" id="add_cri">` +
-      `</form><br>`
-}
-
-
-
-function selected_comp(option_value,default_value){
-    if (option_value === default_value){
-        return `selected`
-    } else{
-        return ``
-    }
+     props.options.map(option=>`<option class="${option_class}" value="${option}" ${selected_option(option,default_value)}>${option}</option>`) +
+    `</select>`+
+    `<br><input type="checkbox" id="negated" name="negated">` +
+    `<label for="negation-maker">Exclusion?</label><br>` +
+    `<button type="button" value="Cancel" id="add_cri">Cancel</button>` +
+    `<button type="submit" value="${submit_text}" id="add_cri">${submit_text}</button>` +
+    `</form><br>`
 }
 
 
@@ -88,6 +97,7 @@ function form_comparison(props,defaults){
           `<input type="text" id="criteria-value" name="criteria-value" value="${default_value}"><br>` +
           `<br><input type="checkbox" id="negated" name="negated">` +
           `<label for="negation-maker">Exclusion?</label><br>` +
+          `<button type="button" value="Cancel" id="add_cri">Cancel</button>` +
           `<input type="submit" value="${submit_text}" id="add_cri">` +
           `</form><br>`
 }
@@ -217,6 +227,8 @@ function handleAddCriteria(){
        //Submitting a Criteria
     $(document).on( "submit","#add-criteria", function(e) {
         e.preventDefault();
+        console.log(e)
+        return false
         let trial_id = $( "#criteria-lookup-form" ).data('trial');
         let criteria_id = $(this).data('criteria');
 
@@ -226,7 +238,7 @@ function handleAddCriteria(){
 
         if (criteria_value.length > 1){
             criteria_value = criteria_value.map(item=>item.value);
-            criteria_value = criteria_value.toString()
+            criteria_value = JSON.stringify(criteria_value)
         }else{
             criteria_value = criteria_value[0].value
         }

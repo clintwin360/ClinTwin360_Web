@@ -59,7 +59,7 @@ class Sponsor(models.Model):
 
 
 class SponsorRequest(models.Model):
-    sponsor_id = models.CharField(max_length=50)
+    sponsor = models.ForeignKey(Sponsor, null=True, on_delete=models.CASCADE)
     criterion_req = models.CharField(null=True, max_length=200)
     values = models.CharField(null=True, max_length=500)
     notes = models.CharField(max_length=1000)
