@@ -51,7 +51,15 @@ class ParticipantQuestionViewSet(mixins.ListModelMixin,
     serializer_class = ParticipantQuestionSerializer
     # permission_classes = [permissions.IsAuthenticated]
 
-
+class VirtualTrialParticipantQuestionViewSet(mixins.ListModelMixin,
+                                 GenericViewSet):
+    """
+    retrieve a list of questions
+    """
+    queryset = VirtualTrialParticipantQuestion.objects.all()
+    serializer_class = VirtualTrialParticipantQuestionSerializer
+    # permission_classes = [permissions.IsAuthenticated]
+	
 class ParticipantViewSet(mixins.CreateModelMixin,
                          mixins.RetrieveModelMixin,
                          mixins.UpdateModelMixin,
@@ -89,6 +97,15 @@ class ParticipantResponseViewSet(mixins.CreateModelMixin,
     serializer_class = ParticipantResponseSerializer
     # permission_classes = [permissions.IsAuthenticated]
 
+class VirtualTrialParticipantResponseViewSet(mixins.CreateModelMixin,
+                                 mixins.UpdateModelMixin,
+                                 GenericViewSet):
+    """
+    post or update a participants response to a question
+    """
+    queryset = VirtualTrialParticipantResponse.objects.all()
+    serializer_class = VirtualTrialParticipantResponseSerializer
+    # permission_classes = [permissions.IsAuthenticated]	
 
 class SponsorProfileViewSet(viewsets.ModelViewSet):
     """

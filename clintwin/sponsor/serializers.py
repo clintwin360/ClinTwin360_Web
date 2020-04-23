@@ -9,6 +9,10 @@ class ParticipantQuestionSerializer(serializers.ModelSerializer):
         model = ParticipantQuestion
         fields = ['id', 'text', 'valueType', 'options']
 
+class VirtualTrialParticipantQuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = VirtualTrialParticipantQuestion
+        fields = ['id', 'text', 'valueType', 'options']		
 
 class ClinicalTrialCriteriaSerializer(serializers.ModelSerializer):
     class Meta:
@@ -44,6 +48,10 @@ class ParticipantResponseSerializer(serializers.ModelSerializer):
         model = ParticipantResponse
         fields = ['question', 'participant', 'value']
 
+class VirtualTrialParticipantResponseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = VirtualTrialParticipantResponse
+        fields = ['question', 'participant', 'value']		
 
 class SponsorSerializer(serializers.ModelSerializer):
     class Meta:
