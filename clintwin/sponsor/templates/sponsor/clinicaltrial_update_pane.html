@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{{ form.media }}
 	{% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,6 +24,7 @@
 		<div class="container-fluid" id="content">
             <form method="post" target="_parent">
                 {% csrf_token %}
+				{{ form.media }}
                 {{form.as_p}}
                 <button class="btn btn-success w-25" type="submit" id="edit_button">Edit Trial</button>
 				<!--<button class="btn btn-success startbtn" type="submit" href="/sponsor/starttrial/{{ clinicaltrial.id }}">Start Trial3</button>-->

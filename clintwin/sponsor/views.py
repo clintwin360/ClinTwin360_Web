@@ -101,6 +101,11 @@ class TrialDetailView(generic.DetailView):
 class TrialUpdateView(generic.UpdateView):
     model = ClinicalTrial
     fields = '__all__'
+    def get_form(self):
+         form = super().get_form()
+         form.fields['recruitmentStartDate'].widget = DatePickerInput(format='%m/%d/%Y')
+         form.fields['recruitmentEndDate'].widget = DatePickerInput(format='%m/%d/%Y')
+         return form
     def get_success_url(self):
           trialid=self.kwargs['pk']
           return reverse_lazy('trialdetail', kwargs={'pk': trialid})
@@ -108,6 +113,11 @@ class TrialUpdateView(generic.UpdateView):
 class TrialUpdatePaneView(generic.UpdateView):
     model = ClinicalTrial
     fields = '__all__'
+    def get_form(self):
+         form = super().get_form()
+         form.fields['recruitmentStartDate'].widget = DatePickerInput(format='%m/%d/%Y')
+         form.fields['recruitmentEndDate'].widget = DatePickerInput(format='%m/%d/%Y')
+         return form
     template_name_suffix = '_update_pane'
     success_url = reverse_lazy('viewtrials')
 

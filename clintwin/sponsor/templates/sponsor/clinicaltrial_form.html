@@ -1,4 +1,8 @@
 {% extends "sponsor/base.html" %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{{ form.media }}
 {% load static %}
 {% block style %}{% endblock %}
 {% block scripts %}{% endblock %}
@@ -7,6 +11,7 @@
 {% block content %}
 <form method="post">
     {% csrf_token %}
+	{{ form.media }}
     {{form.as_p}}
     <a href="{% url 'viewtrials' %}" class="btn btn-info" role="button">Return to Dashboard</a>
     <button class="btn btn-success w-25" type="submit" id="edit_button">Edit Trial</button>
