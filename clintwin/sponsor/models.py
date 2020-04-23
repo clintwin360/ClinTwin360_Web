@@ -164,7 +164,17 @@ class ParticipantQuestion(models.Model):
     def __str__(self):
         return self.text
 
+class VirtualTrialParticipantQuestion(models.Model):
+    text = models.TextField()
+    valueType = models.CharField(max_length=50)
+    # options = ArrayField(models.CharField(max_length=256))
+    options = models.TextField()
+    categories = models.ManyToManyField(QuestionCategory)
 
+    def __str__(self):
+        return self.text
+		
+		
 class QuestionFlow(models.Model):
     question = models.ForeignKey(ParticipantQuestion, on_delete=models.CASCADE, related_name='question_flow')
     response = models.CharField(max_length=128)
@@ -186,7 +196,19 @@ class ParticipantResponse(models.Model):
     class Meta:
         unique_together = ('question', 'participant')
 
+class VirtualTrialParticipantResponse(models.Model):
+    question = models.ForeignKey(ParticipantQuestion, on_delete=models.CASCADE)
+    participant = models.ForeignKey(Participant, on_delete=models.CASCADE, related_name='responses')
+    value = models.CharField(max_length=50)
+    last_answered = models.DateTimeField(auto_now=True, null=True)
 
+    def __str__(self):
+        return self.question.text
+
+    class Meta:
+        unique_together = ('question', 'participant')
+		
+		
 class ClinicalTrialCriteria(models.Model):
     name = models.CharField(max_length=500)
     valueType = models.CharField(max_length=50)
