@@ -45,11 +45,13 @@ urlpatterns = [
     # Test: Page for uploading text file for virtual trials
     path('vt_question_upload/', views.vt_question_upload, name='vt_question_upload'),
 
+    path('viewsponsorreq', views.viewSponsorReq, name='viewsponsorreq'),
+    path('criteriarequest', views.NewSponsorRequestView.as_view(), name='criteriarequest'),
+    re_path(r'^criteriarequest/(?P<pk>\d+)$', views.SponsorRequestDetailView.as_view(), name='requestdetail'),
+
     #Sponsor Views
     path('newsponsor', views.NewSponsorView.as_view(), name='newsponsor'),
     path('viewsponsors', views.viewSponsors, name='viewsponsors'),
-    path('viewsponsorreq', views.viewSponsorReq, name='viewsponsorreq'),
-    path('criteriarequest', views.SponsorRequestView.as_view(), name='criteriarequest'),
     re_path(r'^profile/(?P<pk>\d+)$', views.SponsorDetailView.as_view(), name='sponsordetail'),
     re_path(r'^deleteprofile/(?P<pk>\d+)$', views.DeleteSponsorView.as_view(), name='sponsordelete'),
     re_path(r'^updateprofile/(?P<pk>\d+)$', views.SponsorUpdateView.as_view(), name='sponsorupdate'),
