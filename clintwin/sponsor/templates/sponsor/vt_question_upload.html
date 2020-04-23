@@ -1,0 +1,36 @@
+{% extends "sponsor/base.html" %}
+{% load static %}
+
+{% block scripts %}
+    <script type="text/javascript" src="{% static "sponsor/js/vt_question_upload.js" %}"></script>
+{% endblock %}
+{% block content %}
+
+<div class="container-fluid"><br>
+    <h2 id="create-trial">Upload a CSV file Clinical Trial</h2>
+
+    <div id="new_trial_form">
+        <form method="post" novalidate>
+            {% csrf_token %}
+                    {{ form.custom_id|as_crispy_field }}
+                    {{ form.sponsor|as_crispy_field }}
+                    {{ form.title|as_crispy_field }}
+                    {{ form.url|as_crispy_field }}
+              <div class="d-flex justify-content-around">
+                    {{ form.recruitmentStartDate|as_crispy_field }}
+                    {{ form.recruitmentEndDate|as_crispy_field }}
+              </div>
+                    {{ form.enrollmentTarget|as_crispy_field }}
+                    {{ form.location|as_crispy_field }}
+                    {{ form.objective|as_crispy_field }}
+                    {{ form.comments|as_crispy_field }}
+                    {{ form.followUp|as_crispy_field }}
+
+            <button class="btn btn-primary" type="submit" id="create_button">Create Trial</button>
+
+        </form>
+        <br><br><br><br>
+    </div>
+
+
+{% endblock %}

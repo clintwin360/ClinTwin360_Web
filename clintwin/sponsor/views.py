@@ -203,28 +203,20 @@ class NewSponsorView(generic.CreateView):
     template_name = 'sponsor/new_sponsor.html'
     success_url = reverse_lazy('viewsponsors')
 
-
-#Request Views
-def viewSponsorReq(request):
-    query_results = SponsorRequest.objects.all()
-    return render(request, "sponsor/view_sponsor_req.html")
-
-class SponsorRequestDetailView(generic.DetailView):
+class SponsorRequestView(generic.CreateView):
     model = SponsorRequest
-
-class NewSponsorRequestView(generic.CreateView):
-    model = SponsorRequest
-    fields = ['sponsor', 'criterion_req', 'values', 'notes']
+    fields = ['sponsor_id', 'criterion_req', 'values', 'notes',]
     template_name = 'sponsor/request_criteria.html'
     success_url = reverse_lazy('viewtrials')
 
     def get_initial(self, *args, **kwargs):
         if not (self.request.user.is_clintwin()):
             initial = {}
-            initial['sponsor'] = self.request.user.profile.sponsor
+            initial['sponsor_id'] = self.request.user.profile.sponsor
             return initial
         else:
             return self.initial.copy()
+
 
 #Other views
 def compare_values(a, op, b):
@@ -357,7 +349,9 @@ class ClinicalTrialCreateView(generic.CreateView):
         'followUp', 'location', 'comments')
     template_name = 'create_trial_form.html'
 
-
+def viewSponsorReq(request):
+    query_results = SponsorRequest.objects.all()
+    return render(request, "sponsor/view_sponsor_req.html")
 
 # Supplementary Views
 # Static page for About us
@@ -396,6 +390,9 @@ def dummy(request):
 
 def criteria_investigation(request):
     return render(request, 'sponsor/criteria_investigation.html')
+
+def vt_question_upload(request):
+    return render(request, 'sponsor/vt_question_upload.html')
 
 class ViewSponsorView(TemplateView):
     template_name = 'sponsor/view_sponsor.html'
