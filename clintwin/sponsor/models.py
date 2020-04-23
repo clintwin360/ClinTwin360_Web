@@ -90,6 +90,7 @@ class ClinicalTrial(models.Model):
     createdTimeStamp = models.DateTimeField(auto_now_add=True)
     status = models.CharField('Status', null=True, max_length=100, default='Draft')
     current_recruitment = models.IntegerField('Current Recruitment', default=0, null=True, blank=True)
+    is_virtual = models.BooleanField(null=True)
 
     def __str__(self):
         ret = str(self.id) + ":" + self.title
