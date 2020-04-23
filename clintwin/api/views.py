@@ -99,6 +99,14 @@ class SponsorProfileViewSet(viewsets.ModelViewSet):
     # permission_classes = [permissions.IsAuthenticated]
 
 
+class SponsorRequestViewSet(viewsets.ModelViewSet):
+    """
+    Allow sponsors to be viewed or edited.
+    """
+    queryset = SponsorRequest.objects.all()
+    serializer_class = SponsorRequestSerializer
+
+
 class ClinicalTrialMatchViewSet(mixins.ListModelMixin,
                                 GenericViewSet):
     """

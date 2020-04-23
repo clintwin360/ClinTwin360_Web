@@ -51,6 +51,10 @@ class SponsorSerializer(serializers.ModelSerializer):
         model = Sponsor
         fields = '__all__'
 
+class SponsorRequestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SponsorRequest
+        fields = '__all__'
 
 class SponsorDetailSerializer(serializers.ModelSerializer):
     class Meta:
