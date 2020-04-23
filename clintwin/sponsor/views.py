@@ -203,6 +203,21 @@ class NewSponsorView(generic.CreateView):
     template_name = 'sponsor/new_sponsor.html'
     success_url = reverse_lazy('viewsponsors')
 
+class SponsorRequestView(generic.CreateView):
+    model = SponsorRequest
+    fields = ['sponsor_id', 'criterion_req', 'values', 'notes',]
+    template_name = 'sponsor/request_criteria.html'
+    success_url = reverse_lazy('viewtrials')
+
+    def get_initial(self, *args, **kwargs):
+        if not (self.request.user.is_clintwin()):
+            initial = {}
+            initial['sponsor_id'] = self.request.user.profile.sponsor
+            return initial
+        else:
+            return self.initial.copy()
+
+
 #Other views
 def compare_values(a, op, b):
     if op == "equals":
@@ -378,11 +393,6 @@ def criteria_investigation(request):
 
 class ViewSponsorView(TemplateView):
     template_name = 'sponsor/view_sponsor.html'
-
-
-class ViewSponsorReqView(TemplateView):
-    template_name = 'sponsor/view_sponsor_req.html'
-
 
 # NEW: view for clinicaltrial_list2
 class ClinicalTrialListView2(SingleTableView):

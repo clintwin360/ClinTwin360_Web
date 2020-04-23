@@ -49,6 +49,7 @@ urlpatterns = [
     path('newsponsor', views.NewSponsorView.as_view(), name='newsponsor'),
     path('viewsponsors', views.viewSponsors, name='viewsponsors'),
     path('viewsponsorreq', views.viewSponsorReq, name='viewsponsorreq'),
+    path('criteriarequest', views.SponsorRequestView, name='criteriarequest'),
     re_path(r'^profile/(?P<pk>\d+)$', views.SponsorDetailView.as_view(), name='sponsordetail'),
     re_path(r'^deleteprofile/(?P<pk>\d+)$', views.DeleteSponsorView.as_view(), name='sponsordelete'),
     re_path(r'^updateprofile/(?P<pk>\d+)$', views.SponsorUpdateView.as_view(), name='sponsorupdate'),
