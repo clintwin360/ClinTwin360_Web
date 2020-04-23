@@ -1,0 +1,20 @@
+{% extends "sponsor/base.html" %}
+{% load static %}
+{% block style %}{% endblock %}
+{% block scripts %}{% endblock %}
+{% block title %}Criteria Request Details{% endblock %}
+
+{% block content %}
+  <br><h2 id="request-detail-title"><u>Criterion Request Details</u></h2><br>
+  <p><strong>ID:</strong> {{ sponsorrequest.id }}</p>
+  <p><strong>Sponsor:</strong> {{ sponsorrequest.sponsor.organization }}</p>
+  <p><strong>Criterion:</strong> {{ sponsorrequest.criterion_req }}</p>
+  <p><strong>Values:</strong> {{ sponsorrequest.values }}</p>
+  <p><strong>Notes:</strong> {{ sponsorrequest.notes }}</p>
+
+  <a class="btn btn-info returnbtn" href="{% url 'viewsponsorreq' %}">Return to Dashboard</a>
+
+</br>
+</br>
+
+{% endblock %}
