@@ -1,0 +1,45 @@
+
+
+
+.new-trial-subtitle{
+    font-size: 36px;
+    font-family: Helvetica Medium, sans-serif;
+    color: #4bc5ef;
+    text-align: center;
+    align-content: center;
+}
+
+input[type="text"] {
+    background-color:rgba(0, 0, 0, 0);
+    border: none;
+    outline:none;
+    height:30px;
+    transition:height 1s;
+    -webkit-transition:height 1s;
+}
+
+input[type="text"]:focus {
+    background-color:rgba(0, 0, 0, 0);
+    border: none;
+    outline:none;
+    height:50px;
+    font-size:16px;
+}
+
+#search{
+    align-content: center;
+}
+
+div.bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.bottom-nav-link{
+    font-size: 24px;
+    font-family: Helvetica Medium, sans-serif;
+    color: #4bc5ef;
+}

@@ -3,7 +3,7 @@
 {% block title %}Add Eligibility Criteria{% endblock %}
 {% load crispy_forms_tags %}
 {% block style %}
-<link href="{% static 'sponsor/css/duallist.css' %}" rel="stylesheet">
+<link href="{% static 'sponsor/css/criteria.css' %}" rel="stylesheet">
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 {% endblock %}
 
@@ -15,22 +15,23 @@
 
 {% block content %}
 <br>
-<h3 id="criteria_trial_id"><strong>Eligibility Criteria for Trial ID:</strong> {{ clinicaltrial.custom_id }}</h3>
-<h4 id="criteria_trial_name"><strong>Trial Name:</strong> {{ clinicaltrial.title }}</h4>
+<h3 id="criteria_trial_id">{{ clinicaltrial.custom_id }}</h3>
+<h4 class="new-trial-subtitle">Inclusion Criteria</h4>
 <p hidden id="criteria_trial_ID">{{ clinicaltrial.id }}</p>
 
 
 
 <br>
 
-    <div class="row" id="criteria-search">
-      <label id="field" for="criteria-lookup">Choose an Inclusion or Exclusion Criteria
+    <div class="d-flex justify-content-center" id="criteria-search">
+
         <form role="form" autocomplete="off" id="criteria-lookup-form" data-trial="{{ clinicaltrial.id}}">
           <div class="entry input-group col-xs-3">
               <input class="form-control" type="text" placeholder="Enter an eligibility criteria" id="criteria-lookup">
               <input type="submit" value="Select" id="add_btn">
             </div>
         </form>
+
     </div>
     <br>
 
@@ -39,7 +40,7 @@
     <div class="row-3"
     <div id="selected-criteria">
         <div id="selected-criteria-form">
-            <p id="sel_criteria"><strong>Selected Criteria</strong></p>
+            <p id="sel_criteria"></p>
         </div>
     </div>
     </div>
@@ -75,5 +76,15 @@
 <br>
 <br>
 
+<div class="bottom-nav">
+    <div class="d-flex flex-row justify-content-between">
+    <div class="p-2">
+        <a class="bottom-nav-link" href="#">Go Back</a>
+    </div>
+    <div class="p-2">
+        <a class="bottom-nav-link" href="#">Exclusion Criteria</a>
+    </div>
+    </div>
+</div>
 
 {% endblock %}

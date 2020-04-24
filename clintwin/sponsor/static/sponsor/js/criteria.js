@@ -156,7 +156,7 @@ function setupAjaxWithCSRF(){
 
 function loadCriteria(){
     //Get Searchable Criteria List
-    $.getJSON("/api/criteria/?searchable=true", function(result){
+    $.getJSON("/api/criteria/", function(result){
           criteria_list = result.results;
 
           $( "#criteria-lookup" ).autocomplete({
