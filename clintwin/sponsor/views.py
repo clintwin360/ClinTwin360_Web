@@ -50,24 +50,27 @@ def index(request):
 
 
 # Updated to post trial criteria to API endpoint
-def trial_criteria(request, pk):
+def trial_criteria(request, pk, criteria_type):
     trial = ClinicalTrial.objects.get(pk=pk)
-    if request.method == 'POST':
-        # print(request.POST) //DEBUG--
-        comparison = request.POST.get("comparison", "equals")
-        value = request.POST["criteria-option"]
-        criteria = request.POST["criteria"]
-        criteria = ClinicalTrialCriteria.objects.all().filter(name=criteria)[0]
-        negated = request.POST.get("negated", "off") == "on"
-        if (negated == "on"):
-            criteriaType = "exclusion"
-        else:
-            criteriaType = "inclusion"
-        new_criteria = ClinicalTrialCriteriaResponse.objects.create(
-            trial=trial, value=value, comparison=comparison, criteriaType=criteriaType, negated=negated, criteria=criteria)
-        new_criteria.save()
-    trial_criteria = ClinicalTrialCriteriaResponse.objects.all().filter(trial=pk)
-    return render(request, "sponsor/trial_criteria.html", {"trial_criteria": trial_criteria, "clinicaltrial": trial})
+    if criteria_type == "inclusion":
+        next_page = "/sponsor/trial/{}/criteria/exclusion/".format(trial.id)
+        next_page_text = "Exclusion Criteria"
+        previous_page = "/updatetrial/{}/".format(trial.id)
+        previous_page_text = "Edit Trial"
+    else:
+        next_page = "/sponsor/trial/{}/criteria/review/".format(trial.id)
+        next_page_text = "Review Criteria"
+        previous_page = "/sponsor/trial/{}/criteria/inclusion/".format(trial.id)
+        previous_page_text = "Inclusion Criteria"
+
+
+    trial_criteria_responses = ClinicalTrialCriteriaResponse.objects.all().filter(trial=pk, criteriaType=criteria_type)
+    return render(request, "sponsor/trial_criteria.html",
+                  {"trial_criteria": trial_criteria_responses,
+                   "clinicaltrial": trial, "criteria_type": criteria_type,
+                   "previous_page": previous_page, "next_page": next_page,
+                   "previous_page_text": previous_page_text,
+                   "next_page_text": next_page_text})
 
 
 def login_success(request):

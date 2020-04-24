@@ -27,7 +27,8 @@ urlpatterns = [
     #Trial Views
     path('viewtrials', views.viewTrials, name='viewtrials'),
     re_path(r'^trial/(?P<pk>\d+)$', views.TrialDetailView.as_view(), name='trialdetail'),
-    re_path(r'^trial/(?P<pk>\d+)/criteria/$', views.trial_criteria, name='trial_criteria'),
+    re_path(r'^trial/(?P<pk>\d+)/criteria/inclusion/$', views.trial_criteria, {"criteria_type": "inclusion"}, name='trial_criteria'),
+    re_path(r'^trial/(?P<pk>\d+)/criteria/exclusion/$', views.trial_criteria, {"criteria_type": "exclusion"}, name='trial_criteria'),
     re_path(r'^pane/(?P<pk>\d+)$', views.TrialPaneView.as_view(), name='trialpane'),
     re_path(r'^updatetrialpane/(?P<pk>\d+)$', views.TrialUpdatePaneView.as_view(), name='trialupdatepane'),
     re_path(r'^updatetrial/(?P<pk>\d+)$', views.TrialUpdateView.as_view(), name='trialupdate'),

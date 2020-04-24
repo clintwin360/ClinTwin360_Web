@@ -247,6 +247,8 @@ function handleAddCriteria(){
         e.preventDefault();
         let trial_id = $( "#criteria-lookup-form" ).data('trial');
         let criteria_id = $(this).data('criteria');
+        let criteria_type = $( "#criteria-lookup-form" ).data('type');
+        console.log(criteria_type)
 
         let serialized_data = $(this).serializeArray();
 
@@ -270,7 +272,7 @@ function handleAddCriteria(){
         let criteria_data = {
             "value": criteria_value,
             "comparison": criteria_comparison,
-            "criteriaType": "inclusion",
+            "criteriaType": criteria_type,
             "negated": false,
             "criteria": criteria_id,
             "trial": trial_id
@@ -303,6 +305,7 @@ function handleUpdateCriteria(){
 
         let trial_id = $( "#criteria-lookup-form" ).data('trial');
         let criteria_id = $(this).data('criteria');
+        let criteria_type = $( "#criteria-lookup-form" ).data('type');
         let id = $(this).data('id');
 
         let serialized_data = $(this).serializeArray();
@@ -328,7 +331,7 @@ function handleUpdateCriteria(){
             "id": id,
             "value": criteria_value,
             "comparison": criteria_comparison,
-            "criteriaType": "inclusion",
+            "criteriaType": criteria_type,
             "negated": false,
             "criteria": criteria_id,
             "trial": trial_id

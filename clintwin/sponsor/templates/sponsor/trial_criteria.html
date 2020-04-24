@@ -16,8 +16,8 @@
 {% block content %}
 <br>
 <h3 id="criteria_trial_id">{{ clinicaltrial.custom_id }}</h3>
-<h4 class="new-trial-subtitle">Inclusion Criteria</h4>
-<p hidden id="criteria_trial_ID">{{ clinicaltrial.id }}</p>
+<h4 class="new-trial-subtitle">{{ criteria_type | title}} Criteria</h4>
+<p hidden id="criteria_trial_ID" data-type="{{ criteria_type }}">{{ clinicaltrial.id }}</p>
 
 
 
@@ -25,7 +25,7 @@
 
     <div class="d-flex justify-content-center" id="criteria-search">
 
-        <form role="form" autocomplete="off" id="criteria-lookup-form" data-trial="{{ clinicaltrial.id}}">
+        <form role="form" autocomplete="off" id="criteria-lookup-form" data-trial="{{ clinicaltrial.id}}" data-type="{{ criteria_type }}">
           <div class="entry input-group col-xs-3">
               <input class="form-control" type="text" placeholder="Enter an eligibility criteria" id="criteria-lookup">
               <input type="submit" value="Select" id="add_btn">
@@ -62,10 +62,10 @@
 <div class="bottom-nav">
     <div class="d-flex flex-row justify-content-between">
     <div class="p-2">
-        <a class="bottom-nav-link" href="#">Go Back</a>
+        <a class="bottom-nav-link" href="{{ previous_page }}">{{ previous_page_text }}</a>
     </div>
     <div class="p-2">
-        <a class="bottom-nav-link" href="#">Exclusion Criteria</a>
+        <a class="bottom-nav-link" href="{{ next_page }}">{{ next_page_text }}</a>
     </div>
     </div>
 </div>
