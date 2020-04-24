@@ -338,7 +338,7 @@ def question_flow(request):
 
 def load_data(request):
     call_command('loaddata', 'participant_questions')
-    call_command('loaddata', 'virtualtrial_participant_questions')
+    #call_command('loaddata', 'virtualtrial_participant_questions')
     call_command('loaddata', 'groups')
     call_command('loaddata', 'users')
     call_command('loaddata', 'participants')
@@ -348,7 +348,7 @@ def load_data(request):
     call_command('loaddata', 'criteria_responses')
     call_command('loaddata', 'trial_matches')
     call_command('loaddata', 'participant_responses')
-    call_command('loaddata', 'virtualtrial_participant_responses')
+    #call_command('loaddata', 'virtualtrial_participant_responses')
     call_command('loaddata', 'question_flow')
     call_command('loaddata', 'user_profiles')
     return HttpResponse("Data Loaded!")
