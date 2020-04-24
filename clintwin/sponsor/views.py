@@ -73,6 +73,26 @@ def trial_criteria(request, pk, criteria_type):
                    "next_page_text": next_page_text})
 
 
+def review_criteria(request, pk):
+    trial = ClinicalTrial.objects.get(pk=pk)
+    trial_criteria_responses = ClinicalTrialCriteriaResponse.objects.all().filter(trial=pk)
+    inclusion_criteria = trial_criteria_responses.filter(criteriaType="inclusion")
+    exclusion_criteria = trial_criteria_responses.filter(criteriaType="exclusion")
+
+    next_page = "/sponsor/viewtrials"
+    next_page_text = "Continue"
+    previous_page = "/sponsor/trial/{}/criteria/exclusion/".format(trial.id)
+    previous_page_text = "Exclusion Criteria"
+
+    return render(request, "sponsor/review_criteria.html",
+                  {"inclusion_criteria": inclusion_criteria,
+                   "exclusion_criteria": exclusion_criteria,
+                   "clinicaltrial": trial,
+                   "previous_page": previous_page, "next_page": next_page,
+                   "previous_page_text": previous_page_text,
+                   "next_page_text": next_page_text})
+
+
 def login_success(request):
     if request.user.groups.filter(name='clintwin'):
         return redirect("viewsponsors")

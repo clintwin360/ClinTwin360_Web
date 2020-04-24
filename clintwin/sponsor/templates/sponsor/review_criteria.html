@@ -1,0 +1,55 @@
+{% extends "sponsor/base.html" %}
+{% load static %}
+{% block title %}Add Eligibility Criteria{% endblock %}
+{% load crispy_forms_tags %}
+{% block style %}
+<link href="{% static 'sponsor/css/criteria.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="{% static 'sponsor/js/criteria.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<br>
+<h3 id="criteria_trial_id">{{ clinicaltrial.custom_id }}</h3>
+<h4 class="new-trial-subtitle">Review</h4>
+<p hidden id="criteria_trial_ID" data-type="{{ criteria_type }}">{{ clinicaltrial.id }}</p>
+
+<br>
+<br>
+
+<!-- Table showing list of all criteria added to trial -->
+<div id="criteria-list">
+<h3>Inclusion Criteria</h3>
+<ul>
+    {% for item in inclusion_criteria %}
+    <li class="criteria-item">{{ item.criteria }} {{ item.comparison }} {{ item.value }}</li>
+    {% endfor %}
+</ul>
+
+<h3>Exclusion Criteria</h3>
+<ul>
+    {% for item in exclusion_criteria %}
+    <li class="criteria-item">{{ item.criteria }} {{ item.comparison }} {{ item.value }}</li>
+    {% endfor %}
+</ul>
+</div>
+
+
+
+<div class="bottom-nav">
+    <div class="d-flex flex-row justify-content-between">
+    <div class="p-2">
+        <a class="bottom-nav-link" href="{{ previous_page }}">{{ previous_page_text }}</a>
+    </div>
+    <div class="p-2">
+        <a class="bottom-nav-link" href="{{ next_page }}">{{ next_page_text }}</a>
+    </div>
+    </div>
+</div>
+
+{% endblock %}
