@@ -1,0 +1,61 @@
+[
+  {
+    "model": "sponsor.ParticipantResponse",
+    "pk": "1", 
+    "fields": {
+      "question": "39",
+      "participant": "1",
+      "value": "Congenital heart disease"
+    }
+  },
+    {
+    "model": "sponsor.ParticipantResponse",
+    "pk": "2",
+    "fields": {
+      "trial_id": "1",
+	  "question": "33",
+      "participant": "1",
+      "value": "No"
+    }
+  },
+    {
+    "model": "sponsor.ParticipantResponse",
+    "pk": "3",
+    "fields": {
+      "trial_id": "1",
+	  "question": "34",
+      "participant": "1",
+      "value": "Yes"
+    }
+  },
+    {
+    "model": "sponsor.ParticipantResponse",
+    "pk": "4",
+    "fields": {
+      "trial_id": "1",
+	  "question": "20",
+      "participant": "1",
+      "value": "Yes"
+    }
+  },
+    {
+    "model": "sponsor.ParticipantResponse",
+    "pk": "5",
+    "fields": {
+      "trial_id": "1",
+	  "question": "38",
+      "participant": "1",
+      "value": "No"
+    }
+  },
+    {
+    "model": "sponsor.ParticipantResponse",
+    "pk": "6",
+    "fields": {
+      "trial_id": "1",
+	  "question": "3",
+      "participant": "1",
+      "value": "66"
+    }
+  }
+]

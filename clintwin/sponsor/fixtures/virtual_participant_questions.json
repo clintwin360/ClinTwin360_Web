@@ -1,0 +1,892 @@
+[
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "1", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "What is your height? (ft.)", 
+      "options": "{\"min\":30,\"max\":100,\"increment\":1,\"unit\":\"lbs\"}", 
+      "valueType": "large_option_set"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "2", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "What is your weight? (lbs.)", 
+      "options": "{\"min\":1,\"max\":1000,\"increment\":.5,\"unit\":\"inches\"}", 
+      "valueType": "large_option_set"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "3", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "How old are you?", 
+      "options": "{\"min\":0,\"max\":140,\"increment\":1,\"unit\":\"years\"}", 
+      "valueType": "large_option_set"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "4", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "What race or ethnicity do you identify with?", 
+      "options": "[\"American Indian or Alaska Native\",\"Black or African American\", \"Hispanic or Latino\", \"Native Hawaiian or Other Pacific Islander\", \"White\"]", 
+      "valueType": "pick_one"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "5", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Gender", 
+      "options": "[\"Male\", \"Female\"]", 
+      "valueType": "pick_one"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "6", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "What is your zipcode?", 
+      "options": "\"\"", 
+      "valueType": "enter_val"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "7", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Marital Status", 
+      "options": "[\"Single\", \"Married\", \"Widowed\", \"Divorced\", \"Separated\", \"Registered partnership\"]", 
+      "valueType": "pick_one"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "8", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Living Situation", 
+      "options": "[\"Own a home\", \"Rent\", \"Live with parents\", \"Live with roommates\", \"Homeless\"]", 
+      "valueType": "pick_one"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "9", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Sexually Active", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "10", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Birth Control Used", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "11", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Do you use sunscreen?", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "12", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Have you had chicken pox", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "13", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Blood Type", 
+      "options": "[\"O+\", \"O-\", \"A+\", \"A-\", \"B+\", \"B-\", \"AB+\", \"AB-\"]", 
+      "valueType": "pick_one"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "14", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Do you use Tobacco?", 
+      "options": "[\"Yes\", \"No\", \"In the past\"]", 
+      "valueType": "pick_one"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "15", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "How often?", 
+      "options": "[\"1 per day\", \"2-5 per day\", \"5-10 per day\", \"More than 10 per day\"]", 
+      "valueType": "pick_one"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "16", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "How long have you used tobacco?", 
+      "options": "[\"Less than 6 months\", \"1-2 years\", \"2-5 years\", \"Over 5 years\"]", 
+      "valueType": "pick_one"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "17", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Do you use smokeless or do you smoke tobacco?", 
+      "options": "[\"Smokeless\", \"Smoke tobacco\"]", 
+      "valueType": "list"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "18", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "When did you quit?", 
+      "options": "[\"Less than 6 months\", \"1-2 years\", \"2-5 years\", \"Over 5 years\"]", 
+      "valueType": "pick_one"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "19", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Did you quit the use of Tobacco?", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "20", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Do you exercise?", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "21", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "How often do you exercise in a week?", 
+      "options": "[\"1 day\", \"2 days\", \"3 days\", \"4 days\", \"5 days\", \"6 days\", \"7 days\"] ", 
+      "valueType": "pick_one"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "22", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "How long is each exercise period?", 
+      "options": "[\"Less than 30 minutes\", \"30-45 minutes\", \"45 minutes - 1 hour\", \"Over 1 hour\"]", 
+      "valueType": "pick_one"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "23", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "What form of exercise do you do?", 
+      "options": "[\"Balance exercises\", \"Strength training\", \"Aerobics\", \"Flexibility exercises\"]", 
+      "valueType": "list"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "24", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Do you drink alcohol?", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "25", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Average number of glasses of alcohol per week?", 
+      "options": "[\"1\", \"2\", \"3\", \"4\", \"More than 5\"]", 
+      "valueType": "pick_one"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "26", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Do you have any allergies?", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "27", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "What form(s) of allergies do you have?", 
+      "options": "[\"Drugs\", \"Chemicals\", \"Food\", \"Seasonal\"]", 
+      "valueType": "list"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "28", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Drug and Chemial Allergies:(Please check all that apply)", 
+      "options": "[\"Amoxicillin\", \"Ampicillin\", \"Penicillin\", \"Tetracycline\", \"Ibuprofen\", \"Naproxen\", \"'Aspirin\", \"Cetuximab (Erbitux)\", \"Rituximab (Rituxian)\", \"Insulin\", \"Carbamazepine (Tegretol)\", \"Lamotrigine (Lamictal)\", \"Phenytoin\", \"Atracurium\", \"Succinylcholine\", \"Vecuronium\"]", 
+      "valueType": "list"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "29", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "What allergy symptoms do you experience?", 
+      "options": "[\"Blurred vision\", \"Pain/redness in eyes\", \"Itchy eyes\", \"Watery eyes\", \"Hoarsness\", \"Smell or taste change\", \"Dizziness\", \"Drainage\", \"Itching throat\", \"Snoring\", \"Ringing in ears\", \"Headaches\", \"Itching (general)\", \"Rash\", \"Hives\", \"Depression\", \"Tremor\", \"Anxiety\", \"Persitent cough\", \"Wheezing\", \"Shortness of breath\", \"Chest pain\", \"Palpitation\", \"No sleep/Insomnia\"]", 
+      "valueType": "list"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "30", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "When was your last visit to see a doctor?", 
+      "options": "[\"Less than 1 month ago\", \"1-3 months ago\", \"3-6 months ago\", \"6 months - 1 year ago\", \"Over 1 year ago\"]", 
+      "valueType": "pick_one"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "31", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Was your last visit to see a doctor a regular check-up?", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "32", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Do you have any of these medical problems?", 
+      "options": "[\"Weight loss and fatigue\", \"Eye Problems e.g. glaucoma\", \"Cardiovascular e.g. chest pain, high blood pressure\",\"Respiratory e.g. embolism, tuberculosis\", \"GI e.g trouble swallowing, heartburn\", \"Urinary track infections\", \"Musculoskeletal e.g. arthritis, osteoporosis\", \"Skin Problems e.g. rashes, acne, psoriasis\", \"Neurological e.g.headache, stroke\", \"Endocrine e.g. diabetes, thyroid disease\", \"Psychiatric/Emotional e.g. depression, eating disorders\", \"Hematologic Lymphatic: e.g. anemia, enlarged lymph nodes\"]", 
+      "valueType": "list"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "33", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Are you a healthcare volunteer?", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "34", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Do you own a wearable device?", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "35", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Do you consent to giving access to your physical activity and biometric data from your wearable device?", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "36", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "What type of wearable device do you use?", 
+      "options": "[\"Fitbit\", \"Apple Watch\", \"Garmin\", \"Misfit\", \"Pebble\", \"Other\"]", 
+      "valueType": "list"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "37", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Are you able to give informed consent to participate in clinical studies and trials?", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "38", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Are you pregnant?", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "39", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "What type of cardiovascular disease do you have?", 
+      "options": "[\"Congenital heart disease\", \"Arrhythmia\", \"Coronary artery disease\", \"Dilated cardiomyopathy\", \"Myocardial infarction\", \"Heart failure\", \"Hypertrophic cardiomyopathy\", \"Mitral regurgitation\", \"Mitral valve prolapse\", \"Pulmonary stenosis\"]", 
+      "valueType": "list"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "40", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Have you had any major cardiovascular event and/or procedure recently?", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "41", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "When was your last cardiovascular event and/or precedure?", 
+      "options": "[\"Less than 1 month ago\", \"1-3 months ago\", \"3-6 months ago\", \"6-12 months ago\", \"More than 1 year ago\"]", 
+      "valueType": "pick_one"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "42", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Do you have a healthcare provider?", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "43", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Select healthcare provider", 
+      "options": "[\"Anthem\", \"Kaiser Permanente\", \"Aetna\", \"UnitedHealth Group\", \"Cardinal Health\", \"Other\"]", 
+      "valueType": "pick_one"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "44", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "What language(s) are you fluent in?", 
+      "options": "[\"English\", \"Spanish\", \"French\", \"Italian\", \"Mandarin\", \"Japanese\"]", 
+      "valueType": "list"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "45", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Are you able to read and understand the risks of the study?", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "46", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Do you have any upcoming medical procdedures?", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "47", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Check any upcoming medical procedures that apply", 
+      "options": "[\"Hemodialysis\", \"Peritoneal dialysis\", \"Prandial insulin therapy\", \"Surgery using anesthesia\"]", 
+      "valueType": "list"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "48", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "When is the upcoming medical procedure scheduled for?", 
+      "options": "[\"In less than 3 months\", \"In 3-6 months\", \"In 6-12 months\"]", 
+      "valueType": "pick_one"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "49", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Are you currently taking any medication?", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "50", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Check any medication(s) that you are currently using", 
+      "options": "[\"Vitamins\", \"Diet supplements\", \"Herbal supplements\", \"Glucocorticoid\", \"Aspirin\", \"Insulin\", \"Over-the-counter medication\", \"Plavix/Clopidogrel (for heart disease)\", \"Coumadin/Warfarin (blood thinners)\"]", 
+      "valueType": "list"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "51", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Do you have diabetes?", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "52", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "What types of diabetes do you have?", 
+      "options": "[\"Type 1\", \"Type 2\", \"Gestational\", \"Prediabetes\", \"Secondary\"]", 
+      "valueType": "pick_one"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "53", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "How long have you been diagnosed with diabetes?", 
+      "options": "[\"Less than 3 months ago\", \"3-12 months ago\", \"1-2 years ago\", \"2-5 years ago\", \"Over 5 years ago\"]", 
+      "valueType": "pick_one"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "54", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Has there been any change in your diabetes medication or dosage?", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "55", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "When was the last change in your diabetes medication or dosage?", 
+      "options": "[\"Less than 3 months ago\", \"3-12 months ago\", \"1-2 years ago\", \"2-5 years ago\", \"Over 5 years ago\"]", 
+      "valueType": "pick_one"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "56", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Do you have cancer?", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "57", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Region of the body affected by the cancer", 
+      "options": "[\"Breast\", \"Digestive/Gastrointestinal\", \"Endocrine and Neuroendocrine\", \"Eye\", \"Genitourinary\", \"Germ Cell\", \"Gynecologic\", \"Head and Neck\", \"Hematologic/Blood\", \"Musculoskeletal\", \"Neurologic\", \"Respiratory/Thoracic\", \"Skin\", \"AIDS-Related\"]", 
+      "valueType": "list"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "58", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "What type of Germ Cell Cancer?", 
+      "options": "[\"Central Nervous System\", \"Extracranial Germ Cell Tumor\", \"Extragonadal Germ Cell Tumor\", \"Ovarian Germ Cell Tumor\", \"Testicular Cancer\"]", 
+      "valueType": "list"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "59", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "What type of Digestive/Gastrointestinal Cancer?", 
+      "options": "[\"Anal Cancer\", \"Appendix Cancer\", \"Bile Duct Cancer\", \"Carcinoid Tumor\", \"Gastrointestinal\", \"Colon Cancer\", \"Esophageal Cancer\", \"Gallbladder Cancer\", \"Gastric Cancer\", \"Gastrointestinal Stromal Tumors (GIST)\", \"Islet Cell Tumors\", \"Pancreatic Neuroendocrine Tumors\", \"Liver Cancer\", \"Pancreatic Cancer\", \"Rectal Cancer\", \"Small Intestine Cancer\", \"Stomach (Gastric) Cancer\"]\n", 
+      "valueType": "list"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "60", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "What type of Endocrine and Neuroendocrine Cancer?", 
+      "options": "[\"Adrenocortical Carcinoma\", \"Gastrointestinal Carcinoid Tumor\", \"Islet Cell Tumors\", \"Pancreatic Neuroendocrine Tumors\", \"Neuroendocrine Carcinoma of the Skin (Merkel Cell Carcinoma)\", \"Parathyroid Cancer\", \"Paraganglioma\", \"Pheochromocytoma\", \"Pituitary Tumor\", \"Thyroid Cancer\"]", 
+      "valueType": "list"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "61", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "What type of Eye Cancer?", 
+      "options": "[\"Intraocular Melanoma\", \"Retinoblastoma\"]", 
+      "valueType": "list"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "62", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "What type of Genitourinary Cancer?", 
+      "options": "[\"Bladder Cancer\", \"Kidney (Renal Cell) Cancer\", \"Penile Cancer\", \"Prostate Cancer\", \"Renal Pelvis and Ureter Cancer\", \"Transitional Cell\", \"Testicular Cancer\", \"Urethral Cancer\", \"Wilms Tumor\"]", 
+      "valueType": "list"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "63", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "What type of Gynecologic Cancer?", 
+      "options": "[\"Cervical Cancer\", \"Endometrial Cancer\", \"Fallopian Tube Cancer\", \"Gestational Trophoblastic Tumor\", \"Ovarian Epithelial Cancer\", \"Ovarian Germ Cell Tumor\", \"Ovarian Low Malignant Potential Tumor\", \"Primary Peritoneal Cancer\", \"Uterine Sarcoma\", \"Vaginal Cancer\", \"Vulvar Cancer\"]", 
+      "valueType": "list"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "64", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "What type of Head and Neck Cancer?", 
+      "options": "[\"Hypopharyngeal Cancer\", \"Laryngeal Cancer\", \"Lip and Oral Cavity Cancer\", \"Metastatic Squamous Neck Cancer\", \"Mouth Cancer\", \"Nasopharyngeal Cancer\", \"Paranasal Sinus and Nasal Cavity Cancer\", \"Parathyroid Cancer\", \"Pharyngeal Cancer\", \"Salivary Gland Cancer\", \"Throat Cancer\", \"Thyroid Cancer\"]", 
+      "valueType": "list"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "65", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "What type of Hematologic/Blood Cancer?", 
+      "options": "[\"Leukemia\", \"Lymphoma\"]", 
+      "valueType": "list"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "66", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "What type of Musculoskeletal Cancer?", 
+      "options": "[\"Bone Cancer\", \"Rhabdomyosarcoma\", \"Soft Tissue Sarcoma\"]", 
+      "valueType": "list"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "67", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "What type of Neurologic Cancer?", 
+      "options": "[\"Brain Tumor\", \"Neuroblastoma\", \"Pituitary Tumor\", \"Primary Central Nervous System (CNS) Lymphoma\"]", 
+      "valueType": "list"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "68", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "What type of Respiratory/Thoracic Cancer?", 
+      "options": "[\"Non-Small Cell Lung Cancer\", \"Small Cell Lung Cancer\", \"Pleuropulmonary Blastoma\", \"Tracheobronchial Tumors\", \"Malignant Mesothelioma\", \"Thymoma and Thymic Carcinoma\"]", 
+      "valueType": "list"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "69", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "What type of Skin Cancer?", 
+      "options": "[\"Cutaneous T-Cell Lymphoma\", \"Kaposi Sarcoma\", \"Melanoma\", \"Merkel Cell Carcinoma\", \"Skin Cancer\", \"Cutaneous T-Cell Lymphoma\"]", 
+      "valueType": "list"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "70", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "What type of AIDS-Related Cancer?", 
+      "options": "[\"AIDS-Related Lymphoma\", \"Primary Central Nervous System Lymphoma\", \"Kaposi Sarcoma\"]", 
+      "valueType": "list"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "71", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Are you currently receiving any investigational agents for a cancer clinical trial?", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "72", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Do you have a prior history of a serious reaction to a monoclonal antibody?", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "73", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Are you HIV-positive?", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "74", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Are you receiving combination antiretroviral therapy?", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "75", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Have you had any metastasis i.e. development of secondary malignant growths at a distance from a primary site of cancer?", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "76", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Are you able to be evaluated by a radiation or medical oncologist and otolaryngologist prior to enrolling on study?", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "77", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Do you require treatment with full dose radiotherapy (not postoperative)?", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "78", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Have you had any prior treatment to the cancer site?", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "79", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Are you the willing to sign a written informed consent document before starting the trial?", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "80", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Are you willing and able to take folic acid and vitamin B12 supplementation?", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "81", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "How long were you disease-free post diagnosis of any malignancy?", 
+      "options": "[\"Less than 1 year\", \"1-2 years\", \"3-5 years\", \"5-10 years\", \"More than 10 years\"]", 
+      "valueType": "pick_one"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "82", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Have you had any major surgical procedure, open biopsy, or significant traumatic injury in the past?", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "83", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "How far back did the major surgical procedure, open biopsy, or significant traumatic injury happen?", 
+      "options": "[\"Less than a month ago\", \"1-3 months ago\", \"3-6 months ago\", \"6-12 months ago\", \"More than 1 year ago\"]", 
+      "valueType": "pick_one"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "84", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Do you have any recent non-healing wound, ulcer, bone fracture, unstable angina or myocardial infarction?", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "85", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Food Allergies:(Please check all that apply)", 
+      "options": "[\"Milk\", \"Eggs\", \"Fish\", \"Shellfish\", \"Tree nuts\", \"Peanuts\", \"Wheat\", \"Soybeans\"]", 
+      "valueType": "list"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "86", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Seasonal Allergies:(Please check all that apply)", 
+      "options": "[\"Birch pollen\", \"Oak pollen\", \"Grass pollen\", \"Ragweed pollen\"]", 
+      "valueType": "list"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "87", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "What is your BMI?", 
+      "options": "\"\"", 
+      "valueType": "calc_val"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "88", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "What stage is the cancer?", 
+      "options": "[\"Stage 0\", \"Stage 1\", \"Stage 2\", \"Stage 3\", \"Stage 4\"]", 
+      "valueType": "pick_one"
+    }
+  }, 
+  {
+    "model": "sponsor.ParticipantQuestion", 
+    "pk": "89", 
+    "fields": {
+      "trial_id": "1",
+	  "text": "Are you breastfeeding?", 
+      "options": "[\"Yes\", \"No\"]", 
+      "valueType": "yes_no"
+    }
+  }
+]
