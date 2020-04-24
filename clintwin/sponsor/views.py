@@ -55,7 +55,7 @@ def trial_criteria(request, pk, criteria_type):
     if criteria_type == "inclusion":
         next_page = "/sponsor/trial/{}/criteria/exclusion/".format(trial.id)
         next_page_text = "Exclusion Criteria"
-        previous_page = "/updatetrial/{}/".format(trial.id)
+        previous_page = "/sponsor/updatetrial/{}/".format(trial.id)
         previous_page_text = "Edit Trial"
     else:
         next_page = "/sponsor/trial/{}/criteria/review/".format(trial.id)
