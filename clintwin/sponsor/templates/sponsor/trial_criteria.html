@@ -49,32 +49,15 @@
 <br>
 
 <!-- Table showing list of all criteria added to trial -->
-<div class="ad-card" id="criteria-list">
-  <table class="table table-bordered table-hover" id='criteria-table'>
-      <thead class="thead-light">
-          <tr>
-              <th id="criteria-name">Criteria Name</th>
-              <th>Value</th>
-              <th>Comparison</th>
-              <th>Type</th>
-              <th>Actions</th>
-          </tr>
-      </thead>
-      <tbody id='criteria-list-body'>
-        {% for item in trial_criterias %}
-        <tr>
-            <td>{{ item.criteria }}</td>
-            <td>{{ item.value }}</td>
-            <td>{{ item.comparison }}</td>
-            <td>{{ item.criteriaType }}</td>
-            <td><a class="edit-criteria" data-criteria="{{ item.id }}" href="#">Edit</a>    &nbsp;&nbsp;&nbsp;   <a class="delete-criteria" data-criteria="{{ item.id }}" href="#">Delete</a>
-        </tr>
-        {% endfor %}
-      </tbody>
-  </table>
+<div id="criteria-list">
+<ul>
+    {% for item in trial_criteria %}
+    <li class="criteria-item">{{ item.criteria }} {{ item.comparison }} {{ item.value }}{% include "sponsor/components/svg/delete_button.html" %}{% include "sponsor/components/svg/pencil.html" %}</li>
+    {% endfor %}
+</ul>
 </div>
-<br>
-<br>
+
+
 
 <div class="bottom-nav">
     <div class="d-flex flex-row justify-content-between">

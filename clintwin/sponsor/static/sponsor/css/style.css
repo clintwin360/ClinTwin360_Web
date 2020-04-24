@@ -1,8 +1,75 @@
+/* STYLING FOR NEW FORM */
+
+/* Make all labled bold with grey color */
+label {
+  font-weight: bold;
+  color: #55666f;
+}
+
+/* Styling for all form inputs: transparent */
+input[type="text"], input[type=password],
+[type="url"], [type="number"], [type="email"],
+.textarea, .select, .input-group-text,
+textarea.form-control {
+  background-color: white;
+  border: 0px;
+  outline: none;
+  box-shadow: none;
+  width:100%;
+}
+
+/* Reducing height of all text entry fields */
+#id_objective, #id_comments, #id_followUp,
+#id_notes {
+  height: 100px;
+}
+
+/* Styling for page headers */
+#about_us, #our_location, #how_it_works,
+#contact, #trial_dashboard, #create-trial,
+#new-sponsor, #sponsor-req, #criteria_trial_name,
+#create-criteria, #criteria_trial_id {
+  color: #55666f;
+  text-align: center;
+}
+
+/* Styling for headings */
+#basic-info {
+  color: #73C9EE;
+  text-align: center;
+}
+
+/* Form buttons */
+#create_button {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: 25px;
+  /*input has OS specific font-family*/
+  cursor: pointer;
+  width: 20%;
+  font-size: 24px;
+  font-family: Helvetica Medium, sans-serif;
+  float: right;
+  color: #73C9EE;
+}
+
+#create_button:hover{
+    text-decoration:underline;
+    color: #73C9EE;
+}
+
+
+
+/* ------------------------------------------------- */
+
+
 /* Style body color to off-white */
 .highlight { background-color: lightblue; }
 
 body {
-  background-color: #fff9f9;
+  /* background-color: #F7F9F9; */
+  background-color: #f7f7f7;
   margin: 0;
   padding: 0;
 }
@@ -90,17 +157,9 @@ div.footer {
   height:50%;
 }
 
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 2px 4px;
-  margin: 2px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
 
 /* Styling for all buttons */
-button, #create_button {
+button {
   background-color: #4bc5ef;
   border-radius: 4px;
   color: white;
@@ -125,14 +184,7 @@ button.reset_btn, #id_email, #id_phone {
   width: 40%;
 }
 
-/* Styling for page headers */
-#about_us, #our_location, #how_it_works,
-#contact, #trial_dashboard, #create-trial,
-#new-sponsor, #sponsor-req, #criteria_trial_name,
-#create-criteria, #criteria_trial_id {
-  color: #55666f;
-  text-align: center;
-}
+
 
 
 
@@ -163,7 +215,7 @@ button.reset_btn, #id_email, #id_phone {
   margin-right: auto;
 }
 
-button, #create_button, #add_btn, #add_cri #cancel-criteria{
+button, #add_btn, #add_cri #cancel-criteria{
   background-color: #4bc5ef;
   border-radius: 4px;
   color: white;

@@ -43,3 +43,22 @@ div.bottom-nav {
     font-family: Helvetica Medium, sans-serif;
     color: #4bc5ef;
 }
+
+.criteria-item{
+
+}
+
+.criteria-item:hover {
+  background-color: yellow;
+}
+
+svg.bi{
+    display: none;
+}
+
+rect.btn {
+  stroke:#fff;
+  fill:#fff;
+  fill-opacity:0;
+  stroke-opacity:0;
+}
