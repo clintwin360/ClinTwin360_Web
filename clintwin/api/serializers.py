@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
+from sponsor.models import Participant
+
 UserModel = get_user_model()
 
 
@@ -14,7 +16,10 @@ class UserSerializer(serializers.ModelSerializer):
         )
         user.set_password(validated_data['password'])
         user.save()
-
+        participant = Participant.objects.create(
+            email=validated_data['email']
+        )
+        participant.save()
         return user
 
     class Meta:

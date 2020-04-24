@@ -17,6 +17,8 @@ from rest_framework import permissions
 from django.contrib.auth import get_user
 from django_filters.rest_framework import DjangoFilterBackend
 
+from sponsor.models import Participant
+
 
 def get_token(request):
     x = get_user(request)
@@ -201,3 +203,9 @@ def password_reset(request):
     form.cleaned_data = request.data
     form.save(get_current_site(request))
     return Response(status=status.HTTP_200_OK)
+
+@api_view(('GET',))
+def get_participant_id(request):
+    user = request.user
+    participant = Participant.objects.filter(email=user.email).first()
+    return Response(participant.id)

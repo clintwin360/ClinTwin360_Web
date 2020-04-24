@@ -33,6 +33,7 @@ urlpatterns = [
     path('token/', views.get_token, name='token'),
     path('logout/', views.logout, name='api_logout'),
     path('password_reset/', views.password_reset, name='password_reset'),
+    path('participant_id/', views.get_participant_id, name='get_participant_id'),
     path('', include(router.urls)),
     path('openapi', get_schema_view(
         title="Your Project",
