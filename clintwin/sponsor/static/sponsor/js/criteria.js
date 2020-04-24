@@ -205,7 +205,7 @@ function handleLookupFormSubmission(){
 
 function handleEditCriteria(){
         //Editing a Criteria
-    $(document).on( "click",".edit-criteria", function(e) {
+    $(document).on( "click","#edit-button-rect", function(e) {
         e.preventDefault();
         let criteria = $(this).data('criteria');
         $.getJSON(`/api/criteria_response/${criteria}`, function(result){
@@ -359,7 +359,7 @@ function handleUpdateCriteria(){
 
 
 function handleDeleteCriteria(){
-        $(document).on( "click",".delete-criteria", function(e) {
+        $(document).on( "click","#delete-button-rect", function(e) {
         e.preventDefault();
         $("#selected-criteria-form").empty();
         let criteria = $(this).data('criteria');
@@ -385,15 +385,29 @@ function handleCancel() {
 });
 }
 
+function handleCriteriaHover(){
+    $(document).on('mouseenter', '.criteria-item', function () {
+        console.log("we here!");
+        $(this).find("#edit-button").show();
+        $(this).find("#delete-button").show();
+    }).on('mouseleave', '.criteria-item', function () {
+        console.log("we out!")
+        $(this).find("#delete-button").hide();
+        $(this).find("#edit-button").hide();
+    });
+}
+
 
 //Document Ready
 $(function(){
     setupAjaxWithCSRF();
     loadCriteria();
     handleLookupFormSubmission();
+    handleCriteriaHover();
     handleEditCriteria();
     handleAddCriteria();
     handleUpdateCriteria();
     handleCancel();
     handleDeleteCriteria();
+
 });

@@ -66,8 +66,8 @@ def trial_criteria(request, pk):
         new_criteria = ClinicalTrialCriteriaResponse.objects.create(
             trial=trial, value=value, comparison=comparison, criteriaType=criteriaType, negated=negated, criteria=criteria)
         new_criteria.save()
-    trial_criterias = ClinicalTrialCriteriaResponse.objects.all().filter(trial=pk)
-    return render(request, "sponsor/trial_criteria.html", {"trial_criterias": trial_criterias, "clinicaltrial": trial})
+    trial_criteria = ClinicalTrialCriteriaResponse.objects.all().filter(trial=pk)
+    return render(request, "sponsor/trial_criteria.html", {"trial_criteria": trial_criteria, "clinicaltrial": trial})
 
 
 def login_success(request):
