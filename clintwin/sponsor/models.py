@@ -166,6 +166,7 @@ class ParticipantQuestion(models.Model):
 
 
 class VirtualTrialParticipantQuestion(models.Model):
+     trial_id= models.ForeignKey(ClinicalTrial, on_delete=models.CASCADE, related_name='virtualquestion_trial_id')
      text = models.TextField()
      valueType = models.CharField(max_length=50)
      # options = ArrayField(models.CharField(max_length=256))
@@ -199,6 +200,7 @@ class ParticipantResponse(models.Model):
 
 
 class VirtualTrialParticipantResponse(models.Model):
+     trial_id = models.ForeignKey(ClinicalTrial, on_delete=models.CASCADE, related_name='virtualresponse_trial_id')
      question = models.ForeignKey(ParticipantQuestion, on_delete=models.CASCADE)
      participant = models.ForeignKey(Participant, on_delete=models.CASCADE, related_name='virtual_responses')
      value = models.CharField(max_length=50)
