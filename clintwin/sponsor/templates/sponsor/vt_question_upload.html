@@ -11,16 +11,19 @@
 <br><br>
 <div id="upload-question">
       <form id="upload-file" action="" method="post">
-        <label for="files">Select files:</label>
+        <label for="files">Select file:</label>
         <input type="file" id="file-uploaded" name="fileUploaded" accept=".cvs, text/plain"><br>
         <input type="submit" value="Upload">
       </form><br><br>
 
       <h3 id="create-trial">Instructions for File Upload</h3><br>
-        1. TO BE DONE <br>
-        2. Some useful tips here etc.<br><br>
-      <label for="files">Download Sample File:</label><br>
-      <button id="download">Download</button>
+
+        1. <a href="{% static 'sponsor/sample_file/sample_trial_questions.xlsx' %}" target="_blank">Download</a> sample file<br>
+        2. Enter questions and value type and the answer "options" for each questions.<br>
+        3. Make sure to follow the sample format for answer "options" or your file won't be processed.<br>
+        4. Once completed, save as a CSV file and upload the file.
+      <label for="files">Sample File:</label><br>
+
 </div>
 
 
