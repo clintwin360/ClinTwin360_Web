@@ -3,7 +3,7 @@
 /* Make all labled bold with grey color */
 label {
   font-weight: bold;
-  color: #55666f;
+  color: #4b555a;
 }
 
 /* Styling for all form inputs: transparent */
@@ -29,7 +29,7 @@ textarea.form-control {
 #contact, #trial_dashboard, #create-trial,
 #new-sponsor, #sponsor-req, #criteria_trial_name,
 #create-criteria, #criteria_trial_id {
-  color: #55666f;
+  color: #4b555a;
   text-align: center;
 }
 
@@ -47,7 +47,7 @@ textarea.form-control {
   font-size: 25px;
   /*input has OS specific font-family*/
   cursor: pointer;
-  width: 20%;
+  width: 30%;
   font-size: 24px;
   font-family: Helvetica Medium, sans-serif;
   float: right;

@@ -30,6 +30,15 @@
                     {{ form.custom_id|as_crispy_field }}
                     {{ form.sponsor|as_crispy_field }}
                     {{ form.title|as_crispy_field }}
+
+                    <!-- Placeholder till model changes are migrated -->
+                    <div id="div-id-virtual" class="form-group">
+                      <label for="id-is-virtual" class=" requiredField">
+                          Virtual Trial <span class="asteriskField">*</span>
+                      </label>
+                      <input type="checkbox" name="is-virtual" value="true" required id="id-virtual">
+                    </div>
+
                     {{ form.url|as_crispy_field }}
               <div class="d-flex justify-content-around">
                     {{ form.recruitmentStartDate|as_crispy_field }}
@@ -38,8 +47,6 @@
                     {{ form.enrollmentTarget|as_crispy_field }}
                     {{ form.location|as_crispy_field }}
                     {{ form.objective|as_crispy_field }}
-                    {{ form.comments|as_crispy_field }}
-                    {{ form.followUp|as_crispy_field }}
 
             <button class="btn btn-primary" type="submit" id="create_button">Create Trial</button>
 
