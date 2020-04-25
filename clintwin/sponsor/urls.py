@@ -12,7 +12,6 @@ schema_view = get_swagger_view(title='Pastebin API')
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('criteria_investigation/', views.criteria_investigation, name='criteria_investigation'),
     path('dummy/', views.dummy, name='dummy'),
     path('openapi2', schema_view),
     path('login_success/', views.login_success, name='login_success'),

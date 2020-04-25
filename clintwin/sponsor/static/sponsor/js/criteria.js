@@ -18,34 +18,17 @@ function selected_option(option_value,default_value){
 }
 
 function form_yes_no(props,defaults) {
-    console.log(defaults);
-    let default_comparison = null;
     let default_value = '';
-    let submit_text = 'Add Criteria'
-    let method = "post";
-    let id = "add-criteria";
-    let data_id = "";
     if (defaults){
-        default_comparison = defaults.comparison;
         default_value = defaults.value;
-        submit_text = 'Update';
-        method = "put";
-        id = "edit-criteria";
-        data_id = `data-id="${defaults.id}"`
     }
 
-    return `<form name="${id}" id="${id}" data-criteria="${props.id}" ${data_id} action="" method="${method}">` +
-      `<br><label class="criteria-response" for="criteria">${props.name} </label>` +
-      `<input type="hidden" id="criteria" name="criteria" value="${props.name}"><br>` +
-      `<select id="criteria-value" name="criteria-value">`+
-      `<option value="Yes" id="value" ${selected_option("Yes",default_value)}>Yes</option>`+
-      `<option value="No" id="value" ${selected_option("No",default_value)}>No</option>`+
-      `</select>`+
-      `<br><input type="checkbox" id="negated" name="negated">` +
-      `<label for="negation-maker">Exclusion?</label><br>` +
-        `<button type="button" value="Cancel" id="cancel-criteria">Cancel</button>` +
-        `<input type="submit" value="${submit_text}" id="add_cri">` +
-        `</form><br>`
+    return  `<form name="add-criteria" id="add-criteria" data-criteria="${props.id}">` +
+      `<select id="criteria-value" class="criteria-option-select" name="criteria-value" style="width: 100%">`+
+      `<option value="Yes" ${selected_option("Yes",default_value)}>Yes</option>`+
+      `<option value="No" ${selected_option("No",default_value)}>No</option>`+
+      `</select>` +
+        `</form>`
 }
 
 //add conditions to allow for multiple select
@@ -57,67 +40,37 @@ function form_select(props,defaults){
         option_class = 'multi-option'
     }
 
-    let default_comparison = null;
     let default_value = '';
-    let submit_text = 'Add Criteria';
-    let method = "post";
-    let id = "add-criteria";
-    let data_id = "";
     if (defaults){
-        default_comparison = defaults.comparison;
         default_value = defaults.value;
-        submit_text = 'Update';
-        method = "put";
-        id = "edit-criteria";
-        data_id = `data-id="${defaults.id}"`
     }
 
-    return `<form name="${id}" id="${id}" data-criteria="${props.id}" ${data_id} action="" method="${method}">` +
-    `<br><label class="criteria-response" for="criteria" class="mdb-main-label">${props.name} </label>` +
-    `<input type="hidden" id="criteria" name="criteria" value="${props.name}"><br>` +
-    `<select ${select_type} id="criteria-value" name="criteria-value">`+
-    `<option value="" disabled selected>Select values that apply</option>` +
+    return `<form name="add-criteria" id="add-criteria" data-criteria="${props.id}">` +
+    `<label class="criteria-response" for="criteria" class="mdb-main-label">Select the Values that Apply </label>` +
+    `<select ${select_type} class="criteria-option-select" id="criteria-value" name="criteria-value" style="width: 100%">`+
      props.options.map(option=>`<option class="${option_class}" value="${option}" ${selected_option(option,default_value)}>${option}</option>`) +
-    `</select>`+
-    `<br><input type="checkbox" id="negated" name="negated">` +
-    `<label for="negation-maker">Exclusion?</label><br>` +
-    `<button type="button" value="Cancel" id="cancel-criteria">Cancel</button>` +
-    `<button type="submit" value="${submit_text}" id="add_cri">${submit_text}</button>` +
-    `</form><br>`
+    `</select>` +
+        `</form>`
 }
 
 
 function form_comparison(props,defaults){
     let default_comparison = null;
     let default_value = '';
-    let submit_text = 'Add Criteria'
-    let method = "post";
-    let id = "add-criteria";
-    let data_id = "";
     if (defaults){
         default_comparison = defaults.comparison;
         default_value = defaults.value;
-        submit_text = 'Update';
-        method = "put";
-        id = "edit-criteria";
-        data_id = `data-id="${defaults.id}"`
     }
 
-      return `<form name="${id}" id="${id}" data-criteria="${props.id}" ${data_id} action="" method="${method}" novalidate>` +
-          `<label class="criteria-response" for="criteria">${props.name} </label>` +
-          `<input type="hidden" id="criteria" name="criteria" value="${props.name}"><br>` +
-          `<select id="comparison" name="comparison">`+
+      return `<form name="add-criteria" id="add-criteria" data-criteria="${props.id}">` +
+    `<select class="criteria-option-select" id="comparison" name="comparison" style="width: 100%">`+
                  `<option value="gte" ${selected_option("gte",default_comparison)}>Greater than or equal to</option>`+
                  `<option value="lte" ${selected_option("lte",default_comparison)}>Less than or equal to</option>`+
                  `<option value="equals" ${selected_option("equals",default_comparison)}>Equals</option>`+
                  `<option value="ne" ${selected_option("ne",default_comparison)}>Does not Equal</option>`+
             `</select>`+
-          `<input type="text" id="criteria-value" name="criteria-value" value="${default_value}"><br>` +
-          `<br><input type="checkbox" id="negated" name="negated">` +
-          `<label for="negation-maker">Exclusion?</label><br>` +
-          `<button type="button" value="Cancel" id="cancel-criteria">Cancel</button>` +
-          `<input type="submit" value="${submit_text}" id="add_cri">` +
-          `</form><br>`
+          `<input type="text" id="criteria-value" name="criteria-value" value="${default_value}">` +
+        `</form>`
 }
 
 
@@ -169,33 +122,41 @@ function handleLookupFormSubmission(){
     //Figure out which widget form to show when lookup is submitted
     $("#criteria-lookup-form").submit(function(e) {
         e.preventDefault();
-        $("#selected-criteria-form").empty();
-
+        $("#criteria-modal-body").empty()
         let criteriaCategory = $("#criteria-lookup").val();
         let criteria_item = criteria_list.find(item=>criteriaCategory === item.name);
-        let form_template = null;
+        $('#criteria-modal-title').text(criteriaCategory);
+
+        let template = null;
 
         if (criteria_item.valueType === 'enter_val_comp'){
-            form_template = form_comparison(criteria_item)
+            template = form_comparison(criteria_item)
         }
 
         if (criteria_item.valueType === 'enter_val_fixed'){
-            form_template = form_comparison(criteria_item)
+            template = form_comparison(criteria_item)
         }
 
         if (criteria_item.valueType ==='yes_no'){
-            form_template = form_yes_no(criteria_item)
+            console.log('yes no')
+            template = form_yes_no(criteria_item)
         }
 
         if (criteria_item.valueType === 'pick_one'){
-            form_template = form_select(criteria_item)
+            template = form_select(criteria_item)
         }
 
         if (criteria_item.valueType === 'list'){
-            form_template = form_select(criteria_item)
+            template = form_select(criteria_item)
         }
 
-        $("#selected-criteria-form").append(form_template);
+        $("#criteria-submit-button").text("Add");
+        $("#criteria-submit-button").data('method',"add");
+        $("#criteria-modal-body").append(template);
+        $('.criteria-option-select').select2({
+            dropdownParent: $('#criteria-modal'),
+        });
+        $('#criteria-modal').modal('show');
 
 
         return false;
@@ -207,35 +168,43 @@ function handleEditCriteria(){
         //Editing a Criteria
     $(document).on( "click","#edit-button-rect", function(e) {
         e.preventDefault();
+        $("#criteria-modal-body").empty()
         let criteria = $(this).data('criteria');
         $.getJSON(`/api/criteria_response/${criteria}`, function(result){
             $("#selected-criteria-form").empty();
 
             let criteria_id = result.criteria;
             let criteria_item = criteria_list.find(item=>criteria_id === item.id);
-            let form_template = null;
+            let template = null;
 
             if (criteria_item.valueType === 'enter_val_comp'){
-                form_template = form_comparison(criteria_item,result)
+                template = form_comparison(criteria_item,result)
             }
 
             if (criteria_item.valueType === 'enter_val_fixed'){
-                form_template = form_comparison(criteria_item,result)
+                template = form_comparison(criteria_item,result)
             }
 
             if (criteria_item.valueType ==='yes_no'){
-                form_template = form_yes_no(criteria_item,result)
+                template = form_yes_no(criteria_item,result)
             }
 
             if (criteria_item.valueType === 'pick_one'){
-                form_template = form_select(criteria_item,result)
+                template = form_select(criteria_item,result)
             }
 
             if (criteria_item.valueType === 'list'){
-                form_template = form_select(criteria_item,result)
+                template = form_select(criteria_item,result)
             }
 
-            $("#selected-criteria-form").append(form_template);
+            $("#criteria-submit-button").text("Update");
+            $("#criteria-submit-button").data('method',"update");
+            $("#criteria-submit-button").data('criteria',result.id);
+            $("#criteria-modal-body").append(template);
+            $('.criteria-option-select').select2({
+                dropdownParent: $('#criteria-modal'),
+            });
+            $('#criteria-modal').modal('show');
 
         });
     });
@@ -243,14 +212,21 @@ function handleEditCriteria(){
 
 function handleAddCriteria(){
        //Submitting a Criteria
-    $(document).on( "submit","#add-criteria", function(e) {
+    $(document).on( "click","#criteria-submit-button", function(e) {
         e.preventDefault();
         let trial_id = $( "#criteria-lookup-form" ).data('trial');
-        let criteria_id = $(this).data('criteria');
+        let criteria_id = $("#add-criteria").data('criteria');
         let criteria_type = $( "#criteria-lookup-form" ).data('type');
-        console.log(criteria_type)
+        let response_id = null;
+        let method = "POST";
+        let endpoint = "/api/criteria_response/";
+        if ($("#criteria-submit-button").data('method') === 'update'){
+            response_id = $("#criteria-submit-button").data('criteria');
+            method = "PUT";
+            endpoint += `${response_id}/`;
+        }
 
-        let serialized_data = $(this).serializeArray();
+        let serialized_data = $("#add-criteria").serializeArray();
 
         let criteria_value = serialized_data.filter(item=>item.name==='criteria-value')
 
@@ -278,16 +254,22 @@ function handleAddCriteria(){
             "trial": trial_id
         };
 
-        console.log(criteria_data);
+        if (response_id){
+            criteria_data["id"] = response_id;
+        }
 
+
+        console.log(criteria_data);
         $.ajax({
-            type: "POST",
-            url: "/api/criteria_response/",
+            type: method,
+            url: endpoint,
             data: JSON.stringify(criteria_data),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function(data){
                 location.reload();
+                console.log(endpoint);
+                console.log(criteria_data);
             },
             failure: function(errMsg) {
                 console.error(errMsg);
@@ -301,31 +283,7 @@ function handleAddCriteria(){
 function handleUpdateCriteria(){
        //Submitting a Criteria
     $(document).on( "submit","#edit-criteria", function(e) {
-        e.preventDefault();
 
-        let trial_id = $( "#criteria-lookup-form" ).data('trial');
-        let criteria_id = $(this).data('criteria');
-        let criteria_type = $( "#criteria-lookup-form" ).data('type');
-        let id = $(this).data('id');
-
-        let serialized_data = $(this).serializeArray();
-
-        let criteria_value = serialized_data.filter(item=>item.name==='criteria-value')
-
-        if (criteria_value.length > 1){
-            criteria_value = criteria_value.map(item=>item.value);
-            criteria_value = JSON.stringify(criteria_value)
-        }else{
-            criteria_value = criteria_value[0].value
-        }
-
-        let criteria_comparison = 'equals';
-
-        //check for a comparison value
-        if (serialized_data.filter(item=>item.name==='comparison').length > 0){
-            let comparison = serialized_data.find(item=>item.name==='comparison');
-            criteria_comparison = comparison.value;
-        }
 
         let criteria_data = {
             "id": id,
@@ -390,11 +348,9 @@ function handleCancel() {
 
 function handleCriteriaHover(){
     $(document).on('mouseenter', '.criteria-item', function () {
-        console.log("we here!");
         $(this).find("#edit-button").show();
         $(this).find("#delete-button").show();
     }).on('mouseleave', '.criteria-item', function () {
-        console.log("we out!")
         $(this).find("#delete-button").hide();
         $(this).find("#edit-button").hide();
     });
