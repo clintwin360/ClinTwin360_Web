@@ -39,7 +39,7 @@ class Contact(models.Model):
 
 
 class Sponsor(models.Model):
-    organization = models.CharField('Organization Name', max_length=500, help_text='Name of Sponsor')
+    organization = models.CharField('Organization Name', max_length=500)
     date_joined = models.DateField('Date of Registration', null=True, auto_now_add=True)
     dateDeregistered = models.DateField('Date of De-Regstration', null=True, blank=True)
     contactPerson = models.CharField('Contact Person', null=True, max_length=500)
@@ -80,8 +80,8 @@ class ClinicalTrial(models.Model):
     title = models.CharField('Trial Title', null=True, max_length=500)
     objective = models.TextField('Objective', null=True)
     description = models.TextField('Description', null=True, blank=True)
-    recruitmentStartDate = models.DateField('Recruitment Start Date', null=True, help_text='MM/DD/YY')
-    recruitmentEndDate = models.DateField('Recruitment End Date', null=True, help_text='MM/DD/YY')
+    recruitmentStartDate = models.DateField('Recruitment Start Date', null=True, help_text='MM/DD/YYYY')
+    recruitmentEndDate = models.DateField('Recruitment End Date', null=True, help_text='MM/DD/YYYY')
     enrollmentTarget = models.IntegerField('Enrollment Target', null=True, blank=True)
     url = models.URLField('URL', null=True, blank=True)
     followUp = models.TextField('Followup Notes', null=True, blank=True)
@@ -90,7 +90,7 @@ class ClinicalTrial(models.Model):
     createdTimeStamp = models.DateTimeField(auto_now_add=True)
     status = models.CharField('Status', null=True, max_length=100, default='Draft')
     current_recruitment = models.IntegerField('Current Recruitment', default=0, null=True, blank=True)
-    is_virtual = models.BooleanField(null=True)
+    is_virtual = models.BooleanField('Virtual Trial', null=True, help_text='Do you plan to administer this trial purely online?')
 
     def __str__(self):
         ret = str(self.id) + ":" + self.title

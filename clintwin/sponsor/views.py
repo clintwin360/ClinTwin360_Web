@@ -33,6 +33,7 @@ import ast
 from rest_framework import pagination
 
 from bootstrap_datepicker_plus import DatePickerInput
+from django.forms import fields, CheckboxInput
 
 
 # Create your views here.
@@ -191,7 +192,7 @@ class DeleteTrialPaneView(generic.DeleteView):
 class NewClinicalTrialView(generic.CreateView):
     model = ClinicalTrial
     fields = (
-        'custom_id', 'title', 'sponsor', 'objective', 'recruitmentStartDate', 'recruitmentEndDate', 'enrollmentTarget', 'url',
+        'custom_id', 'title', 'is_virtual', 'sponsor', 'objective', 'recruitmentStartDate', 'recruitmentEndDate', 'enrollmentTarget', 'url',
         'followUp', 'location', 'comments')
 
     template_name = 'sponsor/newtrial.html'
@@ -199,8 +200,15 @@ class NewClinicalTrialView(generic.CreateView):
 
     def get_form(self):
          form = super().get_form()
+         form.fields['custom_id'].widget.attrs['placeholder'] = 'Enter the trial ID'
+         form.fields['title'].widget.attrs['placeholder'] = 'Enter the title of the trial'
+         form.fields['objective'].widget.attrs['placeholder'] = 'Describe in brief detail the objective of this trial'
+         form.fields['enrollmentTarget'].widget.attrs['placeholder'] = 'The enrollment target for this trial'
+         form.fields['url'].widget.attrs['placeholder'] = 'Enter a URL link to any external trial page'
+         form.fields['location'].widget.attrs['placeholder'] = 'The location of this trial'
          form.fields['recruitmentStartDate'].widget = DatePickerInput(format='%m/%d/%Y')
          form.fields['recruitmentEndDate'].widget = DatePickerInput(format='%m/%d/%Y')
+         form.fields['is_virtual'].widget = CheckboxInput()
          return form
 
     def get_initial(self, *args, **kwargs):
@@ -245,8 +253,19 @@ class DeleteSponsorView(generic.DeleteView):
 class NewSponsorView(generic.CreateView):
     model = Sponsor
     fields = ['organization', 'contactPerson', 'location', 'phone', 'email', 'notes']
+
     template_name = 'sponsor/new_sponsor.html'
     success_url = reverse_lazy('viewsponsors')
+
+    def get_form(self):
+         form = super().get_form()
+         form.fields['organization'].widget.attrs['placeholder'] = 'Name of the sponsor organization'
+         form.fields['contactPerson'].widget.attrs['placeholder'] = 'Name of the contact person'
+         form.fields['location'].widget.attrs['placeholder'] = 'Where the organization is located'
+         form.fields['phone'].widget.attrs['placeholder'] = 'Phone number'
+         form.fields['email'].widget.attrs['placeholder'] = 'Email address'
+         form.fields['notes'].widget.attrs['placeholder'] = 'Enter any relevant notes about the sponsor here'
+         return form
 
 #Request Views
 def viewSponsorReq(request):

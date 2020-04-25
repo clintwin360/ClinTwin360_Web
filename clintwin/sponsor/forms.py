@@ -30,8 +30,8 @@ class NewTrialForm(forms.ModelForm):
     startDate = forms.DateField()
     endDate = forms.DateField()
     widgets = {
-             'startDate': DatePickerInput(format='%m/%d/%Y'), 
-             'endDate': DatePickerInput(format='%m/%d/%Y'), 
+             'startDate': DatePickerInput(format='%m/%d/%Y'),
+             'endDate': DatePickerInput(format='%m/%d/%Y'),
          }
 
 
