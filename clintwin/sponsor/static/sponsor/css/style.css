@@ -60,6 +60,13 @@ textarea.form-control {
 }
 
 
+/* Sponsor dashboard */
+.table_container, .main-cards {
+  width: 95%;
+  /* display: block; */
+  margin-left: auto;
+  margin-right: auto;
+}
 
 /* ------------------------------------------------- */
 

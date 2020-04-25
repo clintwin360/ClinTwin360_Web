@@ -15,6 +15,7 @@ function sponsor_row(props){
 $(function(){
   $.getJSON("/api/profile/", function(result){
     $.each(result.results, function(i, field){
+      console.log(field);
      $("#sponsor-list-body").append(sponsor_row(field));
     });
   });

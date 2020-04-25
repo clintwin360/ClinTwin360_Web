@@ -193,7 +193,7 @@ class NewClinicalTrialView(generic.CreateView):
     fields = (
         'custom_id', 'title', 'sponsor', 'objective', 'recruitmentStartDate', 'recruitmentEndDate', 'enrollmentTarget', 'url',
         'followUp', 'location', 'comments')
-    
+
     template_name = 'sponsor/newtrial.html'
     success_url = reverse_lazy('viewtrials')
 
@@ -202,7 +202,7 @@ class NewClinicalTrialView(generic.CreateView):
          form.fields['recruitmentStartDate'].widget = DatePickerInput(format='%m/%d/%Y')
          form.fields['recruitmentEndDate'].widget = DatePickerInput(format='%m/%d/%Y')
          return form
-		 
+
     def get_initial(self, *args, **kwargs):
         if not (self.request.user.is_clintwin()):
             initial = {}
