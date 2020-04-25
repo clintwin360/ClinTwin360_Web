@@ -210,7 +210,7 @@ function handleEditCriteria(){
     });
 }
 
-function handleAddCriteria(){
+function handleSubmitCriteria(){
        //Submitting a Criteria
     $(document).on( "click","#criteria-submit-button", function(e) {
         e.preventDefault();
@@ -280,45 +280,6 @@ function handleAddCriteria(){
 
 }
 
-function handleUpdateCriteria(){
-       //Submitting a Criteria
-    $(document).on( "submit","#edit-criteria", function(e) {
-
-
-        let criteria_data = {
-            "id": id,
-            "value": criteria_value,
-            "comparison": criteria_comparison,
-            "criteriaType": criteria_type,
-            "negated": false,
-            "criteria": criteria_id,
-            "trial": trial_id
-        };
-
-        console.log(criteria_data);
-
-        $.ajax({
-            type: "PUT",
-            url: `/api/criteria_response/${id}/`,
-            data: JSON.stringify(criteria_data),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function(data){
-                location.reload();
-            },
-            failure: function(errMsg) {
-                console.error(errMsg);
-            }
-        });
-        return false
-    });
-
-}
-
-
-
-
-
 function handleDeleteCriteria(){
         $(document).on( "click","#delete-button-rect", function(e) {
         e.preventDefault();
@@ -339,12 +300,6 @@ function handleDeleteCriteria(){
     });
 }
 
-function handleCancel() {
-    $(document).on( "click","#cancel-criteria", function(e) {
-        e.preventDefault();
-        $("#selected-criteria-form").empty();
-});
-}
 
 function handleCriteriaHover(){
     $(document).on('mouseenter', '.criteria-item', function () {
@@ -364,9 +319,7 @@ $(function(){
     handleLookupFormSubmission();
     handleCriteriaHover();
     handleEditCriteria();
-    handleAddCriteria();
-    handleUpdateCriteria();
-    handleCancel();
+    handleSubmitCriteria();
     handleDeleteCriteria();
 
 });
