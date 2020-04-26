@@ -40,6 +40,7 @@ class Contact(models.Model):
     location = models.CharField('Location', null=True, max_length=100)
     comment = models.CharField(max_length=1000, null=True, )
     createdAt = models.DateTimeField(auto_now_add=True)
+    status = models.CharField('Status', null=True, max_length=100, default='Open')
 
 
 class Sponsor(models.Model):

@@ -14,4 +14,6 @@
 <p><strong>Phone:</strong> {{ contact.phone }}</p>
 <p><strong>Comments:</strong> {{ contact.comment}} </p>
 <a class="btn btn-info returnbtn" href="{% url 'contactlist' %}">Return to Dashboard</a>
+<a class="btn btn-success addbtn" href="{% url 'newsponsor' %}" target="_blank">Add New Sponsor</a>
+<a class="btn btn-danger deletebtn" href="#">Close Request</a>
 {% endblock %}
