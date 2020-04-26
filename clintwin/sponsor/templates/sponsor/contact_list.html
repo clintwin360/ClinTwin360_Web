@@ -1,0 +1,16 @@
+{% extends "sponsor/base.html" %}
+{% load static %}
+{% block style %}{% endblock %}
+{% block scripts %}{% endblock %}
+{% block title %}Contact List{% endblock %}
+
+{% block content %}
+<br><h2 id="contact-list-title">Sponsor Access Request Dashboard</h2><br>
+<ul>
+{% for contact in object_list %}
+    <li><a href="contactrequest/{{contact.id}}">{{ contact.organization }} : {{ contact.createdAt }}</a></li>
+{% empty %}
+    <li> No Access Requests Yet </li>
+{% endfor %}
+</ul>
+{% endblock %}

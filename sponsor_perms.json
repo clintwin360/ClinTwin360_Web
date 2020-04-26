@@ -1,0 +1,203 @@
+
+  {
+    "model": "auth.permission",
+    "pk": 25,
+    "fields": {
+      "name": "Can add clinical trial",
+      "content_type": 7,
+      "codename": "add_clinicaltrial"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 26,
+    "fields": {
+      "name": "Can change clinical trial",
+      "content_type": 7,
+      "codename": "change_clinicaltrial"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 27,
+    "fields": {
+      "name": "Can delete clinical trial",
+      "content_type": 7,
+      "codename": "delete_clinicaltrial"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 28,
+    "fields": {
+      "name": "Can view clinical trial",
+      "content_type": 7,
+      "codename": "view_clinicaltrial"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 32,
+    "fields": {
+      "name": "Can view clinical trial criteria",
+      "content_type": 8,
+      "codename": "view_clinicaltrialcriteria"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 33,
+    "fields": {
+      "name": "Can add clinical trial criteria response",
+      "content_type": 9,
+      "codename": "add_clinicaltrialcriteriaresponse"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 34,
+    "fields": {
+      "name": "Can change clinical trial criteria response",
+      "content_type": 9,
+      "codename": "change_clinicaltrialcriteriaresponse"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 35,
+    "fields": {
+      "name": "Can delete clinical trial criteria response",
+      "content_type": 9,
+      "codename": "delete_clinicaltrialcriteriaresponse"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 36,
+    "fields": {
+      "name": "Can view clinical trial criteria response",
+      "content_type": 9,
+      "codename": "view_clinicaltrialcriteriaresponse"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 37,
+    "fields": {
+      "name": "Can add contact",
+      "content_type": 10,
+      "codename": "add_contact"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 38,
+    "fields": {
+      "name": "Can change contact",
+      "content_type": 10,
+      "codename": "change_contact"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 39,
+    "fields": {
+      "name": "Can delete contact",
+      "content_type": 10,
+      "codename": "delete_contact"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 40,
+    "fields": {
+      "name": "Can view contact",
+      "content_type": 10,
+      "codename": "view_contact"
+    }
+  },
+
+  {
+    "model": "auth.permission",
+    "pk": 54,
+    "fields": {
+      "name": "Can change sponsor",
+      "content_type": 14,
+      "codename": "change_sponsor"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 56,
+    "fields": {
+      "name": "Can view sponsor",
+      "content_type": 14,
+      "codename": "view_sponsor"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 57,
+    "fields": {
+      "name": "Can add sponsor request",
+      "content_type": 15,
+      "codename": "add_sponsorrequest"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 58,
+    "fields": {
+      "name": "Can change sponsor request",
+      "content_type": 15,
+      "codename": "change_sponsorrequest"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 59,
+    "fields": {
+      "name": "Can delete sponsor request",
+      "content_type": 15,
+      "codename": "delete_sponsorrequest"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 60,
+    "fields": {
+      "name": "Can view sponsor request",
+      "content_type": 15,
+      "codename": "view_sponsorrequest"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 84,
+    "fields": {
+      "name": "Can view clinical trial match",
+      "content_type": 21,
+      "codename": "view_clinicaltrialmatch"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 90,
+    "fields": {
+      "name": "Can change user profile",
+      "content_type": 23,
+      "codename": "change_userprofile"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 92,
+    "fields": {
+      "name": "Can view user profile",
+      "content_type": 23,
+      "codename": "view_userprofile"
+    }
+  },
+
+
+]

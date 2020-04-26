@@ -325,7 +325,6 @@ class NewSponsorView(generic.CreateView):
 
 # Request Views
 def viewSponsorReq(request):
-    query_results = SponsorRequest.objects.all()
     return render(request, "sponsor/view_sponsor_req.html")
 
 
@@ -353,6 +352,31 @@ class NewSponsorRequestView(generic.CreateView):
         form.fields['values'].widget.attrs['placeholder'] = 'A comma-separated list of potential values'
         form.fields['notes'].widget.attrs['placeholder'] = 'Any addtional notes about the criteria'
         return form
+
+class ContactListView(generic.ListView):
+    model = Contact
+    pagination_by = 25
+
+class ContactDetailView(generic.DetailView):
+    model = Contact
+
+class ContactPageView(generic.CreateView):
+
+        model = Contact
+        fields = ['organization', 'location', 'first_name', 'last_name', 'email', 'phone' ,'comment']
+        template_name = 'sponsor/contact.html'
+        success_url = reverse_lazy('index')
+
+        def get_form(self):
+            form = super().get_form()
+            form.fields['organization'].widget.attrs['placeholder'] = 'Name of the sponsor organization'
+            form.fields['location'].widget.attrs['placeholder'] = 'Location of the sponsor organization'
+            form.fields['first_name'].widget.attrs['placeholder'] = 'First name of the sponsor contact'
+            form.fields['last_name'].widget.attrs['placeholder'] = 'Last name of the sponsor contact'
+            form.fields['email'].widget.attrs['placeholder'] = 'Email address of the sponsor contact'
+            form.fields['phone'].widget.attrs['placeholder'] = 'Phone number of the sponsor contact'
+            form.fields['comment'].widget.attrs['placeholder'] = 'Any addtional comments about the request'
+            return form
 
 
 # Other views
@@ -501,8 +525,7 @@ class HowWorksPageView(TemplateView):
 
 
 # Static page for Contact us
-class ContactPageView(TemplateView):
-    template_name = 'sponsor/contact.html'
+
 
 
 # Static page for directions
