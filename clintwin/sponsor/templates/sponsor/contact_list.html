@@ -5,7 +5,7 @@
 {% block title %}Contact List{% endblock %}
 
 {% block content %}
-<br><h2 id="contact-list-title"><u>Sponsor Access Request Dashboard</u></h2><br>
+<br><h2 id="contact-list-title">Sponsor Access Request Dashboard</h2><br>
 <ul>
 {% for contact in object_list %}
     <li><a href="contactrequest/{{contact.id}}">{{ contact.organization }} : {{ contact.createdAt }}</a></li>
