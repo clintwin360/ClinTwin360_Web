@@ -33,16 +33,20 @@
 	{{ form.custom_id|as_crispy_field }}
             {{ form.sponsor|as_crispy_field }}
             {{ form.title|as_crispy_field }}
+			{{ form.objective|as_crispy_field }}
             {{ form.is_virtual|as_crispy_field }}
             {{ form.url|as_crispy_field }}
+			{{ form.location|as_crispy_field }}
           <div class="d-flex justify-content-around">
             {{ form.recruitmentStartDate|as_crispy_field }}
             {{ form.recruitmentEndDate|as_crispy_field }}
           </div>
             {{ form.enrollmentTarget|as_crispy_field }}
-            {{ form.location|as_crispy_field }}
-            {{ form.objective|as_crispy_field }}
-
+            {{ form.description|as_crispy_field }}
+			{{ form.comments|as_crispy_field }}
+			{{ form.followUp|as_crispy_field }}
+			
+			
     
     <a href="{% url 'viewtrials' %}" class="btn btn-info" id="return_button" role="button">Return to Dashboard</a>
     <button class="btn btn-success w-25" type="submit" id="edit_button">Edit Trial</button>
