@@ -6,7 +6,8 @@
 
 {% block content %}
 <br><h2 id="contact-detail-title"><u>Sponsor Access Request Details</u></h2><br>
-<p><strong>ID:</strong> {{ contact.id }}</p>
+<p><strong>Request ID:</strong> {{ contact.id }}</p>
+<p><strong>Status:</strong> {{ contact.status }}</p>
 <p><strong>Name:</strong> {{ contact.organization }}</p>
 <p><strong>Location:</strong> {{ contact.location}}</p>
 <p><strong>Contact Liason:</strong> {{ contact.first_name }} {{ contact.last_name }}</p>
