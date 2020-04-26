@@ -6,7 +6,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
-from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
+from django.http import HttpResponse
 from rest_framework.authtoken.models import Token
 from .serializers import UserSerializer
 from sponsor.serializers import *
@@ -18,6 +18,8 @@ from django.contrib.auth import get_user
 from django_filters.rest_framework import DjangoFilterBackend
 
 from sponsor.models import Participant
+
+from sponsor.serializers import ParticipantSerializer
 
 
 def get_token(request):
@@ -55,25 +57,31 @@ class ParticipantQuestionViewSet(mixins.ListModelMixin,
     serializer_class = ParticipantQuestionSerializer
     # permission_classes = [permissions.IsAuthenticated]
 
+
 class VirtualTrialParticipantQuestionViewSet(mixins.ListModelMixin,
-                                 GenericViewSet):
+                                             GenericViewSet):
     """
     retrieve a list of questions
     """
     queryset = VirtualTrialParticipantQuestion.objects.all()
     serializer_class = VirtualTrialParticipantQuestionSerializer
     # permission_classes = [permissions.IsAuthenticated]
-	
-class ParticipantViewSet(mixins.CreateModelMixin,
-                         mixins.RetrieveModelMixin,
-                         mixins.UpdateModelMixin,
+
+
+class ParticipantViewSet(mixins.RetrieveModelMixin,
                          GenericViewSet):
     """
     create, get, or update a participant
     """
     queryset = Participant.objects.all()
     serializer_class = ParticipantSerializer
+
     # permission_classes = [permissions.IsAuthenticated]
+    def get_object(self):
+        queryset = self.filter_queryset(self.get_queryset())
+        # make sure to catch 404's below
+        obj = queryset.get(email=self.request.user.email)
+        return obj
 
 
 class ParticipantBasicHealthViewSet(mixins.CreateModelMixin,
@@ -101,15 +109,17 @@ class ParticipantResponseViewSet(mixins.CreateModelMixin,
     serializer_class = ParticipantResponseSerializer
     # permission_classes = [permissions.IsAuthenticated]
 
+
 class VirtualTrialParticipantResponseViewSet(mixins.CreateModelMixin,
-                                 mixins.UpdateModelMixin,
-                                 GenericViewSet):
+                                             mixins.UpdateModelMixin,
+                                             GenericViewSet):
     """
     post or update a participants response to a question
     """
     queryset = VirtualTrialParticipantResponse.objects.all()
     serializer_class = VirtualTrialParticipantResponseSerializer
     # permission_classes = [permissions.IsAuthenticated]	
+
 
 class SponsorProfileViewSet(viewsets.ModelViewSet):
     """
@@ -203,9 +213,3 @@ def password_reset(request):
     form.cleaned_data = request.data
     form.save(get_current_site(request))
     return Response(status=status.HTTP_200_OK)
-
-@api_view(('GET',))
-def get_participant_id(request):
-    user = request.user
-    participant = Participant.objects.filter(email=user.email).first()
-    return Response(participant.id)
