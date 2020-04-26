@@ -1,0 +1,17 @@
+{% extends "sponsor/base.html" %}
+{% load static %}
+{% block style %}{% endblock %}
+{% block scripts %}{% endblock %}
+{% block title %}Contact Details{% endblock %}
+
+{% block content %}
+<br><h2 id="contact-detail-title"><u>Sponsor Access Request Details</u></h2><br>
+<p><strong>ID:</strong> {{ contact.id }}</p>
+<p><strong>Name:</strong> {{ contact.organization }}</p>
+<p><strong>Location:</strong> {{ contact.location}}</p>
+<p><strong>Contact Liason:</strong> {{ contact.first_name }} {{ contact.last_name }}</p>
+<p><strong>Email:</strong> {{ contact.email }}</p>
+<p><strong>Phone:</strong> {{ contact.phone }}</p>
+<p><strong>Comments:</strong> {{ contact.comment}} </p>
+<a class="btn btn-info returnbtn" href="{% url 'contactlist' %}">Return to Dashboard</a>
+{% endblock %}

@@ -32,10 +32,14 @@ User.add_to_class("is_sponsor_admin", is_sponsor_admin)
 
 
 class Contact(models.Model):
+    organization = models.CharField('Organization Name', max_length=500)
     first_name = models.CharField(null=True, max_length=50)
     last_name = models.CharField(null=True, max_length=50)
     email = models.EmailField(null=True)
+    phone = models.CharField('Phone', null=True, max_length=20)
+    location = models.CharField('Location', null=True, max_length=100)
     comment = models.CharField(max_length=1000, null=True, )
+    createdAt = models.DateTimeField(auto_now_add=True)
 
 
 class Sponsor(models.Model):
