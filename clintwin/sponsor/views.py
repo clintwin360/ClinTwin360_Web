@@ -129,6 +129,7 @@ class TrialUpdateView(generic.UpdateView):
          form = super().get_form()
          form.fields['recruitmentStartDate'].widget = DatePickerInput(format='%m/%d/%Y')
          form.fields['recruitmentEndDate'].widget = DatePickerInput(format='%m/%d/%Y')
+         form.fields['is_virtual'].widget = CheckboxInput()
          return form
     def get_success_url(self):
           trialid=self.kwargs['pk']
@@ -141,6 +142,7 @@ class TrialUpdatePaneView(generic.UpdateView):
          form = super().get_form()
          form.fields['recruitmentStartDate'].widget = DatePickerInput(format='%m/%d/%Y')
          form.fields['recruitmentEndDate'].widget = DatePickerInput(format='%m/%d/%Y')
+         form.fields['is_virtual'].widget = CheckboxInput()
          return form
     template_name_suffix = '_update_pane'
     success_url = reverse_lazy('viewtrials')

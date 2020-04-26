@@ -19,9 +19,10 @@ textarea.form-control {
 }
 
 /* Reducing height of all text entry fields */
-#id_objective, #id_comments, #id_followUp,
+#id_objective, #id_comments, #id_followUp, #id_description,
 #id_notes {
   height: 100px;
+  
 }
 
 /* Styling for page headers */
