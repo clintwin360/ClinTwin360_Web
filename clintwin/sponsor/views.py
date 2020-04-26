@@ -64,7 +64,6 @@ def trial_criteria(request, pk, criteria_type):
         previous_page = "/sponsor/trial/{}/criteria/inclusion/".format(trial.id)
         previous_page_text = "Inclusion Criteria"
 
-
     trial_criteria_responses = ClinicalTrialCriteriaResponse.objects.all().filter(trial=pk, criteriaType=criteria_type)
     return render(request, "sponsor/trial_criteria.html",
                   {"trial_criteria": trial_criteria_responses,
@@ -80,8 +79,13 @@ def review_criteria(request, pk):
     inclusion_criteria = trial_criteria_responses.filter(criteriaType="inclusion")
     exclusion_criteria = trial_criteria_responses.filter(criteriaType="exclusion")
 
-    next_page = "/sponsor/viewtrials"
-    next_page_text = "Continue"
+    if trial.is_virtual:
+        next_page = "/sponsor/vt_question_upload/"
+        next_page_text = "Continue"
+    else:
+        next_page = "/sponsor/viewtrials"
+        next_page_text = "Continue"
+
     previous_page = "/sponsor/trial/{}/criteria/exclusion/".format(trial.id)
     previous_page_text = "Exclusion Criteria"
 
@@ -101,22 +105,15 @@ def login_success(request):
         return redirect("viewtrials")
 
 
-#Trial Views
+# Trial Views
 def viewTrials(request):
     return render(request, "sponsor/viewtrials.html")
-
-
-def submit_criteria(request):
-    submission = request.POST
-    if not submission:
-        return JsonResponse({"error": "received an empty post request!"})
-    else:
-        return JsonResponse(submission)
 
 
 class TrialPaneView(generic.DetailView):
     model = ClinicalTrial
     template_name_suffix = '_pane'
+
 
 class TrialDetailView(generic.DetailView):
     model = ClinicalTrial
@@ -125,91 +122,103 @@ class TrialDetailView(generic.DetailView):
 class TrialUpdateView(generic.UpdateView):
     model = ClinicalTrial
     fields = '__all__'
+
     def get_form(self):
-         form = super().get_form()
-         form.fields['recruitmentStartDate'].widget = DatePickerInput(format='%m/%d/%Y')
-         form.fields['recruitmentEndDate'].widget = DatePickerInput(format='%m/%d/%Y')
-         return form
+        form = super().get_form()
+        form.fields['recruitmentStartDate'].widget = DatePickerInput(format='%m/%d/%Y')
+        form.fields['recruitmentEndDate'].widget = DatePickerInput(format='%m/%d/%Y')
+        return form
+
     def get_success_url(self):
-          trialid=self.kwargs['pk']
-          return reverse_lazy('trialdetail', kwargs={'pk': trialid})
+        trialid = self.kwargs['pk']
+        return reverse_lazy('trialdetail', kwargs={'pk': trialid})
+
 
 class TrialUpdatePaneView(generic.UpdateView):
     model = ClinicalTrial
     fields = '__all__'
+
     def get_form(self):
-         form = super().get_form()
-         form.fields['recruitmentStartDate'].widget = DatePickerInput(format='%m/%d/%Y')
-         form.fields['recruitmentEndDate'].widget = DatePickerInput(format='%m/%d/%Y')
-         return form
+        form = super().get_form()
+        form.fields['recruitmentStartDate'].widget = DatePickerInput(format='%m/%d/%Y')
+        form.fields['recruitmentEndDate'].widget = DatePickerInput(format='%m/%d/%Y')
+        return form
+
     template_name_suffix = '_update_pane'
     success_url = reverse_lazy('viewtrials')
+
 
 def vt_question_upload(request):
     return render(request, 'sponsor/vt_question_upload.html')
 
+
 # NEW
 def TrialStartView(request, pk):
-	trial = ClinicalTrial.objects.get(pk=pk)
-	if trial.status != 'Started':
-	   trial.status = 'Started'
-	   trial.save(update_fields=['status'])
+    trial = ClinicalTrial.objects.get(pk=pk)
+    if trial.status != 'Started':
+        trial.status = 'Started'
+        trial.save(update_fields=['status'])
 
-	   #return reverse_lazy('viewtrials')
-	   return redirect("viewtrials")
-
-#NEW
-
-	   #return render("viewtrials")
-	   #return render(request, "sponsor/viewtrials.html", context)
-	   #reverse('sponsor : viewtrials')
-	   #return reverse_lazy('trialdetail', kwargs={'pk': pk})
-	   #return HttpResponseRedirect(reverse('viewtrials'))
+        # return reverse_lazy('viewtrials')
+        return redirect("viewtrials")
 
 
-#NEW
+# NEW
+
+# return render("viewtrials")
+# return render(request, "sponsor/viewtrials.html", context)
+# reverse('sponsor : viewtrials')
+# return reverse_lazy('trialdetail', kwargs={'pk': pk})
+# return HttpResponseRedirect(reverse('viewtrials'))
+
+
+# NEW
 
 def TrialEndView(request, pk):
-	trial = ClinicalTrial.objects.get(pk=pk)
-	if trial.status == 'Started':
-	   trial.status = 'Ended'
-	   trial.save(update_fields=['status'])
+    trial = ClinicalTrial.objects.get(pk=pk)
+    if trial.status == 'Started':
+        trial.status = 'Ended'
+        trial.save(update_fields=['status'])
 
-	   #return reverse_lazy('viewtrials')
-	   return redirect("viewtrials")
-
+        # return reverse_lazy('viewtrials')
+        return redirect("viewtrials")
 
 
 class DeleteTrialView(generic.DeleteView):
     model = ClinicalTrial
     success_url = reverse_lazy('viewtrials')
 
+
 class DeleteTrialPaneView(generic.DeleteView):
     model = ClinicalTrial
     success_url = reverse_lazy('viewtrials')
     template_name_suffix = '_delete_pane'
 
+
 class NewClinicalTrialView(generic.CreateView):
     model = ClinicalTrial
     fields = (
-        'custom_id', 'title', 'is_virtual', 'sponsor', 'objective', 'recruitmentStartDate', 'recruitmentEndDate', 'enrollmentTarget', 'url',
+        'custom_id', 'title', 'is_virtual', 'sponsor', 'objective', 'recruitmentStartDate', 'recruitmentEndDate',
+        'enrollmentTarget', 'url',
         'followUp', 'location', 'comments')
 
     template_name = 'sponsor/newtrial.html'
-    success_url = reverse_lazy('viewtrials')
+
+    def get_success_url(self, **kwargs):
+        return "/sponsor/trial/{}/criteria/inclusion/".format(self.object.pk)
 
     def get_form(self):
-         form = super().get_form()
-         form.fields['custom_id'].widget.attrs['placeholder'] = 'Enter the trial ID'
-         form.fields['title'].widget.attrs['placeholder'] = 'Enter the title of the trial'
-         form.fields['objective'].widget.attrs['placeholder'] = 'Describe in brief detail the objective of this trial'
-         form.fields['enrollmentTarget'].widget.attrs['placeholder'] = 'The enrollment target for this trial'
-         form.fields['url'].widget.attrs['placeholder'] = 'Enter a URL link to any external trial page'
-         form.fields['location'].widget.attrs['placeholder'] = 'The location of this trial'
-         form.fields['recruitmentStartDate'].widget = DatePickerInput(format='%m/%d/%Y')
-         form.fields['recruitmentEndDate'].widget = DatePickerInput(format='%m/%d/%Y')
-         form.fields['is_virtual'].widget = CheckboxInput()
-         return form
+        form = super().get_form()
+        form.fields['custom_id'].widget.attrs['placeholder'] = 'Enter the trial ID'
+        form.fields['title'].widget.attrs['placeholder'] = 'Enter the title of the trial'
+        form.fields['objective'].widget.attrs['placeholder'] = 'Describe in brief detail the objective of this trial'
+        form.fields['enrollmentTarget'].widget.attrs['placeholder'] = 'The enrollment target for this trial'
+        form.fields['url'].widget.attrs['placeholder'] = 'Enter a URL link to any external trial page'
+        form.fields['location'].widget.attrs['placeholder'] = 'The location of this trial'
+        form.fields['recruitmentStartDate'].widget = DatePickerInput(format='%m/%d/%Y')
+        form.fields['recruitmentEndDate'].widget = DatePickerInput(format='%m/%d/%Y')
+        form.fields['is_virtual'].widget = CheckboxInput()
+        return form
 
     def get_initial(self, *args, **kwargs):
         if not (self.request.user.is_clintwin()):
@@ -219,14 +228,13 @@ class NewClinicalTrialView(generic.CreateView):
         else:
             return self.initial.copy()
 
-
-    #def get_form(self):
+    # def get_form(self):
     #    print(self.request.POST)
     #    self.object = self.get_object()
     #    return self.form_class(for_list=self.object, data=self.request.POST)
 
 
-#Sponsor Views
+# Sponsor Views
 def viewSponsors(request):
     queryset = Sponsor.objects.all()
     return render(request, "sponsor/view_sponsors.html")
@@ -241,8 +249,8 @@ class SponsorUpdateView(generic.UpdateView):
     fields = '__all__'
 
     def get_success_url(self):
-          sponsorid=self.kwargs['pk']
-          return reverse_lazy('sponsordetail', kwargs={'pk': sponsorid})
+        sponsorid = self.kwargs['pk']
+        return reverse_lazy('sponsordetail', kwargs={'pk': sponsorid})
 
 
 class DeleteSponsorView(generic.DeleteView):
@@ -258,22 +266,25 @@ class NewSponsorView(generic.CreateView):
     success_url = reverse_lazy('viewsponsors')
 
     def get_form(self):
-         form = super().get_form()
-         form.fields['organization'].widget.attrs['placeholder'] = 'Name of the sponsor organization'
-         form.fields['contactPerson'].widget.attrs['placeholder'] = 'Name of the contact person'
-         form.fields['location'].widget.attrs['placeholder'] = 'Where the organization is located'
-         form.fields['phone'].widget.attrs['placeholder'] = 'Phone number'
-         form.fields['email'].widget.attrs['placeholder'] = 'Email address'
-         form.fields['notes'].widget.attrs['placeholder'] = 'Enter any relevant notes about the sponsor here'
-         return form
+        form = super().get_form()
+        form.fields['organization'].widget.attrs['placeholder'] = 'Name of the sponsor organization'
+        form.fields['contactPerson'].widget.attrs['placeholder'] = 'Name of the contact person'
+        form.fields['location'].widget.attrs['placeholder'] = 'Where the organization is located'
+        form.fields['phone'].widget.attrs['placeholder'] = 'Phone number'
+        form.fields['email'].widget.attrs['placeholder'] = 'Email address'
+        form.fields['notes'].widget.attrs['placeholder'] = 'Enter any relevant notes about the sponsor here'
+        return form
 
-#Request Views
+
+# Request Views
 def viewSponsorReq(request):
     query_results = SponsorRequest.objects.all()
     return render(request, "sponsor/view_sponsor_req.html")
 
+
 class SponsorRequestDetailView(generic.DetailView):
     model = SponsorRequest
+
 
 class NewSponsorRequestView(generic.CreateView):
     model = SponsorRequest
@@ -290,7 +301,7 @@ class NewSponsorRequestView(generic.CreateView):
             return self.initial.copy()
 
 
-#Other views
+# Other views
 def compare_values(a, op, b):
     if op == "equals":
         return a == b
@@ -301,11 +312,11 @@ def compare_values(a, op, b):
 
 
 def calculate_trial_matches(participant):
-    #participant = Participant.objects.get(id=1)
+    # participant = Participant.objects.get(id=1)
     responses = participant.responses.all()
     current_matches = [x.clinical_trial.id for x in participant.trial_matches.select_related('clinical_trial')]
     trials = ClinicalTrial.objects.all().exclude(id__in=current_matches)
-    #return JsonResponse({"data": [x.title for x in trials]})
+    # return JsonResponse({"data": [x.title for x in trials]})
     new_matches = 0
     for trial in trials:
         trial_match = True
@@ -337,7 +348,7 @@ def calculate_trial_matches(participant):
             new_matches += 1
         else:
             ClinicalTrialMatch.objects.create(participant=participant, clinical_trial=trial, match=False)
-    #return JsonResponse({"data": new_matches})
+    # return JsonResponse({"data": new_matches})
     return new_matches
 
 
@@ -349,7 +360,7 @@ def question_rank(questions):
         for criterion in criteria:
             rank += criterion.trial_responses.count()
         ranks[q.id] = rank
-    #data['questions'].sort(key=lambda x: x['rank'], reverse=True)
+    # data['questions'].sort(key=lambda x: x['rank'], reverse=True)
     return ranks
 
 
@@ -380,7 +391,7 @@ def question_flow(request):
 
 def load_data(request):
     call_command('loaddata', 'participant_questions')
-    #call_command('loaddata', 'virtualtrial_participant_questions')
+    # call_command('loaddata', 'virtualtrial_participant_questions')
     call_command('loaddata', 'groups')
     call_command('loaddata', 'users')
     call_command('loaddata', 'participants')
@@ -390,14 +401,14 @@ def load_data(request):
     call_command('loaddata', 'criteria_responses')
     call_command('loaddata', 'trial_matches')
     call_command('loaddata', 'participant_responses')
-    #call_command('loaddata', 'virtualtrial_participant_responses')
+    # call_command('loaddata', 'virtualtrial_participant_responses')
     call_command('loaddata', 'question_flow')
     call_command('loaddata', 'user_profiles')
     return HttpResponse("Data Loaded!")
 
 
 # View for contact us form
-#@api_view(['GET, POST'])
+# @api_view(['GET, POST'])
 @permission_classes((permissions.AllowAny,))
 def contact(request):
     if request.method == 'POST':
@@ -423,29 +434,37 @@ class ClinicalTrialCreateView(generic.CreateView):
         'followUp', 'location', 'comments')
     template_name = 'create_trial_form.html'
 
+
 # Supplementary Views
 # Static page for About us
 class AboutPageView(TemplateView):
     template_name = 'sponsor/about.html'
 
+
 # Static page for How it Works
 class HowWorksPageView(TemplateView):
     template_name = 'sponsor/how_works.html'
+
 
 # Static page for Contact us
 class ContactPageView(TemplateView):
     template_name = 'sponsor/contact.html'
 
+
 # Static page for directions
 class DirectionsPageView(TemplateView):
     template_name = 'directions.html'
+
 
 # Static page for Message display
 class MessagePageView(TemplateView):
     template_name = 'messages.html'
 
+
 def emptyPane(request):
-    return render(request, "sponsor/emptypane.html",)
+    return render(request, "sponsor/emptypane.html", )
+
+
 # Static pages for Admin
 # class NewCriterionView(TemplateView):
 #     template_name = 'new_criterion.html'
@@ -457,8 +476,10 @@ def emptyPane(request):
 def dummy(request):
     return render(request, 'sponsor/dummy.html')
 
+
 class ViewSponsorView(TemplateView):
     template_name = 'sponsor/view_sponsor.html'
+
 
 # NEW: view for clinicaltrial_list2
 class ClinicalTrialListView2(SingleTableView):
