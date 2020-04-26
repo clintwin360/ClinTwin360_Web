@@ -321,5 +321,9 @@ $(function(){
     handleEditCriteria();
     handleSubmitCriteria();
     handleDeleteCriteria();
+    $("[data-toggle=popover]").popover({html:true,trigger: 'focus'})
+    $('#question-button-rect').click(function() {
+        $(this).popover('toggle')
+    });
 
 });

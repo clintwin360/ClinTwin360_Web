@@ -15,7 +15,6 @@ urlpatterns = [
     path('dummy/', views.dummy, name='dummy'),
     path('openapi2', schema_view),
     path('login_success/', views.login_success, name='login_success'),
-    path('submit_criteria/', views.submit_criteria, name='submit_criteria'),
     # Move to API app
     path('loaddata/', views.load_data, name='load_data'),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
