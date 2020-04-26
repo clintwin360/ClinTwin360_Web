@@ -43,7 +43,8 @@ urlpatterns = [
     path('newtrial/exclusion', TemplateView.as_view(template_name='sponsor/trial_criteria.html'), name='exclusion'),
 
     # Test: Page for uploading text file for virtual trials
-    path('vt_question_upload/', views.vt_question_upload, name='vt_question_upload'),
+    # path('vt_question_upload/', views.vt_question_upload, name='vt_question_upload'),
+    re_path(r'^trial/(?P<pk>\d+)/vt_question_upload/$', views.vt_question_upload, name='vt_question_upload'),
 
     path('viewsponsorreq', views.viewSponsorReq, name='viewsponsorreq'),
     path('criteriarequest', views.NewSponsorRequestView.as_view(), name='criteriarequest'),

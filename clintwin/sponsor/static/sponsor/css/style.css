@@ -223,7 +223,8 @@ button.reset_btn, #id_email, #id_phone {
   margin-right: auto;
 }
 
-button, #add_btn, #add_cri #cancel-criteria{
+button, #add_btn, #add_cri #cancel-criteria,
+#upload-btn{
   background-color: #4bc5ef;
   border-radius: 4px;
   color: white;

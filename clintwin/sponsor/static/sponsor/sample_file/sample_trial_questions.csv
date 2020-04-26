@@ -1,4 +1,4 @@
 ﻿id,text,valueType,options
-1,What is your marital_status?,pick_one,"[\""""Single\"""";\""""Married\"""";\""""Widowed\""""; \""""Divorced\""""; \""""Separated\""""; \""""Registered partnership\""""]"
-2,Do you have a healthcare provider?,yes_no,"[\""""Yes\"""";\""""No\""""]"
-3,How old are you?,yes_no,"{\""""min\"""":0;\""""max\"""":140;\""""increment\"""":1;\""""unit\"""":\""""years\""""}"
+1,What is your marital_status?,pick_one,"[""Single"";""Married"";""Widowed""; ""Divorced""; ""Separated""; ""Registered partnership""]"
+2,Do you have a healthcare provider?,yes_no,"[""Yes"";""No""]"
+3,How old are you?,yes_no,"{""min"":0;""max"":140;""increment"":1;""unit"":""years""}"

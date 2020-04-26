@@ -171,7 +171,7 @@ class VirtualTrialParticipantQuestion(models.Model):
      valueType = models.CharField(max_length=50)
      # options = ArrayField(models.CharField(max_length=256))
      options = models.TextField()
-     categories = models.ManyToManyField(QuestionCategory)
+     # categories = models.ManyToManyField(QuestionCategory)
 
      def __str__(self):
          return self.text
