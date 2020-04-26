@@ -304,6 +304,13 @@ class NewSponsorRequestView(generic.CreateView):
         else:
             return self.initial.copy()
 
+    def get_form(self):
+        form = super().get_form()
+        form.fields['criterion_req'].widget.attrs['placeholder'] = 'Eligibility criteria you would like added'
+        form.fields['values'].widget.attrs['placeholder'] = 'A comma-separated list of potential values'
+        form.fields['notes'].widget.attrs['placeholder'] = 'Any addtional notes about the criteria'
+        return form
+
 
 # Other views
 def compare_values(a, op, b):

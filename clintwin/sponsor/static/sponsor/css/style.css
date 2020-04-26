@@ -22,14 +22,14 @@ textarea.form-control {
 #id_objective, #id_comments, #id_followUp, #id_description,
 #id_notes {
   height: 100px;
-  
+
 }
 
 /* Styling for page headers */
 #about_us, #our_location, #how_it_works,
 #contact, #trial_dashboard, #create-trial,#edit-trial,
 #new-sponsor, #sponsor-req, #criteria_trial_name,
-#create-criteria, #criteria_trial_id {
+#create-criteria, #criteria_trial_id, #request-criteria {
   color: #4b555a;
   text-align: center;
 }
