@@ -445,31 +445,13 @@
     "pk": 50, 
     "fields": {
       "question": "82", 
-      "next_question": "84", 
-      "response": "No"
-    }
-  }, 
-  {
-    "model": "sponsor.QuestionFlow", 
-    "pk": 51, 
-    "fields": {
-      "question": "82", 
       "next_question": "83", 
       "response": "Yes"
     }
   }, 
   {
     "model": "sponsor.QuestionFlow", 
-    "pk": 52, 
-    "fields": {
-      "question": "83", 
-      "next_question": "84", 
-      "response": "not_applicable"
-    }
-  }, 
-  {
-    "model": "sponsor.QuestionFlow", 
-    "pk": 53, 
+    "pk": 51, 
     "fields": {
       "question": "27", 
       "next_question": "85", 
@@ -478,7 +460,7 @@
   }, 
   {
     "model": "sponsor.QuestionFlow", 
-    "pk": 54, 
+    "pk": 52, 
     "fields": {
       "question": "27", 
       "next_question": "86", 
