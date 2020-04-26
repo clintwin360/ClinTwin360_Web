@@ -4,19 +4,28 @@
 {% bootstrap_javascript jquery='full' %}
 {{ form.media }}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block style %}{% endblock %}
 {% block scripts %}{% endblock %}
 {% block title %}Trials Update{% endblock %}
 
 {% block content %}
+<div class="container-fluid"><br>
+    <h2 id="edit-trial">Edit Clinical Trial</h2>
+    <h3 id="basic-info"> Trial Details </h3><br>
+
+    <div id="edit_trial_form">
 <form method="post">
     {% csrf_token %}
 	{{ form.media }}
     {{form.as_p}}
-    <a href="{% url 'viewtrials' %}" class="btn btn-info" role="button">Return to Dashboard</a>
+    <a href="{% url 'viewtrials' %}" class="btn btn-info" id="return_button" role="button">Return to Dashboard</a>
     <button class="btn btn-success w-25" type="submit" id="edit_button">Edit Trial</button>
 	
 </form>
 <br>
 <br>
+<br><br><br><br>
+    </div>
+</div>
 {% endblock %}

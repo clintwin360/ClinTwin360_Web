@@ -26,7 +26,7 @@ textarea.form-control {
 
 /* Styling for page headers */
 #about_us, #our_location, #how_it_works,
-#contact, #trial_dashboard, #create-trial,
+#contact, #trial_dashboard, #create-trial,#edit-trial,
 #new-sponsor, #sponsor-req, #criteria_trial_name,
 #create-criteria, #criteria_trial_id {
   color: #4b555a;
@@ -40,7 +40,7 @@ textarea.form-control {
 }
 
 /* Form buttons */
-#create_button {
+#create_button,#edit_button,#return_button {
   background: transparent;
   border: none;
   padding: 0;
@@ -54,7 +54,7 @@ textarea.form-control {
   color: #73C9EE;
 }
 
-#create_button:hover{
+#create_button,#edit_button,#return_button:hover{
     text-decoration:underline;
     color: #73C9EE;
 }
@@ -155,7 +155,7 @@ div.footer {
 
 
 /* Center the new trial form */
-#new_trial_form, #new_sponsor_form, #new_criteria_form,
+#new_trial_form, #new_sponsor_form, #new_criteria_form, #edit_trial_form,
 #request_criteria_form, #upload-question, #view-all-requests {
   display: block;
   margin-left: auto;
