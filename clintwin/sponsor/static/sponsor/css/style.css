@@ -22,20 +22,20 @@ textarea.form-control {
 #id_objective, #id_comments, #id_followUp, #id_description,
 #id_notes {
   height: 100px;
-  
+
 }
 
 /* Styling for page headers */
 #about_us, #our_location, #how_it_works,
-#contact, #trial_dashboard, #create-trial,#edit-trial,
+#contact, #trial-dashboard, #create-trial,#edit-trial,
 #new-sponsor, #sponsor-req, #criteria_trial_name,
-#create-criteria, #criteria_trial_id {
+#create-criteria, #criteria_trial_id, #request-criteria, #contact-list-title, #contact-detail-title {
   color: #4b555a;
   text-align: center;
 }
 
 /* Styling for headings */
-#basic-info {
+#basic-info, #join {
   color: #73C9EE;
   text-align: center;
 }
@@ -157,7 +157,7 @@ div.footer {
 
 /* Center the new trial form */
 #new_trial_form, #new_sponsor_form, #new_criteria_form, #edit_trial_form,
-#request_criteria_form, #upload-question, #view-all-requests {
+#request_criteria_form, #upload-question, #view-all-requests, #contact-form {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -223,7 +223,8 @@ button.reset_btn, #id_email, #id_phone {
   margin-right: auto;
 }
 
-button, #add_btn, #add_cri #cancel-criteria{
+button, #add_btn, #add_cri #cancel-criteria,
+#upload-btn{
   background-color: #4bc5ef;
   border-radius: 4px;
   color: white;

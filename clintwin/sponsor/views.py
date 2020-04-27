@@ -1,4 +1,7 @@
 ##  Original additions
+import csv, io #NEW
+from django.contrib import messages #NEW
+
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import render
 
@@ -80,7 +83,7 @@ def review_criteria(request, pk):
     exclusion_criteria = trial_criteria_responses.filter(criteriaType="exclusion")
 
     if trial.is_virtual:
-        next_page = "/sponsor/vt_question_upload/"
+        next_page = "/sponsor/trial/{}/vt_question_upload/".format(trial.id)
         next_page_text = "Continue"
     else:
         next_page = "/sponsor/viewtrials"
@@ -96,6 +99,50 @@ def review_criteria(request, pk):
                    "previous_page": previous_page, "next_page": next_page,
                    "previous_page_text": previous_page_text,
                    "next_page_text": next_page_text})
+
+
+# def vt_question_upload(request):
+#     return render(request, 'sponsor/vt_question_upload.html')
+
+def vt_question_upload(request, pk):
+    trial = ClinicalTrial.objects.get(pk=pk)
+    # declaring template
+    template = 'sponsor/vt_question_upload.html'
+    prompt = {'order': 'order of CSV should be text, valueType, options'
+    }
+
+    # Handle the GET model
+    if request.method == "GET":
+        return render(request, template, prompt)
+    # Handle the POST model
+    if request.method == "POST":
+        csv_file = request.FILES['fileUploaded']
+
+        # let's check if it is a csv file
+        if not csv_file.name.endswith('.csv'):
+            messages.error(request, 'This is not a CSV file')
+        data_set = csv_file.read().decode('UTF-8')
+        # setup a stream which is when we loop through each line we are able to handle a data in a stream
+        io_string = io.StringIO(data_set)
+        next(io_string)
+        for column in csv.reader(io_string, delimiter=',', quotechar="|"):
+            trial_id = trial
+            text = column[1]
+            valueType=column[2]
+            options = column[3].replace(";",",").replace('"[','[').replace(']"',']').replace('"{','{').replace('}"','}').replace('""', '"')
+
+            vtquestion = VirtualTrialParticipantQuestion.objects.create(
+                trial_id=trial_id, text=text, valueType=valueType, options=options)
+        vtquestion.save()
+        vtquestions = VirtualTrialParticipantQuestion.objects.all().filter(trial_id=pk)
+        context = {}
+        messages.success(request, "Succesfully uploaded trial questions from file: " + csv_file.name)
+
+    # Else if problem with files
+    else:
+        messages.error(request, "Problem with uploaded file's format")
+
+    return render(request, template, {"vtquestions" : vtquestions})
 
 
 def login_success(request):
@@ -150,10 +197,6 @@ class TrialUpdatePaneView(generic.UpdateView):
 
     template_name_suffix = '_update_pane'
     success_url = reverse_lazy('viewtrials')
-
-
-def vt_question_upload(request):
-    return render(request, 'sponsor/vt_question_upload.html')
 
 
 # NEW
@@ -282,7 +325,6 @@ class NewSponsorView(generic.CreateView):
 
 # Request Views
 def viewSponsorReq(request):
-    query_results = SponsorRequest.objects.all()
     return render(request, "sponsor/view_sponsor_req.html")
 
 
@@ -303,6 +345,38 @@ class NewSponsorRequestView(generic.CreateView):
             return initial
         else:
             return self.initial.copy()
+
+    def get_form(self):
+        form = super().get_form()
+        form.fields['criterion_req'].widget.attrs['placeholder'] = 'Eligibility criteria you would like added'
+        form.fields['values'].widget.attrs['placeholder'] = 'A comma-separated list of potential values'
+        form.fields['notes'].widget.attrs['placeholder'] = 'Any addtional notes about the criteria'
+        return form
+
+class ContactListView(generic.ListView):
+    model = Contact
+    pagination_by = 25
+
+class ContactDetailView(generic.DetailView):
+    model = Contact
+
+class ContactPageView(generic.CreateView):
+
+        model = Contact
+        fields = ['organization', 'location', 'first_name', 'last_name', 'email', 'phone' ,'comment']
+        template_name = 'sponsor/contact.html'
+        success_url = reverse_lazy('index')
+
+        def get_form(self):
+            form = super().get_form()
+            form.fields['organization'].widget.attrs['placeholder'] = 'Name of the sponsor organization'
+            form.fields['location'].widget.attrs['placeholder'] = 'Location of the sponsor organization'
+            form.fields['first_name'].widget.attrs['placeholder'] = 'First name of the sponsor contact'
+            form.fields['last_name'].widget.attrs['placeholder'] = 'Last name of the sponsor contact'
+            form.fields['email'].widget.attrs['placeholder'] = 'Email address of the sponsor contact'
+            form.fields['phone'].widget.attrs['placeholder'] = 'Phone number of the sponsor contact'
+            form.fields['comment'].widget.attrs['placeholder'] = 'Any addtional comments about the request'
+            return form
 
 
 # Other views
@@ -451,8 +525,7 @@ class HowWorksPageView(TemplateView):
 
 
 # Static page for Contact us
-class ContactPageView(TemplateView):
-    template_name = 'sponsor/contact.html'
+
 
 
 # Static page for directions

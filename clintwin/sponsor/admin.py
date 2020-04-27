@@ -14,5 +14,7 @@ admin.site.register(QuestionFlow)
 admin.site.register(UserProfile)
 admin.site.register(ClinicalTrialMatch)
 admin.site.register(PushNotification)
+admin.site.register(VirtualTrialParticipantQuestion)
+admin.site.register(VirtualTrialParticipantResponse)
 
 from signal import *

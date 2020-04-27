@@ -1,28 +1,44 @@
 {% extends "sponsor/base.html" %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{{ form.media }}
 {% load static %}
-
+{% load crispy_forms_tags %}
 {% block scripts %}
-<script src="{% static 'sponsor/js/vt_question_upload.js' %}"></script>
+<!-- <script src="{% static 'sponsor/js/vt_question_upload.js' %}"></script> -->
 {% endblock %}
-
+{% block title %}Upload CSV File Containing Trial Questions{% endblock %}
 {% block content %}
 <br>
-<h2 id="create-trial">Upload a CSV file containing trial questions</h2>
+<h2 id="create-trial">Upload CSV File Containing Trial Questions</h2>
 <br><br>
 <div id="upload-question">
-      <form id="upload-file" action="" method="post">
+      <form id="upload-file" action="" method="post" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+
+        {% if messages %}
+        <ul class="messages">
+          {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+        </ul><br>
+        {% endif %}
+
         <label for="files">Select file:</label>
-        <input type="file" id="file-uploaded" name="fileUploaded" accept=".cvs, text/plain"><br>
-        <input type="submit" value="Upload">
+        <input type="file" id="file-uploaded" name="fileUploaded" accept=".csv, text/plain"><br>
+        <input type="submit" value="Upload" id="upload-btn">
       </form><br><br>
 
       <h3 id="create-trial">Instructions for File Upload</h3><br>
 
-        1. <a href="{% static 'sponsor/sample_file/sample_trial_questions.xlsx' %}" target="_blank">Download</a> sample file<br>
-        2. Enter questions and value type and the answer "options" for each questions.<br>
-        3. Make sure to follow the sample format for answer "options" or your file won't be processed.<br>
-        4. Once completed, save as a CSV file and upload the file.
-      <label for="files">Sample File:</label><br>
+        1.   <a href="{% static 'sponsor/sample_file/sample_trial_questions.xlsx' %}" target="_blank">Download</a> sample file.<br>
+        2.   Fill out the id, question, valueType, and answer options for each questions.<br>
+        3.   Make sure to follow the sample format for answer "options".<br>
+        4.   Once completed, save as a CSV file and upload the file.<br><br>
+
+      <a class="btn btn-info returnbtn" href="/sponsor/viewtrials">Return to Dashboard</a>
+      <br>
 
 </div>
 

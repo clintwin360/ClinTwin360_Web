@@ -1,0 +1,43 @@
+{% extends "sponsor/base.html" %}
+{% load static %}
+{% block style %}{% endblock %}
+{% block scripts %}{% endblock %}
+{% block title %}Contact List{% endblock %}
+
+{% block content %}
+<br><h2 id="contact-list-title">Sponsor Access Request Dashboard</h2><br>
+<div class="table_container">
+    <div class="main-cards row">
+          <table class="table table-bordered">
+            <thead class="thead-light">
+              <tr>
+                <th id="spnsr_id">Request ID</th>
+                <th>Status</th>
+                <th>Organization</th>
+                <th>Location</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th id="end_date">Request Time</th>
+              </tr>
+            </thead>
+
+            <tbody id="contact-list-body">
+            {% for contact in object_list %}
+                <tr>
+                    <td>{{ contact.id }}</td>
+                    <td>{{ contact.status }}</td>
+                    <td>{{ contact.organization }}</td>
+                    <td>{{ contact.location }}</td>
+                    <td>{{ contact.first_name }} {{ contact.last_name }}</td>
+                    <td>{{ contact.email }}</td>
+                    <td>{{ contact.phone }}</td>
+                    <td>{{ contact.createdAt }}</td>
+                    <td><a class="btn btn-info editbtn" href="contactrequest/{{contact.id}}">View</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
