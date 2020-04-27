@@ -249,8 +249,9 @@ class PushNotification(models.Model):
 @receiver(post_save, sender=PushNotification)
 def send_new_message_notification(sender, **kwargs):
     message = kwargs['instance']
-    send_new_message_push_notification(recipient=message.recipient,
+    r = send_new_message_push_notification(recipient=message.recipient,
                                        content=message.content)
+    print(r)
 
 
 def send_new_message_push_notification(**kwargs):
