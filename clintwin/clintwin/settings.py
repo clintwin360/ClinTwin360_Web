@@ -50,9 +50,9 @@ INSTALLED_APPS = [
 ]
 
 PUSH_NOTIFICATIONS_SETTINGS = {
-        "APNS_CERTIFICATE": "certificate.pem",
+        "APNS_CERTIFICATE": "aps.pem",
         "APNS_TOPIC": "com.cscie599.ClinTwin360",
-        "APNS_USE_SANDBOX": True,
+        # "APNS_USE_SANDBOX": True,
         "UPDATE_ON_DUPLICATE_REG_ID": True,
 }
 
