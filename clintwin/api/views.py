@@ -167,8 +167,11 @@ class ClinicalTrialViewSet(mixins.RetrieveModelMixin,
 
     def get_queryset(self):
         sponsor_id = self.request.query_params.get('sponsor_id', None)
+        trial_id = self.request.query_params.get('id', None)
         if sponsor_id:
             queryset = ClinicalTrial.objects.filter(sponsor__id=sponsor_id)
+        elif trial_id:
+            queryset = ClinicalTrial.objects.filter(id=trial_id)
         else:
             queryset = ClinicalTrial.objects.all()
 

@@ -551,15 +551,9 @@ def emptyPane(request):
 
 # Test views
 def dummy(request):
+    trials = ClinicalTrial.objects.filter()
     return render(request, 'sponsor/dummy.html')
 
 
 class ViewSponsorView(TemplateView):
     template_name = 'sponsor/view_sponsor.html'
-
-
-# NEW: view for clinicaltrial_list2
-class ClinicalTrialListView2(SingleTableView):
-    model = ClinicalTrial
-    template_name = 'sponsor/clinicaltrial_list2.html'
-    table_class = ClinicalTrialTable

@@ -47,6 +47,23 @@ body, html {
     padding: 0;
 }
 
+.title-left{
+    width: 40px;
+}
+
+.title-right{
+    width: 40px;
+}
+
 #virtual-tag{
-    display: inline-block;
+    padding: 2px;
+}
+
+#dashboard-trial-title {
+  font-size: 1.5vw;
+}
+
+.card{
+    height: 125px;
+    width: 100vw;
 }
