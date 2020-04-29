@@ -4,7 +4,7 @@
     "pk": "1", 
     "fields": {
       "text": "What is your height? (ft.)", 
-      "options": "{\"min\":30,\"max\":100,\"increment\":1,\"unit\":\"lbs\"}", 
+      "options": "{\"min\":30,\"max\":100,\"increment\":1,\"unit\":\"inches\"}", 
       "valueType": "large_option_set"
     }
   }, 
@@ -13,7 +13,7 @@
     "pk": "2", 
     "fields": {
       "text": "What is your weight? (lbs.)", 
-      "options": "{\"min\":1,\"max\":1000,\"increment\":.5,\"unit\":\"inches\"}", 
+      "options": "{\"min\":1,\"max\":1000,\"increment\":.5,\"unit\":\"lbs\"}", 
       "valueType": "large_option_set"
     }
   }, 
@@ -159,15 +159,6 @@
       "text": "When did you quit?", 
       "options": "[\"Less than 6 months\", \"1-2 years\", \"2-5 years\", \"Over 5 years\"]", 
       "valueType": "pick_one"
-    }
-  }, 
-  {
-    "model": "sponsor.ParticipantQuestion", 
-    "pk": "19", 
-    "fields": {
-      "text": "Did you quit the use of Tobacco?", 
-      "options": "[\"Yes\", \"No\"]", 
-      "valueType": "yes_no"
     }
   }, 
   {
