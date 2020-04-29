@@ -85,8 +85,8 @@ class ClinicalTrial(models.Model):
     title = models.CharField('Trial Title', null=True, max_length=500)
     objective = models.TextField('Objective', null=True)
     description = models.TextField('Description', null=True, blank=True)
-    recruitmentStartDate = models.DateField('Recruitment Start Date', null=True,)
-    recruitmentEndDate = models.DateField('Recruitment End Date', null=True,)
+    recruitmentStartDate = models.DateField('Recruitment Start Date', null=True, )
+    recruitmentEndDate = models.DateField('Recruitment End Date', null=True, )
     enrollmentTarget = models.IntegerField('Enrollment Target', null=True, blank=True)
     url = models.URLField('URL', null=True, blank=True)
     followUp = models.TextField('Followup Notes', null=True, blank=True)
@@ -95,7 +95,8 @@ class ClinicalTrial(models.Model):
     createdTimeStamp = models.DateTimeField(auto_now_add=True)
     status = models.CharField('Status', null=True, max_length=100, default='Draft')
     current_recruitment = models.IntegerField('Current Recruitment', default=0, null=True, blank=True)
-    is_virtual = models.BooleanField('Virtual Trial', null=True, help_text='Do you plan to administer this trial online?')
+    is_virtual = models.BooleanField('Virtual Trial', null=True,
+                                     help_text='Do you plan to administer this trial online?')
 
     def __str__(self):
         ret = str(self.id) + ":" + self.title
@@ -179,15 +180,16 @@ class ParticipantQuestion(models.Model):
 
 
 class VirtualTrialParticipantQuestion(models.Model):
-     trial_id= models.ForeignKey(ClinicalTrial, on_delete=models.CASCADE, related_name='virtualquestion_trial_id')
-     text = models.TextField()
-     valueType = models.CharField(max_length=50)
-     # options = ArrayField(models.CharField(max_length=256))
-     options = models.TextField()
-     # categories = models.ManyToManyField(QuestionCategory)
+    clinical_trial = models.ForeignKey(ClinicalTrial, on_delete=models.CASCADE, related_name='virtual_questions')
+    text = models.TextField()
+    valueType = models.CharField(max_length=50)
+    # options = ArrayField(models.CharField(max_length=256))
+    options = models.TextField()
 
-     def __str__(self):
-         return self.text
+    # categories = models.ManyToManyField(QuestionCategory)
+
+    def __str__(self):
+        return self.text
 
 
 class QuestionFlow(models.Model):
@@ -213,16 +215,16 @@ class ParticipantResponse(models.Model):
 
 
 class VirtualTrialParticipantResponse(models.Model):
-     question = models.ForeignKey(VirtualTrialParticipantQuestion, on_delete=models.CASCADE)
-     participant = models.ForeignKey(Participant, on_delete=models.CASCADE, related_name='virtual_responses')
-     value = models.CharField(max_length=50)
-     last_answered = models.DateTimeField(auto_now=True, null=True)
+    question = models.ForeignKey(VirtualTrialParticipantQuestion, on_delete=models.CASCADE)
+    participant = models.ForeignKey(Participant, on_delete=models.CASCADE, related_name='virtual_responses')
+    value = models.CharField(max_length=50)
+    last_answered = models.DateTimeField(auto_now=True, null=True)
 
-     def __str__(self):
-         return self.question.text
+    def __str__(self):
+        return self.question.text
 
-     class Meta:
-         unique_together = ('question', 'participant')
+    class Meta:
+        unique_together = ('question', 'participant')
 
 
 class ClinicalTrialCriteria(models.Model):
@@ -258,7 +260,7 @@ class PushNotification(models.Model):
 def send_new_message_notification(sender, **kwargs):
     message = kwargs['instance']
     r = send_new_message_push_notification(recipient=message.recipient,
-                                       content=message.content)
+                                           content=message.content)
     print(r)
 
 

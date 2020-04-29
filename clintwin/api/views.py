@@ -65,6 +65,8 @@ class VirtualTrialParticipantQuestionViewSet(mixins.ListModelMixin,
     """
     queryset = VirtualTrialParticipantQuestion.objects.all()
     serializer_class = VirtualTrialParticipantQuestionSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['clinical_trial']
     # permission_classes = [permissions.IsAuthenticated]
 
 
