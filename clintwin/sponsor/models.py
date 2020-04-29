@@ -159,6 +159,14 @@ class ClinicalTrialMatch(models.Model):
         return self.participant.name() + ":" + self.clinical_trial.title + ">>" + self.match
 
 
+class ClinicalTrialEnrollment(models.Model):
+    participant = models.ForeignKey(Participant, on_delete=models.CASCADE, related_name='enrollments')
+    clinical_trial = models.ForeignKey(ClinicalTrial, on_delete=models.CASCADE, related_name='enrollments')
+
+    def __str__(self):
+        return self.participant.name() + ":" + self.clinical_trial.title
+
+
 class ParticipantQuestion(models.Model):
     text = models.TextField()
     valueType = models.CharField(max_length=50)

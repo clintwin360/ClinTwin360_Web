@@ -22,6 +22,7 @@ router.register(r'virtualtrial_responses', views.VirtualTrialParticipantResponse
 router.register(r'profile', views.SponsorProfileViewSet)
 router.register(r'matches', views.ClinicalTrialMatchViewSet, basename='ClinicalTrialMatch')
 router.register(r'trials', views.ClinicalTrialViewSet, basename='ClinicalTrial')
+router.register(r'enroll', views.ClinicalTrialEnrollmentViewSet, basename='ClinicalTrialEnrollment')
 router.register(r'sponsor_request', views.SponsorRequestViewSet)
 router.register(r'criteria_response', views.ClinicalTrialCriteriaResponseViewSet, basename='ClinicalTrialCriteriaResponse')
 router.register(r'device/apns', APNSDeviceAuthorizedViewSet)

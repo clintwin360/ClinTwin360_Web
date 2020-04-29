@@ -157,6 +157,25 @@ class ClinicalTrialMatchViewSet(mixins.ListModelMixin,
         return queryset
 
 
+class ClinicalTrialEnrollmentViewSet(mixins.CreateModelMixin,
+                                     mixins.ListModelMixin,
+                                     GenericViewSet):
+    """
+    Enroll in a Virtual Trial or get a list of enrolled trials for a participant
+    """
+    serializer_class = ClinicalTrialEnrollmentSerializer
+
+    def get_queryset(self):
+        participant_id = self.request.query_params.get('participant')
+        if participant_id:
+            participant = Participant.objects.get(id=participant_id)
+            queryset = ClinicalTrialEnrollment.objects.filter(participant=participant)
+        else:
+            queryset = ClinicalTrialMatch.objects.none()
+
+        return queryset
+
+
 class ClinicalTrialViewSet(mixins.RetrieveModelMixin,
                            mixins.ListModelMixin,
                            GenericViewSet):

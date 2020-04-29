@@ -96,6 +96,14 @@ class ClinicalTrialMatchSerializer(serializers.ModelSerializer):
         fields = ['clinical_trial']
 
 
+class ClinicalTrialEnrollmentSerializer(serializers.ModelSerializer):
+    clinical_trial = ClinicalTrialListSerializer(read_only=True)
+
+    class Meta:
+        model = ClinicalTrialMatch
+        fields = ['participant', 'clinical_trial']
+
+
 class ClinicalTrialCriteriaResponseSerializer(serializers.ModelSerializer):
     clinical_trial = ClinicalTrialDetailSerializer(read_only=True)
 
