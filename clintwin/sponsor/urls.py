@@ -53,7 +53,8 @@ urlpatterns = [
     path('contact', views.ContactPageView.as_view(), name='contact'),
     path('contactlist', views.ContactListView.as_view(), name='contactlist'),
     re_path(r'^contactrequest/(?P<pk>\d+)$', views.ContactDetailView.as_view(), name='contactdetail'),
-
+    re_path(r'accessclose/(?P<pk>\d+)$', views.AccessRequestCloseView, name='accessclose'),
+    re_path(r'criteriarequestcomplete/(?P<pk>\d+)$', views.CriteriaRequestCompleteView, name='criteriarequestcomplete'),
     #Sponsor Views
     path('newsponsor', views.NewSponsorView.as_view(), name='newsponsor'),
     path('viewsponsors', views.viewSponsors, name='viewsponsors'),

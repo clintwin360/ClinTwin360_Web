@@ -323,6 +323,7 @@ class NewSponsorView(generic.CreateView):
         return form
 
 
+
 # Request Views
 def viewSponsorReq(request):
     return render(request, "sponsor/view_sponsor_req.html")
@@ -378,6 +379,22 @@ class ContactPageView(generic.CreateView):
             form.fields['comment'].widget.attrs['placeholder'] = 'Any addtional comments about the request'
             return form
 
+
+def CriteriaRequestCompleteView(request, pk):
+    criteria_request = SponsorRequest.objects.get(pk=pk)
+    if criteria_request.status == 'Open':
+        criteria_request.status = 'Completed'
+        criteria_request.save(update_fields=['status'])
+
+        return redirect("viewsponsorreq")
+
+def AccessRequestCloseView(request, pk):
+    access_request = Contact.objects.get(pk=pk)
+    if access_request.status == 'Open':
+        access_request.status = 'Closed'
+        access_request.save(update_fields=['status'])
+
+        return redirect("contactlist")
 
 # Other views
 def compare_values(a, op, b):

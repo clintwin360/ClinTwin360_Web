@@ -68,7 +68,7 @@ class SponsorRequest(models.Model):
     criterion_req = models.CharField(null=True, max_length=200)
     values = models.CharField(null=True, max_length=500)
     notes = models.CharField(max_length=1000)
-
+    status = models.CharField('Status', null=True, max_length=100, default='Open')
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
