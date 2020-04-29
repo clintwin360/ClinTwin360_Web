@@ -254,6 +254,8 @@ class ClinicalTrialCriteriaResponse(models.Model):
 class PushNotification(models.Model):
     recipient = models.ForeignKey(User, related_name='received_messages', on_delete=models.CASCADE)
     content = models.CharField(max_length=512)
+    sendResponse = models.CharField(max_length=1024, null=True, blank=True)
+    createdTimeStamp = models.DateTimeField(auto_now_add=True)
 
 
 @receiver(post_save, sender=PushNotification)
@@ -261,7 +263,10 @@ def send_new_message_notification(sender, **kwargs):
     message = kwargs['instance']
     r = send_new_message_push_notification(recipient=message.recipient,
                                            content=message.content)
-    print(r)
+    message.sendResponse = r
+    post_save.disconnect(send_new_message_notification, sender=PushNotification)
+    message.save()
+    post_save.connect(send_new_message_notification, sender=PushNotification)
 
 
 def send_new_message_push_notification(**kwargs):
@@ -269,7 +274,7 @@ def send_new_message_push_notification(**kwargs):
 
     device = APNSDevice.objects.filter(name=kwargs.get("recipient").username)
     if not device:
-        print('Unable to retrieve a device for the user!')
+        return 'Unable to retrieve a device for the user!'
     else:
         return device.send_message(content)
 
