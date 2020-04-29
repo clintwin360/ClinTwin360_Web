@@ -55,8 +55,10 @@ urlpatterns = [
     re_path(r'^contactrequest/(?P<pk>\d+)$', views.ContactDetailView.as_view(), name='contactdetail'),
     re_path(r'accessclose/(?P<pk>\d+)$', views.AccessRequestCloseView, name='accessclose'),
     re_path(r'criteriarequestcomplete/(?P<pk>\d+)$', views.CriteriaRequestCompleteView, name='criteriarequestcomplete'),
+    re_path(r'requestnewsponsor/(?P<pk>\d+)$', views.NewSponsorFromRequest, name='newsponsorfromrequest'),
     #Sponsor Views
     path('newsponsor', views.NewSponsorView.as_view(), name='newsponsor'),
+    path('newsponsorfill', views.NewSponsorFillView.as_view(), name='newsponsorfill'),
     path('viewsponsors', views.viewSponsors, name='viewsponsors'),
     re_path(r'^profile/(?P<pk>\d+)$', views.SponsorDetailView.as_view(), name='sponsordetail'),
     re_path(r'^deleteprofile/(?P<pk>\d+)$', views.DeleteSponsorView.as_view(), name='sponsordelete'),

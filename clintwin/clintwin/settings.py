@@ -179,4 +179,6 @@ BOOTSTRAP4 = {
     'include_jquery': True,
 }
 
+SESSION_ENGINE = "django.contrib.sessions.backends.db"
+
 #Push notifications

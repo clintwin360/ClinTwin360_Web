@@ -322,7 +322,27 @@ class NewSponsorView(generic.CreateView):
         form.fields['notes'].widget.attrs['placeholder'] = 'Enter any relevant notes about the sponsor here'
         return form
 
+class NewSponsorFillView(generic.CreateView):
+    model = Sponsor
+    fields = ['organization', 'contactPerson', 'location', 'phone', 'email', 'notes']
 
+    template_name = 'sponsor/new_sponsor.html'
+    success_url = reverse_lazy('viewsponsors')
+
+    def get_initial(self, *args, **kwargs):
+        initial = super().get_initial()
+        initial = self.request.session['data']
+        return initial
+
+    def get_form(self):
+        form = super().get_form()
+        form.fields['organization'].widget.attrs['placeholder'] = 'Name of the sponsor organization'
+        form.fields['contactPerson'].widget.attrs['placeholder'] = 'Name of the contact person'
+        form.fields['location'].widget.attrs['placeholder'] = 'Where the organization is located'
+        form.fields['phone'].widget.attrs['placeholder'] = 'Phone number'
+        form.fields['email'].widget.attrs['placeholder'] = 'Email address'
+        form.fields['notes'].widget.attrs['placeholder'] = 'Enter any relevant notes about the sponsor here'
+        return form
 
 # Request Views
 def viewSponsorReq(request):
@@ -395,6 +415,16 @@ def AccessRequestCloseView(request, pk):
         access_request.save(update_fields=['status'])
 
         return redirect("contactlist")
+
+def NewSponsorFromRequest(request, pk):
+    access_request = Contact.objects.get(pk=pk)
+    request.session['data'] = {'organization': access_request.organization,
+            'contactPerson': access_request.first_name + " " + access_request.last_name,
+            'location': access_request.location,
+            'phone': access_request.phone,
+            'email': access_request.email}
+
+    return redirect("newsponsorfill")
 
 # Other views
 def compare_values(a, op, b):
