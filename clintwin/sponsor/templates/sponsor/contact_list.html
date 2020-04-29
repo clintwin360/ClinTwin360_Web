@@ -33,7 +33,12 @@
                     <td>{{ contact.email }}</td>
                     <td>{{ contact.phone }}</td>
                     <td>{{ contact.createdAt }}</td>
-                    <td><a class="btn btn-info editbtn" href="contactrequest/{{contact.id}}">View</a></td>
+                    <td>
+                    <a class="btn btn-info editbtn" href="contactrequest/{{contact.id}}">View</a>
+                    {% if contact.status == 'Open' %}
+                    <a class="btn btn-danger deletebtn" href="sponsor/accessclose/{{ contact.id }}">Close Request</a>
+                    {% endif %}
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>
