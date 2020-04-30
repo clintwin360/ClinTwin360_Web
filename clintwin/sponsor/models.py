@@ -72,7 +72,7 @@ class SponsorRequest(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    sponsor = models.ForeignKey(Sponsor, null=True, on_delete=models.SET_NULL)
+    sponsor = models.ForeignKey(Sponsor, null=True, on_delete=models.SET_NULL, related_name='user_profiles')
 
     def __str__(self):
         ret = self.user.username + ":" + self.sponsor.organization

@@ -7,15 +7,15 @@ function trial_card_template(props){
   `<div class="card-body">`+
       `<div class="row">`+
       `<div class="col-9">`+
-        `<h5 class="card-title">${props.title}`+
-        `<small class="text-muted">4/1/2020 - 4/1/2021</small>`+
-        `</h5>`+
+        `<h6 class="card-title">${props.title}`+
+        `</h6>`+
+        `<small class="text-muted">${props.recruitmentStartDate} - ${props.recruitmentEndDate}</small>`+
       `</div>`+
       `<div class="col-3">`+
-        `<h5 class="text-muted text-right">100/500</h5>`+
-      `</div>`+
-      `</div>`+
-    `<p class="card-text"></p>`+
+        `<sup id="virtual-tag" class="bg-primary rounded text-white tag">virtual</sup>`+
+        `<sup id="virtual-tag" class="bg-primary rounded text-white tag">${props.status}</sup>`+
+        `</div>`+
+        `<h5 class="text-muted text-right mt-auto">${props.current_recruitment}/${props.enrollmentTarget}</h5>`+
   `</div>`+
 `</div>`
 }

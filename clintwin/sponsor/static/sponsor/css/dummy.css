@@ -55,9 +55,6 @@ body, html {
     width: 40px;
 }
 
-#virtual-tag{
-    padding: 2px;
-}
 
 #dashboard-trial-title {
   font-size: 1.5vw;
@@ -67,3 +64,18 @@ body, html {
     height: 125px;
     width: 100vw;
 }
+
+.tag{
+    margin: 1px;
+    padding: 2px;
+}
+
+.selected-trial-header {
+    position:relative;
+}
+.actions-menu {
+    position:absolute;
+    bottom:0;
+    right:20px;
+}
+

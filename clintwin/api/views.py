@@ -173,7 +173,7 @@ class ClinicalTrialEnrollmentViewSet(mixins.CreateModelMixin,
             participant = Participant.objects.get(id=participant_id)
             queryset = ClinicalTrialEnrollment.objects.filter(participant=participant)
         else:
-            queryset = ClinicalTrialMatch.objects.none()
+            queryset = ClinicalTrialEnrollment.objects.none()
 
         return queryset
 

@@ -1,3 +1,15 @@
 <div class="selected-trial-header">
-    <h1 class="selected-trial-title"></h1>
+    <div class="dropdown show actions-menu">
+        <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         Actions
+        </a>
+
+  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+    <a class="dropdown-item" href="/sponsor/starttrial/{{ clinicaltrial.id }}">Start Trial</a>
+    <a class="dropdown-item" href="/sponsor/endtrial/{{ clinicaltrial.id }}">End Trial</a>
+      <a class="dropdown-item" href="/sponsor/trial/{{ clinicaltrial.id }}/criteria/inclusion/">Add Criteria</a>
+    <a class="dropdown-item" href="/sponsor/updatetrial/{{ clinicaltrial.id }}">Edit Trial</a>
+      <a class="dropdown-item" href="/sponsor/deletetrial/{{ clinicaltrial.id }}">Delete Trial</a>
+  </div>
 </div>
+    </div>
