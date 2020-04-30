@@ -1,4 +1,6 @@
 from datetime import date
+from django.core.validators import URLValidator, validate_email
+from phonenumber_field.modelfields import PhoneNumberField
 
 from django.contrib.auth.models import User
 from django.db import models
@@ -8,6 +10,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.urls import reverse
 from push_notifications.models import APNSDevice
+from .validators import *
 
 
 # End of new additions
@@ -35,8 +38,8 @@ class Contact(models.Model):
     organization = models.CharField('Organization Name', max_length=500)
     first_name = models.CharField(null=True, max_length=50)
     last_name = models.CharField(null=True, max_length=50)
-    email = models.EmailField(null=True)
-    phone = models.CharField('Phone', null=True, max_length=20)
+    email = models.EmailField(null=True,validators= [validate_email])
+    phone = PhoneNumberField()
     location = models.CharField('Location', null=True, max_length=100)
     comment = models.CharField(max_length=1000, null=True, )
     createdAt = models.DateTimeField(auto_now_add=True)
@@ -45,11 +48,11 @@ class Contact(models.Model):
 
 class Sponsor(models.Model):
     organization = models.CharField('Organization Name', max_length=500)
-    date_joined = models.DateField('Date of Registration', null=True, auto_now_add=True)
-    dateDeregistered = models.DateField('Date of De-Regstration', null=True, blank=True)
+    date_joined = models.DateField('Date of Registration', null=True, auto_now_add=True,validators= [validate_date])
+    dateDeregistered = models.DateField('Date of De-Regstration', null=True, blank=True,validators= [validate_date])
     contactPerson = models.CharField('Contact Person', null=True, max_length=500)
-    email = models.EmailField('Email', null=True)
-    phone = models.CharField('Phone', null=True, max_length=20)
+    email = models.EmailField('Email', null=True,validators= [validate_email])
+    phone = PhoneNumberField()
     location = models.CharField('Location', null=True, max_length=100)
     notes = models.TextField('Comments', null=True, blank=True)
 
@@ -85,18 +88,20 @@ class ClinicalTrial(models.Model):
     title = models.CharField('Trial Title', null=True, max_length=500)
     objective = models.TextField('Objective', null=True)
     description = models.TextField('Description', null=True, blank=True)
-    recruitmentStartDate = models.DateField('Recruitment Start Date', null=True, )
-    recruitmentEndDate = models.DateField('Recruitment End Date', null=True, )
-    enrollmentTarget = models.IntegerField('Enrollment Target', null=True, blank=True)
-    url = models.URLField('URL', null=True, blank=True)
+<<<<<<< HEAD
+    recruitmentStartDate = models.DateField('Recruitment Start Date', null=True, validators= [validate_date])
+    recruitmentEndDate = models.DateField('Recruitment End Date', null=True, validators= [validate_date])
+    enrollmentTarget = models.IntegerField('Enrollment Target', null=True, blank=True, validators= [validate_integer])
+    url = models.URLField('URL', null=True, blank=True,validators= [URLValidator])
     followUp = models.TextField('Followup Notes', null=True, blank=True)
     location = models.CharField('Location', null=True, max_length=100)
     comments = models.TextField('Comments', null=True, blank=True)
     createdTimeStamp = models.DateTimeField(auto_now_add=True)
-    status = models.CharField('Status', null=True, max_length=100, default='Draft')
-    current_recruitment = models.IntegerField('Current Recruitment', default=0, null=True, blank=True)
-    is_virtual = models.BooleanField('Virtual Trial', null=True,
-                                     help_text='Do you plan to administer this trial online?')
+<<<<<<< HEAD
+    status = models.CharField('Status', null=True, max_length=100, default='Draft', validators= [validate_status])
+    current_recruitment = models.IntegerField('Current Recruitment', default=0, null=True, blank=True, validators= [validate_integer])
+    is_virtual = models.BooleanField('Virtual Trial', null=True, help_text='Do you plan to administer this trial online?')
+
 
     def __str__(self):
         ret = str(self.id) + ":" + self.title
@@ -105,7 +110,7 @@ class ClinicalTrial(models.Model):
     def get_absolute_url(self):
         # Returns the url to access a detail record for the Clinical Trial.
         return reverse('clinicalTrial-detail', args=[str(self.id)])
-
+		
 
 class QuestionCategory(models.Model):
     name = models.CharField(max_length=50)
@@ -114,9 +119,9 @@ class QuestionCategory(models.Model):
 class Participant(models.Model):
     first_name = models.CharField(max_length=128, null=True)
     last_name = models.CharField(max_length=128, null=True)
-    email = models.EmailField()
-    date_joined = models.DateTimeField(auto_now_add=True, null=True)
-    phone = models.CharField(null=True, max_length=16)
+    email = models.EmailField(validators= [validate_email])
+    date_joined = models.DateTimeField(auto_now_add=True, null=True,validators= [validate_date])
+    phone = PhoneNumberField()
     location = models.CharField(null=True, max_length=100)
     last_login = models.DateTimeField(auto_now=True, null=True)
 
@@ -135,8 +140,8 @@ class ParticipantBasicHealth(models.Model):
     )
     participant = models.OneToOneField("Participant", on_delete=models.CASCADE)
     gender = models.CharField('Gender', max_length=1, null=True, choices=GENDER)
-    weight = models.FloatField('Weight', null=True)
-    height = models.FloatField('Height', null=True)
+    weight = models.FloatField('Weight', null=True,validators= [validate_integer])
+    height = models.FloatField('Height', null=True,validators= [validate_integer])
     birth_date = models.DateField('Date of Birth', help_text='MM/DD/YY', null=True, blank=True)
 
     def bmi(self):

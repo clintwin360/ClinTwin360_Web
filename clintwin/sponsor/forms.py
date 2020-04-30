@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -43,7 +44,21 @@ class NewSponsorForm(forms.ModelForm):
     sponsor__name = forms.CharField(max_length=500)
     information_provided_by = forms.CharField(max_length=500)
 
+"""	
+class EditTrialModelForm(forms.ModelForm):
+    class Meta:
+        model = ClinicalTrial
+        fields = ['custom_id', 'title', 'objective', 'is_virtual', 'url', 'location', 'recruitmentStartDate', 'recruitmentEndDate', 'enrollmentTarget', 'description', 'comments', 'followUp']
 
+    
+    #targetRecruitment = forms.IntegerField()
+    #recruitmentStartDate= formsDateField()
+    #recruitmentEndDate = forms.DateField()
+    #widgets = {
+             #'recruitmentStartDate': DatePickerInput(format='%m/%d/%Y'),
+             #'recruitmentEndDate': DatePickerInput(format='%m/%d/%Y'),
+         #}
+"""	
 
 """
 widget=forms.Select(choices=TITLE_CHOICES)

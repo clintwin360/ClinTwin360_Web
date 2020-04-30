@@ -27,3 +27,5 @@ django-push-notifications
 django-filter==2.2.0
 django-bootstrap4
 django-bootstrap-datepicker-plus
+django-phonenumber-field
+phonenumbers
