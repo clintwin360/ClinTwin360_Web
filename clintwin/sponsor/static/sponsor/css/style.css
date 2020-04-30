@@ -41,7 +41,7 @@ textarea.form-control {
 }
 
 /* Form buttons */
-#create_button,#edit_button,#return_button {
+#create_button,#edit_button,#return_button,#submit_button {
   background: transparent;
   border: none;
   padding: 0;
@@ -55,7 +55,7 @@ textarea.form-control {
   color: #73C9EE;
 }
 
-#create_button,#edit_button,#return_button:hover{
+#create_button,#edit_button,#return_button,#submit_button:hover{
     text-decoration:underline;
     color: #73C9EE;
 }

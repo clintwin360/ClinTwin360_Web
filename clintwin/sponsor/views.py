@@ -37,6 +37,7 @@ from rest_framework import pagination
 
 from bootstrap_datepicker_plus import DatePickerInput
 from django.forms import fields, CheckboxInput
+from django.core.exceptions import ValidationError
 
 
 # Create your views here.
@@ -178,6 +179,7 @@ class TrialUpdateView(generic.UpdateView):
          form.fields['is_virtual'].widget = CheckboxInput()
          return form
 
+    
     def get_success_url(self):
         trialid = self.kwargs['pk']
         return reverse_lazy('trialdetail', kwargs={'pk': trialid})
@@ -563,3 +565,4 @@ class ClinicalTrialListView2(SingleTableView):
     model = ClinicalTrial
     template_name = 'sponsor/clinicaltrial_list2.html'
     table_class = ClinicalTrialTable
+	

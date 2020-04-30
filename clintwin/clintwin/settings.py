@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django_filters',
 	"bootstrap4",
 	"bootstrap_datepicker_plus",
+	'phonenumber_field',
 ]
 
 PUSH_NOTIFICATIONS_SETTINGS = {
