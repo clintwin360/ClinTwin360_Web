@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Group
 from rest_framework import serializers
 
 from sponsor.models import Participant
@@ -16,6 +17,15 @@ class UserSerializer(serializers.ModelSerializer):
         )
         user.set_password(validated_data['password'])
         user.save()
+        # Assign the participant group to the user
+        try:
+            g = Group.objects.get(name='participant')
+            g.user_set.add(user)
+        except Group.DoesNotExist:
+            print('Group Participant does not exists')
+            pass
+
+        # Create a Participant object for the new user
         participant = Participant.objects.create(
             email=validated_data['email']
         )

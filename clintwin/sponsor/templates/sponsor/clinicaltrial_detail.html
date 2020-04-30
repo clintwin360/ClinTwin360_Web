@@ -13,7 +13,7 @@
   <p><strong>Objective:</strong> {{ clinicaltrial.objective }}</p>
   <p><strong>Description:</strong> {{ clinicaltrial.description }}</p>
   <p><strong>Location:</strong> {{ clinicaltrial.location}}</p>
-  <p><strong>Status:</strong> {{ clinicaltrial.status }}</p>
+  <p id="status"><strong>Status:</strong> {{ clinicaltrial.status }}</p>
   <p><strong>Start Date:</strong> {{ clinicaltrial.recruitmentStartDate }}</p>
   <p><strong>End Date:</strong> {{ clinicaltrial.recruitmentEndDate }}</p>
   <p><strong>Current Recruitment:</strong> {{ clinicaltrial.current_recruitment }}</p>
@@ -25,10 +25,19 @@
   <a class="btn btn-danger deletebtn" href="/sponsor/deletetrial/{{ clinicaltrial.id }}">Delete Trial</a>
 
   <a class="btn btn-success startbtn" type="submit" href="/sponsor/starttrial/{{ clinicaltrial.id }}">Start Trial</a>
-  <a class="btn btn-warning endbtn" type="submit" href="/sponsor/endtrial/{{ clinicaltrial.id }}">End Trial</a>
+  <a class="btn btn-warning endbtn" id="end-trial-btn" type="submit" href="/sponsor/endtrial/{{ clinicaltrial.id }}">End Trial</a>
 
   <a class="btn btn-primary editbtn" href="/sponsor/trial/{{ clinicaltrial.pk }}/criteria/inclusion/">Add/View Criteria</a>
   </br>
   </br>
+
+  <script>
+    var trialstatus = '{{ clinicaltrial.status }}';
+
+    if (trialstatus != 'Active Recruitment') {
+      document.getElementById('end-trial-btn').style.display = 'none';
+    }
+
+  </script>
 
 {% endblock %}
