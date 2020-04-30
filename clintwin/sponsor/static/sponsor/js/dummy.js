@@ -35,6 +35,7 @@ function update_trial_details(props){
     $("#dashboard-trial-title").text(props.title)
     $("#dashboard-objective-text").text(props.objective);
     $("#dashboard-description-text").text(props.description);
+    $("#selected-trial-header").data('trial',props.id);
 }
 
 function get_trial_criteria(id){
@@ -115,6 +116,31 @@ $(function(){
     console.log("clicked!!" ,$(this).data('trial'));
     get_trial_details($(this).data('trial'))
 });
+
+    $("#criteria-trial-link").click(function() {
+        let id = $("#selected-trial-header").data('trial');
+        window.location.href = `/sponsor/trial/${id}/criteria/inclusion/`;
+    })
+
+    $("#start-trial-link").click(function() {
+        let id = $("#selected-trial-header").data('trial');
+        window.location.href = `/sponsor/starttrial/${id}`;
+    })
+
+    $("#end-trial-link").click(function() {
+        let id = $("#selected-trial-header").data('trial');
+        window.location.href = `/sponsor/endtrial/${id}`;
+    })
+
+    $("#update-trial-link").click(function() {
+        let id = $("#selected-trial-header").data('trial');
+        window.location.href = `/sponsor/updatetrial/${id}`;
+    })
+
+    $("#delete-trial-link").click(function() {
+        let id = $("#selected-trial-header").data('trial');
+        window.location.href = `/sponsor/deletetrial/${id}`;
+    })
 
 });
 
