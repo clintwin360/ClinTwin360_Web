@@ -392,10 +392,10 @@ class ContactPageView(generic.CreateView):
             form = super().get_form()
             form.fields['organization'].widget.attrs['placeholder'] = 'Name of the sponsor organization'
             form.fields['location'].widget.attrs['placeholder'] = 'Location of the sponsor organization'
-            form.fields['first_name'].widget.attrs['placeholder'] = 'First name of the sponsor contact'
-            form.fields['last_name'].widget.attrs['placeholder'] = 'Last name of the sponsor contact'
-            form.fields['email'].widget.attrs['placeholder'] = 'Email address of the sponsor contact'
-            form.fields['phone'].widget.attrs['placeholder'] = 'Phone number of the sponsor contact'
+            form.fields['first_name'].widget.attrs['placeholder'] = "Contact's first name"
+            form.fields['last_name'].widget.attrs['placeholder'] = "Contact's last name"
+            form.fields['email'].widget.attrs['placeholder'] = "Contact's email address"
+            form.fields['phone'].widget.attrs['placeholder'] = "Contact's phone number"
             form.fields['comment'].widget.attrs['placeholder'] = 'Any addtional comments about the request'
             return form
 

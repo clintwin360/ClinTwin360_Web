@@ -18,8 +18,10 @@
 			{{ form.media }}
                     {{ form.organization|as_crispy_field }}
                     {{ form.location|as_crispy_field }}
+                  <div class="d-flex justify-content-around">
                     {{ form.first_name|as_crispy_field }}
                     {{ form.last_name|as_crispy_field }}
+                  </div>
                     {{ form.email|as_crispy_field }}
                     {{ form.phone|as_crispy_field }}
                     {{ form.comment|as_crispy_field }}
