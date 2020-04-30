@@ -12,5 +12,12 @@
     "fields": {
         "name": "sponsor"
     }
+},
+{
+    "model": "auth.group",
+    "pk": 3,
+    "fields": {
+        "name": "participant"
+    }
 }
 ]

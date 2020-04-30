@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 from .models import *
 from rest_framework import serializers
 import ast
@@ -9,10 +11,12 @@ class ParticipantQuestionSerializer(serializers.ModelSerializer):
         model = ParticipantQuestion
         fields = ['id', 'text', 'valueType', 'options']
 
+
 class VirtualTrialParticipantQuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = VirtualTrialParticipantQuestion
-        fields = ['id', 'text', 'valueType', 'options']		
+        fields = ['id', 'text', 'valueType', 'options']
+
 
 class ClinicalTrialCriteriaSerializer(serializers.ModelSerializer):
     class Meta:
@@ -48,20 +52,24 @@ class ParticipantResponseSerializer(serializers.ModelSerializer):
         model = ParticipantResponse
         fields = ['question', 'participant', 'value']
 
+
 class VirtualTrialParticipantResponseSerializer(serializers.ModelSerializer):
     class Meta:
         model = VirtualTrialParticipantResponse
-        fields = ['question', 'participant', 'value']		
+        fields = ['question', 'participant', 'value']
+
 
 class SponsorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sponsor
         fields = '__all__'
 
+
 class SponsorRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = SponsorRequest
         fields = '__all__'
+
 
 class SponsorDetailSerializer(serializers.ModelSerializer):
     class Meta:
@@ -96,6 +104,34 @@ class ClinicalTrialMatchSerializer(serializers.ModelSerializer):
         fields = ['clinical_trial']
 
 
+class ClinicalTrialField(serializers.PrimaryKeyRelatedField):
+    def to_representation(self, value):
+        pk = super(ClinicalTrialField, self).to_representation(value)
+        try:
+            item = ClinicalTrial.objects.get(pk=pk)
+            serializer = ClinicalTrialDetailSerializer(item)
+            return serializer.data
+        except ClinicalTrialEnrollment.DoesNotExist:
+            return None
+
+    def get_choices(self, cutoff=None):
+        queryset = self.get_queryset()
+        if queryset is None:
+            return {}
+
+        return OrderedDict([(item.id, str(item)) for item in queryset])
+
+
+class ClinicalTrialEnrollmentSerializer(serializers.ModelSerializer):
+    clinical_trial = ClinicalTrialField(queryset=ClinicalTrial.objects.all())
+
+    # clinical_trial = ClinicalTrialListSerializer(read_only=True)
+
+    class Meta:
+        model = ClinicalTrialEnrollment
+        fields = ['participant', 'clinical_trial']
+
+
 class ClinicalTrialCriteriaResponseSerializer(serializers.ModelSerializer):
     clinical_trial = ClinicalTrialDetailSerializer(read_only=True)
 
@@ -115,6 +151,7 @@ class ClinicalTrialCriteriaResponseSerializer(serializers.ModelSerializer):
             "criteriaType": instance.criteriaType,
             "comparison": instance.comparison,
             "negated": instance.negated,
-            "criteria": instance.criteria.id,
+            "criteria": {"id": instance.criteria.id,
+                         "name": instance.criteria.name},
             "trial": instance.trial.id
         }

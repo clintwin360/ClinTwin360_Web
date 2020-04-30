@@ -1,6 +1,8 @@
 function request_row(props){
     let template = "" +
         "<tr id=\"request-"+ props.id +"\" class=\"clickable-row request-element\">" +
+        "<td>"+props.id+"</td>" +
+        "<td>"+props.status+"</td>" +
         "<td>"+props.sponsor.organization+"</td>" +
         "<td>"+props.criterion_req+"</td>" +
         "<td>"+props.values+"</td>" +

@@ -71,11 +71,11 @@ class SponsorRequest(models.Model):
     criterion_req = models.CharField(null=True, max_length=200)
     values = models.CharField(null=True, max_length=500)
     notes = models.CharField(max_length=1000)
-
+    status = models.CharField('Status', null=True, max_length=100, default='Open')
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    sponsor = models.ForeignKey(Sponsor, null=True, on_delete=models.SET_NULL)
+    sponsor = models.ForeignKey(Sponsor, null=True, on_delete=models.SET_NULL, related_name='user_profiles')
 
     def __str__(self):
         ret = self.user.username + ":" + self.sponsor.organization
@@ -88,6 +88,7 @@ class ClinicalTrial(models.Model):
     title = models.CharField('Trial Title', null=True, max_length=500)
     objective = models.TextField('Objective', null=True)
     description = models.TextField('Description', null=True, blank=True)
+<<<<<<< HEAD
     recruitmentStartDate = models.DateField('Recruitment Start Date', null=True, validators= [validate_date])
     recruitmentEndDate = models.DateField('Recruitment End Date', null=True, validators= [validate_date])
     enrollmentTarget = models.IntegerField('Enrollment Target', null=True, blank=True, validators= [validate_integer])
@@ -96,9 +97,11 @@ class ClinicalTrial(models.Model):
     location = models.CharField('Location', null=True, max_length=100)
     comments = models.TextField('Comments', null=True, blank=True)
     createdTimeStamp = models.DateTimeField(auto_now_add=True)
+<<<<<<< HEAD
     status = models.CharField('Status', null=True, max_length=100, default='Draft', validators= [validate_status])
     current_recruitment = models.IntegerField('Current Recruitment', default=0, null=True, blank=True, validators= [validate_integer])
     is_virtual = models.BooleanField('Virtual Trial', null=True, help_text='Do you plan to administer this trial online?')
+
 
     def __str__(self):
         ret = str(self.id) + ":" + self.title
@@ -162,6 +165,14 @@ class ClinicalTrialMatch(models.Model):
         return self.participant.name() + ":" + self.clinical_trial.title + ">>" + self.match
 
 
+class ClinicalTrialEnrollment(models.Model):
+    participant = models.ForeignKey(Participant, on_delete=models.CASCADE, related_name='enrollments')
+    clinical_trial = models.ForeignKey(ClinicalTrial, on_delete=models.CASCADE, related_name='enrollments')
+
+    def __str__(self):
+        return self.participant.name() + ":" + self.clinical_trial.title
+
+
 class ParticipantQuestion(models.Model):
     text = models.TextField()
     valueType = models.CharField(max_length=50)
@@ -174,15 +185,16 @@ class ParticipantQuestion(models.Model):
 
 
 class VirtualTrialParticipantQuestion(models.Model):
-     trial_id= models.ForeignKey(ClinicalTrial, on_delete=models.CASCADE, related_name='virtualquestion_trial_id')
-     text = models.TextField()
-     valueType = models.CharField(max_length=50)
-     # options = ArrayField(models.CharField(max_length=256))
-     options = models.TextField()
-     # categories = models.ManyToManyField(QuestionCategory)
+    clinical_trial = models.ForeignKey(ClinicalTrial, on_delete=models.CASCADE, related_name='virtual_questions')
+    text = models.TextField()
+    valueType = models.CharField(max_length=50)
+    # options = ArrayField(models.CharField(max_length=256))
+    options = models.TextField()
 
-     def __str__(self):
-         return self.text
+    # categories = models.ManyToManyField(QuestionCategory)
+
+    def __str__(self):
+        return self.text
 
 
 class QuestionFlow(models.Model):
@@ -208,16 +220,16 @@ class ParticipantResponse(models.Model):
 
 
 class VirtualTrialParticipantResponse(models.Model):
-     question = models.ForeignKey(VirtualTrialParticipantQuestion, on_delete=models.CASCADE)
-     participant = models.ForeignKey(Participant, on_delete=models.CASCADE, related_name='virtual_responses')
-     value = models.CharField(max_length=50)
-     last_answered = models.DateTimeField(auto_now=True, null=True)
+    question = models.ForeignKey(VirtualTrialParticipantQuestion, on_delete=models.CASCADE)
+    participant = models.ForeignKey(Participant, on_delete=models.CASCADE, related_name='virtual_responses')
+    value = models.CharField(max_length=50)
+    last_answered = models.DateTimeField(auto_now=True, null=True)
 
-     def __str__(self):
-         return self.question.text
+    def __str__(self):
+        return self.question.text
 
-     class Meta:
-         unique_together = ('question', 'participant')
+    class Meta:
+        unique_together = ('question', 'participant')
 
 
 class ClinicalTrialCriteria(models.Model):
@@ -247,13 +259,19 @@ class ClinicalTrialCriteriaResponse(models.Model):
 class PushNotification(models.Model):
     recipient = models.ForeignKey(User, related_name='received_messages', on_delete=models.CASCADE)
     content = models.CharField(max_length=512)
+    sendResponse = models.CharField(max_length=1024, null=True, blank=True)
+    createdTimeStamp = models.DateTimeField(auto_now_add=True)
 
 
 @receiver(post_save, sender=PushNotification)
 def send_new_message_notification(sender, **kwargs):
     message = kwargs['instance']
-    send_new_message_push_notification(recipient=message.recipient,
-                                       content=message.content)
+    r = send_new_message_push_notification(recipient=message.recipient,
+                                           content=message.content)
+    message.sendResponse = r
+    post_save.disconnect(send_new_message_notification, sender=PushNotification)
+    message.save()
+    post_save.connect(send_new_message_notification, sender=PushNotification)
 
 
 def send_new_message_push_notification(**kwargs):
@@ -261,7 +279,7 @@ def send_new_message_push_notification(**kwargs):
 
     device = APNSDevice.objects.filter(name=kwargs.get("recipient").username)
     if not device:
-        print('Unable to retrieve a device for the user!')
+        return 'Unable to retrieve a device for the user!'
     else:
         return device.send_message(content)
 

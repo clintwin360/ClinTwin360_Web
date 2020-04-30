@@ -53,7 +53,7 @@ INSTALLED_APPS = [
 PUSH_NOTIFICATIONS_SETTINGS = {
         "APNS_CERTIFICATE": "aps.pem",
         "APNS_TOPIC": "com.cscie599.ClinTwin360",
-        # "APNS_USE_SANDBOX": True,
+        "APNS_USE_SANDBOX": True,
         "UPDATE_ON_DUPLICATE_REG_ID": True,
 }
 
@@ -179,5 +179,7 @@ DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap4.html"
 BOOTSTRAP4 = {
     'include_jquery': True,
 }
+
+SESSION_ENGINE = "django.contrib.sessions.backends.db"
 
 #Push notifications

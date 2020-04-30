@@ -65,6 +65,8 @@ class VirtualTrialParticipantQuestionViewSet(mixins.ListModelMixin,
     """
     queryset = VirtualTrialParticipantQuestion.objects.all()
     serializer_class = VirtualTrialParticipantQuestionSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['clinical_trial']
     # permission_classes = [permissions.IsAuthenticated]
 
 
@@ -157,6 +159,25 @@ class ClinicalTrialMatchViewSet(mixins.ListModelMixin,
         return queryset
 
 
+class ClinicalTrialEnrollmentViewSet(mixins.CreateModelMixin,
+                                     mixins.ListModelMixin,
+                                     GenericViewSet):
+    """
+    Enroll in a Virtual Trial or get a list of enrolled trials for a participant
+    """
+    serializer_class = ClinicalTrialEnrollmentSerializer
+
+    def get_queryset(self):
+        participant_id = self.request.query_params.get('participant')
+        if participant_id:
+            participant = Participant.objects.get(id=participant_id)
+            queryset = ClinicalTrialEnrollment.objects.filter(participant=participant)
+        else:
+            queryset = ClinicalTrialEnrollment.objects.none()
+
+        return queryset
+
+
 class ClinicalTrialViewSet(mixins.RetrieveModelMixin,
                            mixins.ListModelMixin,
                            GenericViewSet):
@@ -167,8 +188,11 @@ class ClinicalTrialViewSet(mixins.RetrieveModelMixin,
 
     def get_queryset(self):
         sponsor_id = self.request.query_params.get('sponsor_id', None)
+        trial_id = self.request.query_params.get('id', None)
         if sponsor_id:
             queryset = ClinicalTrial.objects.filter(sponsor__id=sponsor_id)
+        elif trial_id:
+            queryset = ClinicalTrial.objects.filter(id=trial_id)
         else:
             queryset = ClinicalTrial.objects.all()
 
