@@ -13,11 +13,6 @@
     align-self: flex-end;
 }
 
-.card {
-    background: #eee;
-    border-top: 1px solid transparent;
-}
-
 .card:hover {
     background: #e1e1e1;
     border-top: 1px solid #d0d0d0;
@@ -60,10 +55,6 @@ body, html {
   font-size: 1.5vw;
 }
 
-.card{
-    /*height: 125px;*/
-    width: 100vw;
-}
 
 .tag{
     margin: 1px;

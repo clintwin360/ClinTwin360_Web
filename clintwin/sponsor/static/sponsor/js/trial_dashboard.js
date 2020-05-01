@@ -79,7 +79,56 @@ function searchTrials(input) {
     }
 }
 
+function isVirtualTag(state){
+    console.log(state);
+    if (state === true){
+        return ''
+    }else{
+        return 'hidden'
+    }
+}
 
+function trial_card_template(props){
+    return `<div id="trial-card-${props.id}"  class="card" data-trial="${props.id}">`+
+      `<div class="card-header bg-transparent">`+
+        `<div>`+
+          `<div id="id-tag">`+
+            `<h7 id="trial-id" class="text-right text-muted mt-auto">${props.custom_id}</h7>`+
+          `</div>`+
+
+          `<div id="tag">`+
+            `<span id="virtual-tag" class="badge badge-primary" ${isVirtualTag(props.is_virtual)}>virtual</span>`+
+            `<span id="virtual-tag" class="badge badge-secondary">${props.status}</span>`+
+          `</div>`+
+        `</div>`+
+      `</div>`+
+      `<div class="card-body">`+
+        `<h5 class="card-title">${props.title}</h5>`+
+      `</div>`+
+      `<div class="card-footer bg-transparent">`+
+        `<div class="row">`+
+          `<div class="card-text col-sm-4">`+
+            `<small id="more-info" class="small text-left text-muted">Location: ${props.location}</small>`+
+            `<small id="more-info" class="small text-left text-muted">Contact: Eli Lily</small>`+
+            `<small id="more-info" class="small text-left text-muted">Email: eli@hentech.edu</small>`+
+          `</div>`+
+          `<div id="target" class="col-sm-4">`+
+            `<span id="target-span">`+
+              `<h6 class="text-center text-muted">${props.current_recruitment}/${props.enrollmentTarget}</h6>`+
+            `</span>`+
+          `</div>`+
+          `<div id="date" class="col-sm-4">`+
+            `<span id="date-span">`+
+              `<h6 class="text-right text-muted">${props.recruitmentStartDate} - ${props.recruitmentEndDate}</h6>`+
+            `</span>`+
+          `</div>`+
+        `</div>`+
+      `</div>`+
+`</div>`
+}
+
+
+/*
 function trial_card_template(props){
     //console.log(props);
     return `<div id="trial-card-${props.id}" class="card mt-2" data-trial="${props.id}">`+
@@ -98,7 +147,7 @@ function trial_card_template(props){
   `</div>`+
 `</div>`
 }
-
+*/
 
 function update_trial_details(props){
     $("#dashboard-trial-title").text(props.title)
