@@ -108,7 +108,7 @@ class ClinicalTrial(models.Model):
     def get_absolute_url(self):
         # Returns the url to access a detail record for the Clinical Trial.
         return reverse('clinicalTrial-detail', args=[str(self.id)])
-		
+
 
 class QuestionCategory(models.Model):
     name = models.CharField(max_length=50)
@@ -283,3 +283,9 @@ def send_new_message_push_notification(**kwargs):
         return device.send_message(content)
 
 # End code to send push notifications
+@receiver(post_save, sender=User)
+def get_create_profile(sender, **kwargs):
+    #request = kwargs.get('request')
+    #sponsor_id = request.session['id']
+    if kwargs.get('created', False):
+        UserProfile.objects.get_or_create(user=kwargs.get('instance'), sponsor=Sponsor.objects.get(pk=1))
