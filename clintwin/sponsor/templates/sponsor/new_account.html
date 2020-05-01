@@ -1,0 +1,25 @@
+{% extends "sponsor/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Add New Account{% endblock %}
+{% block content %}
+<div class="container-fluid"><br>
+    <h2 id="new-sponsor">Create a New Account</h2><br>
+
+    <div id="new_sponsor_form">
+        <form method="post" novalidate>
+            {% csrf_token %}
+                    {{ form.username|as_crispy_field }}
+                    {{ form.password|as_crispy_field }}
+                    {{ form.email|as_crispy_field }}
+                    {{ form.first_name|as_crispy_field }}
+                    {{ form.last_name|as_crispy_field }}
+
+            <button class="btn btn-primary" type="submit" name="create_button" id="create_button">Create Account</button>
+            <!-- <input type="hidden" name="redirect" value="{% url 'viewsponsors' %}"/> -->
+        </form>
+
+        <br><br><br><br>
+    </div>
+</div>
+{% endblock %}

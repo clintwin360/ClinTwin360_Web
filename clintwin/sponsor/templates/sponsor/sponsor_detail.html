@@ -13,9 +13,20 @@
 <p><strong>Phone:</strong> {{ sponsor.phone }}</p>
 <p><strong>Location:</strong> {{ sponsor.location}}</p>
 <p><strong>Join Date:</strong> {{ sponsor.date_joined }}</p>
+{% if not sponsor.dateDeregistered == null %}
 <p><strong>Quit Date:</strong> {{ sponsor.dateDeregistered }}</p>
+{% endif %}
 <p><strong>Notes:</strong> {{ sponsor.notes }}</p>
+<p><strong>Accounts:</strong></p>
+<ul>
+{% for profile in sponsor.user_profiles.all  %}
+<li><a href="user/{{ profile.user.id }}">{{ profile.user.username}} - {{ profile.user.email }}</a></li>
+{% empty %}
+<li>No Accounts Currently Exist For This Sponsor</li>
+{% endfor %}
+</ul>
 <a class="btn btn-info returnbtn" href="{% url 'viewsponsors' %}">Return to Dashboard</a>
 <a class="btn btn-secondary editbtn" href="/sponsor/updateprofile/{{ sponsor.id }}">Edit Sponsor</a>
 <a class="btn btn-danger deletebtn" href="/sponsor/deleteprofile/{{ sponsor.id }}">Delete Sponsor</a>
+<a class="btn btn-success addbtn" href="{% url 'newaccount' %}">Add Account</a>
 {% endblock %}

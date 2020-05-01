@@ -344,6 +344,18 @@ class NewSponsorFillView(generic.CreateView):
         form.fields['notes'].widget.attrs['placeholder'] = 'Enter any relevant notes about the sponsor here'
         return form
 
+#Account Views
+class NewAccountView(generic.CreateView):
+    model = User
+    fields = ['username', 'password', 'email', 'first_name', 'last_name',]
+
+    template_name = 'sponsor/new_account.html'
+    success_url = reverse_lazy('viewsponsors')
+
+class AccountDetailView(generic.DetailView):
+    model = User
+    template_name = 'sponsor/account_detail.html'
+
 # Request Views
 def viewSponsorReq(request):
     return render(request, "sponsor/view_sponsor_req.html")
