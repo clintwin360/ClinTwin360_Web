@@ -88,7 +88,6 @@ class ClinicalTrial(models.Model):
     title = models.CharField('Trial Title', null=True, max_length=500)
     objective = models.TextField('Objective', null=True)
     description = models.TextField('Description', null=True, blank=True)
-<<<<<<< HEAD
     recruitmentStartDate = models.DateField('Recruitment Start Date', null=True, validators= [validate_date])
     recruitmentEndDate = models.DateField('Recruitment End Date', null=True, validators= [validate_date])
     enrollmentTarget = models.IntegerField('Enrollment Target', null=True, blank=True, validators= [validate_integer])
@@ -97,7 +96,6 @@ class ClinicalTrial(models.Model):
     location = models.CharField('Location', null=True, max_length=100)
     comments = models.TextField('Comments', null=True, blank=True)
     createdTimeStamp = models.DateTimeField(auto_now_add=True)
-<<<<<<< HEAD
     status = models.CharField('Status', null=True, max_length=100, default='Draft', validators= [validate_status])
     current_recruitment = models.IntegerField('Current Recruitment', default=0, null=True, blank=True, validators= [validate_integer])
     is_virtual = models.BooleanField('Virtual Trial', null=True, help_text='Do you plan to administer this trial online?')

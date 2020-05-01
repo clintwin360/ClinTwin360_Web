@@ -179,7 +179,7 @@ class TrialUpdateView(generic.UpdateView):
          form.fields['is_virtual'].widget = CheckboxInput()
          return form
 
-    
+
     def get_success_url(self):
         trialid = self.kwargs['pk']
         return reverse_lazy('trialdetail', kwargs={'pk': trialid})
@@ -603,7 +603,10 @@ def dummy(request):
     trials = ClinicalTrial.objects.filter()
     return render(request, 'sponsor/dummy.html')
 
+def card(request):
+    trials = ClinicalTrial.objects.filter()
+    return render(request, 'sponsor/card.html')
+
 
 class ViewSponsorView(TemplateView):
     template_name = 'sponsor/view_sponsor.html'
-

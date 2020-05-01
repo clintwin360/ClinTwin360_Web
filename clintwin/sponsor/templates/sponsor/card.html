@@ -1,0 +1,52 @@
+{% extends "sponsor/base.html" %}
+{% load static %}
+
+{% block scripts %}
+    <link href="{% static 'sponsor/css/card.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<br><br>
+
+
+<div id="dashboard-trial-cards" class="card">
+      <div class="card-header bg-transparent">
+        <div id="tag">
+          <span id="virtual-tag" class="badge badge-pill badge-info">virtual</span>
+          <span id="virtual-tag" class="badge badge-pill badge-info">Recruitment Ended</span>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <h6 class="card-title">A Very Long Trial Title Here to Test</h6>
+        <p class="card-text">
+        <small class="card-subtitle mb-2 text-muted">March 3, 2020 - April 6,2020</small>
+        </p>
+      </div>
+
+      <div class="card-footer bg-transparent">
+        <h5 id="target" class="text-right text-muted mt-auto">250/200</h5>
+      </div>
+</div>
+
+<div id="dashboard-trial-cards" class="card">
+      <div class="card-header bg-transparent">
+        <div id="tag">
+          <span id="virtual-tag" class="badge badge-pill badge-primary">virtual</span>
+          <span id="virtual-tag" class="badge badge-pill badge-primary">Recruitment Ended</span>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <h6 class="card-title">Another Very Long Trial Title Here to Test</h6>
+        <p class="card-text">
+        <small class="card-subtitle mb-2 text-muted">March 3, 2020 - April 6,2020</small>
+        </p>
+      </div>
+
+      <div class="card-footer bg-transparent">
+        <h6 id="target" class="text-right mt-auto">250/200</h6>
+      </div>
+</div>
+
+
+{% endblock %}

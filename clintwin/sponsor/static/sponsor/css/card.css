@@ -1,0 +1,36 @@
+
+#dashboard-trial-cards {
+  width: 45%;
+}
+
+.card{
+  width: 98%;
+  margin-left: 25px;
+  margin-top: 0.5rem;
+  background-color: #F8F8F9;
+}
+
+.card-header, .card-footer {
+  padding: 0.25rem;
+  padding-right: 0.5rem;
+  padding-bottom: 0;
+  border: none;
+  margin-bottom: 0;
+}
+
+#tag {
+  background-color: none;
+  float: right;
+}
+
+#target {
+  background-color: none;
+  padding-bottom: 0;
+}
+
+.card-title, .card-body, .card-footer {
+  margin-bottom: 0;
+  margin-top: 0;
+  padding-top: 0.5rem;
+  padding-bottom: 0;
+}
