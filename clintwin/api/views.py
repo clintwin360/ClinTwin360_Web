@@ -187,6 +187,8 @@ class ClinicalTrialViewSet(mixins.UpdateModelMixin,
     List all Clinical Trials or List trials by sponsor_id
     """
     serializer_class = ClinicalTrialSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['status', 'is_virtual']
 
     def get_queryset(self):
         if self.request.user.is_clintwin():

@@ -79,6 +79,42 @@ body, html {
     right:20px;
 }
 
+.trial-search {
+    position:absolute;
+    bottom: 4px;
+    right: -22px;
+}
+
+.trial-filter{
+    position:absolute;
+    bottom: 4px;
+    right: 252px;
+    display: inline-block;
+}
+
+.trial-sort{
+    position:absolute;
+    bottom: 4px;
+    right: 452px;
+    display: inline-block;
+}
+
+.filter-label{
+    position: relative;
+    display: inline-block;
+    font-size: 18px;
+    font-family: Helvetica Medium, sans-serif;
+    bottom: -8px;
+}
+
+.sort-label{
+    position: relative;
+    display: inline-block;
+    font-size: 18px;
+    font-family: Helvetica Medium, sans-serif;
+    bottom: -8px;
+}
+
 .hilite {
     background-color: yellow;
 }
