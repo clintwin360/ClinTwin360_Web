@@ -96,10 +96,9 @@ class ParticipantBasicHealthViewSet(mixins.CreateModelMixin,
     serializer_class = ParticipantBasicHealthSerializer
 
     def perform_create(self, serializer):
-        basic_health = serializer.save()
-        basic_health.participant.state = 1
-        basic_health.participant.save()
-        print(basic_health)
+        participant_basic_health = serializer.save()
+        participant_basic_health.participant.basic_health = 1
+        participant_basic_health.participant.save()
     # permission_classes = [permissions.IsAuthenticated]
 
 

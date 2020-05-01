@@ -122,7 +122,7 @@ class Participant(models.Model):
     phone = PhoneNumberField(null=True)
     location = models.CharField(null=True, max_length=100)
     last_login = models.DateTimeField(auto_now=True, null=True)
-    state = models.IntegerField(default=0, null=True)
+    basic_health = models.IntegerField(default=0, null=True)
 
     def name(self):
         return str(self.email)
