@@ -51,7 +51,15 @@ def index(request):
     if not request.user.is_authenticated:
         return redirect('login')
     else:
-        return redirect('login_success')
+        if request.user.is_clintwin():
+            return redirect("viewsponsors")
+        else:
+            return render(request, "sponsor/trial_dashboard.html")
+
+
+def trial_dashboard(request):
+    trials = ClinicalTrial.objects.filter()
+    return render(request, 'sponsor/trial_dashboard.html')
 
 
 # Updated to post trial criteria to API endpoint
@@ -150,7 +158,7 @@ def login_success(request):
     if request.user.groups.filter(name='clintwin'):
         return redirect("viewsponsors")
     else:
-        return redirect("viewtrials")
+        return render(request, "sponsor/trial_dashboard.html")
 
 
 # Trial Views
@@ -233,17 +241,6 @@ def TrialEndView(request, pk):
         return redirect("viewtrials")
 
 
-class DeleteTrialView(generic.DeleteView):
-    model = ClinicalTrial
-    success_url = reverse_lazy('viewtrials')
-
-
-class DeleteTrialPaneView(generic.DeleteView):
-    model = ClinicalTrial
-    success_url = reverse_lazy('viewtrials')
-    template_name_suffix = '_delete_pane'
-
-
 class NewClinicalTrialView(generic.CreateView):
     model = ClinicalTrial
     fields = (
@@ -324,6 +321,7 @@ class NewSponsorView(generic.CreateView):
         form.fields['notes'].widget.attrs['placeholder'] = 'Enter any relevant notes about the sponsor here'
         return form
 
+
 class NewSponsorFillView(generic.CreateView):
     model = Sponsor
     fields = ['organization', 'contactPerson', 'location', 'phone', 'email', 'notes']
@@ -376,12 +374,15 @@ class NewSponsorRequestView(generic.CreateView):
         form.fields['notes'].widget.attrs['placeholder'] = 'Any addtional notes about the criteria'
         return form
 
+
 class ContactListView(generic.ListView):
     model = Contact
     pagination_by = 25
 
+
 class ContactDetailView(generic.DetailView):
     model = Contact
+
 
 class ContactPageView(generic.CreateView):
 
@@ -410,6 +411,7 @@ def CriteriaRequestCompleteView(request, pk):
 
         return redirect("viewsponsorreq")
 
+
 def AccessRequestCloseView(request, pk):
     access_request = Contact.objects.get(pk=pk)
     if access_request.status == 'Open':
@@ -417,6 +419,7 @@ def AccessRequestCloseView(request, pk):
         access_request.save(update_fields=['status'])
 
         return redirect("contactlist")
+
 
 def NewSponsorFromRequest(request, pk):
     access_request = Contact.objects.get(pk=pk)
@@ -427,6 +430,7 @@ def NewSponsorFromRequest(request, pk):
             'email': access_request.email}
 
     return redirect("newsponsorfill")
+
 
 # Other views
 def compare_values(a, op, b):
@@ -599,9 +603,7 @@ def emptyPane(request):
 #     template_name = 'view_criteria.html'
 
 # Test views
-def dummy(request):
-    trials = ClinicalTrial.objects.filter()
-    return render(request, 'sponsor/dummy.html')
+
 
 def card(request):
     trials = ClinicalTrial.objects.filter()

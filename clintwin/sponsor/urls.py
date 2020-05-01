@@ -12,9 +12,13 @@ schema_view = get_swagger_view(title='Pastebin API')
 
 urlpatterns = [
     path('', views.index, name='index'),
+<<<<<<< HEAD
     path('dummy/', views.dummy, name='dummy'),
     path('card/', views.card, name='card'),
+=======
+>>>>>>> d1ada1fe19a6e8d46df331696f0528363945662a
     path('openapi2', schema_view),
+    path('dashboard/', views.trial_dashboard, name='trial_dashboard'),
     path('login_success/', views.login_success, name='login_success'),
     # Move to API app
     path('loaddata/', views.load_data, name='load_data'),
@@ -32,9 +36,12 @@ urlpatterns = [
     re_path(r'^pane/(?P<pk>\d+)$', views.TrialPaneView.as_view(), name='trialpane'),
     re_path(r'^updatetrialpane/(?P<pk>\d+)$', views.TrialUpdatePaneView.as_view(), name='trialupdatepane'),
     re_path(r'^updatetrial/(?P<pk>\d+)$', views.TrialUpdateView.as_view(), name='trialupdate'),
+<<<<<<< HEAD
     re_path(r'^deletetrial/(?P<pk>\d+)$', views.DeleteTrialView.as_view(), name='trialdelete'),
     re_path(r'^deletetrialpane/(?P<pk>\d+)$', views.DeleteTrialPaneView.as_view(), name='trialdeletepane'),
 
+=======
+>>>>>>> d1ada1fe19a6e8d46df331696f0528363945662a
 
     re_path(r'starttrial/(?P<pk>\d+)$', views.TrialStartView, name='trialstart'),#NEW
 	re_path(r'endtrial/(?P<pk>\d+)$', views.TrialEndView, name='trialend'),#NEW

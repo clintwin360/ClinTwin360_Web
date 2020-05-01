@@ -61,7 +61,7 @@ body, html {
 }
 
 .card{
-    height: 125px;
+    /*height: 125px;*/
     width: 100vw;
 }
 
@@ -79,3 +79,6 @@ body, html {
     right:20px;
 }
 
+.hilite {
+    background-color: yellow;
+}
