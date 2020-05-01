@@ -1,9 +1,15 @@
 {% extends "sponsor/base.html" %}
 {% load static %}
 
+{% block style %}
+<link href="{% static 'sponsor/css/trial_dashboard.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+
 {% block scripts %}
-    <link href="{% static 'sponsor/css/trial_dashboard.css' %}" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
     <script type="text/javascript" src="{% static "sponsor/js/trial_dashboard.js" %}"></script>
 {% endblock %}
 {% block content %}
@@ -12,7 +18,7 @@
 <div class="page-container">
     <div class="row">
         <div class="col-lg-6">
-            {% include "sponsor/components/trial_dashboard/navbar.html" %}
+            {% include "sponsor/components/trial_dashboard/dashboard_left_header.html" %}
                 <div id ="dashboard-trial-cards" class="row trial-cards scrollbar scrollbar-lady-lips">
                 </div>
 

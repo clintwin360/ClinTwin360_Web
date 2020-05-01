@@ -39,7 +39,7 @@ class Contact(models.Model):
     first_name = models.CharField(null=True, max_length=50)
     last_name = models.CharField(null=True, max_length=50)
     email = models.EmailField(null=True,validators= [validate_email])
-    phone = PhoneNumberField()
+    phone = PhoneNumberField(null=True)
     location = models.CharField('Location', null=True, max_length=100)
     comment = models.CharField(max_length=1000, null=True, )
     createdAt = models.DateTimeField(auto_now_add=True)
@@ -52,7 +52,7 @@ class Sponsor(models.Model):
     dateDeregistered = models.DateField('Date of De-Regstration', null=True, blank=True,validators= [validate_date])
     contactPerson = models.CharField('Contact Person', null=True, max_length=500)
     email = models.EmailField('Email', null=True,validators= [validate_email])
-    phone = PhoneNumberField()
+    phone = PhoneNumberField(null=True)
     location = models.CharField('Location', null=True, max_length=100)
     notes = models.TextField('Comments', null=True, blank=True)
 
@@ -119,7 +119,7 @@ class Participant(models.Model):
     last_name = models.CharField(max_length=128, null=True)
     email = models.EmailField(validators= [validate_email])
     date_joined = models.DateTimeField(auto_now_add=True, null=True,validators= [validate_date])
-    phone = PhoneNumberField()
+    phone = PhoneNumberField(null=True)
     location = models.CharField(null=True, max_length=100)
     last_login = models.DateTimeField(auto_now=True, null=True)
 

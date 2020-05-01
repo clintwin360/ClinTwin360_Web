@@ -1,0 +1,31 @@
+<div id="selected-trial-header" class="selected-trial-header">
+
+
+    <div class="trial-sort">
+    <h4 class="sort-label">Sort by:</h4>
+    <select id="trial-sort" name="trial-sort"  style="width: 150px">
+        <option>Name</option>
+        <option>Date</option>
+        <option>Current Enrollment</option>
+        <option>Target Enrollment</option>
+    </select>
+    </div>
+
+
+    <div class="trial-filter">
+    <h4 class="filter-label">Filter</h4>
+    <select id="trial-filter" name="trial-filter"  style="width: 150px">
+        <option value="All" selected>All</option>
+        <option value="Draft">Draft</option>
+        <option value="Active Recruitment">Active</option>
+        <option value="Recruitment Ended">Ended</option>
+        <option value="Virtual" data-virtual="true">Virtual</option>
+        <option value="Virtual" data-virtual="false">Medical</option>
+    </select>
+    </div>
+
+
+    <form class="form-inline trial-search">
+      <input id="trial-search" class="form-control mr-sm-2" type="search"  incremental="incremental" onsearch="searchTrials(this)"  placeholder="Search Trials" aria-label="Search">
+    </form>
+    </div>

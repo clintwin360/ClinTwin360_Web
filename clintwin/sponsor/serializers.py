@@ -84,7 +84,7 @@ class ClinicalTrialSerializer(serializers.ModelSerializer):
         model = ClinicalTrial
         fields = ['title', 'objective', 'id', 'sponsor', 'recruitmentStartDate',
                   'recruitmentEndDate', 'enrollmentTarget', 'description', 'url', 'current_recruitment', 'status',
-                  'custom_id', ]
+                  'custom_id', 'is_virtual']
 
 
 class ClinicalTrialMatchSerializer(serializers.ModelSerializer):
