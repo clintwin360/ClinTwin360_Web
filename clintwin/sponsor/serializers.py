@@ -38,7 +38,7 @@ class ClinicalTrialCriteriaSerializer(serializers.ModelSerializer):
 class ParticipantSerializer(serializers.ModelSerializer):
     class Meta:
         model = Participant
-        fields = ['id', 'first_name', 'last_name', 'email']
+        fields = ['id', 'email', 'state']
 
 
 class ParticipantBasicHealthSerializer(serializers.ModelSerializer):
