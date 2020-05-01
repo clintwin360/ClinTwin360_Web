@@ -37,17 +37,15 @@
 	</title>
 </head>
 
-{% block content %}	
+
 <body>
     <main>
-	
+	{% block content %}	
 		<div class="container-fluid" id="content">
 		
             <form method="post" >
                 {% csrf_token %}
-				{{ form.media }}          
-			
-            
+				         
 			{{ form.custom_id|as_crispy_field }}
 			{{ form.sponsor|as_crispy_field }}
 			{{ form.title|as_crispy_field }}
@@ -64,16 +62,19 @@
 			{{ form.comments|as_crispy_field }}
 			{{ form.followUp|as_crispy_field }}
 			
-			<button class="btn btn-success w-25" type="submit" id="edit_button">Edit Trial</button>
+			<!--<a href="{% url 'viewtrials' %}" class="btn btn-info" id="return_button" role="button">Return to Dashboard</a>
+			<button class="btn btn-success w-25" type="submit" id="edit_button" target="_parent" href="{% url 'viewtrials' %}">Edit Trial</button>-->
+			<!--<a href="{% url 'viewtrials' %}" class="btn btn-info" id="return_button" role="button">Return to Dashboard</a>-->
+			<input type="submit" id="submit_button" value="Edit Trial">
 			
-				
             </form>
 			
             <br>
             <br>
         </div>
+		{% endblock %}
 	</main>
 	
 </body>
-{% endblock %}
+
 </html>

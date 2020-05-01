@@ -1,13 +1,13 @@
 
 #dashboard-trial-cards {
-  width: 45%;
+  width: 50%;
 }
 
 .card{
   width: 98%;
   margin-left: 25px;
   margin-top: 0.5rem;
-  background-color: #F8F8F9;
+  background-color: white;
 }
 
 .card-header, .card-footer {
@@ -18,19 +18,49 @@
   margin-bottom: 0;
 }
 
-#tag {
-  background-color: none;
-  float: right;
+.card-footer {
+  padding-top: 0.5rem;
+  padding-left: 0;
+  margin: 0;
 }
 
-#target {
-  background-color: none;
-  padding-bottom: 0;
-}
 
-.card-title, .card-body, .card-footer {
+.card-title, .card-body{
   margin-bottom: 0;
   margin-top: 0;
   padding-top: 0.5rem;
-  padding-bottom: 0;
+  padding-bottom: 0.2rem;
+  padding-left: 0.3rem;
+}
+
+.card-text{
+  margin-bottom: 0rem;
+}
+
+#tag {
+  float: right;
+}
+
+#id-tag {
+  float: left;
+  padding-left: 0.3rem;
+}
+
+#target-span {
+  position:absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+#date-span {
+  position:absolute;
+  bottom: 0;
+  right: 1rem;
+  /* left: 0; */
+}
+
+#more-info {
+  float: left;
+  padding-left: 0.5rem;
 }

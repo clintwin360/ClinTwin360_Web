@@ -28,7 +28,7 @@ function highlightText(element, word_starts, length) {
         str = item.html();
         item.data("origHTML", str);
     }
-    console.log(item.data("origHTML"));
+    //console.log(item.data("origHTML"));
     let highlighted_str = "";
     let previous = 0;
     for (let start of word_starts) {
@@ -55,14 +55,13 @@ function getAllIndexes(arr, val) {
     return indexes;
 }
 
-function searchTrials() {
-    let value = $("#trial-search").val();
+
+function searchTrials(input) {
+    let value = $(input).val();
     let filter = value.toUpperCase();
-    console.log("filter",filter);
     let cards = $(".card");
     for (let card of cards) {
         let title = $(card).find(".card-title").text().toUpperCase()
-        console.log(title,filter,title.includes(filter));
         if (title.includes(filter)){
             $(card).show()
             if (filter !== ""){
@@ -82,7 +81,7 @@ function searchTrials() {
 
 
 function trial_card_template(props){
-    console.log(props);
+    //console.log(props);
     return `<div id="trial-card-${props.id}" class="card mt-2" data-trial="${props.id}">`+
   `<div class="card-body">`+
       `<div class="row">`+
@@ -101,35 +100,45 @@ function trial_card_template(props){
 }
 
 
-function row_template(props){
-    let template = "" +
-        "<tr id=\"trial-"+ props.id +"\" class=\"clickable-row\">\<" +
-        "td>"+props.title+"</td>" +
-        "<td>"+props.sponsor.organization+"</td>" +
-        "<td>"+props.enrollmentTarget+"</td>" +
-        "</tr>";
-    return template;
-}
-
 function update_trial_details(props){
     $("#dashboard-trial-title").text(props.title)
     $("#dashboard-objective-text").text(props.objective);
     $("#dashboard-description-text").text(props.description);
     $("#selected-trial-header").data('trial',props.id);
+    console.log("status",props);
+    if (props.status === "Active Recruitment"){
+        $("#start-trial-link").hide()
+        $("#end-trial-link").show()
+        $("#criteria-trial-link").hide()
+        $("#update-trial-link").hide()
+    } else if (props.status === "Recruitment Ended"){
+        $("#start-trial-link").hide()
+        $("#end-trial-link").hide()
+        $("#criteria-trial-link").hide()
+        $("#update-trial-link").hide()
+    } else if (props.status === "Draft"){
+        $("#start-trial-link").show()
+        $("#criteria-trial-link").show()
+        $("#update-trial-link").show()
+        $("#end-trial-link").hide()
+    } else {
+        //invalid status
+        return
+    }
 }
 
 function get_trial_criteria(id){
     $.getJSON(`/api/criteria_response/?trial=${id}`, function(result){
-      console.log(result);
+      //console.log(result);
       update_trial_criteria(result.results)
     });
 }
 
 function get_trial_details(id){
-    console.log("getting details")
-    $.getJSON(`/api/trials/?id=${id}`, function(result){
-      console.log(result);
-      update_trial_details(result.results[0])
+    //console.log("getting details")
+    $.getJSON(`/api/trials/${id}/`, function(result){
+      //console.log(result);
+      update_trial_details(result)
     });
 }
 
@@ -149,15 +158,17 @@ function update_trial_cards(props){
 
 $(function(){
 
-  $.getJSON("/api/trials/", function(result){
-      console.log(result.results);
-      $.each(result.results, function(i, field){
-          console.log(field);
-          update_trial_cards(field);
-      });
-      update_trial_details(result.results[0])
-      get_trial_criteria(result.results[0].id)
-  });
+
+
+    $.getJSON("/api/trials/", function(result){
+        console.log(result.results);
+        $.each(result.results, function(i, field){
+            console.log(field);
+            update_trial_cards(field);
+            });
+        update_trial_details(result.results[0])
+        get_trial_criteria(result.results[0].id)
+    });
 
 
 
@@ -192,7 +203,7 @@ $(function(){
 
 
     $(document).on( "click",".card", function() {
-    console.log("clicked!!" ,$(this).data('trial'));
+    //console.log("clicked!!" ,$(this).data('trial'));
     get_trial_details($(this).data('trial'));
     get_trial_criteria($(this).data('trial'))
 });
@@ -261,6 +272,34 @@ $(function(){
         })
        // window.location.href = `/sponsor/deletetrial/${id}`;
     })
+
+    $("#trial-filter").select2();
+    $("#trial-sort").select2();
+
+    $("#trial-filter").change(function() {
+        $("#dashboard-trial-cards").empty()
+        let status = $(this).val();
+        let url = `/api/trials/`;
+
+        switch (status) {
+            case 'Virtual':
+                let is_virtual = $(this).find(':selected').data('virtual')
+                url += `?is_virtual=${is_virtual}`;
+                break;
+            case 'All':
+                break;
+            default:
+                url += `?status=${status}`;
+        }
+        console.log(url);
+        $.getJSON(url, function(result){
+        $.each(result.results, function(i, field){
+            update_trial_cards(field);
+            });
+        update_trial_details(result.results[0])
+        get_trial_criteria(result.results[0].id)
+        });
+    });
 
 });
 

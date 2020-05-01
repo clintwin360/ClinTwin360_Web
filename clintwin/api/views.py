@@ -96,8 +96,9 @@ class ParticipantBasicHealthViewSet(mixins.CreateModelMixin,
     serializer_class = ParticipantBasicHealthSerializer
 
     def perform_create(self, serializer):
-        basic_health = serializer.save()
-        print(basic_health)
+        participant_basic_health = serializer.save()
+        participant_basic_health.participant.basic_health = 1
+        participant_basic_health.participant.save()
     # permission_classes = [permissions.IsAuthenticated]
 
 
@@ -187,6 +188,8 @@ class ClinicalTrialViewSet(mixins.UpdateModelMixin,
     List all Clinical Trials or List trials by sponsor_id
     """
     serializer_class = ClinicalTrialSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['status', 'is_virtual']
 
     def get_queryset(self):
         if self.request.user.is_clintwin():
