@@ -32,7 +32,6 @@ urlpatterns = [
     re_path(r'^updatetrialpane/(?P<pk>\d+)$', views.TrialUpdatePaneView.as_view(), name='trialupdatepane'),
     re_path(r'^updatetrial/(?P<pk>\d+)$', views.TrialUpdateView.as_view(), name='trialupdate'),
 
-
     re_path(r'starttrial/(?P<pk>\d+)$', views.TrialStartView, name='trialstart'),#NEW
 	re_path(r'endtrial/(?P<pk>\d+)$', views.TrialEndView, name='trialend'),#NEW
 

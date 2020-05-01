@@ -31,7 +31,8 @@
             <p><strong>URL:</strong> <a class="trial-url-link" href="{{ clinicaltrial.url }}" target="_top">{{ clinicaltrial.url }}</a></p>
             <p><strong>Comments:</strong> {{ clinicaltrial.comments }}</p>
             <a class="btn btn-info editbtn" href="/sponsor/updatetrialpane/{{ clinicaltrial.id }}">Edit Trial</a>
-            <a class="btn btn-danger deletebtn" href="/sponsor/deletetrialpane/{{ clinicaltrial.id }}">Delete Trial</a>
+            
+			<a class="btn btn-danger deletebtn" href="/sponsor/deletetrialpane/{{ clinicaltrial.id }}">Delete Trial</a>
 			<!--<button class="btn btn-success startbtn" type="submit" href="/sponsor/starttrial/{{ clinicaltrial.id }}">Start Trial1</button>--->
 			<!--<a class="btn btn-success startbtn" type="submit" href="/sponsor/starttrial/{{ clinicaltrial.id }}">Start Trial2</a>-->
 			<!--<a class="btn btn-warning endbtn" type="submit" href="/sponsor/endtrial/{{ clinicaltrial.id }}">End Trial</a>-->
