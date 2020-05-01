@@ -178,24 +178,21 @@ class ClinicalTrialEnrollmentViewSet(mixins.CreateModelMixin,
         return queryset
 
 
-class ClinicalTrialViewSet(mixins.RetrieveModelMixin,
+class ClinicalTrialViewSet(mixins.UpdateModelMixin,
+                           mixins.DestroyModelMixin,
+                           mixins.RetrieveModelMixin,
                            mixins.ListModelMixin,
                            GenericViewSet):
     """
     List all Clinical Trials or List trials by sponsor_id
     """
-    serializer_class = ClinicalTrialListSerializer
+    serializer_class = ClinicalTrialSerializer
 
     def get_queryset(self):
-        sponsor_id = self.request.query_params.get('sponsor_id', None)
-        trial_id = self.request.query_params.get('id', None)
-        if sponsor_id:
-            queryset = ClinicalTrial.objects.filter(sponsor__id=sponsor_id)
-        elif trial_id:
-            queryset = ClinicalTrial.objects.filter(id=trial_id)
-        else:
+        if self.request.user.is_clintwin():
             queryset = ClinicalTrial.objects.all()
-
+        else:
+            queryset = ClinicalTrial.objects.filter(sponsor=self.request.user.profile.sponsor)
         return queryset
 
 
