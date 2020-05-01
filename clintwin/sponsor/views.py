@@ -293,13 +293,13 @@ class SponsorDetailView(generic.DetailView):
 class SponsorUpdateView(generic.UpdateView):
     model = Sponsor
     fields = '__all__'
-	
+
 	#Datepicker widet below throws weird indent error
     #def get_form(self):
 	    #form = super().get_form()
         #form.fields['dateDeregistered'].widget = DatePickerInput(format='%m/%d/%Y')
 		#return form
-	
+
     def get_success_url(self):
         sponsorid = self.kwargs['pk']
         return reverse_lazy('sponsordetail', kwargs={'pk': sponsorid})
@@ -361,6 +361,13 @@ class NewAccountView(generic.CreateView):
 class AccountDetailView(generic.DetailView):
     model = User
     template_name = 'sponsor/account_detail.html'
+
+def NewAccountFromSponsor(request, pk):
+    sponsor = Sponsor.objects.get(pk=pk)
+    request.session['id'] = sponsor.id
+
+    return redirect("newaccount")
+
 
 # Request Views
 def viewSponsorReq(request):
