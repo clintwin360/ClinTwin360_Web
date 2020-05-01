@@ -166,7 +166,7 @@ div.footer {
 }
 
 
-/* Styling for all buttons */
+/* Styling for all buttons
 button {
   background-color: #4bc5ef;
   border-radius: 4px;
@@ -177,6 +177,7 @@ button {
   cursor: pointer;
   width: 100%;
 }
+*/
 
 /* Styling for "forgot password" */
 span.psw {
@@ -223,6 +224,7 @@ button.reset_btn, #id_email, #id_phone {
   margin-right: auto;
 }
 
+/*
 button, #add_btn, #add_cri #cancel-criteria,
 #upload-btn{
   background-color: #4bc5ef;
@@ -234,6 +236,7 @@ button, #add_btn, #add_cri #cancel-criteria,
   cursor: pointer;
   width: 20%;
 }
+ */
 
 #back_cri {
   float: right;

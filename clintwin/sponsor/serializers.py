@@ -77,7 +77,7 @@ class SponsorDetailSerializer(serializers.ModelSerializer):
         fields = ['organization', 'contactPerson', 'email']
 
 
-class ClinicalTrialListSerializer(serializers.ModelSerializer):
+class ClinicalTrialSerializer(serializers.ModelSerializer):
     sponsor = SponsorDetailSerializer(read_only=True)
 
     class Meta:
@@ -87,17 +87,8 @@ class ClinicalTrialListSerializer(serializers.ModelSerializer):
                   'custom_id', ]
 
 
-class ClinicalTrialDetailSerializer(serializers.ModelSerializer):
-    sponsor = SponsorDetailSerializer(read_only=True)
-
-    class Meta:
-        model = ClinicalTrial
-        fields = ['title', 'objective', 'description', 'recruitmentStartDate',
-                  'recruitmentEndDate', 'id', 'sponsor', 'url', 'current_recruitment', 'status', 'custom_id', ]
-
-
 class ClinicalTrialMatchSerializer(serializers.ModelSerializer):
-    clinical_trial = ClinicalTrialListSerializer(read_only=True)
+    clinical_trial = ClinicalTrialSerializer(read_only=True)
 
     class Meta:
         model = ClinicalTrialMatch
@@ -109,7 +100,7 @@ class ClinicalTrialField(serializers.PrimaryKeyRelatedField):
         pk = super(ClinicalTrialField, self).to_representation(value)
         try:
             item = ClinicalTrial.objects.get(pk=pk)
-            serializer = ClinicalTrialDetailSerializer(item)
+            serializer = ClinicalTrialSerializer(item)
             return serializer.data
         except ClinicalTrialEnrollment.DoesNotExist:
             return None
@@ -125,15 +116,13 @@ class ClinicalTrialField(serializers.PrimaryKeyRelatedField):
 class ClinicalTrialEnrollmentSerializer(serializers.ModelSerializer):
     clinical_trial = ClinicalTrialField(queryset=ClinicalTrial.objects.all())
 
-    # clinical_trial = ClinicalTrialListSerializer(read_only=True)
-
     class Meta:
         model = ClinicalTrialEnrollment
         fields = ['participant', 'clinical_trial']
 
 
 class ClinicalTrialCriteriaResponseSerializer(serializers.ModelSerializer):
-    clinical_trial = ClinicalTrialDetailSerializer(read_only=True)
+    clinical_trial = ClinicalTrialSerializer(read_only=True)
 
     class Meta:
         model = ClinicalTrialCriteriaResponse
