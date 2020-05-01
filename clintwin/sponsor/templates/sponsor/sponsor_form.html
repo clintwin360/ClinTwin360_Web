@@ -1,14 +1,43 @@
 {% extends "sponsor/base.html" %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{{ form.media }}
 {% load static %}
-{% block style %}{% endblock %}
-{% block scripts %}{% endblock %}
+{% load crispy_forms_tags %}
 {% block title %}Sponsor Update{% endblock %}
 
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <a href="{% url 'viewsponsors' %}" class="btn btn-info" role="button">Return to Dashboard</a>
-    <input class="btn btn-success" type="submit" id="edit_button" value="Edit Sponsor">
-</form>
+<div class="container-fluid"><br>
+    <h2 id="edit-sponsor">Edit Sponsor</h2>
+    <h3 id="basic-info"> Sponsor Details </h3><br>
+
+    <div id="edit_sponsor_form">
+		
+		{{ form.media }}
+
+
+	<form method="post">
+		{% csrf_token %}
+		<!--{{ form.as_p }}-->
+	
+		{{ form.organization|as_crispy_field }}
+		<!--<div class="d-flex justify-content-around">-->
+			{{ form.dateDeregistered|as_crispy_field }}
+		<!--</div>-->	
+		{{ form.contactPerson|as_crispy_field }}
+		{{ form.email|as_crispy_field }}
+		{{ form.phone|as_crispy_field }}
+		{{ form.location|as_crispy_field }}
+		{{ form.notes|as_crispy_field }}
+	
+	
+		<a href="{% url 'viewsponsors' %}" class="btn btn-info" id="return_button" role="button">Return to Dashboard</a>
+		<input class="btn btn-success" type="submit" id="edit_button" value="Edit Sponsor">
+		
+	</form>
+	<br><br><br><br>
+
+	</div>
+</div>
 {% endblock %}
