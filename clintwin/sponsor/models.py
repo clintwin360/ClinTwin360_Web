@@ -237,7 +237,7 @@ class ClinicalTrialCriteria(models.Model):
     options = models.TextField()
     # options = ArrayField(models.CharField(max_length=256))
     searchable = models.BooleanField()
-    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, related_name='subcriteria')
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, required=False, related_name='subcriteria')
     question = models.ForeignKey(ParticipantQuestion, on_delete=models.CASCADE, null=True, related_name="criteria")
 
     def __str__(self):
