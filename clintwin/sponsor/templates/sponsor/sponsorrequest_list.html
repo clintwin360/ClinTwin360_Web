@@ -15,8 +15,8 @@
                 <th>Status</th>
                 <th id="spnsr">Sponsor</th>
                 <th>Critierion</th>
-                <th>Values</th>
                 <th>Notes</th>
+                <th id="end_date">Requested At</th>
               </tr>
             </thead>
             <tbody id="request-list-body">
@@ -26,8 +26,8 @@
                     <td>{{ request.status }}</td>
                     <td>{{ request.sponsor.organization }}</td>
                     <td>{{ request.criterion_req }}</td>
-                    <td>{{ request.values }}</td>
                     <td>{{ request.notes }}</td>
+                    <td>{{ request.createdAt }}</td>
                     <td>
                     <a class="btn btn-info editbtn" href="criteriarequest/{{ request.id }}">View</a>
                     {% if request.status == 'Open' %}

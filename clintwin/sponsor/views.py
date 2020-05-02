@@ -289,6 +289,8 @@ class SponsorListView(LoginRequiredMixin, generic.ListView):
     model = Sponsor
     pagination_by = 25
 
+    ordering = ['organization']
+
 class SponsorDetailView(LoginRequiredMixin, generic.DetailView):
     model = Sponsor
 
@@ -393,6 +395,8 @@ class SponsorRequestListView(LoginRequiredMixin, generic.ListView):
     model = SponsorRequest
     pagination_by = 25
 
+    ordering = ['-status', '-createdAt']
+
 class SponsorRequestDetailView(LoginRequiredMixin, generic.DetailView):
     model = SponsorRequest
 
@@ -420,6 +424,8 @@ class NewSponsorRequestView(LoginRequiredMixin, generic.CreateView):
 class ContactListView(LoginRequiredMixin, generic.ListView):
     model = Contact
     pagination_by = 25
+
+    ordering = ['-status', '-createdAt']
 
 class ContactDetailView(LoginRequiredMixin, generic.DetailView):
     model = Contact
