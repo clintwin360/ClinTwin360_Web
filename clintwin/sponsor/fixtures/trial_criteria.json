@@ -1,18 +1,6 @@
 [
   {
     "model": "sponsor.ClinicalTrialCriteria", 
-    "pk": 0, 
-    "fields": {
-      "name": "criteria", 
-      "options": "optionslist", 
-      "valueType": "type", 
-      "parent": null, 
-      "searchable": false, 
-      "question_id": "question_id"
-    }
-  }, 
-  {
-    "model": "sponsor.ClinicalTrialCriteria", 
     "pk": 1, 
     "fields": {
       "name": "allergies", 
