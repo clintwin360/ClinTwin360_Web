@@ -1,7 +1,7 @@
 .card{
   width: 100vw;
   height: 200px;
-  margin-left: 25px;
+  margin-left: 10px;
   margin-top: 0.5rem;
   padding-top: 0.5rem;
   background-color: white;
@@ -42,6 +42,10 @@
 #id-tag {
   float: left;
   padding-left: 0.3rem;
+}
+
+#virtual-tag{
+  margin: 0 2px;
 }
 
 #target-span {
