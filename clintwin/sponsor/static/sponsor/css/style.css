@@ -27,9 +27,11 @@ textarea.form-control {
 
 /* Styling for page headers */
 #about_us, #our_location, #how_it_works,
-#contact, #trial-dashboard, #create-trial,#edit-trial,#edit-sponsor,
+#contact, #trial-dashboard, #create-trial,
+#edit-trial, #edit-sponsor, #view-sponsor,
 #new-sponsor, #sponsor-req, #criteria_trial_name,
-#create-criteria, #criteria_trial_id, #request-criteria, #contact-list-title, #contact-detail-title {
+#create-criteria, #criteria_trial_id, #request-criteria,
+#contact-list-title, #contact-detail-title {
   color: #4b555a;
   text-align: center;
 }
@@ -88,11 +90,15 @@ body {
 }
 
 /* Style navbar elements */
-#navbar, #navbarDropdown, #contact_us, #navbarLogo {
+#navbar, #navbarDropdown, #contact_us, #navbarLogo, #spnsr-btn {
   background-color: #4bc5ef;
   color: white;
 }
 
+#spnsr-btn {
+  margin-left: 5%;
+  border: none;
+}
 
 #logout_link{
 	float: right;
