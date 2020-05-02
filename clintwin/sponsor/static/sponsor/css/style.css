@@ -31,7 +31,8 @@ textarea.form-control {
 #edit-trial, #edit-sponsor, #view-sponsor,
 #new-sponsor, #sponsor-req, #criteria_trial_name,
 #create-criteria, #criteria_trial_id, #request-criteria,
-#contact-list-title, #contact-detail-title {
+#contact-list-title, #contact-detail-title,
+#view-all-requests {
   color: #4b555a;
   text-align: center;
 }
