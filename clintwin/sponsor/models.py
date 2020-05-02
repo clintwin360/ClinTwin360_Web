@@ -29,9 +29,17 @@ def is_sponsor_admin(self):
         return False
 
 
-User.add_to_class("is_clintwin", is_clintwin)
+def is_sponsor(self):
+    return self.groups.filter(name='sponsor').exists()
 
-User.add_to_class("is_sponsor_admin", is_sponsor_admin)
+
+def is_participant(self):
+    return self.groups.filter(name='participant').exists()
+
+
+User.add_to_class("is_clintwin", is_clintwin)
+User.add_to_class("is_sponsor", is_sponsor)
+User.add_to_class("is_participant", is_participant)
 
 
 class Contact(models.Model):

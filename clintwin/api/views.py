@@ -170,10 +170,9 @@ class ClinicalTrialEnrollmentViewSet(mixins.CreateModelMixin,
     serializer_class = ClinicalTrialEnrollmentSerializer
 
     def get_queryset(self):
-        participant_id = self.request.query_params.get('participant')
-        if participant_id:
-            participant = Participant.objects.get(id=participant_id)
-            queryset = ClinicalTrialEnrollment.objects.filter(participant=participant)
+        if self.request.user.is_participant():
+            participant = Participant.objects.filter(email=self.request.user.username)
+            queryset = ClinicalTrialEnrollment.objects.filter(participant__in=participant)
         else:
             queryset = ClinicalTrialEnrollment.objects.none()
 
@@ -195,8 +194,10 @@ class ClinicalTrialViewSet(mixins.UpdateModelMixin,
     def get_queryset(self):
         if self.request.user.is_clintwin():
             queryset = ClinicalTrial.objects.all()
-        else:
+        elif self.request.user.is_sponsor():
             queryset = ClinicalTrial.objects.filter(sponsor=self.request.user.profile.sponsor)
+        else:
+            queryset = ClinicalTrial.objects.none()
         return queryset
 
 
