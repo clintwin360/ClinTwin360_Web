@@ -42,7 +42,7 @@ urlpatterns = [
 
     # Test: Page for uploading text file for virtual trials
     # path('vt_question_upload/', views.vt_question_upload, name='vt_question_upload'),
-    re_path(r'^trial/(?P<pk>\d+)/vt_question_upload/$', views.vt_question_upload, name='vt_question_upload'),
+    re_path(r'^trial/(?P<pk>\d+)/question_upload/$', views.question_upload, name='question_upload'),
 
     #Request Views
     path('viewsponsorreq', views.SponsorRequestListView.as_view(), name='viewsponsorreq'),

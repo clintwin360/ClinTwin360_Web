@@ -94,7 +94,7 @@ def review_criteria(request, pk):
     exclusion_criteria = trial_criteria_responses.filter(criteriaType="exclusion")
 
     if trial.is_virtual:
-        next_page = "/sponsor/trial/{}/vt_question_upload/".format(trial.id)
+        next_page = "/sponsor/trial/{}/question_upload/".format(trial.id)
         next_page_text = "Continue"
     else:
         next_page = "/sponsor/viewtrials"
@@ -111,13 +111,13 @@ def review_criteria(request, pk):
                    "previous_page_text": previous_page_text,
                    "next_page_text": next_page_text})
 
-# def vt_question_upload(request):
-#     return render(request, 'sponsor/vt_question_upload.html')
+
 @login_required
-def vt_question_upload(request, pk):
+def question_upload(request, pk):
     trial = ClinicalTrial.objects.get(pk=pk)
+    print(trial)
     # declaring template
-    template = 'sponsor/vt_question_upload.html'
+    template = 'sponsor/question_upload.html'
     prompt = {'order': 'order of CSV should be text, valueType, options'
     }
 
@@ -136,15 +136,15 @@ def vt_question_upload(request, pk):
         io_string = io.StringIO(data_set)
         next(io_string)
         for column in csv.reader(io_string, delimiter=',', quotechar="|"):
-            trial_id = trial
+            clinical_trial = trial
             text = column[1]
             valueType=column[2]
             options = column[3].replace(";",",").replace('"[','[').replace(']"',']').replace('"{','{').replace('}"','}').replace('""', '"')
 
             vtquestion = VirtualTrialParticipantQuestion.objects.create(
-                trial_id=trial_id, text=text, valueType=valueType, options=options)
+                clinical_trial=clinical_trial, text=text, valueType=valueType, options=options)
         vtquestion.save()
-        vtquestions = VirtualTrialParticipantQuestion.objects.all().filter(trial_id=pk)
+        vtquestions = VirtualTrialParticipantQuestion.objects.all().filter(clinical_trial=pk)
         context = {}
         messages.success(request, "Succesfully uploaded trial questions from file: " + csv_file.name)
 
