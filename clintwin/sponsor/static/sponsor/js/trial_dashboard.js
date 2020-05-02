@@ -125,7 +125,7 @@ function trial_card_template(props){
           `</div>`+
           `<div id="date" class="col-sm-4">`+
             `<span id="date-span">`+
-              `<h6 class="text-right text-muted">${props.recruitmentStartDate} - ${props.recruitmentEndDate}</h6>`+
+              `<h6 class="text-muted">${props.recruitmentStartDate} - ${props.recruitmentEndDate}</h6>`+
             `</span>`+
           `</div>`+
         `</div>`+
