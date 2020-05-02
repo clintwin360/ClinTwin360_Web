@@ -63,6 +63,7 @@ urlpatterns = [
     re_path(r'^updateprofile/(?P<pk>\d+)$', views.SponsorUpdateView.as_view(), name='sponsorupdate'),
     #Account Views
     path('newaccount', views.NewAccountView.as_view(), name ='newaccount'),
+    re_path(r'accountfromsponsor/(?P<pk>\d+)$', views.NewAccountFromSponsor, name='accountfromsponsor'),
     re_path(r'user/(?P<pk>\d+)$', views.AccountDetailView.as_view(), name ='viewaccount'),
     # Supporting Views
     path('about', views.AboutPageView.as_view(), name='about'),

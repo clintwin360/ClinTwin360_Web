@@ -6,6 +6,8 @@ from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import render
 
 from django.views.generic import TemplateView
+
+from django.forms import PasswordInput
 # from .forms import *
 from sponsor.forms import UserCreationForm, NewTrialForm, NewSponsorForm
 # from .forms import AuthenticationForm
@@ -293,13 +295,13 @@ class SponsorDetailView(generic.DetailView):
 class SponsorUpdateView(generic.UpdateView):
     model = Sponsor
     fields = '__all__'
-	
+
 	#Datepicker widet below throws weird indent error
     #def get_form(self):
 	    #form = super().get_form()
         #form.fields['dateDeregistered'].widget = DatePickerInput(format='%m/%d/%Y')
 		#return form
-	
+
     def get_success_url(self):
         sponsorid = self.kwargs['pk']
         return reverse_lazy('sponsordetail', kwargs={'pk': sponsorid})
@@ -358,9 +360,25 @@ class NewAccountView(generic.CreateView):
     template_name = 'sponsor/new_account.html'
     success_url = reverse_lazy('viewsponsors')
 
+    def get_form(self):
+        form = super().get_form()
+        form.fields['username'].widget.attrs['placeholder'] = 'Username for the account'
+        form.fields['password'].widget = PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Enter a secure password'})
+        form.fields['email'].widget.attrs['placeholder'] = 'Email address for the account'
+        form.fields['first_name'].widget.attrs['placeholder'] = 'First name of the user'
+        form.fields['last_name'].widget.attrs['placeholder'] = 'Last name of the user'
+        return form
+
 class AccountDetailView(generic.DetailView):
     model = User
     template_name = 'sponsor/account_detail.html'
+
+def NewAccountFromSponsor(request, pk):
+    sponsor = Sponsor.objects.get(pk=pk)
+    request.session['id'] = sponsor.id
+
+    return redirect("newaccount")
+
 
 # Request Views
 def viewSponsorReq(request):
