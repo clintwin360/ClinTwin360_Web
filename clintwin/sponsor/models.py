@@ -80,6 +80,7 @@ class SponsorRequest(models.Model):
     values = models.CharField(null=True, max_length=500)
     notes = models.CharField(max_length=1000)
     status = models.CharField('Status', null=True, max_length=100, default='Open')
+    createdAt = models.DateTimeField(auto_now_add=True)
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
