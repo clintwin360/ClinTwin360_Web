@@ -43,8 +43,21 @@ textarea.form-control {
   text-align: center;
 }
 
+/* Upload questions */
+#upload-btn {
+  background-color: #4bc5ef;
+  color: white;
+  width: 20%;
+  height: 35px;
+  margin-top: 1rem;
+  border: 1rem;
+  border-radius: 0.2rem;
+  -moz-border-radius: 5px;
+}
+
 /* Form buttons */
-#create_button,#edit_button,#return_button,#submit_button {
+#create_button,#edit_button,#return_button,
+#submit_button {
   background: transparent;
   border: none;
   padding: 0;
@@ -58,7 +71,8 @@ textarea.form-control {
   color: #73C9EE;
 }
 
-#create_button,#edit_button,#return_button,#submit_button:hover{
+#create_button,#edit_button,#return_button,
+#submit_button:hover{
     text-decoration:underline;
     color: #73C9EE;
 }
@@ -105,7 +119,7 @@ body {
 	float: right;
 	text-align:right;
 	background-color: #4bc5ef;
-    color: white;
+  color: white;
 }
 
 #greeting {
