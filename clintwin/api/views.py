@@ -82,7 +82,7 @@ class ParticipantViewSet(mixins.RetrieveModelMixin,
     def get_object(self):
         queryset = self.filter_queryset(self.get_queryset())
         # make sure to catch 404's below
-        obj = queryset.get(email=self.request.user.email)
+        obj = queryset.get(email=self.request.user.username)
         return obj
 
 
@@ -96,6 +96,10 @@ class ParticipantBasicHealthViewSet(mixins.CreateModelMixin,
     serializer_class = ParticipantBasicHealthSerializer
 
     def perform_create(self, serializer):
+        participant = Participant.objects.filter(email=self.request.user.username).get()
+        p2 = serializer.validated_data.get('participant', None)
+        if p2 != participant:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
         participant_basic_health = serializer.save()
         participant_basic_health.participant.basic_health = 1
         participant_basic_health.participant.save()
