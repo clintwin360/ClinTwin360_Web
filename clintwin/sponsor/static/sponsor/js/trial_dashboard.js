@@ -108,9 +108,15 @@ function trial_card_template(props){
       `<div class="card-footer bg-transparent">`+
         `<div class="row">`+
           `<div class="card-text col-sm-4">`+
-            `<small id="more-info" class="small text-left text-muted">Location: ${props.location}</small>`+
-            `<small id="more-info" class="small text-left text-muted">Contact: Eli Lily</small>`+
-            `<small id="more-info" class="small text-left text-muted">Email: eli@hentech.edu</small>`+
+            `<div id="info" class="row">`+
+              `<small id="more-info" class="small text-left text-muted">Location: ${props.location}</small>`+
+            `</div>`+
+            `<div id="info" class="row">`+
+              `<small id="more-info" class="small text-left text-muted">Contact: Eli Lily</small>`+
+            `</div>`+
+            `<div id="info" class="row">`+
+              `<small id="more-info" class="small text-left text-muted">Email: eli@hentech.edu</small>`+
+            `</div>`+
           `</div>`+
           `<div id="target" class="col-sm-4">`+
             `<span id="target-span">`+
@@ -351,6 +357,3 @@ $(function(){
     });
 
 });
-
-
-
