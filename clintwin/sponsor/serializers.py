@@ -92,7 +92,7 @@ class ClinicalTrialMatchSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ClinicalTrialMatch
-        fields = ['clinical_trial', 'expressed_interest']
+        fields = ['clinical_trial', 'expressed_interest', 'id']
 
 
 class ClinicalTrialField(serializers.PrimaryKeyRelatedField):
