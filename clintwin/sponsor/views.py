@@ -564,7 +564,7 @@ def question_flow(request):
                                       [{'response': x.response, 'next_question': x.next_question.id} for x in flow]})
     return JsonResponse(data)
 
-@login_required
+
 def load_data(request):
     call_command('loaddata', 'participant_questions')
     # call_command('loaddata', 'virtualtrial_participant_questions')
