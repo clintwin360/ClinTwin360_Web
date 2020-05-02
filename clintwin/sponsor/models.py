@@ -161,7 +161,7 @@ class ClinicalTrialMatch(models.Model):
     match = models.BooleanField(null=True)
 
     def __str__(self):
-        return self.participant.name() + ":" + self.clinical_trial.title + ">>" + self.match
+        return self.participant.name() + ":" + self.clinical_trial.title + ">>" + str(self.match)
 
 
 class ClinicalTrialEnrollment(models.Model):
