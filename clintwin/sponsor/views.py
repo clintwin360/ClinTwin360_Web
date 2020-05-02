@@ -11,14 +11,14 @@ from django.views.generic import TemplateView
 
 from django.forms import PasswordInput
 # from .forms import *
-from sponsor.forms import UserCreationForm, NewTrialForm, NewSponsorForm
+from sponsor.forms import NewAccountForm, NewTrialForm, NewSponsorForm
 # from .forms import AuthenticationForm
 from django.urls import reverse_lazy
 from django.views import generic
 from rest_framework import viewsets
 from rest_framework import permissions
 from rest_framework import generics
-
+from django.contrib.auth.forms import UserCreationForm
 # New additions
 
 from rest_framework.decorators import api_view, permission_classes
@@ -354,8 +354,8 @@ class NewSponsorFillView(LoginRequiredMixin, generic.CreateView):
 #Account Views
 class NewAccountView(LoginRequiredMixin, generic.CreateView):
     model = User
-    fields = ['username', 'password', 'email', 'first_name', 'last_name',]
 
+    form_class = NewAccountForm
     template_name = 'sponsor/new_account.html'
     success_url = reverse_lazy('viewsponsors')
 
@@ -369,10 +369,8 @@ class NewAccountView(LoginRequiredMixin, generic.CreateView):
     def get_form(self):
         form = super().get_form()
         form.fields['username'].widget.attrs['placeholder'] = 'Username for the account'
-        form.fields['password'].widget = PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Enter a secure password'})
-        form.fields['email'].widget.attrs['placeholder'] = 'Email address for the account'
-        form.fields['first_name'].widget.attrs['placeholder'] = 'First name of the user'
-        form.fields['last_name'].widget.attrs['placeholder'] = 'Last name of the user'
+        form.fields['password1'].widget = PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Enter a secure password'})
+        form.fields['password2'].widget = PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Enter the same password'})
         return form
 
 class AccountDetailView(LoginRequiredMixin, generic.DetailView):
