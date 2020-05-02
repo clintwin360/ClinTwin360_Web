@@ -553,7 +553,6 @@ def question_rank(questions):
     return ranks
 
 
-@login_required
 def question_flow(request):
     participant_id = request.GET.get('participant_id')
     questions = ParticipantQuestion.objects.all()
