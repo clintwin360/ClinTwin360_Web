@@ -57,12 +57,10 @@ def index(request):
     else:
         return login_success(request)
 
-
 @login_required
 def trial_dashboard(request):
     trials = ClinicalTrial.objects.filter()
     return render(request, 'sponsor/trial_dashboard.html')
-
 
 # Updated to post trial criteria to API endpoint
 @login_required
@@ -111,7 +109,6 @@ def review_criteria(request, pk):
                    "previous_page": previous_page, "next_page": next_page,
                    "previous_page_text": previous_page_text,
                    "next_page_text": next_page_text})
-
 
 # def vt_question_upload(request):
 #     return render(request, 'sponsor/vt_question_upload.html')
@@ -166,13 +163,10 @@ def login_success(request):
         logout(request)
         return redirect('index')
 
-
-
 # Trial Views
 @login_required
 def viewTrials(request):
     return render(request, "sponsor/viewtrials.html")
-
 
 class TrialPaneView(LoginRequiredMixin, generic.DetailView):
     model = ClinicalTrial
@@ -195,7 +189,6 @@ class TrialUpdateView(LoginRequiredMixin, generic.UpdateView):
          form.fields['is_virtual'].widget = CheckboxInput()
          return form
 
-
     def get_success_url(self):
         trialid = self.kwargs['pk']
         return reverse_lazy('trialdetail', kwargs={'pk': trialid})
@@ -216,7 +209,6 @@ class TrialUpdatePaneView(LoginRequiredMixin, generic.UpdateView):
     template_name_suffix = '_update_pane'
     success_url = reverse_lazy('viewtrials')
 
-
 # NEW
 @login_required
 def TrialStartView(request, pk):
@@ -227,7 +219,6 @@ def TrialStartView(request, pk):
 
         # return reverse_lazy('viewtrials')
         return redirect("viewtrials")
-
 
 # NEW
 
@@ -248,7 +239,6 @@ def TrialEndView(request, pk):
 
         # return reverse_lazy('viewtrials')
         return redirect("viewtrials")
-
 
 class NewClinicalTrialView(LoginRequiredMixin, generic.CreateView):
     model = ClinicalTrial
@@ -290,15 +280,17 @@ class NewClinicalTrialView(LoginRequiredMixin, generic.CreateView):
 
 
 # Sponsor Views
-@login_required
-def viewSponsors(request):
-    queryset = Sponsor.objects.all()
-    return render(request, "sponsor/view_sponsors.html")
+#@login_required
+#def viewSponsors(request):
+    #queryset = Sponsor.objects.all()
+    #return render(request, "sponsor/view_sponsors.html")
 
+class SponsorListView(LoginRequiredMixin, generic.ListView):
+    model = Sponsor
+    pagination_by = 25
 
 class SponsorDetailView(LoginRequiredMixin, generic.DetailView):
     model = Sponsor
-
 
 class SponsorUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Sponsor
@@ -314,11 +306,9 @@ class SponsorUpdateView(LoginRequiredMixin, generic.UpdateView):
         sponsorid = self.kwargs['pk']
         return reverse_lazy('sponsordetail', kwargs={'pk': sponsorid})
 
-
 class DeleteSponsorView(LoginRequiredMixin, generic.DeleteView):
     model = Sponsor
     success_url = reverse_lazy('viewsponsors')
-
 
 class NewSponsorView(LoginRequiredMixin, generic.CreateView):
     model = Sponsor
@@ -336,7 +326,6 @@ class NewSponsorView(LoginRequiredMixin, generic.CreateView):
         form.fields['email'].widget.attrs['placeholder'] = 'Email address'
         form.fields['notes'].widget.attrs['placeholder'] = 'Enter any relevant notes about the sponsor here'
         return form
-
 
 class NewSponsorFillView(LoginRequiredMixin, generic.CreateView):
     model = Sponsor
@@ -375,7 +364,6 @@ class NewAccountView(LoginRequiredMixin, generic.CreateView):
         UserProfile.objects.get_or_create(user=self.object, sponsor=Sponsor.objects.get(pk=sponsor_id))
         return redirect(self.get_success_url())
 
-
     def get_form(self):
         form = super().get_form()
         form.fields['username'].widget.attrs['placeholder'] = 'Username for the account'
@@ -389,7 +377,6 @@ class AccountDetailView(LoginRequiredMixin, generic.DetailView):
     model = User
     template_name = 'sponsor/account_detail.html'
 
-
 @login_required
 def NewAccountFromSponsor(request, pk):
     sponsor = Sponsor.objects.get(pk=pk)
@@ -397,16 +384,17 @@ def NewAccountFromSponsor(request, pk):
 
     return redirect("newaccount")
 
-
 # Request Views
-@login_required
-def viewSponsorReq(request):
-    return render(request, "sponsor/view_sponsor_req.html")
+#@login_required
+#def viewSponsorReq(request):
+    #return render(request, "sponsor/view_sponsor_req.html")
 
+class SponsorRequestListView(LoginRequiredMixin, generic.ListView):
+    model = SponsorRequest
+    pagination_by = 25
 
 class SponsorRequestDetailView(LoginRequiredMixin, generic.DetailView):
     model = SponsorRequest
-
 
 class NewSponsorRequestView(LoginRequiredMixin, generic.CreateView):
     model = SponsorRequest
@@ -429,34 +417,29 @@ class NewSponsorRequestView(LoginRequiredMixin, generic.CreateView):
         form.fields['notes'].widget.attrs['placeholder'] = 'Any addtional notes about the criteria'
         return form
 
-
 class ContactListView(LoginRequiredMixin, generic.ListView):
     model = Contact
     pagination_by = 25
 
-
 class ContactDetailView(LoginRequiredMixin, generic.DetailView):
     model = Contact
 
-
 class ContactPageView(generic.CreateView):
+    model = Contact
+    fields = ['organization', 'location', 'first_name', 'last_name', 'email', 'phone' ,'comment']
+    template_name = 'sponsor/contact.html'
+    success_url = reverse_lazy('index')
 
-        model = Contact
-        fields = ['organization', 'location', 'first_name', 'last_name', 'email', 'phone' ,'comment']
-        template_name = 'sponsor/contact.html'
-        success_url = reverse_lazy('index')
-
-        def get_form(self):
-            form = super().get_form()
-            form.fields['organization'].widget.attrs['placeholder'] = 'Name of the sponsor organization'
-            form.fields['location'].widget.attrs['placeholder'] = 'Location of the sponsor organization'
-            form.fields['first_name'].widget.attrs['placeholder'] = "Contact's first name"
-            form.fields['last_name'].widget.attrs['placeholder'] = "Contact's last name"
-            form.fields['email'].widget.attrs['placeholder'] = "Contact's email address"
-            form.fields['phone'].widget.attrs['placeholder'] = "Contact's phone number"
-            form.fields['comment'].widget.attrs['placeholder'] = 'Any addtional comments about the request'
-            return form
-
+    def get_form(self):
+        form = super().get_form()
+        form.fields['organization'].widget.attrs['placeholder'] = 'Name of the sponsor organization'
+        form.fields['location'].widget.attrs['placeholder'] = 'Location of the sponsor organization'
+        form.fields['first_name'].widget.attrs['placeholder'] = "Enter first name"
+        form.fields['last_name'].widget.attrs['placeholder'] = "Enter last name"
+        form.fields['email'].widget.attrs['placeholder'] = "Enter email address"
+        form.fields['phone'].widget.attrs['placeholder'] = "Enter phone number"
+        form.fields['comment'].widget.attrs['placeholder'] = 'Any addtional comments about the request'
+        return form
 
 @login_required
 def CriteriaRequestCompleteView(request, pk):
@@ -467,7 +450,6 @@ def CriteriaRequestCompleteView(request, pk):
 
         return redirect("viewsponsorreq")
 
-
 @login_required
 def AccessRequestCloseView(request, pk):
     access_request = Contact.objects.get(pk=pk)
@@ -476,7 +458,6 @@ def AccessRequestCloseView(request, pk):
         access_request.save(update_fields=['status'])
 
         return redirect("contactlist")
-
 
 @login_required
 def NewSponsorFromRequest(request, pk):
@@ -489,7 +470,6 @@ def NewSponsorFromRequest(request, pk):
 
     return redirect("newsponsorfill")
 
-
 # Other views
 def compare_values(a, op, b):
     if op == "equals":
@@ -498,7 +478,6 @@ def compare_values(a, op, b):
         return float(a) >= float(b)
     if op == 'lte':
         return float(a) <= float(b)
-
 
 def calculate_trial_matches(participant):
     # participant = Participant.objects.get(id=1)
@@ -540,7 +519,6 @@ def calculate_trial_matches(participant):
     # return JsonResponse({"data": new_matches})
     return new_matches
 
-
 def question_rank(questions):
     ranks = {}
     for q in questions:
@@ -551,7 +529,6 @@ def question_rank(questions):
         ranks[q.id] = rank
     # data['questions'].sort(key=lambda x: x['rank'], reverse=True)
     return ranks
-
 
 def question_flow(request):
     participant_id = request.GET.get('participant_id')
@@ -577,7 +554,6 @@ def question_flow(request):
                                       [{'response': x.response, 'next_question': x.next_question.id} for x in flow]})
     return JsonResponse(data)
 
-
 @login_required
 def load_data(request):
     call_command('loaddata', 'participant_questions')
@@ -595,7 +571,6 @@ def load_data(request):
     call_command('loaddata', 'question_flow')
     call_command('loaddata', 'user_profiles')
     return HttpResponse("Data Loaded!")
-
 
 # View for contact us form
 # @api_view(['GET, POST'])
@@ -615,7 +590,6 @@ def contact(request):
         form = ContactForm()
     return render(request, 'contactform.html', {'form': form})
 
-
 class ClinicalTrialCreateView(LoginRequiredMixin, generic.CreateView):
     model = ClinicalTrial
     fields = (
@@ -624,35 +598,25 @@ class ClinicalTrialCreateView(LoginRequiredMixin, generic.CreateView):
         'followUp', 'location', 'comments')
     template_name = 'create_trial_form.html'
 
-
 # Supplementary Views
 # Static page for About us
 class AboutPageView(TemplateView):
     template_name = 'sponsor/about.html'
 
-
 # Static page for How it Works
 class HowWorksPageView(TemplateView):
     template_name = 'sponsor/how_works.html'
-
-
-# Static page for Contact us
-
-
 
 # Static page for directions
 class DirectionsPageView(TemplateView):
     template_name = 'directions.html'
 
-
 # Static page for Message display
 class MessagePageView(TemplateView):
     template_name = 'messages.html'
 
-
 def emptyPane(request):
     return render(request, "sponsor/emptypane.html", )
-
 
 # Static pages for Admin
 # class NewCriterionView(TemplateView):

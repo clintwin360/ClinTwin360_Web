@@ -1,0 +1,43 @@
+{% extends "sponsor/base.html" %}
+{% load static %}
+{% block style %}{% endblock %}
+{% block scripts %}{% endblock %}
+{% block title %}View Criteria Requests{% endblock %}
+{% block content %}
+<br><h2 id="view-all-requests">Sponsor Criteria Requests</h2><br>
+<br>
+<div class="table_container">
+    <div class="main-cards row">
+          <table class="table table-bordered">
+            <thead class="thead-light">
+              <tr>
+                <th>Request ID</th>
+                <th>Status</th>
+                <th id="spnsr">Sponsor</th>
+                <th>Critierion</th>
+                <th>Values</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody id="request-list-body">
+            {% for request in object_list %}
+                <tr>
+                    <td>{{ request.id }}</td>
+                    <td>{{ request.status }}</td>
+                    <td>{{ request.sponsor.organization }}</td>
+                    <td>{{ request.criterion_req }}</td>
+                    <td>{{ request.values }}</td>
+                    <td>{{ request.notes }}</td>
+                    <td>
+                    <a class="btn btn-info editbtn" href="criteriarequest/{{ request.id }}">View</a>
+                    {% if request.status == 'Open' %}
+                    <a class="btn btn-danger deletebtn" href="sponsor/criteriarequestcomplete/{{ request.id }}">Mark Complete</a>
+                    {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
