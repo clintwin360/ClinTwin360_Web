@@ -1,6 +1,8 @@
 ##  Original additions
 import csv, io #NEW
 from django.contrib import messages #NEW
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import render
@@ -26,7 +28,7 @@ from django.contrib.auth.models import User
 from .serializers import *
 from django.core.management import call_command
 from django.shortcuts import redirect
-from django.contrib.auth import views as auth_views
+from django.contrib.auth import views as auth_views, logout
 from rest_framework.renderers import TemplateHTMLRenderer
 from django.db.models import Count
 
@@ -53,18 +55,17 @@ def index(request):
     if not request.user.is_authenticated:
         return redirect('login')
     else:
-        if request.user.is_clintwin():
-            return redirect("viewsponsors")
-        else:
-            return render(request, "sponsor/trial_dashboard.html")
+        return login_success(request)
 
 
+@login_required
 def trial_dashboard(request):
     trials = ClinicalTrial.objects.filter()
     return render(request, 'sponsor/trial_dashboard.html')
 
 
 # Updated to post trial criteria to API endpoint
+@login_required
 def trial_criteria(request, pk, criteria_type):
     trial = ClinicalTrial.objects.get(pk=pk)
     if criteria_type == "inclusion":
@@ -86,7 +87,7 @@ def trial_criteria(request, pk, criteria_type):
                    "previous_page_text": previous_page_text,
                    "next_page_text": next_page_text})
 
-
+@login_required
 def review_criteria(request, pk):
     trial = ClinicalTrial.objects.get(pk=pk)
     trial_criteria_responses = ClinicalTrialCriteriaResponse.objects.all().filter(trial=pk)
@@ -114,7 +115,7 @@ def review_criteria(request, pk):
 
 # def vt_question_upload(request):
 #     return render(request, 'sponsor/vt_question_upload.html')
-
+@login_required
 def vt_question_upload(request, pk):
     trial = ClinicalTrial.objects.get(pk=pk)
     # declaring template
@@ -155,29 +156,34 @@ def vt_question_upload(request, pk):
 
     return render(request, template, {"vtquestions" : vtquestions})
 
-
+@login_required
 def login_success(request):
     if request.user.groups.filter(name='clintwin'):
         return redirect("viewsponsors")
-    else:
+    elif request.user.groups.filter(name='sponsor'):
         return render(request, "sponsor/trial_dashboard.html")
+    else:
+        logout(request)
+        return redirect('index')
+
 
 
 # Trial Views
+@login_required
 def viewTrials(request):
     return render(request, "sponsor/viewtrials.html")
 
 
-class TrialPaneView(generic.DetailView):
+class TrialPaneView(LoginRequiredMixin, generic.DetailView):
     model = ClinicalTrial
     template_name_suffix = '_pane'
 
 
-class TrialDetailView(generic.DetailView):
+class TrialDetailView(LoginRequiredMixin, generic.DetailView):
     model = ClinicalTrial
 
 
-class TrialUpdateView(generic.UpdateView):
+class TrialUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = ClinicalTrial
     fields = '__all__'
 
@@ -195,7 +201,7 @@ class TrialUpdateView(generic.UpdateView):
         return reverse_lazy('trialdetail', kwargs={'pk': trialid})
 
 
-class TrialUpdatePaneView(generic.UpdateView):
+class TrialUpdatePaneView(LoginRequiredMixin, generic.UpdateView):
     model = ClinicalTrial
     fields = '__all__'
 
@@ -212,6 +218,7 @@ class TrialUpdatePaneView(generic.UpdateView):
 
 
 # NEW
+@login_required
 def TrialStartView(request, pk):
     trial = ClinicalTrial.objects.get(pk=pk)
     if trial.status != 'Started':
@@ -232,7 +239,7 @@ def TrialStartView(request, pk):
 
 
 # NEW
-
+@login_required
 def TrialEndView(request, pk):
     trial = ClinicalTrial.objects.get(pk=pk)
     if trial.status == 'Started':
@@ -243,7 +250,7 @@ def TrialEndView(request, pk):
         return redirect("viewtrials")
 
 
-class NewClinicalTrialView(generic.CreateView):
+class NewClinicalTrialView(LoginRequiredMixin, generic.CreateView):
     model = ClinicalTrial
     fields = (
         'custom_id', 'title', 'is_virtual', 'sponsor', 'objective', 'recruitmentStartDate', 'recruitmentEndDate',
@@ -283,16 +290,17 @@ class NewClinicalTrialView(generic.CreateView):
 
 
 # Sponsor Views
+@login_required
 def viewSponsors(request):
     queryset = Sponsor.objects.all()
     return render(request, "sponsor/view_sponsors.html")
 
 
-class SponsorDetailView(generic.DetailView):
+class SponsorDetailView(LoginRequiredMixin, generic.DetailView):
     model = Sponsor
 
 
-class SponsorUpdateView(generic.UpdateView):
+class SponsorUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Sponsor
     fields = '__all__'
 
@@ -307,12 +315,12 @@ class SponsorUpdateView(generic.UpdateView):
         return reverse_lazy('sponsordetail', kwargs={'pk': sponsorid})
 
 
-class DeleteSponsorView(generic.DeleteView):
+class DeleteSponsorView(LoginRequiredMixin, generic.DeleteView):
     model = Sponsor
     success_url = reverse_lazy('viewsponsors')
 
 
-class NewSponsorView(generic.CreateView):
+class NewSponsorView(LoginRequiredMixin, generic.CreateView):
     model = Sponsor
     fields = ['organization', 'contactPerson', 'location', 'phone', 'email', 'notes']
 
@@ -330,7 +338,7 @@ class NewSponsorView(generic.CreateView):
         return form
 
 
-class NewSponsorFillView(generic.CreateView):
+class NewSponsorFillView(LoginRequiredMixin, generic.CreateView):
     model = Sponsor
     fields = ['organization', 'contactPerson', 'location', 'phone', 'email', 'notes']
 
@@ -353,7 +361,7 @@ class NewSponsorFillView(generic.CreateView):
         return form
 
 #Account Views
-class NewAccountView(generic.CreateView):
+class NewAccountView(LoginRequiredMixin, generic.CreateView):
     model = User
     fields = ['username', 'password', 'email', 'first_name', 'last_name',]
 
@@ -377,10 +385,12 @@ class NewAccountView(generic.CreateView):
         form.fields['last_name'].widget.attrs['placeholder'] = 'Last name of the user'
         return form
 
-class AccountDetailView(generic.DetailView):
+class AccountDetailView(LoginRequiredMixin, generic.DetailView):
     model = User
     template_name = 'sponsor/account_detail.html'
 
+
+@login_required
 def NewAccountFromSponsor(request, pk):
     sponsor = Sponsor.objects.get(pk=pk)
     request.session['id'] = sponsor.id
@@ -389,15 +399,16 @@ def NewAccountFromSponsor(request, pk):
 
 
 # Request Views
+@login_required
 def viewSponsorReq(request):
     return render(request, "sponsor/view_sponsor_req.html")
 
 
-class SponsorRequestDetailView(generic.DetailView):
+class SponsorRequestDetailView(LoginRequiredMixin, generic.DetailView):
     model = SponsorRequest
 
 
-class NewSponsorRequestView(generic.CreateView):
+class NewSponsorRequestView(LoginRequiredMixin, generic.CreateView):
     model = SponsorRequest
     fields = ['sponsor', 'criterion_req', 'values', 'notes']
     template_name = 'sponsor/request_criteria.html'
@@ -419,12 +430,12 @@ class NewSponsorRequestView(generic.CreateView):
         return form
 
 
-class ContactListView(generic.ListView):
+class ContactListView(LoginRequiredMixin, generic.ListView):
     model = Contact
     pagination_by = 25
 
 
-class ContactDetailView(generic.DetailView):
+class ContactDetailView(LoginRequiredMixin, generic.DetailView):
     model = Contact
 
 
@@ -447,6 +458,7 @@ class ContactPageView(generic.CreateView):
             return form
 
 
+@login_required
 def CriteriaRequestCompleteView(request, pk):
     criteria_request = SponsorRequest.objects.get(pk=pk)
     if criteria_request.status == 'Open':
@@ -456,6 +468,7 @@ def CriteriaRequestCompleteView(request, pk):
         return redirect("viewsponsorreq")
 
 
+@login_required
 def AccessRequestCloseView(request, pk):
     access_request = Contact.objects.get(pk=pk)
     if access_request.status == 'Open':
@@ -465,6 +478,7 @@ def AccessRequestCloseView(request, pk):
         return redirect("contactlist")
 
 
+@login_required
 def NewSponsorFromRequest(request, pk):
     access_request = Contact.objects.get(pk=pk)
     request.session['data'] = {'organization': access_request.organization,
@@ -539,6 +553,7 @@ def question_rank(questions):
     return ranks
 
 
+@login_required
 def question_flow(request):
     participant_id = request.GET.get('participant_id')
     questions = ParticipantQuestion.objects.all()
@@ -564,6 +579,7 @@ def question_flow(request):
     return JsonResponse(data)
 
 
+@login_required
 def load_data(request):
     call_command('loaddata', 'participant_questions')
     # call_command('loaddata', 'virtualtrial_participant_questions')
@@ -601,7 +617,7 @@ def contact(request):
     return render(request, 'contactform.html', {'form': form})
 
 
-class ClinicalTrialCreateView(generic.CreateView):
+class ClinicalTrialCreateView(LoginRequiredMixin, generic.CreateView):
     model = ClinicalTrial
     fields = (
         'id', 'sponsorId', 'title', 'objective', 'recruitmentStartDate', 'recruitmentEndDate', 'enrollmentTarget',
@@ -648,11 +664,11 @@ def emptyPane(request):
 
 # Test views
 
-
+@login_required
 def card(request):
     trials = ClinicalTrial.objects.filter()
     return render(request, 'sponsor/card.html')
 
 
-class ViewSponsorView(TemplateView):
+class ViewSponsorView(LoginRequiredMixin, TemplateView):
     template_name = 'sponsor/view_sponsor.html'

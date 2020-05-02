@@ -31,7 +31,6 @@ urlpatterns = [
     path('auth-token/', obtain_auth_token, name='api_token_auth'),
     path('question_flow/', question_flow, name='question_flow'),
     path('register/', views.CreateUserView.as_view(), name='register'),
-    path('token/', views.get_token, name='token'),
     path('logout/', views.logout, name='api_logout'),
     path('password_reset/', views.password_reset, name='password_reset'),
     path('participant/', views.ParticipantViewSet.as_view({'get': 'retrieve'}), name='get_participant'),
