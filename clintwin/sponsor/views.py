@@ -42,6 +42,7 @@ from rest_framework import pagination
 from bootstrap_datepicker_plus import DatePickerInput
 from django.forms import fields, CheckboxInput
 from django.core.exceptions import ValidationError
+from django.contrib.auth.models import Group
 
 
 # Create your views here.
@@ -363,15 +364,20 @@ class NewAccountView(LoginRequiredMixin, generic.CreateView):
         self.object = form.save(commit=False)
         sponsor_id = self.request.session['id']
         self.object.save()
+        sponsor_group = Group.objects.get(name='sponsor')
+        sponsor_group.user_set.add(self.object)
         UserProfile.objects.get_or_create(user=self.object, sponsor=Sponsor.objects.get(pk=sponsor_id))
         return redirect(self.get_success_url())
 
     def get_form(self):
         form = super().get_form()
         form.fields['username'].widget.attrs['placeholder'] = 'Username for the account'
+        form.fields['email'].widget.attrs['placeholder'] = 'Email associated to the account'
         form.fields['password1'].widget = PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Enter a secure password'})
         form.fields['password2'].widget = PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Enter the same password'})
         return form
+
+
 
 class AccountDetailView(LoginRequiredMixin, generic.DetailView):
     model = User
