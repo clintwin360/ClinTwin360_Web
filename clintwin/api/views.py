@@ -141,7 +141,8 @@ class SponsorRequestViewSet(viewsets.ModelViewSet):
     serializer_class = SponsorRequestSerializer
 
 
-class ClinicalTrialMatchViewSet(mixins.ListModelMixin,
+class ClinicalTrialMatchViewSet(mixins.UpdateModelMixin,
+                                mixins.ListModelMixin,
                                 GenericViewSet):
     """
     Get a list of matching trials for a participant

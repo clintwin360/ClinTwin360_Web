@@ -523,7 +523,8 @@
       "options": "[\"Yes\", \"No\"]", 
       "valueType": "yes_no", 
       "parent": null, 
-      "searchable": false
+      "searchable": true, 
+      "question_id": "33"
     }
   }, 
   {
