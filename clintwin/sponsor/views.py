@@ -360,6 +360,14 @@ class NewAccountView(generic.CreateView):
     template_name = 'sponsor/new_account.html'
     success_url = reverse_lazy('viewsponsors')
 
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        sponsor_id = self.request.session['id']
+        self.object.save()
+        UserProfile.objects.get_or_create(user=self.object, sponsor=Sponsor.objects.get(pk=sponsor_id))
+        return redirect(self.get_success_url())
+
+
     def get_form(self):
         form = super().get_form()
         form.fields['username'].widget.attrs['placeholder'] = 'Username for the account'
@@ -462,7 +470,7 @@ def NewSponsorFromRequest(request, pk):
     request.session['data'] = {'organization': access_request.organization,
             'contactPerson': access_request.first_name + " " + access_request.last_name,
             'location': access_request.location,
-            'phone': access_request.phone,
+            'phone': str(access_request.phone),
             'email': access_request.email}
 
     return redirect("newsponsorfill")
