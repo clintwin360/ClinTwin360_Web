@@ -82,7 +82,7 @@ class ParticipantViewSet(mixins.RetrieveModelMixin,
     def get_object(self):
         queryset = self.filter_queryset(self.get_queryset())
         # make sure to catch 404's below
-        obj = queryset.get(email=self.request.user.email)
+        obj = queryset.get(email=self.request.user.username)
         return obj
 
 
@@ -96,6 +96,10 @@ class ParticipantBasicHealthViewSet(mixins.CreateModelMixin,
     serializer_class = ParticipantBasicHealthSerializer
 
     def perform_create(self, serializer):
+        participant = Participant.objects.filter(email=self.request.user.username).get()
+        p2 = serializer.validated_data.get('participant', None)
+        if p2 != participant:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
         participant_basic_health = serializer.save()
         participant_basic_health.participant.basic_health = 1
         participant_basic_health.participant.save()
@@ -174,10 +178,9 @@ class ClinicalTrialEnrollmentViewSet(mixins.CreateModelMixin,
     serializer_class = ClinicalTrialEnrollmentSerializer
 
     def get_queryset(self):
-        participant_id = self.request.query_params.get('participant')
-        if participant_id:
-            participant = Participant.objects.get(id=participant_id)
-            queryset = ClinicalTrialEnrollment.objects.filter(participant=participant)
+        if self.request.user.is_participant():
+            participant = Participant.objects.filter(email=self.request.user.username)
+            queryset = ClinicalTrialEnrollment.objects.filter(participant__in=participant)
         else:
             queryset = ClinicalTrialEnrollment.objects.none()
 
@@ -199,8 +202,10 @@ class ClinicalTrialViewSet(mixins.UpdateModelMixin,
     def get_queryset(self):
         if self.request.user.is_clintwin():
             queryset = ClinicalTrial.objects.all()
-        else:
+        elif self.request.user.is_sponsor():
             queryset = ClinicalTrial.objects.filter(sponsor=self.request.user.profile.sponsor)
+        else:
+            queryset = ClinicalTrial.objects.none()
         return queryset
 
 

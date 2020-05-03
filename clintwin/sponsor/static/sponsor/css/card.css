@@ -1,8 +1,9 @@
 .card{
   width: 100vw;
   height: 200px;
-  margin-left: 25px;
+  margin-left: 10px;
   margin-top: 0.5rem;
+  padding-top: 0.5rem;
   background-color: white;
 }
 
@@ -43,6 +44,10 @@
   padding-left: 0.3rem;
 }
 
+#virtual-tag{
+  margin: 0 2px;
+}
+
 #target-span {
   position:absolute;
   bottom: 0;
@@ -54,10 +59,15 @@
   position:absolute;
   bottom: 0;
   right: 1rem;
+  float: left;
   /* left: 0; */
 }
 
 #more-info {
   float: left;
   padding-left: 0.5rem;
+}
+
+#info {
+  padding-left: 1rem;
 }

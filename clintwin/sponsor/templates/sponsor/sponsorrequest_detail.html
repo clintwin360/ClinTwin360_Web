@@ -12,6 +12,7 @@
   <p><strong>Criterion:</strong> {{ sponsorrequest.criterion_req }}</p>
   <p><strong>Values:</strong> {{ sponsorrequest.values }}</p>
   <p><strong>Notes:</strong> {{ sponsorrequest.notes }}</p>
+  <p><strong>Requested At:</strong> {{ sponsorrequest.createdAt }}</p>
 
   <a class="btn btn-info returnbtn" href="{% url 'viewsponsorreq' %}">Return to Dashboard</a>
   {% if sponsorrequest.status == 'Open' %}

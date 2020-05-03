@@ -29,9 +29,17 @@ def is_sponsor_admin(self):
         return False
 
 
-User.add_to_class("is_clintwin", is_clintwin)
+def is_sponsor(self):
+    return self.groups.filter(name='sponsor').exists()
 
-User.add_to_class("is_sponsor_admin", is_sponsor_admin)
+
+def is_participant(self):
+    return self.groups.filter(name='participant').exists()
+
+
+User.add_to_class("is_clintwin", is_clintwin)
+User.add_to_class("is_sponsor", is_sponsor)
+User.add_to_class("is_participant", is_participant)
 
 
 class Contact(models.Model):
@@ -72,6 +80,7 @@ class SponsorRequest(models.Model):
     values = models.CharField(null=True, max_length=500)
     notes = models.CharField(max_length=1000)
     status = models.CharField('Status', null=True, max_length=100, default='Open')
+    createdAt = models.DateTimeField(auto_now_add=True)
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
@@ -284,9 +293,3 @@ def send_new_message_push_notification(**kwargs):
         return device.send_message(content)
 
 # End code to send push notifications
-@receiver(post_save, sender=User)
-def get_create_profile(sender, **kwargs):
-    #request = kwargs.get('request')
-    #sponsor_id = request.session['id']
-    if kwargs.get('created', False):
-        UserProfile.objects.get_or_create(user=kwargs.get('instance'), sponsor=Sponsor.objects.get(pk=1))

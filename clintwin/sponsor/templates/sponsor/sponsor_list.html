@@ -1,0 +1,41 @@
+{% extends "sponsor/base.html" %}
+{% load static %}
+{% block style %}{% endblock %}
+{% block scripts %}{% endblock %}
+{% block title %}View Sponsors{% endblock %}
+{% block content %}
+<br><h2 id="view-sponsor">Sponsor Dashboard</h2><br>
+<a id="spnsr-btn" class="btn btn-success addbtn" href="/sponsor/newsponsor">Create a New Sponsor</a>
+<br><br>
+<div class="table_container">
+    <div class="main-cards row">
+          <table class="table table-bordered">
+            <thead class="thead-light">
+              <tr>
+                <th id="spnsr_id">Sponsor ID</th>
+                <th>Organization</th>
+                <th>Contact</th>
+                <th id="end_date">Date Joined</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody id="sponsor-list-body">
+            {% for sponsor in object_list %}
+                <tr>
+                    <td>{{ sponsor.id }}</td>
+                    <td>{{ sponsor.organization }}</td>
+                    <td>{{ sponsor.contactPerson }}</td>
+                    <td>{{ sponsor.date_joined }}</td>
+                    <td>{{ sponsor.notes }}</td>
+                    <td>
+                        <a class="btn btn-info viewbtn\" href="/sponsor/profile/{{ sponsor.id }}">View
+                        <a class="btn btn-secondary editbtn\" href="/sponsor/updateprofile/{{ sponsor.id }}">Edit
+                        <a class="btn btn-danger deletebtn\" href="/sponsor/deleteprofile/{{ sponsor.id }}">Delete
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

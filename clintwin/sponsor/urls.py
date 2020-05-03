@@ -42,10 +42,10 @@ urlpatterns = [
 
     # Test: Page for uploading text file for virtual trials
     # path('vt_question_upload/', views.vt_question_upload, name='vt_question_upload'),
-    re_path(r'^trial/(?P<pk>\d+)/vt_question_upload/$', views.vt_question_upload, name='vt_question_upload'),
+    re_path(r'^trial/(?P<pk>\d+)/question_upload/$', views.question_upload, name='question_upload'),
 
     #Request Views
-    path('viewsponsorreq', views.viewSponsorReq, name='viewsponsorreq'),
+    path('viewsponsorreq', views.SponsorRequestListView.as_view(), name='viewsponsorreq'),
     path('criteriarequest', views.NewSponsorRequestView.as_view(), name='criteriarequest'),
     re_path(r'^criteriarequest/(?P<pk>\d+)$', views.SponsorRequestDetailView.as_view(), name='requestdetail'),
     path('contact', views.ContactPageView.as_view(), name='contact'),
@@ -57,7 +57,7 @@ urlpatterns = [
     #Sponsor Views
     path('newsponsor', views.NewSponsorView.as_view(), name='newsponsor'),
     path('newsponsorfill', views.NewSponsorFillView.as_view(), name='newsponsorfill'),
-    path('viewsponsors', views.viewSponsors, name='viewsponsors'),
+    path('viewsponsors', views.SponsorListView.as_view(), name='viewsponsors'),
     re_path(r'^profile/(?P<pk>\d+)$', views.SponsorDetailView.as_view(), name='sponsordetail'),
     re_path(r'^deleteprofile/(?P<pk>\d+)$', views.DeleteSponsorView.as_view(), name='sponsordelete'),
     re_path(r'^updateprofile/(?P<pk>\d+)$', views.SponsorUpdateView.as_view(), name='sponsorupdate'),

@@ -1,6 +1,8 @@
 ##  Original additions
 import csv, io #NEW
 from django.contrib import messages #NEW
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import render
@@ -9,14 +11,14 @@ from django.views.generic import TemplateView
 
 from django.forms import PasswordInput
 # from .forms import *
-from sponsor.forms import UserCreationForm, NewTrialForm, NewSponsorForm
+from sponsor.forms import NewAccountForm, NewTrialForm, NewSponsorForm
 # from .forms import AuthenticationForm
 from django.urls import reverse_lazy
 from django.views import generic
 from rest_framework import viewsets
 from rest_framework import permissions
 from rest_framework import generics
-
+from django.contrib.auth.forms import UserCreationForm
 # New additions
 
 from rest_framework.decorators import api_view, permission_classes
@@ -26,7 +28,7 @@ from django.contrib.auth.models import User
 from .serializers import *
 from django.core.management import call_command
 from django.shortcuts import redirect
-from django.contrib.auth import views as auth_views
+from django.contrib.auth import views as auth_views, logout
 from rest_framework.renderers import TemplateHTMLRenderer
 from django.db.models import Count
 
@@ -40,6 +42,7 @@ from rest_framework import pagination
 from bootstrap_datepicker_plus import DatePickerInput
 from django.forms import fields, CheckboxInput
 from django.core.exceptions import ValidationError
+from django.contrib.auth.models import Group
 
 
 # Create your views here.
@@ -53,18 +56,15 @@ def index(request):
     if not request.user.is_authenticated:
         return redirect('login')
     else:
-        if request.user.is_clintwin():
-            return redirect("viewsponsors")
-        else:
-            return render(request, "sponsor/trial_dashboard.html")
+        return login_success(request)
 
-
+@login_required
 def trial_dashboard(request):
     trials = ClinicalTrial.objects.filter()
     return render(request, 'sponsor/trial_dashboard.html')
 
-
 # Updated to post trial criteria to API endpoint
+@login_required
 def trial_criteria(request, pk, criteria_type):
     trial = ClinicalTrial.objects.get(pk=pk)
     if criteria_type == "inclusion":
@@ -86,7 +86,7 @@ def trial_criteria(request, pk, criteria_type):
                    "previous_page_text": previous_page_text,
                    "next_page_text": next_page_text})
 
-
+@login_required
 def review_criteria(request, pk):
     trial = ClinicalTrial.objects.get(pk=pk)
     trial_criteria_responses = ClinicalTrialCriteriaResponse.objects.all().filter(trial=pk)
@@ -94,7 +94,7 @@ def review_criteria(request, pk):
     exclusion_criteria = trial_criteria_responses.filter(criteriaType="exclusion")
 
     if trial.is_virtual:
-        next_page = "/sponsor/trial/{}/vt_question_upload/".format(trial.id)
+        next_page = "/sponsor/trial/{}/question_upload/".format(trial.id)
         next_page_text = "Continue"
     else:
         next_page = "/sponsor/viewtrials"
@@ -112,13 +112,12 @@ def review_criteria(request, pk):
                    "next_page_text": next_page_text})
 
 
-# def vt_question_upload(request):
-#     return render(request, 'sponsor/vt_question_upload.html')
-
-def vt_question_upload(request, pk):
+@login_required
+def question_upload(request, pk):
     trial = ClinicalTrial.objects.get(pk=pk)
+    print(trial)
     # declaring template
-    template = 'sponsor/vt_question_upload.html'
+    template = 'sponsor/question_upload.html'
     prompt = {'order': 'order of CSV should be text, valueType, options'
     }
 
@@ -137,15 +136,15 @@ def vt_question_upload(request, pk):
         io_string = io.StringIO(data_set)
         next(io_string)
         for column in csv.reader(io_string, delimiter=',', quotechar="|"):
-            trial_id = trial
+            clinical_trial = trial
             text = column[1]
             valueType=column[2]
             options = column[3].replace(";",",").replace('"[','[').replace(']"',']').replace('"{','{').replace('}"','}').replace('""', '"')
 
             vtquestion = VirtualTrialParticipantQuestion.objects.create(
-                trial_id=trial_id, text=text, valueType=valueType, options=options)
+                clinical_trial=clinical_trial, text=text, valueType=valueType, options=options)
         vtquestion.save()
-        vtquestions = VirtualTrialParticipantQuestion.objects.all().filter(trial_id=pk)
+        vtquestions = VirtualTrialParticipantQuestion.objects.all().filter(clinical_trial=pk)
         context = {}
         messages.success(request, "Succesfully uploaded trial questions from file: " + csv_file.name)
 
@@ -155,29 +154,31 @@ def vt_question_upload(request, pk):
 
     return render(request, template, {"vtquestions" : vtquestions})
 
-
+@login_required
 def login_success(request):
     if request.user.groups.filter(name='clintwin'):
         return redirect("viewsponsors")
-    else:
+    elif request.user.groups.filter(name='sponsor'):
         return render(request, "sponsor/trial_dashboard.html")
-
+    else:
+        logout(request)
+        return redirect('index')
 
 # Trial Views
+@login_required
 def viewTrials(request):
     return render(request, "sponsor/viewtrials.html")
 
-
-class TrialPaneView(generic.DetailView):
+class TrialPaneView(LoginRequiredMixin, generic.DetailView):
     model = ClinicalTrial
     template_name_suffix = '_pane'
 
 
-class TrialDetailView(generic.DetailView):
+class TrialDetailView(LoginRequiredMixin, generic.DetailView):
     model = ClinicalTrial
 
 
-class TrialUpdateView(generic.UpdateView):
+class TrialUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = ClinicalTrial
     fields = '__all__'
 
@@ -189,13 +190,12 @@ class TrialUpdateView(generic.UpdateView):
          form.fields['is_virtual'].widget = CheckboxInput()
          return form
 
-
     def get_success_url(self):
         trialid = self.kwargs['pk']
         return reverse_lazy('trialdetail', kwargs={'pk': trialid})
 
 
-class TrialUpdatePaneView(generic.UpdateView):
+class TrialUpdatePaneView(LoginRequiredMixin, generic.UpdateView):
     model = ClinicalTrial
     fields = '__all__'
 
@@ -210,8 +210,8 @@ class TrialUpdatePaneView(generic.UpdateView):
     template_name_suffix = '_update_pane'
     success_url = reverse_lazy('viewtrials')
 
-
 # NEW
+@login_required
 def TrialStartView(request, pk):
     trial = ClinicalTrial.objects.get(pk=pk)
     if trial.status != 'Started':
@@ -220,7 +220,6 @@ def TrialStartView(request, pk):
 
         # return reverse_lazy('viewtrials')
         return redirect("viewtrials")
-
 
 # NEW
 
@@ -232,7 +231,7 @@ def TrialStartView(request, pk):
 
 
 # NEW
-
+@login_required
 def TrialEndView(request, pk):
     trial = ClinicalTrial.objects.get(pk=pk)
     if trial.status == 'Started':
@@ -242,8 +241,7 @@ def TrialEndView(request, pk):
         # return reverse_lazy('viewtrials')
         return redirect("viewtrials")
 
-
-class NewClinicalTrialView(generic.CreateView):
+class NewClinicalTrialView(LoginRequiredMixin, generic.CreateView):
     model = ClinicalTrial
     fields = (
         'custom_id', 'title', 'is_virtual', 'sponsor', 'objective', 'recruitmentStartDate', 'recruitmentEndDate',
@@ -283,16 +281,21 @@ class NewClinicalTrialView(generic.CreateView):
 
 
 # Sponsor Views
-def viewSponsors(request):
-    queryset = Sponsor.objects.all()
-    return render(request, "sponsor/view_sponsors.html")
+#@login_required
+#def viewSponsors(request):
+    #queryset = Sponsor.objects.all()
+    #return render(request, "sponsor/view_sponsors.html")
 
+class SponsorListView(LoginRequiredMixin, generic.ListView):
+    model = Sponsor
+    pagination_by = 25
 
-class SponsorDetailView(generic.DetailView):
+    ordering = ['organization']
+
+class SponsorDetailView(LoginRequiredMixin, generic.DetailView):
     model = Sponsor
 
-
-class SponsorUpdateView(generic.UpdateView):
+class SponsorUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Sponsor
     fields = '__all__'
 
@@ -306,13 +309,11 @@ class SponsorUpdateView(generic.UpdateView):
         sponsorid = self.kwargs['pk']
         return reverse_lazy('sponsordetail', kwargs={'pk': sponsorid})
 
-
-class DeleteSponsorView(generic.DeleteView):
+class DeleteSponsorView(LoginRequiredMixin, generic.DeleteView):
     model = Sponsor
     success_url = reverse_lazy('viewsponsors')
 
-
-class NewSponsorView(generic.CreateView):
+class NewSponsorView(LoginRequiredMixin, generic.CreateView):
     model = Sponsor
     fields = ['organization', 'contactPerson', 'location', 'phone', 'email', 'notes']
 
@@ -329,8 +330,7 @@ class NewSponsorView(generic.CreateView):
         form.fields['notes'].widget.attrs['placeholder'] = 'Enter any relevant notes about the sponsor here'
         return form
 
-
-class NewSponsorFillView(generic.CreateView):
+class NewSponsorFillView(LoginRequiredMixin, generic.CreateView):
     model = Sponsor
     fields = ['organization', 'contactPerson', 'location', 'phone', 'email', 'notes']
 
@@ -353,43 +353,58 @@ class NewSponsorFillView(generic.CreateView):
         return form
 
 #Account Views
-class NewAccountView(generic.CreateView):
+class NewAccountView(LoginRequiredMixin, generic.CreateView):
     model = User
-    fields = ['username', 'password', 'email', 'first_name', 'last_name',]
 
+    form_class = NewAccountForm
     template_name = 'sponsor/new_account.html'
     success_url = reverse_lazy('viewsponsors')
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        sponsor_id = self.request.session['id']
+        self.object.save()
+        sponsor_group = Group.objects.get(name='sponsor')
+        sponsor_group.user_set.add(self.object)
+        UserProfile.objects.get_or_create(user=self.object, sponsor=Sponsor.objects.get(pk=sponsor_id))
+        return redirect(self.get_success_url())
 
     def get_form(self):
         form = super().get_form()
         form.fields['username'].widget.attrs['placeholder'] = 'Username for the account'
-        form.fields['password'].widget = PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Enter a secure password'})
-        form.fields['email'].widget.attrs['placeholder'] = 'Email address for the account'
-        form.fields['first_name'].widget.attrs['placeholder'] = 'First name of the user'
-        form.fields['last_name'].widget.attrs['placeholder'] = 'Last name of the user'
+        form.fields['email'].widget.attrs['placeholder'] = 'Email associated to the account'
+        form.fields['password1'].widget = PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Enter a secure password'})
+        form.fields['password2'].widget = PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Enter the same password'})
         return form
 
-class AccountDetailView(generic.DetailView):
+
+
+class AccountDetailView(LoginRequiredMixin, generic.DetailView):
     model = User
     template_name = 'sponsor/account_detail.html'
 
+@login_required
 def NewAccountFromSponsor(request, pk):
     sponsor = Sponsor.objects.get(pk=pk)
     request.session['id'] = sponsor.id
 
     return redirect("newaccount")
 
-
 # Request Views
-def viewSponsorReq(request):
-    return render(request, "sponsor/view_sponsor_req.html")
+#@login_required
+#def viewSponsorReq(request):
+    #return render(request, "sponsor/view_sponsor_req.html")
 
+class SponsorRequestListView(LoginRequiredMixin, generic.ListView):
+    model = SponsorRequest
+    pagination_by = 25
 
-class SponsorRequestDetailView(generic.DetailView):
+    ordering = ['-status', '-createdAt']
+
+class SponsorRequestDetailView(LoginRequiredMixin, generic.DetailView):
     model = SponsorRequest
 
-
-class NewSponsorRequestView(generic.CreateView):
+class NewSponsorRequestView(LoginRequiredMixin, generic.CreateView):
     model = SponsorRequest
     fields = ['sponsor', 'criterion_req', 'values', 'notes']
     template_name = 'sponsor/request_criteria.html'
@@ -410,35 +425,33 @@ class NewSponsorRequestView(generic.CreateView):
         form.fields['notes'].widget.attrs['placeholder'] = 'Any addtional notes about the criteria'
         return form
 
-
-class ContactListView(generic.ListView):
+class ContactListView(LoginRequiredMixin, generic.ListView):
     model = Contact
     pagination_by = 25
 
+    ordering = ['-status', '-createdAt']
 
-class ContactDetailView(generic.DetailView):
+class ContactDetailView(LoginRequiredMixin, generic.DetailView):
     model = Contact
 
-
 class ContactPageView(generic.CreateView):
+    model = Contact
+    fields = ['organization', 'location', 'first_name', 'last_name', 'email', 'phone' ,'comment']
+    template_name = 'sponsor/contact.html'
+    success_url = reverse_lazy('index')
 
-        model = Contact
-        fields = ['organization', 'location', 'first_name', 'last_name', 'email', 'phone' ,'comment']
-        template_name = 'sponsor/contact.html'
-        success_url = reverse_lazy('index')
+    def get_form(self):
+        form = super().get_form()
+        form.fields['organization'].widget.attrs['placeholder'] = 'Name of the sponsor organization'
+        form.fields['location'].widget.attrs['placeholder'] = 'Location of the sponsor organization'
+        form.fields['first_name'].widget.attrs['placeholder'] = "Enter first name"
+        form.fields['last_name'].widget.attrs['placeholder'] = "Enter last name"
+        form.fields['email'].widget.attrs['placeholder'] = "Enter email address"
+        form.fields['phone'].widget.attrs['placeholder'] = "Enter phone number"
+        form.fields['comment'].widget.attrs['placeholder'] = 'Any addtional comments about the request'
+        return form
 
-        def get_form(self):
-            form = super().get_form()
-            form.fields['organization'].widget.attrs['placeholder'] = 'Name of the sponsor organization'
-            form.fields['location'].widget.attrs['placeholder'] = 'Location of the sponsor organization'
-            form.fields['first_name'].widget.attrs['placeholder'] = "Contact's first name"
-            form.fields['last_name'].widget.attrs['placeholder'] = "Contact's last name"
-            form.fields['email'].widget.attrs['placeholder'] = "Contact's email address"
-            form.fields['phone'].widget.attrs['placeholder'] = "Contact's phone number"
-            form.fields['comment'].widget.attrs['placeholder'] = 'Any addtional comments about the request'
-            return form
-
-
+@login_required
 def CriteriaRequestCompleteView(request, pk):
     criteria_request = SponsorRequest.objects.get(pk=pk)
     if criteria_request.status == 'Open':
@@ -447,7 +460,7 @@ def CriteriaRequestCompleteView(request, pk):
 
         return redirect("viewsponsorreq")
 
-
+@login_required
 def AccessRequestCloseView(request, pk):
     access_request = Contact.objects.get(pk=pk)
     if access_request.status == 'Open':
@@ -456,17 +469,16 @@ def AccessRequestCloseView(request, pk):
 
         return redirect("contactlist")
 
-
+@login_required
 def NewSponsorFromRequest(request, pk):
     access_request = Contact.objects.get(pk=pk)
     request.session['data'] = {'organization': access_request.organization,
             'contactPerson': access_request.first_name + " " + access_request.last_name,
             'location': access_request.location,
-            'phone': access_request.phone,
+            'phone': str(access_request.phone),
             'email': access_request.email}
 
     return redirect("newsponsorfill")
-
 
 # Other views
 def compare_values(a, op, b):
@@ -476,7 +488,6 @@ def compare_values(a, op, b):
         return float(a) >= float(b)
     if op == 'lte':
         return float(a) <= float(b)
-
 
 def calculate_trial_matches(participant):
     # participant = Participant.objects.get(id=1)
@@ -518,7 +529,6 @@ def calculate_trial_matches(participant):
     # return JsonResponse({"data": new_matches})
     return new_matches
 
-
 def question_rank(questions):
     ranks = {}
     for q in questions:
@@ -529,7 +539,6 @@ def question_rank(questions):
         ranks[q.id] = rank
     # data['questions'].sort(key=lambda x: x['rank'], reverse=True)
     return ranks
-
 
 def question_flow(request):
     participant_id = request.GET.get('participant_id')
@@ -573,7 +582,6 @@ def load_data(request):
     call_command('loaddata', 'user_profiles')
     return HttpResponse("Data Loaded!")
 
-
 # View for contact us form
 # @api_view(['GET, POST'])
 @permission_classes((permissions.AllowAny,))
@@ -592,8 +600,7 @@ def contact(request):
         form = ContactForm()
     return render(request, 'contactform.html', {'form': form})
 
-
-class ClinicalTrialCreateView(generic.CreateView):
+class ClinicalTrialCreateView(LoginRequiredMixin, generic.CreateView):
     model = ClinicalTrial
     fields = (
         'id', 'sponsorId', 'title', 'objective', 'recruitmentStartDate', 'recruitmentEndDate', 'enrollmentTarget',
@@ -601,35 +608,25 @@ class ClinicalTrialCreateView(generic.CreateView):
         'followUp', 'location', 'comments')
     template_name = 'create_trial_form.html'
 
-
 # Supplementary Views
 # Static page for About us
 class AboutPageView(TemplateView):
     template_name = 'sponsor/about.html'
 
-
 # Static page for How it Works
 class HowWorksPageView(TemplateView):
     template_name = 'sponsor/how_works.html'
-
-
-# Static page for Contact us
-
-
 
 # Static page for directions
 class DirectionsPageView(TemplateView):
     template_name = 'directions.html'
 
-
 # Static page for Message display
 class MessagePageView(TemplateView):
     template_name = 'messages.html'
 
-
 def emptyPane(request):
     return render(request, "sponsor/emptypane.html", )
-
 
 # Static pages for Admin
 # class NewCriterionView(TemplateView):
@@ -640,11 +637,11 @@ def emptyPane(request):
 
 # Test views
 
-
+@login_required
 def card(request):
     trials = ClinicalTrial.objects.filter()
     return render(request, 'sponsor/card.html')
 
 
-class ViewSponsorView(TemplateView):
+class ViewSponsorView(LoginRequiredMixin, TemplateView):
     template_name = 'sponsor/view_sponsor.html'
