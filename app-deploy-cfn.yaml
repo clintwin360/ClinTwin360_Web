@@ -1,0 +1,98 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Parameters:
+  ArtifactBucket:
+    Type: String
+    Default: "clintwin-artifacts"
+
+Resources:
+  LauchTemplate:
+    Type: AWS::EC2::LaunchTemplate
+    Properties:
+      LaunchTemplateData:
+        IamInstanceProfile:
+          Arn: arn:aws:iam::691659811383:instance-profile/TargetS3ReadOnly
+        ImageId: ami-0b5cbb57e7a031c25
+        InstanceType: t2.micro
+        KeyName: ec2_clintwin
+        SecurityGroupIds:
+          - sg-0c26670ede78d7139
+        UserData: IyEvYmluL2Jhc2gKYXdzIHMzIGNwIHMzOi8vY2xpbnR3aW4tYXJ0aWZhY3RzL2NsaW50d2luLnppcCAuCnVuemlwIGNsaW50d2luLnppcApjZCBjbGludHdpbi8KYXdzIHMzIGNwIHMzOi8vY2xpbnR3aW4tYXJ0aWZhY3RzL2Fwcy5wZW0gLgpwaXAzIGluc3RhbGwgLXIgcmVxdWlyZW1lbnRzLnR4dApleHBvcnQgU1FMX0VOR0lORT1kamFuZ28uZGIuYmFja2VuZHMucG9zdGdyZXNxbApleHBvcnQgU1FMX0RBVEFCQVNFPXBvc3RncmVzCmV4cG9ydCBTUUxfVVNFUj1wb3N0Z3JlcwpleHBvcnQgU1FMX1BBU1NXT1JEPVE5UjhTd0todmk5RUZ6ZzNURXhzCmV4cG9ydCBTUUxfSE9TVD1kYXRhYmFzZS1jbGludHdpbi5jMWYyZzV5cW5mM3YudXMtZWFzdC0xLnJkcy5hbWF6b25hd3MuY29tCmV4cG9ydCBTUUxfUE9SVD01NDMyCmV4cG9ydCBFTUFJTF9IT1NUX1BBU1NXT1JEPUNsaW50d2luZTU5OSMKcGlwMyBpbnN0YWxsIC0tdXBncmFkZSBweXdlYnB1c2gKcHl0aG9uMyBtYW5hZ2UucHkgbWFrZW1pZ3JhdGlvbnMgLS1uby1pbnB1dApweXRob24zIG1hbmFnZS5weSBtaWdyYXRlIC0tbm8taW5wdXQKcHl0aG9uMyBtYW5hZ2UucHkgY29sbGVjdHN0YXRpYyAtLW5vLWlucHV0CnNlcnZpY2UgdXdzZ2kgcmVzdGFydApzZXJ2aWNlIG5naW54IHJlc3RhcnQjIS9iaW4vYmFzaAphd3MgczMgY3AgczM6Ly9jbGludHdpbi1hcnRpZmFjdHMvY2xpbnR3aW4uemlwIC4KdW56aXAgY2xpbnR3aW4uemlwCmNkIGNsaW50d2luLwphd3MgczMgY3AgczM6Ly9jbGludHdpbi1hcnRpZmFjdHMvYXBzLnBlbSAuCnBpcDMgaW5zdGFsbCAtciByZXF1aXJlbWVudHMudHh0CmV4cG9ydCBTUUxfRU5HSU5FPWRqYW5nby5kYi5iYWNrZW5kcy5wb3N0Z3Jlc3FsCmV4cG9ydCBTUUxfREFUQUJBU0U9cG9zdGdyZXMKZXhwb3J0IFNRTF9VU0VSPXBvc3RncmVzCmV4cG9ydCBTUUxfUEFTU1dPUkQ9UTlSOFN3S2h2aTlFRnpnM1RFeHMKZXhwb3J0IFNRTF9IT1NUPWRhdGFiYXNlLWNsaW50d2luLmMxZjJnNXlxbmYzdi51cy1lYXN0LTEucmRzLmFtYXpvbmF3cy5jb20KZXhwb3J0IFNRTF9QT1JUPTU0MzIKZXhwb3J0IEVNQUlMX0hPU1RfUEFTU1dPUkQ9Q2xpbnR3aW5lNTk5IwpwaXAzIGluc3RhbGwgLS11cGdyYWRlIHB5d2VicHVzaApweXRob24zIG1hbmFnZS5weSBtYWtlbWlncmF0aW9ucyAtLW5vLWlucHV0CnB5dGhvbjMgbWFuYWdlLnB5IG1pZ3JhdGUgLS1uby1pbnB1dApweXRob24zIG1hbmFnZS5weSBjb2xsZWN0c3RhdGljIC0tbm8taW5wdXQKc2VydmljZSB1d3NnaSByZXN0YXJ0CnNlcnZpY2UgbmdpbnggcmVzdGFydA==
+      LaunchTemplateName: clintwin_launchtemplate
+  AutoScalingGroup:
+    Type: AWS::AutoScaling::AutoScalingGroup
+    Properties:
+      AutoScalingGroupName: clintwin_ag
+      AvailabilityZones:
+        - us-east-1a
+        - us-east-1b
+      Cooldown: '300'
+      DesiredCapacity: '1'
+      HealthCheckGracePeriod: '300'
+      HealthCheckType: EC2
+      MaxSize: '2'
+      MinSize: '1'
+      LaunchTemplate:
+        LaunchTemplateName: clintwin_launchtemplate
+        Version:
+          Fn::GetAtt:
+            - LauchTemplate
+            - LatestVersionNumber
+      TerminationPolicies:
+        - OldestInstance
+      TargetGroupARNs:
+        - !Ref TargetGroup
+  TargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    DependsOn: LoadBalancer
+    Properties:
+      Name: clintwin-tg
+      VpcId: vpc-6f182615
+      HealthCheckEnabled: True
+      HealthCheckIntervalSeconds: 5
+      HealthCheckPath: /health/
+      HealthCheckPort: 8000
+      HealthCheckProtocol: HTTP
+      HealthCheckTimeoutSeconds: 3
+      HealthyThresholdCount: 2
+      Matcher:
+        HttpCode: 200-299
+      Port: 8000
+      Protocol: HTTP
+      TargetType: instance
+      UnhealthyThresholdCount: 2
+
+  LoadBalancer:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Name: clintwin-loadbalancer
+      Scheme: internet-facing
+      Subnets:
+        - subnet-035ffb0d
+        - subnet-32d03254
+
+  LoadBalancerListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    DependsOn:
+      - LoadBalancer
+      - TargetGroup
+    Properties:
+      LoadBalancerArn: !Ref LoadBalancer
+      Port: 8080
+      Protocol: HTTP
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref TargetGroup
+
+  ListenerRule:
+    Type: AWS::ElasticLoadBalancingV2::ListenerRule
+    Properties:
+      ListenerArn: !Ref LoadBalancerListener
+      Priority: 1
+      Conditions:
+        - Field: path-pattern
+          Values:
+            - /
+      Actions:
+        - TargetGroupArn: !Ref TargetGroup
+          Type: forward
