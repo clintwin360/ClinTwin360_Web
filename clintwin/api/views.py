@@ -145,7 +145,8 @@ class SponsorRequestViewSet(viewsets.ModelViewSet):
     serializer_class = SponsorRequestSerializer
 
 
-class ClinicalTrialMatchViewSet(mixins.UpdateModelMixin,
+class ClinicalTrialMatchViewSet(mixins.RetrieveModelMixin,
+                                mixins.UpdateModelMixin,
                                 mixins.ListModelMixin,
                                 GenericViewSet):
     """
@@ -160,7 +161,10 @@ class ClinicalTrialMatchViewSet(mixins.UpdateModelMixin,
             calculate_trial_matches(participant)
             queryset = ClinicalTrialMatch.objects.filter(participant=participant, match=True)
         else:
-            queryset = ClinicalTrialMatch.objects.none()
+            #user_email = request.user.email
+            #participant = Participant.objects.get(email=user_email)
+            #queryset = ClinicalTrialMatch.objects.filter(participant=participant)
+            queryset = ClinicalTrialMatch.objects.all()
 
         return queryset
 

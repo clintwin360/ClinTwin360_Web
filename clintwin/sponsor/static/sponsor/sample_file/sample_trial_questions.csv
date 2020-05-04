@@ -1,4 +1,6 @@
 ﻿id,text,valueType,options
-1,What is your marital_status?,pick_one,"[""Single"";""Married"";""Widowed""; ""Divorced""; ""Separated""; ""Registered partnership""]"
-2,Do you have a healthcare provider?,yes_no,"[""Yes"";""No""]"
-3,How old are you?,large_option_set,"{""min"":0;""max"":140;""increment"":1;""unit"":""years""}"
+1,How often do you measure your heart rate each day?,pick_one,"[""never"";""1"";""2"";""3""; ""4""; ""5""]"
+2,How often do you measure your blood pressure each day?,pick_one,"[""never"";""1"";""2"";""3""; ""4""; ""5""]"
+3,Did you stretch today?,yes_no,"[""Yes"";""No""]"
+4,Have you had to do physical therapy?,yes_no,"[""Yes"";""No""]"
+5,How old are you?,large_option_set,"{""min"":0;""max"":140;""increment"":1;""unit"":""years""}"

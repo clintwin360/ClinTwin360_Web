@@ -30,6 +30,7 @@
     overflow-y: auto;
     border: 1px solid blue;
     padding: 20px;
+    align-content: flex-start;
 }
 
 body, html {
@@ -95,7 +96,7 @@ body, html {
     display: inline-block;
     font-size: 18px;
     font-family: Helvetica Medium, sans-serif;
-    bottom: -8px;
+    bottom: -4px;
 }
 
 .sort-label{
@@ -103,7 +104,7 @@ body, html {
     display: inline-block;
     font-size: 18px;
     font-family: Helvetica Medium, sans-serif;
-    bottom: -8px;
+    bottom: -4px;
 }
 
 .hilite {
