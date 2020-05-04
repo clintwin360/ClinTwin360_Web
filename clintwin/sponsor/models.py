@@ -1,5 +1,5 @@
 from datetime import date
-from django.core.validators import URLValidator, validate_email
+from django.core.validators import URLValidator, validate_email, MinValueValidator
 from phonenumber_field.modelfields import PhoneNumberField
 
 from django.contrib.auth.models import User
@@ -97,18 +97,17 @@ class ClinicalTrial(models.Model):
     title = models.CharField('Trial Title', null=True, max_length=500)
     objective = models.TextField('Objective', null=True)
     description = models.TextField('Description', null=True, blank=True)
-    recruitmentStartDate = models.DateField('Recruitment Start Date', null=True, validators= [validate_date])
-    recruitmentEndDate = models.DateField('Recruitment End Date', null=True, validators= [validate_date])
-    enrollmentTarget = models.IntegerField('Enrollment Target', null=True, blank=True, validators= [validate_integer])
-    url = models.URLField('URL', null=True, blank=True,validators= [URLValidator])
+    recruitmentStartDate = models.DateField('Recruitment Start Date', null=True)
+    recruitmentEndDate = models.DateField('Recruitment End Date', null=True)
+    enrollmentTarget = models.IntegerField('Enrollment Target', null=True, blank=True, validators=[MinValueValidator(0, "You can not enter a negative value")])
+    url = models.URLField('URL', null=True, blank=True,validators=[URLValidator])
     followUp = models.TextField('Followup Notes', null=True, blank=True)
     location = models.CharField('Location', null=True, max_length=100)
     comments = models.TextField('Comments', null=True, blank=True)
     createdTimeStamp = models.DateTimeField(auto_now_add=True)
     status = models.CharField('Status', null=True, max_length=100, default='Draft', validators= [validate_status])
-    current_recruitment = models.IntegerField('Current Recruitment', default=0, null=True, blank=True, validators= [validate_integer])
+    current_recruitment = models.IntegerField('Current Recruitment', default=0, null=True, blank=True, validators=[MinValueValidator(0, "You can not enter a negative value")])
     is_virtual = models.BooleanField('Virtual Trial', null=True, help_text='Do you plan to administer this trial online?')
-
 
     def __str__(self):
         ret = str(self.id) + ":" + self.title
@@ -148,8 +147,8 @@ class ParticipantBasicHealth(models.Model):
     )
     participant = models.OneToOneField("Participant", on_delete=models.CASCADE)
     gender = models.CharField('Gender', max_length=1, null=True, choices=GENDER)
-    weight = models.FloatField('Weight', null=True,validators= [validate_integer])
-    height = models.FloatField('Height', null=True,validators= [validate_integer])
+    weight = models.FloatField('Weight', null=True,validators=[MinValueValidator(0, "You can not enter a negative value")])
+    height = models.FloatField('Height', null=True,validators=[MinValueValidator(0, "You can not enter a negative value")])
     birth_date = models.DateField('Date of Birth', help_text='MM/DD/YY', null=True, blank=True)
 
     def bmi(self):
