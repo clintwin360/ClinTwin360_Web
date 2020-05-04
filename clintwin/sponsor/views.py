@@ -1,5 +1,7 @@
 ##  Original additions
 import csv, io #NEW
+import os
+
 from django.contrib import messages #NEW
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -18,7 +20,7 @@ from django.views import generic
 from rest_framework import viewsets
 from rest_framework import permissions
 from rest_framework import generics
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordResetForm
 # New additions
 
 from rest_framework.decorators import api_view, permission_classes
@@ -43,6 +45,7 @@ from bootstrap_datepicker_plus import DatePickerInput
 from django.forms import fields, CheckboxInput
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import Group
+from django.core.mail import send_mail
 
 
 # Create your views here.
@@ -325,7 +328,6 @@ class NewAccountView(LoginRequiredMixin, generic.CreateView):
 
     form_class = NewAccountForm
     template_name = 'sponsor/new_account.html'
-    success_url = reverse_lazy('viewsponsors')
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -334,7 +336,12 @@ class NewAccountView(LoginRequiredMixin, generic.CreateView):
         sponsor_group = Group.objects.get(name='sponsor')
         sponsor_group.user_set.add(self.object)
         UserProfile.objects.get_or_create(user=self.object, sponsor=Sponsor.objects.get(pk=sponsor_id))
-        return redirect(self.get_success_url())
+        if not self.object.has_usable_password():
+            self.request.session['email'] = self.object.email
+            return redirect('passwordemail')
+        else:
+            return redirect('viewsponsors')
+
 
     def get_form(self):
         form = super().get_form()
@@ -349,6 +356,20 @@ class NewAccountView(LoginRequiredMixin, generic.CreateView):
 class AccountDetailView(LoginRequiredMixin, generic.DetailView):
     model = User
     template_name = 'sponsor/account_detail.html'
+
+def PasswordEmailView(request):
+    reset_form = PasswordResetForm({'email': request.session['email']})
+    if reset_form.is_valid():
+        print('hi')
+        print(request.session['email'])
+        reset_form.save(
+            email_template_name='registration/account_creation_email.html',
+            subject_template_name='registration/account_creation_subject.txt',
+            #from_email='clintwin@gmail.com',
+            request=request
+        )
+        print('bye')
+    return redirect('viewsponsors')
 
 @login_required
 def NewAccountFromSponsor(request, pk):
@@ -533,11 +554,11 @@ def question_flow(request):
 
 
 def load_data(request):
-    call_command('loaddata', 'participant_questions')
     # call_command('loaddata', 'virtualtrial_participant_questions')
     call_command('loaddata', 'groups')
     call_command('loaddata', 'users')
     call_command('loaddata', 'participants')
+    call_command('loaddata', 'participant_profiles')
     call_command('loaddata', 'trial_criteria')
     call_command('loaddata', 'sponsors')
     call_command('loaddata', 'clinical_trials')

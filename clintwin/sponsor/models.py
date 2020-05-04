@@ -139,6 +139,15 @@ class Participant(models.Model):
         return self.name()
 
 
+class ParticipantProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='participant')
+    participant = models.ForeignKey(Participant, null=True, on_delete=models.SET_NULL, related_name='participant_profiles')
+
+    def __str__(self):
+        ret = self.user.username + ":" + self.participant.email
+        return ret
+
+
 class ParticipantBasicHealth(models.Model):
     GENDER = (
         ('M', 'Male'),

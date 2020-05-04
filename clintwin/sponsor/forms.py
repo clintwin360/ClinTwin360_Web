@@ -11,7 +11,7 @@ class NewAccountForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ("username", "email", "password1", "password2")
+        fields = ("username", "email")
 
     def __init__(self, *args, **kwargs):
         super(UserCreationForm, self).__init__(*args, **kwargs)
@@ -32,6 +32,8 @@ class NewAccountForm(UserCreationForm):
     def save(self, commit=True):
         user = super(NewAccountForm, self).save(commit=False)
         user.email = self.cleaned_data["email"]
+        if self.cleaned_data.get("password2") == "":
+            user.set_unusable_password()
         if commit:
             user.save()
         return user

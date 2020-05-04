@@ -99,7 +99,7 @@
         "username": "john.doe@fakemail.com",
         "first_name": "",
         "last_name": "",
-        "email": "jane.joe@fakemail.com",
+        "email": "john.doe@fakemail.com",
         "is_staff": false,
         "is_active": true,
         "date_joined": "2020-04-09T01:47:36.476Z",

@@ -1,0 +1,18 @@
+[
+  {
+    "model": "sponsor.ParticipantProfile",
+    "pk": "1",
+    "fields": {
+      "user": "6",
+      "participant": "1"
+    }
+  },
+  {
+    "model": "sponsor.ParticipantProfile",
+    "pk": "2",
+    "fields": {
+      "user": "5",
+      "participant": "2"
+    }
+  }
+]
