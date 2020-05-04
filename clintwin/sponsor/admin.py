@@ -54,6 +54,7 @@ admin.site.register(User, UserAdmin)
 
 # Register your models here.
 admin.site.register(Participant)
+admin.site.register(ParticipantProfile)
 admin.site.register(ParticipantBasicHealth)
 admin.site.register(ParticipantResponse)
 admin.site.register(ClinicalTrialCriteria)
