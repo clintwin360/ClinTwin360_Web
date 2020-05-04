@@ -327,6 +327,7 @@ class NewAccountView(LoginRequiredMixin, generic.CreateView):
     form_class = NewAccountForm
     template_name = 'sponsor/new_account.html'
 
+
     def form_valid(self, form):
         self.object = form.save(commit=False)
         sponsor_id = self.request.session['id']
@@ -345,8 +346,6 @@ class NewAccountView(LoginRequiredMixin, generic.CreateView):
         form = super().get_form()
         form.fields['username'].widget.attrs['placeholder'] = 'Username for the account'
         form.fields['email'].widget.attrs['placeholder'] = 'Email associated to the account'
-        form.fields['password1'].widget = PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Enter a secure password'})
-        form.fields['password2'].widget = PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Enter the same password'})
         return form
 
 
@@ -358,8 +357,6 @@ class AccountDetailView(LoginRequiredMixin, generic.DetailView):
 def PasswordEmailView(request):
     reset_form = PasswordResetForm({'email': request.session['email']})
     if reset_form.is_valid():
-        print('hi')
-        print(request.session['email'])
         reset_form.save(
             email_template_name='registration/account_creation_email.html',
             subject_template_name='registration/account_creation_subject.txt',

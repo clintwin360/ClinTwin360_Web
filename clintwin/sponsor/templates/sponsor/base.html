@@ -70,16 +70,19 @@
 								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 								<a class="dropdown-item" href="{% url 'newtrial' %}">Create New Clinical Trial</a>
 								<a class="dropdown-item" href="/sponsor/dashboard/">View Clinical Trials</a>
+							</div>
 							</li>
 							</ul>
 
 							<ul class="navbar-nav ml-auto">
-								<li class="nav-item">
-									<a class="nav-link" id="greeting" >Welcome back, {{ user.username }}!  </a>
-								</li>
-
-								<li class="nav-item">
-									<a class="nav-link" id="logout_link" href="{% url 'logout' %}" >logout</a>
+								<li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" href="#" id="greeting" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Welcome back, {{ user.username }}!
+									</a>
+									<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+										<a class="dropdown-item" href="/sponsor/user/{{ user.id }}"> My Profile
+										<a class="dropdown-item" href="{% url 'logout' %}" >Logout</a>
+									</div>
 								</li>
 							</ul>
 

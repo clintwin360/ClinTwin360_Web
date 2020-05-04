@@ -15,6 +15,26 @@ class NewAccountForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super(UserCreationForm, self).__init__(*args, **kwargs)
+        del self.fields['password1']
+        del self.fields['password2']
+
+    def save(self, commit=True):
+        user = super(NewAccountForm, self).save(commit=False)
+        user.email = self.cleaned_data["email"]
+        user.set_unusable_password()
+        if commit:
+            user.save()
+        return user
+
+class NewAccountSponsorAdminForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+
+    class Meta:
+        model = User
+        fields = ("username", "email")
+
+    def __init__(self, *args, **kwargs):
+        super(UserCreationForm, self).__init__(*args, **kwargs)
         self.fields['password1'].required = False
         self.fields['password2'].required = False
         # If one field gets autocompleted but not the other, our 'neither
