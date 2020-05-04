@@ -139,10 +139,10 @@ function trial_card_template(props){
               `<small id="more-info" class="small text-left text-muted">Location: ${props.location}</small>`+
             `</div>`+
             `<div id="info" class="row">`+
-              `<small id="more-info" class="small text-left text-muted">Contact: Eli Lily</small>`+
+              `<small id="more-info" class="small text-left text-muted">Contact: ${props.sponsor.contactPerson}</small>`+
             `</div>`+
             `<div id="info" class="row">`+
-              `<small id="more-info" class="small text-left text-muted">Email: eli@hentech.edu</small>`+
+              `<small id="more-info" class="small text-left text-muted">Email: ${props.sponsor.email}</small>`+
             `</div>`+
           `</div>`+
           `<div id="target" class="col-sm-4">`+

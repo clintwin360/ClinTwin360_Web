@@ -78,13 +78,15 @@ class SponsorDetailSerializer(serializers.ModelSerializer):
 
 
 class ClinicalTrialSerializer(serializers.ModelSerializer):
+    recruitmentStartDate = serializers.DateField(format='%B %d, %Y')
+    recruitmentEndDate = serializers.DateField(format='%B %d, %Y')
     sponsor = SponsorDetailSerializer(read_only=True)
 
     class Meta:
         model = ClinicalTrial
         fields = ['title', 'objective', 'id', 'sponsor', 'recruitmentStartDate',
                   'recruitmentEndDate', 'enrollmentTarget', 'description', 'url', 'current_recruitment', 'status',
-                  'custom_id', 'is_virtual']
+                  'custom_id', 'is_virtual', 'location']
 
 
 class ClinicalTrialMatchSerializer(serializers.ModelSerializer):
