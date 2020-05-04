@@ -23,25 +23,13 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
     path('accounts/password_reset_done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
-    #Trial Views
-    path('viewtrials', views.viewTrials, name='viewtrials'),
-    re_path(r'^trial/(?P<pk>\d+)$', views.TrialDetailView.as_view(), name='trialdetail'),
-    re_path(r'^trial/(?P<pk>\d+)/criteria/inclusion/$', views.trial_criteria, {"criteria_type": "inclusion"}, name='trial_criteria'),
-    re_path(r'^trial/(?P<pk>\d+)/criteria/exclusion/$', views.trial_criteria, {"criteria_type": "exclusion"}, name='trial_criteria'),
-    re_path(r'^trial/(?P<pk>\d+)/criteria/review/$', views.review_criteria, name='trial_criteria'),
+    re_path(r'^trial/(?P<pk>\d+)/criteria/inclusion/$', views.trial_criteria, {"criteria_type": "inclusion"}, name='inclusion_criteria'),
+    re_path(r'^trial/(?P<pk>\d+)/criteria/exclusion/$', views.trial_criteria, {"criteria_type": "exclusion"}, name='exclusion_criteria'),
+    re_path(r'^trial/(?P<pk>\d+)/criteria/review/$', views.review_criteria, name='review_criteria'),
     re_path(r'^pane/(?P<pk>\d+)$', views.TrialPaneView.as_view(), name='trialpane'),
     re_path(r'^updatetrialpane/(?P<pk>\d+)$', views.TrialUpdatePaneView.as_view(), name='trialupdatepane'),
     re_path(r'^updatetrial/(?P<pk>\d+)$', views.TrialUpdateView.as_view(), name='trialupdate'),
-
-    re_path(r'starttrial/(?P<pk>\d+)$', views.TrialStartView, name='trialstart'),#NEW
-	   re_path(r'endtrial/(?P<pk>\d+)$', views.TrialEndView, name='trialend'),#NEW
-
     path('newtrial', views.NewClinicalTrialView.as_view(), name='newtrial'),
-    path('newtrial/inclusion', TemplateView.as_view(template_name='sponsor/inclusion.html'), name='inclusion'),
-    path('newtrial/exclusion', TemplateView.as_view(template_name='sponsor/trial_criteria.html'), name='exclusion'),
-
-    # Test: Page for uploading text file for virtual trials
-    # path('vt_question_upload/', views.vt_question_upload, name='vt_question_upload'),
     re_path(r'^trial/(?P<pk>\d+)/question_upload/$', views.question_upload, name='question_upload'),
 
     #Request Views
@@ -70,5 +58,4 @@ urlpatterns = [
     path('how_works', views.HowWorksPageView.as_view(), name='how_works'),
     path('contact', views.ContactPageView.as_view(), name='contact'),
     path('directions', views.DirectionsPageView.as_view(), name='directions'),
-    path('emptypane', views.emptyPane, name='emptypane'),
 ]
