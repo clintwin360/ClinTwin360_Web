@@ -96,3 +96,41 @@ Resources:
       Actions:
         - TargetGroupArn: !Ref TargetGroup
           Type: forward
+
+  PostgresDB:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      AllocatedStorage: '20'
+      AllowMajorVersionUpgrade: 'false'
+      AutoMinorVersionUpgrade: 'true'
+      DBInstanceClass: db.t2.micro
+      Port: '5432'
+      StorageType: gp2
+      BackupRetentionPeriod: '7'
+      MasterUsername: postgres
+      MasterUserPassword: clintwin360
+      PreferredBackupWindow: 04:25-04:55
+      PreferredMaintenanceWindow: tue:08:46-tue:09:16
+      DBName: MyDatabase
+      Engine: postgres
+      EngineVersion: '11.5'
+      LicenseModel: postgresql-license
+      DBSubnetGroupName: default-vpc-6f182615
+      VPCSecurityGroups:
+        - Ref: sgDbAccessSG
+
+  sgDbAccessSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: EC2 to DB acess SG
+      VpcId: vpc-6f182615
+  sgAutoScalingSecurityGroup1:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: AutoScaling-Security-Group-1 (2020-03-23 17:46:40.120-04:00)
+      VpcId: vpc-6f182615
+
+Outputs:
+  ClintwinURL:
+    Description: 'URL to the Clintwin service.'
+    Value: !Sub 'http://${LoadBalancer.DNSName}'
