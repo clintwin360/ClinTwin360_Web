@@ -363,7 +363,7 @@ def PasswordEmailView(request):
         reset_form.save(
             email_template_name='registration/account_creation_email.html',
             subject_template_name='registration/account_creation_subject.txt',
-            from_email='clintwin@gmail.com',
+            #from_email='clintwin@gmail.com',
             request=request
         )
         print('bye')
