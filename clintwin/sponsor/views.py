@@ -18,7 +18,7 @@ from django.views import generic
 from rest_framework import viewsets
 from rest_framework import permissions
 from rest_framework import generics
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordResetForm
 # New additions
 
 from rest_framework.decorators import api_view, permission_classes
@@ -335,7 +335,8 @@ class NewAccountView(LoginRequiredMixin, generic.CreateView):
         sponsor_group.user_set.add(self.object)
         UserProfile.objects.get_or_create(user=self.object, sponsor=Sponsor.objects.get(pk=sponsor_id))
         if not self.object.has_usable_password():
-            return redirect('password_reset')
+            self.request.session['email'] = self.object.email
+            return redirect('passwordemail')
         else:
             return redirect('viewsponsors')
 
@@ -353,6 +354,20 @@ class NewAccountView(LoginRequiredMixin, generic.CreateView):
 class AccountDetailView(LoginRequiredMixin, generic.DetailView):
     model = User
     template_name = 'sponsor/account_detail.html'
+
+def PasswordEmailView(request):
+    reset_form = PasswordResetForm({'email': request.session['email']})
+    if reset_form.is_valid():
+        print('hi')
+        print(request.session['email'])
+        reset_form.save(
+            email_template_name='registration/account_creation_email.html',
+            subject_template_name='registration/account_creation_subject.txt',
+            from_email='clintwin@gmail.com',
+            request=request
+        )
+        print('bye')
+    return redirect('viewsponsors')
 
 @login_required
 def NewAccountFromSponsor(request, pk):
