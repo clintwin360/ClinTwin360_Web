@@ -35,7 +35,7 @@
   text-align: left;
 }
 
-#tag {
+#trial-card-tags {
   float: right;
 }
 
@@ -44,7 +44,11 @@
   padding-left: 0.3rem;
 }
 
-#virtual-tag{
+#trial-card-virtual-tag{
+  margin: 0 2px;
+}
+
+#trial-card-status-tag{
   margin: 0 2px;
 }
 

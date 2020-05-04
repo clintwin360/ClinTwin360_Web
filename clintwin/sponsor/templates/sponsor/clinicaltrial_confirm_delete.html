@@ -8,7 +8,7 @@
 <form method="post">
     {% csrf_token %}
     <p>Are you sure you want to delete "{{ clinicaltrial.title }}"?</p>
-    <a class="btn btn-info returnbtn" href="{% url 'viewtrials' %}">Return to Dashboard</a>
+    <a class="btn btn-info returnbtn" href="{% url 'trial_dashboard' %}">Return to Dashboard</a>
     <a class="btn btn-success editbtn" href="/sponsor/trial/{{ clinicaltrial.id }}">View Trial</a>
     <input class ="btn btn-danger" type="submit" value="Confirm Delete" />
 </form>

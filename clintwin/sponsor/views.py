@@ -98,7 +98,7 @@ def review_criteria(request, pk):
         next_page = "/sponsor/trial/{}/question_upload/".format(trial.id)
         next_page_text = "Continue"
     else:
-        next_page = "/sponsor/viewtrials"
+        next_page = "/sponsor/trial_dashboard/"
         next_page_text = "Continue"
 
     previous_page = "/sponsor/trial/{}/criteria/exclusion/".format(trial.id)
@@ -165,10 +165,6 @@ def login_success(request):
         logout(request)
         return redirect('index')
 
-# Trial Views
-@login_required
-def viewTrials(request):
-    return render(request, "sponsor/viewtrials.html")
 
 class TrialPaneView(LoginRequiredMixin, generic.DetailView):
     model = ClinicalTrial
@@ -209,38 +205,9 @@ class TrialUpdatePaneView(LoginRequiredMixin, generic.UpdateView):
          return form
 
     template_name_suffix = '_update_pane'
-    success_url = reverse_lazy('viewtrials')
-
-# NEW
-@login_required
-def TrialStartView(request, pk):
-    trial = ClinicalTrial.objects.get(pk=pk)
-    if trial.status != 'Started':
-        trial.status = 'Started'
-        trial.save(update_fields=['status'])
-
-        # return reverse_lazy('viewtrials')
-        return redirect("viewtrials")
-
-# NEW
-
-# return render("viewtrials")
-# return render(request, "sponsor/viewtrials.html", context)
-# reverse('sponsor : viewtrials')
-# return reverse_lazy('trialdetail', kwargs={'pk': pk})
-# return HttpResponseRedirect(reverse('viewtrials'))
+    success_url = reverse_lazy('trial_dashboard')
 
 
-# NEW
-@login_required
-def TrialEndView(request, pk):
-    trial = ClinicalTrial.objects.get(pk=pk)
-    if trial.status == 'Started':
-        trial.status = 'Ended'
-        trial.save(update_fields=['status'])
-
-        # return reverse_lazy('viewtrials')
-        return redirect("viewtrials")
 
 class NewClinicalTrialView(LoginRequiredMixin, generic.CreateView):
     model = ClinicalTrial
@@ -412,7 +379,7 @@ class NewSponsorRequestView(LoginRequiredMixin, generic.CreateView):
     model = SponsorRequest
     fields = ['sponsor', 'criterion_req', 'values', 'notes']
     template_name = 'sponsor/request_criteria.html'
-    success_url = reverse_lazy('viewtrials')
+    success_url = reverse_lazy('trial_dashboard')
 
     def get_initial(self, *args, **kwargs):
         if not (self.request.user.is_clintwin()):

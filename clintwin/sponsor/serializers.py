@@ -17,6 +17,14 @@ class VirtualTrialParticipantQuestionSerializer(serializers.ModelSerializer):
         model = VirtualTrialParticipantQuestion
         fields = ['id', 'text', 'valueType', 'options']
 
+    def to_representation(self, instance):
+        return {
+            "id": instance.id,
+            "text": instance.text,
+            "valueType": instance.valueType,
+            "options": ast.literal_eval(instance.options)
+        }
+
 
 class ClinicalTrialCriteriaSerializer(serializers.ModelSerializer):
     class Meta:
@@ -78,13 +86,16 @@ class SponsorDetailSerializer(serializers.ModelSerializer):
 
 
 class ClinicalTrialSerializer(serializers.ModelSerializer):
+    recruitmentStartDate = serializers.DateField(format='%B %d, %Y', required=False)
+    recruitmentEndDate = serializers.DateField(format='%B %d, %Y', required=False)
+    partial = True
     sponsor = SponsorDetailSerializer(read_only=True)
 
     class Meta:
         model = ClinicalTrial
         fields = ['title', 'objective', 'id', 'sponsor', 'recruitmentStartDate',
                   'recruitmentEndDate', 'enrollmentTarget', 'description', 'url', 'current_recruitment', 'status',
-                  'custom_id', 'is_virtual']
+                  'custom_id', 'is_virtual', 'location']
 
 
 class ClinicalTrialMatchSerializer(serializers.ModelSerializer):
