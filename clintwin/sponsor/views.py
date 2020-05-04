@@ -1,5 +1,7 @@
 ##  Original additions
 import csv, io #NEW
+import os
+
 from django.contrib import messages #NEW
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -552,11 +554,11 @@ def question_flow(request):
 
 
 def load_data(request):
-    call_command('loaddata', 'participant_questions')
     # call_command('loaddata', 'virtualtrial_participant_questions')
     call_command('loaddata', 'groups')
     call_command('loaddata', 'users')
     call_command('loaddata', 'participants')
+    call_command('loaddata', 'participant_profiles')
     call_command('loaddata', 'trial_criteria')
     call_command('loaddata', 'sponsors')
     call_command('loaddata', 'clinical_trials')
