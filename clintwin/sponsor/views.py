@@ -13,7 +13,7 @@ from django.views.generic import TemplateView
 
 from django.forms import PasswordInput
 # from .forms import *
-from sponsor.forms import NewAccountForm, NewTrialForm, NewSponsorForm
+from sponsor.forms import NewAccountForm, NewTrialForm, NewSponsorForm, NewAccountSponsorAdminForm
 # from .forms import AuthenticationForm
 from django.urls import reverse_lazy
 from django.views import generic
@@ -332,8 +332,10 @@ class NewAccountView(LoginRequiredMixin, generic.CreateView):
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
-        sponsor_id = self.request.session['id']
+        sponsor_id = self.request.session['sponsor_id']
         self.object.save()
+        #sponsor_admin_group = Group.objects.get(name='sponsor_admin')
+        #sponsor_admin_group.user_set.add(self.object)
         sponsor_group = Group.objects.get(name='sponsor')
         sponsor_group.user_set.add(self.object)
         UserProfile.objects.get_or_create(user=self.object, sponsor=Sponsor.objects.get(pk=sponsor_id))
@@ -350,12 +352,40 @@ class NewAccountView(LoginRequiredMixin, generic.CreateView):
         form.fields['email'].widget.attrs['placeholder'] = 'Email associated to the account'
         return form
 
+class NewAccountSponsorAdminView(LoginRequiredMixin, generic.CreateView):
+    model = User
 
+    form_class = NewAccountSponsorAdminForm
+    template_name = 'sponsor/new_account_sa.html'
+
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        sponsor_id = self.request.session['sponsor_admin_id']
+        self.object.save()
+        sponsor_group = Group.objects.get(name='sponsor')
+        sponsor_group.user_set.add(self.object)
+        UserProfile.objects.get_or_create(user=self.object, sponsor=Sponsor.objects.get(pk=sponsor_id))
+        if not self.object.has_usable_password():
+            self.request.session['email'] = self.object.email
+            return redirect('passwordemail')
+        else:
+            return redirect('viewsponsors')
+
+
+    def get_form(self):
+        form = super().get_form()
+        form.fields['username'].widget.attrs['placeholder'] = 'Username for the account'
+        form.fields['email'].widget.attrs['placeholder'] = 'Email associated to the account'
+        form.fields['password1'].widget.attrs['placeholder'] = 'Username for the account'
+        form.fields['password2'].widget.attrs['placeholder'] = 'Email associated to the account'
+        return form
 
 class AccountDetailView(LoginRequiredMixin, generic.DetailView):
     model = User
     template_name = 'sponsor/account_detail.html'
 
+@login_required
 def PasswordEmailView(request):
     reset_form = PasswordResetForm({'email': request.session['email']})
     if reset_form.is_valid():
@@ -371,9 +401,16 @@ def PasswordEmailView(request):
 @login_required
 def NewAccountFromSponsor(request, pk):
     sponsor = Sponsor.objects.get(pk=pk)
-    request.session['id'] = sponsor.id
+    request.session['sponsor_id'] = sponsor.id
 
     return redirect("newaccount")
+
+@login_required
+def NewAccountFromSponsorAdmin(request, pk):
+    sponsor = request.user.profile.sponsor.id
+    request.session['sponsor_admin_id'] = sponsor.id
+
+    return redirect("newaccountsponsoradmin")
 
 # Request Views
 #@login_required

@@ -23,11 +23,7 @@ def is_clintwin(self):
 
 
 def is_sponsor_admin(self):
-    if self.groups.filter('sponsor_admin').exists():
-        return True
-    else:
-        return False
-
+    return self.groups.filter(name='sponsor_admin').exists()
 
 def is_sponsor(self):
     return self.groups.filter(name='sponsor').exists()
@@ -40,7 +36,7 @@ def is_participant(self):
 User.add_to_class("is_clintwin", is_clintwin)
 User.add_to_class("is_sponsor", is_sponsor)
 User.add_to_class("is_participant", is_participant)
-
+#User.add_to_class("is_participant", is_sponsor_admin)
 
 class Contact(models.Model):
     organization = models.CharField('Organization Name', max_length=500)
