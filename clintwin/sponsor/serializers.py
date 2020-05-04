@@ -17,6 +17,14 @@ class VirtualTrialParticipantQuestionSerializer(serializers.ModelSerializer):
         model = VirtualTrialParticipantQuestion
         fields = ['id', 'text', 'valueType', 'options']
 
+    def to_representation(self, instance):
+        return {
+            "id": instance.id,
+            "text": instance.text,
+            "valueType": instance.valueType,
+            "options": ast.literal_eval(instance.options)
+        }
+
 
 class ClinicalTrialCriteriaSerializer(serializers.ModelSerializer):
     class Meta:
