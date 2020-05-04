@@ -17,7 +17,7 @@ def validate_date(value):
 
 
 def validate_status(value):
-    if value not in ["Draft", "Started", "Ended"]:
+    if value not in ["Draft", "Active Recruitment", "Recruitment Ended"]:
         raise ValidationError("Invalid status")
     else:
         return value

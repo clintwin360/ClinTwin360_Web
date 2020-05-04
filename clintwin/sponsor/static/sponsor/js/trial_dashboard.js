@@ -123,9 +123,9 @@ function trial_card_template(props){
             `<h7 id="trial-id" class="text-right text-muted mt-auto">${props.custom_id}</h7>`+
           `</div>`+
 
-          `<div id="tag">`+
-            `<span id="virtual-tag" class="badge badge-primary" ${isVirtualTag(props.is_virtual)}>virtual</span>`+
-            `<span id="virtual-tag" class="badge badge-secondary">${props.status}</span>`+
+          `<div id="trial-card-tags">`+
+            `<span id="trial-card-virtual-tag" class="badge badge-primary" ${isVirtualTag(props.is_virtual)}>virtual</span>`+
+            `<span id="trial-card-status-tag" class="badge badge-secondary">${props.status}</span>`+
           `</div>`+
         `</div>`+
       `</div>`+
@@ -207,8 +207,9 @@ function get_trial_criteria(id){
 function get_trial_details(id){
     //console.log("getting details")
     $.getJSON(`/api/trials/${id}/`, function(result){
-      //console.log(result);
-      update_trial_details(result)
+        //console.log(result);
+        update_trial_details(result)
+        get_trial_criteria(id)
     });
 }
 
@@ -222,7 +223,7 @@ function update_trial_criteria(props){
     $("#dashboard-exclusion-criteria").html(exclusion_list_items);
 }
 
-function update_trial_cards(props){
+function add_trial_card(props){
     $("#dashboard-trial-cards").append(trial_card_template(props));
 }
 
@@ -233,23 +234,10 @@ $(function(){
     $.getJSON("/api/trials/", function(result){
         console.log(result.results);
         $.each(result.results, function(i, field){
-            console.log(field);
-            update_trial_cards(field);
+            add_trial_card(field);
             });
-        update_trial_details(result.results[0])
-        get_trial_criteria(result.results[0].id)
+        update_trial_details(result.results[0]);
     });
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -263,19 +251,8 @@ $(function(){
 
 
 
-
-
-
-
-
-
-
-
-
     $(document).on( "click",".card", function() {
-    //console.log("clicked!!" ,$(this).data('trial'));
     get_trial_details($(this).data('trial'));
-    get_trial_criteria($(this).data('trial'))
 });
 
     $("#criteria-trial-link").click(function() {
@@ -285,12 +262,96 @@ $(function(){
 
     $("#start-trial-link").click(function() {
         let id = $("#selected-trial-header").data('trial');
-        window.location.href = `/sponsor/starttrial/${id}`;
-    })
+        let data = {"status":"Active Recruitment"};
+        Swal.fire({
+          title: 'Do you want to start recruitment for this trial?',
+          text: "You won't be able to revert this!",
+          icon: 'info',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Start Recruiting',
+          preConfirm: (login) => {
+            return fetch(`/api/trials/${id}/`,{
+                method: 'PUT',
+                credentials: 'same-origin',
+                headers: {
+                    "X-CSRFToken": getCookie("csrftoken"),
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error(response.statusText)
+                }
+              })
+              .catch(error => {
+                Swal.showValidationMessage(
+                  `Request failed: ${error}`
+                )
+              })
+          },
+          allowOutsideClick: () => !Swal.isLoading()
+        }).then((result) => {
+          if (result.value) {
+              $(`#trial-card-${id}`).find("#trial-card-status-tag").text("Active Recruitment");
+              get_trial_details(id);
+            Swal.fire(
+              'Recruitment Begun!',
+              'Your trial is now recruiting',
+              'success'
+            )
+          }
+        })
+    });
 
     $("#end-trial-link").click(function() {
         let id = $("#selected-trial-header").data('trial');
-        window.location.href = `/sponsor/endtrial/${id}`;
+        let data = {"status":"Recruitment Ended"};
+        Swal.fire({
+          title: 'Do you want to end recruitment for this trial?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'End Recruiting',
+          preConfirm: (login) => {
+            return fetch(`/api/trials/${id}/`,{
+                method: 'PUT',
+                credentials: 'same-origin',
+                headers: {
+                    "X-CSRFToken": getCookie("csrftoken"),
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error(response.statusText)
+                }
+              })
+              .catch(error => {
+                Swal.showValidationMessage(
+                  `Request failed: ${error}`
+                )
+              })
+          },
+          allowOutsideClick: () => !Swal.isLoading()
+        }).then((result) => {
+          if (result.value) {
+              $(`#trial-card-${id}`).find("#trial-card-status-tag").text("Recruitment Ended");
+              get_trial_details(id);
+            Swal.fire(
+              'Recruitment Ended!',
+              'Your trial has ended recruitment',
+              'success'
+            )
+          }
+        })
     })
 
     $("#update-trial-link").click(function() {
@@ -345,7 +406,6 @@ $(function(){
             )
           }
         })
-       // window.location.href = `/sponsor/deletetrial/${id}`;
     })
 
 
