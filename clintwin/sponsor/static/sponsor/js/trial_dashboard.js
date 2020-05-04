@@ -15,6 +15,33 @@ function getCookie(name) {
     return cookieValue;
 }
 
+function setupTrialFiltering(){
+    $("#trial-filter").select2();
+    $("#trial-filter").change(function() {
+        $("#dashboard-trial-cards").empty()
+        let status = $(this).val();
+        let url = `/api/trials/`;
+
+        switch (status) {
+            case 'Virtual':
+                let is_virtual = $(this).find(':selected').data('virtual')
+                url += `?is_virtual=${is_virtual}`;
+                break;
+            case 'All':
+                break;
+            default:
+                url += `?status=${status}`;
+        }
+        console.log(url);
+        $.getJSON(url, function(result){
+        $.each(result.results, function(i, field){
+            update_trial_cards(field);
+            });
+        update_trial_details(result.results[0])
+        get_trial_criteria(result.results[0].id)
+        });
+    });
+}
 
 function restoreText(element){
     let str = element.data("origHTML");
@@ -134,32 +161,20 @@ function trial_card_template(props){
 }
 
 
-/*
-function trial_card_template(props){
-    //console.log(props);
-    return `<div id="trial-card-${props.id}" class="card mt-2" data-trial="${props.id}">`+
-  `<div class="card-body">`+
-      `<div class="row">`+
-      `<div class="col-9">`+
-        `<h6 class="card-title">${props.title}`+
-        `</h6>`+
-        `<small class="text-muted">${props.recruitmentStartDate} - ${props.recruitmentEndDate}</small>`+
-      `</div>`+
-      `<div class="col-3">`+
-        `<sup id="virtual-tag" class="bg-primary rounded text-white tag">virtual</sup>`+
-        `<sup id="virtual-tag" class="bg-primary rounded text-white tag">${props.status}</sup>`+
-        `</div>`+
-        `<h5 class="text-muted text-right mt-auto">${props.current_recruitment}/${props.enrollmentTarget}</h5>`+
-  `</div>`+
-`</div>`
-}
-*/
-
 function update_trial_details(props){
     $("#dashboard-trial-title").text(props.title)
     $("#dashboard-objective-text").text(props.objective);
     $("#dashboard-description-text").text(props.description);
+    $("#dashboard-trial-start-date").text(props.recruitmentStartDate);
+    $("#dashboard-trial-end-date").text(props.recruitmentEndDate);
     $("#selected-trial-header").data('trial',props.id);
+    if(props.is_virtual == true){
+        $("#dashboard-virtual-tag").show()
+        $("#virtual-question-link").show()
+    }else{
+        $("#dashboard-virtual-tag").hide()
+        $("#virtual-question-link").hide()
+    }
     console.log("status",props);
     if (props.status === "Active Recruitment"){
         $("#start-trial-link").hide()
@@ -283,6 +298,11 @@ $(function(){
         window.location.href = `/sponsor/updatetrial/${id}`;
     })
 
+    $("#virtual-question-link").click(function() {
+        let id = $("#selected-trial-header").data('trial');
+        window.location.href = `/trial/${id}/question_upload/`;
+    })
+
     $("#delete-trial-link").click(function() {
         let id = $("#selected-trial-header").data('trial');
         Swal.fire({
@@ -328,32 +348,8 @@ $(function(){
        // window.location.href = `/sponsor/deletetrial/${id}`;
     })
 
-    $("#trial-filter").select2();
+
     $("#trial-sort").select2();
 
-    $("#trial-filter").change(function() {
-        $("#dashboard-trial-cards").empty()
-        let status = $(this).val();
-        let url = `/api/trials/`;
-
-        switch (status) {
-            case 'Virtual':
-                let is_virtual = $(this).find(':selected').data('virtual')
-                url += `?is_virtual=${is_virtual}`;
-                break;
-            case 'All':
-                break;
-            default:
-                url += `?status=${status}`;
-        }
-        console.log(url);
-        $.getJSON(url, function(result){
-        $.each(result.results, function(i, field){
-            update_trial_cards(field);
-            });
-        update_trial_details(result.results[0])
-        get_trial_criteria(result.results[0].id)
-        });
-    });
-
+    setupTrialFiltering();
 });
