@@ -139,6 +139,15 @@ class Participant(models.Model):
         return self.name()
 
 
+class ParticipantProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='participant')
+    participant = models.ForeignKey(Participant, null=True, on_delete=models.SET_NULL, related_name='participant_profiles')
+
+    def __str__(self):
+        ret = self.user.username + ":" + self.participant.email
+        return ret
+
+
 class ParticipantBasicHealth(models.Model):
     GENDER = (
         ('M', 'Male'),
@@ -231,13 +240,11 @@ class VirtualTrialParticipantResponse(models.Model):
     question = models.ForeignKey(VirtualTrialParticipantQuestion, on_delete=models.CASCADE)
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE, related_name='virtual_responses')
     value = models.CharField(max_length=50)
-    last_answered = models.DateTimeField(auto_now=True, null=True)
+    answered_on = models.DateTimeField(auto_now=True, null=True)
 
     def __str__(self):
         return self.question.text
 
-    class Meta:
-        unique_together = ('question', 'participant')
 
 
 class ClinicalTrialCriteria(models.Model):

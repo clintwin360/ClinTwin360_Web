@@ -4,6 +4,8 @@ from rest_framework import serializers
 
 from sponsor.models import Participant
 
+from sponsor.models import ParticipantProfile
+
 UserModel = get_user_model()
 
 
@@ -30,6 +32,13 @@ class UserSerializer(serializers.ModelSerializer):
             email=validated_data['email']
         )
         participant.save()
+
+        participant_profile = ParticipantProfile.objects.create(
+            user=user,
+            participant=participant
+        )
+        participant_profile.save()
+
         return user
 
     class Meta:
