@@ -43,6 +43,7 @@ from bootstrap_datepicker_plus import DatePickerInput
 from django.forms import fields, CheckboxInput
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import Group
+from django.core.mail import send_mail
 
 
 # Create your views here.
@@ -358,7 +359,6 @@ class NewAccountView(LoginRequiredMixin, generic.CreateView):
 
     form_class = NewAccountForm
     template_name = 'sponsor/new_account.html'
-    success_url = reverse_lazy('viewsponsors')
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -367,7 +367,11 @@ class NewAccountView(LoginRequiredMixin, generic.CreateView):
         sponsor_group = Group.objects.get(name='sponsor')
         sponsor_group.user_set.add(self.object)
         UserProfile.objects.get_or_create(user=self.object, sponsor=Sponsor.objects.get(pk=sponsor_id))
-        return redirect(self.get_success_url())
+        if not self.object.has_usable_password():
+            return redirect('password_reset')
+        else:
+            return redirect('viewsponsors')
+
 
     def get_form(self):
         form = super().get_form()
