@@ -3,6 +3,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from rest_framework import permissions, status
 from django.contrib.auth import get_user_model
 from rest_framework.decorators import api_view, permission_classes
+from rest_framework.filters import OrderingFilter
 from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
@@ -196,8 +197,9 @@ class ClinicalTrialViewSet(mixins.UpdateModelMixin,
     List all Clinical Trials or List trials by sponsor_id
     """
     serializer_class = ClinicalTrialSerializer
-    filter_backends = [DjangoFilterBackend]
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
     filterset_fields = ['status', 'is_virtual']
+    ordering_fields = ['title', 'recruitmentStartDate', 'recruitmentEndDate', 'enrollmentTarget', 'current_recruitment']
 
     def get_queryset(self):
         if self.request.user.is_clintwin():

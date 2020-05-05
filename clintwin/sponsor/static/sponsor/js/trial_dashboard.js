@@ -15,10 +15,55 @@ function getCookie(name) {
     return cookieValue;
 }
 
+function registerDeleteTrial(){
+        $("#delete-trial-link").click(function() {
+        let id = $("#selected-trial-header").data('trial');
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!',
+          preConfirm: (login) => {
+            return fetch(`/api/trials/${id}/`,{
+                method: 'DELETE',
+                credentials: 'same-origin',
+                headers: {
+                    "X-CSRFToken": getCookie("csrftoken"),
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+            })
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error(response.statusText)
+                }
+              })
+              .catch(error => {
+                Swal.showValidationMessage(
+                  `Request failed: ${error}`
+                )
+              })
+          },
+          allowOutsideClick: () => !Swal.isLoading()
+        }).then((result) => {
+          if (result.value) {
+              $(`#trial-card-${id}`).remove()
+            Swal.fire(
+              'Deleted!',
+              'Your file has been deleted.',
+              'success'
+            )
+          }
+        })
+    })
+}
+
 function setupTrialFiltering(){
     $("#trial-filter").select2();
     $("#trial-filter").change(function() {
-        $("#dashboard-trial-cards").empty();
         let status = $(this).val();
         let url = `/api/trials/`;
 
@@ -34,11 +79,28 @@ function setupTrialFiltering(){
         }
         console.log(url);
         $.getJSON(url, function(result){
-        $.each(result.results, function(i, field){
-            add_trial_card(field);
-            });
-        update_trial_details(result.results[0])
-        get_trial_criteria(result.results[0].id)
+            $("#dashboard-trial-cards").empty();
+            $.each(result.results, function(i, field){
+                add_trial_card(field);
+                });
+            update_trial_details(result.results[0])
+            get_trial_criteria(result.results[0].id)
+        });
+    });
+}
+
+function setupTrialSorting(){
+    $("#trial-sort").select2();
+    $("#trial-sort").change(function() {
+        let key = $(this).val();
+        let url = `/api/trials/?ordering=${key}`;
+        $.getJSON(url, function(result){
+            $("#dashboard-trial-cards").empty();
+            $.each(result.results, function(i, field){
+                add_trial_card(field);
+                });
+            update_trial_details(result.results[0])
+            get_trial_criteria(result.results[0].id)
         });
     });
 }
@@ -227,40 +289,8 @@ function add_trial_card(props){
     $("#dashboard-trial-cards").append(trial_card_template(props));
 }
 
-$(function(){
-
-
-
-    $.getJSON("/api/trials/", function(result){
-        console.log(result.results);
-        $.each(result.results, function(i, field){
-            add_trial_card(field);
-            });
-        update_trial_details(result.results[0]);
-    });
-
-
-
-      $( ".card" ).hover(
-  function() {
-    $(this).addClass('mask red').css('cursor', 'pointer');
-  }, function() {
-    $(this).removeClass('mask red');
-  }
-);
-
-
-
-    $(document).on( "click",".card", function() {
-    get_trial_details($(this).data('trial'));
-});
-
-    $("#criteria-trial-link").click(function() {
-        let id = $("#selected-trial-header").data('trial');
-        window.location.href = `/sponsor/trial/${id}/criteria/inclusion/`;
-    })
-
-    $("#start-trial-link").click(function() {
+function registerStartTrial() {
+        $("#start-trial-link").click(function() {
         let id = $("#selected-trial-header").data('trial');
         let data = {"status":"Active Recruitment"};
         Swal.fire({
@@ -306,8 +336,10 @@ $(function(){
           }
         })
     });
+}
 
-    $("#end-trial-link").click(function() {
+function registerEndTrial() {
+        $("#end-trial-link").click(function() {
         let id = $("#selected-trial-header").data('trial');
         let data = {"status":"Recruitment Ended"};
         Swal.fire({
@@ -353,63 +385,70 @@ $(function(){
           }
         })
     })
+}
 
-    $("#update-trial-link").click(function() {
-        let id = $("#selected-trial-header").data('trial');
-        window.location.href = `/sponsor/updatetrial/${id}`;
-    })
-
+function registerQuestionUpload() {
     $("#virtual-question-link").click(function() {
         let id = $("#selected-trial-header").data('trial');
         window.location.href = `/sponsor/trial/${id}/question_upload/`;
     })
+}
 
-    $("#delete-trial-link").click(function() {
+function registerUpdateTrial() {
+    $("#update-trial-link").click(function() {
         let id = $("#selected-trial-header").data('trial');
-        Swal.fire({
-          title: 'Are you sure?',
-          text: "You won't be able to revert this!",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, delete it!',
-          preConfirm: (login) => {
-            return fetch(`/api/trials/${id}/`,{
-                method: 'DELETE',
-                credentials: 'same-origin',
-                headers: {
-                    "X-CSRFToken": getCookie("csrftoken"),
-                    "Accept": "application/json",
-                    "Content-Type": "application/json"
-                },
-            })
-              .then(response => {
-                if (!response.ok) {
-                  throw new Error(response.statusText)
-                }
-              })
-              .catch(error => {
-                Swal.showValidationMessage(
-                  `Request failed: ${error}`
-                )
-              })
-          },
-          allowOutsideClick: () => !Swal.isLoading()
-        }).then((result) => {
-          if (result.value) {
-              $(`#trial-card-${id}`).remove()
-            Swal.fire(
-              'Deleted!',
-              'Your file has been deleted.',
-              'success'
-            )
-          }
-        })
+        window.location.href = `/sponsor/updatetrial/${id}`;
     })
+}
 
 
-    $("#trial-sort").select2();
+function registerEditCriteria() {
+    $("#criteria-trial-link").click(function() {
+        let id = $("#selected-trial-header").data('trial');
+        window.location.href = `/sponsor/trial/${id}/criteria/inclusion/`;
+    })
+}
 
+$(function(){
+
+    $.getJSON("/api/trials/", function(result){
+        console.log(result.results);
+        $.each(result.results, function(i, field){
+            add_trial_card(field);
+            });
+        update_trial_details(result.results[0]);
+    });
+
+
+
+      $( ".card" ).hover(
+  function() {
+    $(this).addClass('mask red').css('cursor', 'pointer');
+  }, function() {
+    $(this).removeClass('mask red');
+  }
+);
+
+
+
+    $(document).on( "click",".card", function() {
+    get_trial_details($(this).data('trial'));
+});
+
+
+    registerEditCriteria();
+    registerStartTrial();
+    registerEndTrial();
+    registerUpdateTrial();
+    registerQuestionUpload();
+    registerDeleteTrial();
+
+    setupTrialSorting()
     setupTrialFiltering();
+
+    $(".set-order").click(function() {
+        console.log($(this));
+        $("#order-descending").toggle()
+        $("#order-ascending").toggle()
+    });
 });

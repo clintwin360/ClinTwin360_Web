@@ -110,3 +110,7 @@ body, html {
 .hilite {
     background-color: yellow;
 }
+
+#order-descending{
+    display: none;
+}
