@@ -377,8 +377,8 @@ class NewAccountSponsorAdminView(LoginRequiredMixin, generic.CreateView):
         form = super().get_form()
         form.fields['username'].widget.attrs['placeholder'] = 'Username for the account'
         form.fields['email'].widget.attrs['placeholder'] = 'Email associated to the account'
-        form.fields['password1'].widget.attrs['placeholder'] = 'Username for the account'
-        form.fields['password2'].widget.attrs['placeholder'] = 'Email associated to the account'
+        form.fields['password1'].widget.attrs['placeholder'] = 'Enter a secure password'
+        form.fields['password2'].widget.attrs['placeholder'] = 'Enter the same password'
         return form
 
 class AccountDetailView(LoginRequiredMixin, generic.DetailView):
