@@ -169,11 +169,6 @@ def login_success(request):
         return redirect('index')
 
 
-class TrialPaneView(LoginRequiredMixin, generic.DetailView):
-    model = ClinicalTrial
-    template_name_suffix = '_pane'
-
-
 class TrialDetailView(LoginRequiredMixin, generic.DetailView):
     model = ClinicalTrial
 
@@ -193,22 +188,6 @@ class TrialUpdateView(LoginRequiredMixin, generic.UpdateView):
     def get_success_url(self):
         trialid = self.kwargs['pk']
         return reverse_lazy('trialdetail', kwargs={'pk': trialid})
-
-
-class TrialUpdatePaneView(LoginRequiredMixin, generic.UpdateView):
-    model = ClinicalTrial
-    fields = '__all__'
-
-    def get_form(self):
-
-         form = super().get_form()
-         form.fields['recruitmentStartDate'].widget = DatePickerInput(format='%m/%d/%Y')
-         form.fields['recruitmentEndDate'].widget = DatePickerInput(format='%m/%d/%Y')
-         form.fields['is_virtual'].widget = CheckboxInput()
-         return form
-
-    template_name_suffix = '_update_pane'
-    success_url = reverse_lazy('trial_dashboard')
 
 
 class NewClinicalTrialView(LoginRequiredMixin, generic.CreateView):
@@ -379,8 +358,8 @@ class NewAccountSponsorAdminView(LoginRequiredMixin, UserPassesTestMixin, generi
         else:
             return redirect('trial_dashboard')
 
-        def test_func(self):
-            return self.request.user.groups.filter(name='sponsor_admin').exists()
+    def test_func(self):
+        return self.request.user.groups.filter(name='sponsor_admin').exists()
 
     def get_form(self):
         form = super().get_form()
@@ -425,18 +404,20 @@ def NewAccountFromSponsorAdmin(request):
     return redirect("newaccountsponsoradmin")
 
 # Request Views
-#@login_required
-#def viewSponsorReq(request):
-    #return render(request, "sponsor/view_sponsor_req.html")
-
-class SponsorRequestListView(LoginRequiredMixin, generic.ListView):
+class SponsorRequestListView(LoginRequiredMixin, UserPassesTestMixin, generic.ListView):
     model = SponsorRequest
     pagination_by = 25
 
     ordering = ['-status', '-createdAt']
 
-class SponsorRequestDetailView(LoginRequiredMixin, generic.DetailView):
+    def test_func(self):
+        return self.request.user.groups.filter(name='sponsor_admin').exists()
+
+class SponsorRequestDetailView(LoginRequiredMixin, UserPassesTestMixin, generic.DetailView):
     model = SponsorRequest
+
+    def test_func(self):
+        return self.request.user.groups.filter(name='sponsor_admin').exists()
 
 class NewSponsorRequestView(LoginRequiredMixin, generic.CreateView):
     model = SponsorRequest
@@ -451,6 +432,7 @@ class NewSponsorRequestView(LoginRequiredMixin, generic.CreateView):
             return initial
         else:
             return self.initial.copy()
+
 
     def get_form(self):
         form = super().get_form()
@@ -470,9 +452,11 @@ class ContactListView(LoginRequiredMixin, UserPassesTestMixin, generic.ListView)
         return self.request.user.groups.filter(name='clintwin').exists()
 
 
-class ContactDetailView(LoginRequiredMixin, generic.DetailView):
+class ContactDetailView(LoginRequiredMixin, UserPassesTestMixin, generic.DetailView):
     model = Contact
 
+    def test_func(self):
+        return self.request.user.groups.filter(name='clintwin').exists()
 
 class ContactPageView(generic.CreateView):
     model = Contact
@@ -623,32 +607,6 @@ def load_data(request):
     call_command('loaddata', 'user_profiles')
     return HttpResponse("Data Loaded!")
 
-# View for contact us form
-# @api_view(['GET, POST'])
-@permission_classes((permissions.AllowAny,))
-def contact(request):
-    if request.method == 'POST':
-        # POST, generate bound form with data from the request
-        form = ContactForm(request.POST)
-        # check if it's valid:
-        if form.is_valid():
-            # Insert into DB
-            form.save()
-            # redirect to a new URL:
-            return HttpResponseRedirect('success.html')
-    elif request.method == 'GET':
-        # GET, generate unbound (blank) form
-        form = ContactForm()
-    return render(request, 'contactform.html', {'form': form})
-
-class ClinicalTrialCreateView(LoginRequiredMixin, generic.CreateView):
-    model = ClinicalTrial
-    fields = (
-        'id', 'sponsorId', 'title', 'objective', 'recruitmentStartDate', 'recruitmentEndDate', 'enrollmentTarget',
-        'url',
-        'followUp', 'location', 'comments')
-    template_name = 'create_trial_form.html'
-
 # Supplementary Views
 # Static page for About us
 class AboutPageView(TemplateView):
@@ -658,31 +616,9 @@ class AboutPageView(TemplateView):
 class HowWorksPageView(TemplateView):
     template_name = 'sponsor/how_works.html'
 
-# Static page for directions
-class DirectionsPageView(TemplateView):
-    template_name = 'directions.html'
-
-# Static page for Message display
-class MessagePageView(TemplateView):
-    template_name = 'messages.html'
-
-def emptyPane(request):
-    return render(request, "sponsor/emptypane.html", )
-
-# Static pages for Admin
-# class NewCriterionView(TemplateView):
-#     template_name = 'new_criterion.html'
-#
-# class ViewCriteriaView(TemplateView):
-#     template_name = 'view_criteria.html'
-
 # Test views
 
 @login_required
 def card(request):
     trials = ClinicalTrial.objects.filter()
     return render(request, 'sponsor/card.html')
-
-
-class ViewSponsorView(LoginRequiredMixin, TemplateView):
-    template_name = 'sponsor/view_sponsor.html'

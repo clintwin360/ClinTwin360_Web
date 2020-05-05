@@ -15,23 +15,19 @@ urlpatterns = [
     path('card/', views.card, name='card'),
     path('openapi2', schema_view),
     path('dashboard/', views.trial_dashboard, name='trial_dashboard'),
-    path('login_success/', views.login_success, name='login_success'),
-    # Move to API app
+    # API Related Views
     path('loaddata/', views.load_data, name='load_data'),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     #Login/Password Views
     path('accounts/', include('django.contrib.auth.urls')),
-    path('accounts/password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
-    path('accounts/password_reset_done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('login_success/', views.login_success, name='login_success'),
+    #Trial Views
     re_path(r'^trial/(?P<pk>\d+)/criteria/inclusion/$', views.trial_criteria, {"criteria_type": "inclusion"}, name='inclusion_criteria'),
     re_path(r'^trial/(?P<pk>\d+)/criteria/exclusion/$', views.trial_criteria, {"criteria_type": "exclusion"}, name='exclusion_criteria'),
     re_path(r'^trial/(?P<pk>\d+)/criteria/review/$', views.review_criteria, name='review_criteria'),
-    re_path(r'^pane/(?P<pk>\d+)$', views.TrialPaneView.as_view(), name='trialpane'),
-    re_path(r'^updatetrialpane/(?P<pk>\d+)$', views.TrialUpdatePaneView.as_view(), name='trialupdatepane'),
     re_path(r'^updatetrial/(?P<pk>\d+)$', views.TrialUpdateView.as_view(), name='trialupdate'),
     path('newtrial', views.NewClinicalTrialView.as_view(), name='newtrial'),
     re_path(r'^trial/(?P<pk>\d+)/question_upload/$', views.question_upload, name='question_upload'),
-
     #Request Views
     path('viewsponsorreq', views.SponsorRequestListView.as_view(), name='viewsponsorreq'),
     path('criteriarequest', views.NewSponsorRequestView.as_view(), name='criteriarequest'),
@@ -59,6 +55,4 @@ urlpatterns = [
     # Supporting Views
     path('about', views.AboutPageView.as_view(), name='about'),
     path('how_works', views.HowWorksPageView.as_view(), name='how_works'),
-    path('contact', views.ContactPageView.as_view(), name='contact'),
-    path('directions', views.DirectionsPageView.as_view(), name='directions'),
 ]
