@@ -361,7 +361,7 @@ $(function(){
 
     $("#virtual-question-link").click(function() {
         let id = $("#selected-trial-header").data('trial');
-        window.location.href = `/trial/${id}/question_upload/`;
+        window.location.href = `/sponsor/trial/${id}/question_upload/`;
     })
 
     $("#delete-trial-link").click(function() {
