@@ -100,7 +100,7 @@ def review_criteria(request, pk):
         next_page = "/sponsor/trial/{}/question_upload/".format(trial.id)
         next_page_text = "Continue"
     else:
-        next_page = "/sponsor/trial_dashboard/"
+        next_page = "/sponsor/dashboard/"
         next_page_text = "Continue"
 
     previous_page = "/sponsor/trial/{}/criteria/exclusion/".format(trial.id)
