@@ -18,7 +18,7 @@ function getCookie(name) {
 function setupTrialFiltering(){
     $("#trial-filter").select2();
     $("#trial-filter").change(function() {
-        $("#dashboard-trial-cards").empty()
+        $("#dashboard-trial-cards").empty();
         let status = $(this).val();
         let url = `/api/trials/`;
 
@@ -35,7 +35,7 @@ function setupTrialFiltering(){
         console.log(url);
         $.getJSON(url, function(result){
         $.each(result.results, function(i, field){
-            update_trial_cards(field);
+            add_trial_card(field);
             });
         update_trial_details(result.results[0])
         get_trial_criteria(result.results[0].id)
