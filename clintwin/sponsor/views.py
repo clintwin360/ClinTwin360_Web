@@ -315,7 +315,7 @@ class NewSponsorFillView(LoginRequiredMixin, UserPassesTestMixin, generic.Create
 class NewAccountView(LoginRequiredMixin, UserPassesTestMixin, generic.CreateView):
     model = User
 
-    form_class = NewAccountForm
+    form_class = NewAccountSponsorAdminForm
     template_name = 'sponsor/new_account.html'
 
 
