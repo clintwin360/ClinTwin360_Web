@@ -52,6 +52,7 @@ urlpatterns = [
     #Account Views
     path('newaccount', views.NewAccountView.as_view(), name ='newaccount'),
     path('newaccountsponsoradmin', views.NewAccountSponsorAdminView.as_view(), name ='newaccountsponsoradmin'),
+    path('sponsoradminnewaccount', views.NewAccountFromSponsorAdmin, name ='sponsoradminnewaccount'),
     path('passwordemail', views.PasswordEmailView, name='passwordemail'),
     re_path(r'accountfromsponsor/(?P<pk>\d+)$', views.NewAccountFromSponsor, name='accountfromsponsor'),
     re_path(r'user/(?P<pk>\d+)$', views.AccountDetailView.as_view(), name ='viewaccount'),

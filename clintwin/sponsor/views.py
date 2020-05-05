@@ -370,7 +370,7 @@ class NewAccountSponsorAdminView(LoginRequiredMixin, generic.CreateView):
             self.request.session['email'] = self.object.email
             return redirect('passwordemail')
         else:
-            return redirect('viewsponsors')
+            return redirect('trial_dashboard')
 
 
     def get_form(self):
@@ -396,7 +396,10 @@ def PasswordEmailView(request):
             request=request
         )
         print('bye')
-    return redirect('viewsponsors')
+    if request.user.is_clintwin():
+        return redirect('viewsponsors')
+    else:
+        return redirect('trial_dashboard')
 
 @login_required
 def NewAccountFromSponsor(request, pk):
@@ -406,8 +409,8 @@ def NewAccountFromSponsor(request, pk):
     return redirect("newaccount")
 
 @login_required
-def NewAccountFromSponsorAdmin(request, pk):
-    sponsor = request.user.profile.sponsor.id
+def NewAccountFromSponsorAdmin(request):
+    sponsor = request.user.profile.sponsor
     request.session['sponsor_admin_id'] = sponsor.id
 
     return redirect("newaccountsponsoradmin")

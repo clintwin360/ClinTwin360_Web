@@ -44,13 +44,13 @@ class NewAccountSponsorAdminForm(UserCreationForm):
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
-        password2 = super(NewAccountForm, self).clean_password2()
+        password2 = super(NewAccountSponsorAdminForm, self).clean_password2()
         if bool(password1) ^ bool(password2):
             raise forms.ValidationError("Fill out both fields")
         return password2
 
     def save(self, commit=True):
-        user = super(NewAccountForm, self).save(commit=False)
+        user = super(NewAccountSponsorAdminForm, self).save(commit=False)
         user.email = self.cleaned_data["email"]
         if self.cleaned_data.get("password2") == "":
             user.set_unusable_password()
