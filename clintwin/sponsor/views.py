@@ -327,7 +327,7 @@ class NewSponsorFillView(LoginRequiredMixin, UserPassesTestMixin, generic.Create
 
 
 #Account Views
-class NewAccountView(LoginRequiredMixin, generic.CreateView):
+class NewAccountView(LoginRequiredMixin, UserPassesTestMixin, generic.CreateView):
     model = User
 
     form_class = NewAccountForm
@@ -338,8 +338,8 @@ class NewAccountView(LoginRequiredMixin, generic.CreateView):
         self.object = form.save(commit=False)
         sponsor_id = self.request.session['sponsor_id']
         self.object.save()
-        #sponsor_admin_group = Group.objects.get(name='sponsor_admin')
-        #sponsor_admin_group.user_set.add(self.object)
+        sponsor_admin_group = Group.objects.get(name='sponsor_admin')
+        sponsor_admin_group.user_set.add(self.object)
         sponsor_group = Group.objects.get(name='sponsor')
         sponsor_group.user_set.add(self.object)
         UserProfile.objects.get_or_create(user=self.object, sponsor=Sponsor.objects.get(pk=sponsor_id))
@@ -356,7 +356,10 @@ class NewAccountView(LoginRequiredMixin, generic.CreateView):
         form.fields['email'].widget.attrs['placeholder'] = 'Email associated to the account'
         return form
 
-class NewAccountSponsorAdminView(LoginRequiredMixin, generic.CreateView):
+    def test_func(self):
+        return self.request.user.groups.filter(name='clintwin').exists()
+
+class NewAccountSponsorAdminView(LoginRequiredMixin, UserPassesTestMixin, generic.CreateView):
     model = User
 
     form_class = NewAccountSponsorAdminForm
@@ -376,6 +379,8 @@ class NewAccountSponsorAdminView(LoginRequiredMixin, generic.CreateView):
         else:
             return redirect('trial_dashboard')
 
+        def test_func(self):
+            return self.request.user.groups.filter(name='sponsor_admin').exists()
 
     def get_form(self):
         form = super().get_form()
