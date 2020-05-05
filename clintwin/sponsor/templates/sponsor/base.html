@@ -61,7 +61,7 @@
 						</li>
 					-->
 
-								{% endif %}
+
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								Manage Clinical Trials
@@ -77,13 +77,14 @@
 								<a class="nav-link" href="{% url 'accountfromsponsoradmin' %}"  id="add_account">>Add Account</a>
 							</li>
 							-->
+							{% endif %}
 						</ul>
 
 
 
 
 
-							<ul class="navbar-nav ml-auto">
+							<ul class="navbar-nav ml-auto ">
 								<li class="nav-item dropdown">
 									<a class="nav-link dropdown-toggle" href="#" id="greeting" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									Welcome, {{ user.username }}
