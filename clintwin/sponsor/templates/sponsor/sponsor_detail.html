@@ -17,7 +17,7 @@
 <p><strong>Quit Date:</strong> {{ sponsor.dateDeregistered }}</p>
 {% endif %}
 <p><strong>Notes:</strong> {{ sponsor.notes }}</p>
-{% if user.is_clintwin || user.is_sponsor_admin %}
+{% if user.is_clintwin or user.is_sponsor_admin %}
 <p><strong>Accounts:</strong></p>
 <ul>
 {% for profile in sponsor.user_profiles.all  %}
