@@ -8,9 +8,9 @@
 <br><h2 id="account-detail-title"><u>Account Details</u></h2><br>
 <p><strong>Username:</strong> {{ user.username }}</p>
 <p><strong>Email:</strong> {{ user.email }}</p>
-<p><strong>Created At:</strong> {{ user.date_joined }}</p>
 <p><strong>Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
 <p><strong>Sponsor:</strong> <a href="/sponsor/profile/{{ user.profile.sponsor.id }}">{{ user.profile.sponsor.id }} - {{ user.profile.sponsor.organization }}</a></p>
+<p><strong>Created At:</strong> {{ user.date_joined }}</p>
 {% if user.is_clintwin %}
 <a class="btn btn-info returnbtn" href="{% url 'viewsponsors' %}">Return to Sponsor Dashboard</a>
 {% endif %}
