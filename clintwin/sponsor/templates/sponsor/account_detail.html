@@ -11,5 +11,10 @@
 <p><strong>Created At:</strong> {{ user.date_joined }}</p>
 <p><strong>Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
 <p><strong>Sponsor:</strong> <a href="/sponsor/profile/{{ user.profile.sponsor.id }}">{{ user.profile.sponsor.id }} - {{ user.profile.sponsor.organization }}</a></p>
+{% if user.is_clintwin %}
 <a class="btn btn-info returnbtn" href="{% url 'viewsponsors' %}">Return to Sponsor Dashboard</a>
+{% endif %}
+{% if user.is_sponsor %}
+<a class="btn btn-info returnbtn" href="{% url 'trial_dashboard' %}">Return to Dashboard</a>
+{% endif %}
 {% endblock %}
