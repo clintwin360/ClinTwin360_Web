@@ -14,6 +14,10 @@
             {{ form.media }}
                     {{ form.username|as_crispy_field }}
                     {{ form.email|as_crispy_field }}
+                    {{ form.password1|as_crispy_field }}
+                    {{ form.password2|as_crispy_field }}
+                    {{ form.first_name|as_crispy_field }}
+                    {{ form.last_name|as_crispy_field }}
             <button class="btn btn-primary" type="submit" name="create_button" id="create_button">Create Account</button>
             <!-- <input type="hidden" name="redirect" value="{% url 'viewsponsors' %}"/> -->
         </form>

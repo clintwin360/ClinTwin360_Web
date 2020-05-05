@@ -14,7 +14,7 @@ from django.views.generic import TemplateView
 
 from django.forms import PasswordInput
 # from .forms import *
-from sponsor.forms import NewAccountForm, NewTrialForm, NewSponsorForm, NewAccountSponsorAdminForm
+from sponsor.forms import NewAccountForm, NewAccountSponsorAdminForm
 # from .forms import AuthenticationForm
 from django.urls import reverse_lazy
 from django.views import generic
@@ -278,6 +278,12 @@ class NewSponsorView(LoginRequiredMixin, UserPassesTestMixin, generic.CreateView
     def test_func(self):
         return self.request.user.groups.filter(name='clintwin').exists()
 
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.save()
+        sponsorid = self.object.id
+        return redirect(reverse_lazy('sponsordetail', kwargs={'pk': sponsorid}))
+
 
 class NewSponsorFillView(LoginRequiredMixin, UserPassesTestMixin, generic.CreateView, ABC):
     model = Sponsor
@@ -326,13 +332,15 @@ class NewAccountView(LoginRequiredMixin, UserPassesTestMixin, generic.CreateView
             self.request.session['email'] = self.object.email
             return redirect('passwordemail')
         else:
-            return redirect('viewsponsors')
+            return redirect(reverse_lazy('viewaccount', kwargs={'pk': self.object.id}))
 
 
     def get_form(self):
         form = super().get_form()
         form.fields['username'].widget.attrs['placeholder'] = 'Username for the account'
         form.fields['email'].widget.attrs['placeholder'] = 'Email associated to the account'
+        form.fields['first_name'].widget.attrs['placeholder'] = 'First name of user associated to the account'
+        form.fields['last_name'].widget.attrs['placeholder'] = 'Last name of user associated to the account'
         return form
 
     def test_func(self):
@@ -356,7 +364,7 @@ class NewAccountSponsorAdminView(LoginRequiredMixin, UserPassesTestMixin, generi
             self.request.session['email'] = self.object.email
             return redirect('passwordemail')
         else:
-            return redirect('trial_dashboard')
+            return redirect(reverse_lazy('viewaccount', kwargs={'pk': self.object.id}))
 
     def test_func(self):
         return self.request.user.groups.filter(name='sponsor_admin').exists()
@@ -367,6 +375,8 @@ class NewAccountSponsorAdminView(LoginRequiredMixin, UserPassesTestMixin, generi
         form.fields['email'].widget.attrs['placeholder'] = 'Email associated to the account'
         form.fields['password1'].widget.attrs['placeholder'] = 'Enter a secure password'
         form.fields['password2'].widget.attrs['placeholder'] = 'Enter the same password'
+        form.fields['first_name'].widget.attrs['placeholder'] = 'First name of user associated to the account'
+        form.fields['last_name'].widget.attrs['placeholder'] = 'Last name of user associated to the account'
         return form
 
 class AccountDetailView(LoginRequiredMixin, generic.DetailView):
