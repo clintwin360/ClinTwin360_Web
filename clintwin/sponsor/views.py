@@ -1,10 +1,11 @@
 ##  Original additions
 import csv, io #NEW
 import os
+from abc import ABC
 
 from django.contrib import messages #NEW
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import render
@@ -210,7 +211,6 @@ class TrialUpdatePaneView(LoginRequiredMixin, generic.UpdateView):
     success_url = reverse_lazy('trial_dashboard')
 
 
-
 class NewClinicalTrialView(LoginRequiredMixin, generic.CreateView):
     model = ClinicalTrial
     fields = (
@@ -244,46 +244,42 @@ class NewClinicalTrialView(LoginRequiredMixin, generic.CreateView):
         else:
             return self.initial.copy()
 
-    # def get_form(self):
-    #    print(self.request.POST)
-    #    self.object = self.get_object()
-    #    return self.form_class(for_list=self.object, data=self.request.POST)
-
 
 # Sponsor Views
-#@login_required
-#def viewSponsors(request):
-    #queryset = Sponsor.objects.all()
-    #return render(request, "sponsor/view_sponsors.html")
-
-class SponsorListView(LoginRequiredMixin, generic.ListView):
+class SponsorListView(LoginRequiredMixin, UserPassesTestMixin, generic.ListView):
     model = Sponsor
     pagination_by = 25
 
     ordering = ['organization']
 
+    def test_func(self):
+        return self.request.user.groups.filter(name='clintwin').exists()
+
+
 class SponsorDetailView(LoginRequiredMixin, generic.DetailView):
     model = Sponsor
+
 
 class SponsorUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Sponsor
     fields = '__all__'
 
-	#Datepicker widet below throws weird indent error
-    #def get_form(self):
-	    #form = super().get_form()
-        #form.fields['dateDeregistered'].widget = DatePickerInput(format='%m/%d/%Y')
-		#return form
-
     def get_success_url(self):
         sponsorid = self.kwargs['pk']
         return reverse_lazy('sponsordetail', kwargs={'pk': sponsorid})
 
-class DeleteSponsorView(LoginRequiredMixin, generic.DeleteView):
+    #TODO limit to clintwin and sponsor admin
+
+
+class DeleteSponsorView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
     model = Sponsor
     success_url = reverse_lazy('viewsponsors')
 
-class NewSponsorView(LoginRequiredMixin, generic.CreateView):
+    def test_func(self):
+        return self.request.user.groups.filter(name='clintwin').exists()
+
+
+class NewSponsorView(LoginRequiredMixin, UserPassesTestMixin, generic.CreateView):
     model = Sponsor
     fields = ['organization', 'contactPerson', 'location', 'phone', 'email', 'notes']
 
@@ -300,7 +296,11 @@ class NewSponsorView(LoginRequiredMixin, generic.CreateView):
         form.fields['notes'].widget.attrs['placeholder'] = 'Enter any relevant notes about the sponsor here'
         return form
 
-class NewSponsorFillView(LoginRequiredMixin, generic.CreateView):
+    def test_func(self):
+        return self.request.user.groups.filter(name='clintwin').exists()
+
+
+class NewSponsorFillView(LoginRequiredMixin, UserPassesTestMixin, generic.CreateView, ABC):
     model = Sponsor
     fields = ['organization', 'contactPerson', 'location', 'phone', 'email', 'notes']
 
@@ -321,6 +321,10 @@ class NewSponsorFillView(LoginRequiredMixin, generic.CreateView):
         form.fields['email'].widget.attrs['placeholder'] = 'Email address'
         form.fields['notes'].widget.attrs['placeholder'] = 'Enter any relevant notes about the sponsor here'
         return form
+
+    def test_func(self):
+        return self.request.user.groups.filter(name='clintwin').exists()
+
 
 #Account Views
 class NewAccountView(LoginRequiredMixin, generic.CreateView):
@@ -450,14 +454,20 @@ class NewSponsorRequestView(LoginRequiredMixin, generic.CreateView):
         form.fields['notes'].widget.attrs['placeholder'] = 'Any addtional notes about the criteria'
         return form
 
-class ContactListView(LoginRequiredMixin, generic.ListView):
+
+class ContactListView(LoginRequiredMixin, UserPassesTestMixin, generic.ListView):
     model = Contact
     pagination_by = 25
 
     ordering = ['-status', '-createdAt']
 
+    def test_func(self):
+        return self.request.user.groups.filter(name='clintwin').exists()
+
+
 class ContactDetailView(LoginRequiredMixin, generic.DetailView):
     model = Contact
+
 
 class ContactPageView(generic.CreateView):
     model = Contact
@@ -475,6 +485,7 @@ class ContactPageView(generic.CreateView):
         form.fields['phone'].widget.attrs['placeholder'] = "Enter phone number"
         form.fields['comment'].widget.attrs['placeholder'] = 'Any addtional comments about the request'
         return form
+
 
 @login_required
 def CriteriaRequestCompleteView(request, pk):

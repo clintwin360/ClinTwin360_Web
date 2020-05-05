@@ -36,7 +36,7 @@ def is_participant(self):
 User.add_to_class("is_clintwin", is_clintwin)
 User.add_to_class("is_sponsor", is_sponsor)
 User.add_to_class("is_participant", is_participant)
-#User.add_to_class("is_participant", is_sponsor_admin)
+User.add_to_class("is_sponsor_admin", is_sponsor_admin)
 
 class Contact(models.Model):
     organization = models.CharField('Organization Name', max_length=500)
