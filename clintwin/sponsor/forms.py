@@ -7,12 +7,10 @@ from bootstrap_datepicker_plus import DatePickerInput
 
 class NewAccountForm(UserCreationForm):
     email = forms.EmailField(required=True)
-    first_name = forms.CharField(required=False)
-    last_name = forms.CharField(required=False)
 
     class Meta:
         model = User
-        fields = ("username", "email", 'first_name', 'last_name')
+        fields = ("username", "email")
 
     def __init__(self, *args, **kwargs):
         super(UserCreationForm, self).__init__(*args, **kwargs)
@@ -22,8 +20,6 @@ class NewAccountForm(UserCreationForm):
     def save(self, commit=True):
         user = super(NewAccountForm, self).save(commit=False)
         user.email = self.cleaned_data["email"]
-        user.first_name = self.cleaned_data["first_name"]
-        user.last_name = self.cleaned_data["last_name"]
         user.set_unusable_password()
         if commit:
             user.save()
