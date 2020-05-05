@@ -1,33 +1,6 @@
 [
   {
     "model": "sponsor.ParticipantQuestion", 
-    "pk": "1", 
-    "fields": {
-      "text": "What is your height? (ft.)", 
-      "options": "{\"min\":30,\"max\":100,\"increment\":1,\"unit\":\"inches\"}", 
-      "valueType": "large_option_set"
-    }
-  }, 
-  {
-    "model": "sponsor.ParticipantQuestion", 
-    "pk": "2", 
-    "fields": {
-      "text": "What is your weight? (lbs.)", 
-      "options": "{\"min\":1,\"max\":1000,\"increment\":.5,\"unit\":\"lbs\"}", 
-      "valueType": "large_option_set"
-    }
-  }, 
-  {
-    "model": "sponsor.ParticipantQuestion", 
-    "pk": "3", 
-    "fields": {
-      "text": "How old are you?", 
-      "options": "{\"min\":0,\"max\":140,\"increment\":1,\"unit\":\"years\"}", 
-      "valueType": "large_option_set"
-    }
-  }, 
-  {
-    "model": "sponsor.ParticipantQuestion", 
     "pk": "4", 
     "fields": {
       "text": "What race or ethnicity do you identify with?", 
