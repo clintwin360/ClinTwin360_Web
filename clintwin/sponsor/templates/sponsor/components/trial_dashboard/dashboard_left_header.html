@@ -1,8 +1,15 @@
 <div id="selected-trial-header" class="selected-trial-header">
 
 
+    <div class="new-trial">
+      <h4 id="add-trial">Add Trial</h4>
+      <a href="{% url 'newtrial' %}">
+        <span id="glyph-icon" class="glyphicon glyphicon-edit"></span>
+      </a>
+    </div>
+
     <div class="trial-sort">
-        <h4 class="sort-label">Sort by:</h4>
+        <h4 class="sort-label">Sort by</h4>
         <select id="trial-sort" name="trial-sort"  style="width: 150px">
             <option value="title">Title</option>
             <option value="recruitmentStartDate">Recruitment Start Date</option>
