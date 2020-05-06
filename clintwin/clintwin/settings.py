@@ -172,7 +172,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'clintwin360@gmail.com'
-EMAIL_HOST_PASSWORD = 'Clintwine599#'
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
 # NEW
 DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap4.html"
