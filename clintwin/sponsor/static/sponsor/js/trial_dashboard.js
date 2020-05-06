@@ -93,16 +93,26 @@ function setupTrialSorting(){
     $("#trial-sort").select2();
     $("#trial-sort").change(function() {
         let key = $(this).val();
-        let url = `/api/trials/?ordering=${key}`;
-        $.getJSON(url, function(result){
-            $("#dashboard-trial-cards").empty();
-            $.each(result.results, function(i, field){
-                add_trial_card(field);
-                });
-            update_trial_details(result.results[0])
-            get_trial_criteria(result.results[0].id)
-        });
+        let order = $(".set-order:visible").data("order");
+        sortTrials(key,order);
     });
+}
+
+function sortTrials(key,order){
+    let order_modifier = "";
+    if (order === 'descending'){
+        order_modifier = "-"
+    }
+    let url = `/api/trials/?ordering=${order_modifier}${key}`;
+    $.getJSON(url, function(result){
+        $("#dashboard-trial-cards").empty();
+        $.each(result.results, function(i, field){
+            add_trial_card(field);
+            });
+        update_trial_details(result.results[0])
+        get_trial_criteria(result.results[0].id)
+    });
+
 }
 
 function restoreText(element){
@@ -410,30 +420,25 @@ function registerEditCriteria() {
 }
 
 $(function(){
-
-    $.getJSON("/api/trials/", function(result){
-        console.log(result.results);
-        $.each(result.results, function(i, field){
-            add_trial_card(field);
-            });
-        update_trial_details(result.results[0]);
-    });
+    let key = $("#trial-sort").val();
+    let order = $(".set-order:visible").data("order");
+    sortTrials(key,order);
 
 
 
-      $( ".card" ).hover(
-  function() {
-    $(this).addClass('mask red').css('cursor', 'pointer');
-  }, function() {
-    $(this).removeClass('mask red');
-  }
-);
+    $( ".card" ).hover(
+        function() {
+        $(this).addClass('mask red').css('cursor', 'pointer');
+    }, function() {
+        $(this).removeClass('mask red');
+    }
+    );
 
 
 
     $(document).on( "click",".card", function() {
     get_trial_details($(this).data('trial'));
-});
+    });
 
 
     registerEditCriteria();
@@ -450,5 +455,8 @@ $(function(){
         console.log($(this));
         $("#order-descending").toggle()
         $("#order-ascending").toggle()
+        let key = $("#trial-sort").val();
+        let order = $(".set-order:visible").data("order");
+        sortTrials(key,order);
     });
 });
