@@ -166,7 +166,6 @@ LOGIN_REDIRECT_URL = '/sponsor/login_success'
 LOGOUT_REDIRECT_URL = '/sponsor/'
 # LOGOUT_REDIRECT_URL = 'registration/logged_out.html'
 
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
