@@ -601,8 +601,8 @@ def question_flow(request):
     if participant_id:
         basic_health = ParticipantBasicHealth.objects.get(participant__id=participant_id)
         sex = basic_health.sex
-        if sex:
-            pass
+        if sex == "Male":
+            questions = questions.exclude(id__in=FEMALE_QUESTIONS)
         responses = ParticipantResponse.objects.filter(participant__id=participant_id)
         answered_questions = [x.question.id for x in responses]
         questions = questions.exclude(id__in=answered_questions)
