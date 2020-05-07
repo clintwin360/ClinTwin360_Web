@@ -133,10 +133,12 @@ class Participant(models.Model):
         return str(self.email)
 
     def basic_health_submitted(self):
-        if self.basic_health:
-            return True
-        else:
-            return False
+        has_basic_health = False
+        try:
+            has_basic_health = (self.basic_health is not None)
+        except ParticipantBasicHealth.DoesNotExist:
+            pass
+        return has_basic_health
 
     def __str__(self):
         return self.name()
