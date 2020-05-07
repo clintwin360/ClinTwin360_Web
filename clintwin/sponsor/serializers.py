@@ -54,7 +54,7 @@ class ParticipantSerializer(serializers.ModelSerializer):
 class ParticipantBasicHealthSerializer(serializers.ModelSerializer):
     class Meta:
         model = ParticipantBasicHealth
-        fields = ['participant', 'gender', 'weight', 'height', 'birth_date']
+        fields = ['participant', 'sex', 'weight', 'height', 'birth_date']
 
 
 class ParticipantResponseSerializer(serializers.ModelSerializer):
