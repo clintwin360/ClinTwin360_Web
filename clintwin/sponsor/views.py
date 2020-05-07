@@ -544,9 +544,14 @@ def compare_values(a, op, b):
 
 def calculate_trial_matches(participant):
     # participant = Participant.objects.get(id=1)
+    # update age:
+    age_response = participant.responses.get(question__id=3)
+    age_response.value = participant.basic_health.age()
+    age_response.save()
+
     responses = participant.responses.all()
     current_matches = [x.clinical_trial.id for x in participant.trial_matches.select_related('clinical_trial')]
-    trials = ClinicalTrial.objects.all().exclude(id__in=current_matches)
+    trials = ClinicalTrial.objects.filter(status="Active Recruitment").exclude(id__in=current_matches)
     # return JsonResponse({"data": [x.title for x in trials]})
     new_matches = 0
     for trial in trials:
