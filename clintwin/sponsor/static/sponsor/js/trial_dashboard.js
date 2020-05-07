@@ -435,10 +435,22 @@ $(function(){
 
 
 
-    $(document).on( "hover",".card", function() {
-        console.log("HOVERING");
+    $(document).on( "mouseover",".card", function() {
+        if ($(this).hasClass("selected-card")){
+            $(this).css('background-color', '#62bbff');
+        }else{
+            $(this).css('background-color', '#aeaeae');
+        }
 
     });
+    $(document).on( "mouseout",".card", function() {
+        if ($(this).hasClass("selected-card")){
+            $(this).css('background-color', '#98d9ff');
+        }else{
+            $(this).css('background-color', 'white');
+        }
+    });
+
 
 
 
