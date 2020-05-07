@@ -38,6 +38,7 @@ User.add_to_class("is_sponsor", is_sponsor)
 User.add_to_class("is_participant", is_participant)
 User.add_to_class("is_sponsor_admin", is_sponsor_admin)
 
+
 class Contact(models.Model):
     organization = models.CharField('Organization Name', max_length=500)
     first_name = models.CharField(null=True, max_length=50)
@@ -77,6 +78,7 @@ class SponsorRequest(models.Model):
     notes = models.CharField(max_length=1000)
     status = models.CharField('Status', null=True, max_length=100, default='Open')
     createdAt = models.DateTimeField(auto_now_add=True)
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
@@ -126,10 +128,15 @@ class Participant(models.Model):
     phone = PhoneNumberField(null=True)
     location = models.CharField(null=True, max_length=100)
     last_login = models.DateTimeField(auto_now=True, null=True)
-    basic_health = models.IntegerField(default=0, null=True)
 
     def name(self):
         return str(self.email)
+
+    def basic_health_submitted(self):
+        if self.basic_health:
+            return True
+        else:
+            return False
 
     def __str__(self):
         return self.name()
@@ -150,7 +157,7 @@ class ParticipantBasicHealth(models.Model):
         ('F', 'Female'),
         ('O', 'Other'),
     )
-    participant = models.OneToOneField("Participant", on_delete=models.CASCADE)
+    participant = models.OneToOneField("Participant", on_delete=models.CASCADE, related_name="basic_health")
     gender = models.CharField('Gender', max_length=1, null=True, choices=GENDER)
     weight = models.FloatField('Weight', null=True,validators=[MinValueValidator(0, "You can not enter a negative value")])
     height = models.FloatField('Height', null=True,validators=[MinValueValidator(0, "You can not enter a negative value")])
@@ -240,7 +247,6 @@ class VirtualTrialParticipantResponse(models.Model):
 
     def __str__(self):
         return self.question.text
-
 
 
 class ClinicalTrialCriteria(models.Model):

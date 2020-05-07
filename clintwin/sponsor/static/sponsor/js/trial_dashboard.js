@@ -443,7 +443,8 @@ $(function(){
         }
 
     });
-    $(document).on( "mouseout",".card", function() {
+    $(document).on( "mouseleave",".card", function() {
+        console.log("MOUSE OOUT")
         if ($(this).hasClass("selected-card")){
             $(this).css('background-color', '#98d9ff');
         }else{
@@ -455,12 +456,13 @@ $(function(){
 
 
     $(document).on( "click",".card", function() {
-        let cards = $(".card");
-        for (let card of cards) {
-            $(card).removeClass("selected-card");
+        if ($(this).hasClass("selected-card")){
+            return;
         }
-        $(this).addClass("selected-card");
-    get_trial_details($(this).data('trial'));
+        $(".selected-card").css('background-color', 'white');
+        $(".selected-card").removeClass('selected-card');
+        $(this).addClass('selected-card');
+        get_trial_details($(this).data('trial'));
     });
 
 

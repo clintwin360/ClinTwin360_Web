@@ -56,6 +56,10 @@ from django.core.mail import send_mail
 # if (bcrypt.checkpw(request.POST['login_password'].encode(), user.password.encode())):
 
 
+QUESTION_EXCLUDES = [1, 2, 3, 5, 87]
+
+
+
 def index(request):
     if not request.user.is_authenticated:
         return redirect('login')
@@ -564,6 +568,7 @@ def calculate_trial_matches(participant):
     # return JsonResponse({"data": new_matches})
     return new_matches
 
+
 def question_rank(questions):
     ranks = {}
     for q in questions:
@@ -575,9 +580,10 @@ def question_rank(questions):
     # data['questions'].sort(key=lambda x: x['rank'], reverse=True)
     return ranks
 
+
 def question_flow(request):
     participant_id = request.GET.get('participant_id')
-    questions = ParticipantQuestion.objects.all()
+    questions = ParticipantQuestion.objects.all().exclude(id__in=QUESTION_EXCLUDES)
     if participant_id:
         print("WE PARTICPANT {}".format(participant_id))
         responses = ParticipantResponse.objects.filter(participant__id=participant_id)
