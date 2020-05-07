@@ -67,6 +67,22 @@ body, html {
     right:20px;
 }
 
+/* NEW */
+.select2-container .select2-selection--single {
+  height: 37px !important;
+  border-color: #BDC3C7 !important;
+}
+
+#select2-trial-sort-container {
+  vertical-align: middle;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #444;
+    line-height: 37px !important;
+}
+/* ===== */
+
 .trial-search {
     position:absolute;
     bottom: 4px;
@@ -76,21 +92,52 @@ body, html {
 .trial-filter{
     position:absolute;
     bottom: 4px;
-    right: 252px;
+    right: 232px;
     display: inline-block;
+    vertical-align: middle;
+    font-size: 17px;
 }
 
-.trial-sort{
+.trial-sort {
     position:absolute;
     bottom: 4px;
     right: 452px;
     display: inline-block;
+    vertical-align: middle;
+    font-size: 17px;
+}
+
+.new-trial {
+    position:absolute;
+    bottom: 0;
+    right: 670px;
+    width: 150px;
+}
+
+.glyphicon.glyphicon-edit{
+  font-size:25px;
+  padding: 2px;
+  padding-top: 0;
+  background: transparent;
+  border: 0;
+}
+
+#add-trial {
+  position: relative;
+  display: inline-block;
+  font-size: 17px;
+  font-family: Helvetica Medium, sans-serif;
+  /* bottom: 2px; */
+}
+
+#glyph-icon {
+  top: 0;
 }
 
 .filter-label{
     position: relative;
     display: inline-block;
-    font-size: 18px;
+    font-size: 17px;
     font-family: Helvetica Medium, sans-serif;
     bottom: -4px;
 }
@@ -98,7 +145,7 @@ body, html {
 .sort-label{
     position: relative;
     display: inline-block;
-    font-size: 18px;
+    font-size: 17px;
     font-family: Helvetica Medium, sans-serif;
     bottom: -4px;
 }
