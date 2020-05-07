@@ -18,7 +18,7 @@ from rest_framework import permissions
 from django.contrib.auth import get_user
 from django_filters.rest_framework import DjangoFilterBackend
 
-from sponsor.models import Participant
+from sponsor.models import Participant, ParticipantResponse, ParticipantQuestion
 
 from sponsor.serializers import ParticipantSerializer
 
@@ -97,13 +97,27 @@ class ParticipantBasicHealthViewSet(mixins.CreateModelMixin,
     serializer_class = ParticipantBasicHealthSerializer
 
     def perform_create(self, serializer):
-        participant = Participant.objects.filter(email=self.request.user.username).get()
+        participant = self.request.user.participant_profile.participant
         p2 = serializer.validated_data.get('participant', None)
         if p2 != participant:
             return Response(status=status.HTTP_400_BAD_REQUEST)
-        participant_basic_health = serializer.save()
-        participant_basic_health.participant.basic_health = 1
-        participant_basic_health.participant.save()
+        basic_health = serializer.save()
+        # creating responses for the basic health data for the trial matching
+        ParticipantResponse.objects.create(participant=participant,
+                                           question=ParticipantQuestion.objects.get(id=3),
+                                           value=basic_health.age())
+        ParticipantResponse.objects.create(participant=participant,
+                                           question=ParticipantQuestion.objects.get(id=1),
+                                           value=basic_health.weight)
+        ParticipantResponse.objects.create(participant=participant,
+                                           question=ParticipantQuestion.objects.get(id=2),
+                                           value=basic_health.height)
+        ParticipantResponse.objects.create(participant=participant,
+                                           question=ParticipantQuestion.objects.get(id=5),
+                                           value=basic_health.sex)
+        ParticipantResponse.objects.create(participant=participant,
+                                           question=ParticipantQuestion.objects.get(id=87),
+                                           value=basic_health.bmi())
     # permission_classes = [permissions.IsAuthenticated]
 
 
