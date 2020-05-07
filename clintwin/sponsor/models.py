@@ -152,13 +152,13 @@ class ParticipantProfile(models.Model):
 
 
 class ParticipantBasicHealth(models.Model):
-    GENDER = (
+    SEX = (
         ('M', 'Male'),
         ('F', 'Female'),
         ('O', 'Other'),
     )
     participant = models.OneToOneField("Participant", on_delete=models.CASCADE, related_name="basic_health")
-    gender = models.CharField('Gender', max_length=1, null=True, choices=GENDER)
+    sex = models.CharField('Sex', max_length=1, null=True, choices=SEX)
     weight = models.FloatField('Weight', null=True,validators=[MinValueValidator(0, "You can not enter a negative value")])
     height = models.FloatField('Height', null=True,validators=[MinValueValidator(0, "You can not enter a negative value")])
     birth_date = models.DateField('Date of Birth', help_text='MM/DD/YY', null=True, blank=True)
