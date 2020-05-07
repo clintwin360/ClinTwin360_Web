@@ -421,7 +421,7 @@ class SponsorRequestListView(LoginRequiredMixin, UserPassesTestMixin, generic.Li
     ordering = ['-status', '-createdAt']
 
     def test_func(self):
-        return self.request.user.groups.filter(name='sponsor_admin').exists()
+        return self.request.user.groups.filter(name='clintwin').exists()
 
 class SponsorRequestDetailView(LoginRequiredMixin, UserPassesTestMixin, generic.DetailView):
     model = SponsorRequest
