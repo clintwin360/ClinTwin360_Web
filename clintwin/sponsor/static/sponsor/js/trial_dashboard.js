@@ -96,6 +96,15 @@ function setupTrialSorting(){
         let order = $(".set-order:visible").data("order");
         sortTrials(key,order);
     });
+
+    $(".set-order").click(function() {
+        console.log($(this));
+        $("#order-descending").toggle()
+        $("#order-ascending").toggle()
+        let key = $("#trial-sort").val();
+        let order = $(".set-order:visible").data("order");
+        sortTrials(key,order);
+    });
 }
 
 function sortTrials(key,order){
@@ -426,18 +435,34 @@ $(function(){
 
 
 
-    $( ".card" ).hover(
-        function() {
-        $(this).addClass('mask red').css('cursor', 'pointer');
-    }, function() {
-        $(this).removeClass('mask red');
-    }
-    );
+    $(document).on( "mouseover",".card", function() {
+        if ($(this).hasClass("selected-card")){
+            $(this).css('background-color', '#62bbff');
+        }else{
+            $(this).css('background-color', '#aeaeae');
+        }
+
+    });
+    $(document).on( "mouseleave",".card", function() {
+        console.log("MOUSE OOUT")
+        if ($(this).hasClass("selected-card")){
+            $(this).css('background-color', '#98d9ff');
+        }else{
+            $(this).css('background-color', 'white');
+        }
+    });
+
 
 
 
     $(document).on( "click",".card", function() {
-    get_trial_details($(this).data('trial'));
+        if ($(this).hasClass("selected-card")){
+            return;
+        }
+        $(".selected-card").css('background-color', 'white');
+        $(".selected-card").removeClass('selected-card');
+        $(this).addClass('selected-card');
+        get_trial_details($(this).data('trial'));
     });
 
 
@@ -451,12 +476,4 @@ $(function(){
     setupTrialSorting()
     setupTrialFiltering();
 
-    $(".set-order").click(function() {
-        console.log($(this));
-        $("#order-descending").toggle()
-        $("#order-ascending").toggle()
-        let key = $("#trial-sort").val();
-        let order = $(".set-order:visible").data("order");
-        sortTrials(key,order);
-    });
 });

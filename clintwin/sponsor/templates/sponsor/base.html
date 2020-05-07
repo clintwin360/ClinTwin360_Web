@@ -92,7 +92,7 @@
 									<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 										{% if user.is_sponsor %}
 										<a class="dropdown-item" href="/sponsor/user/{{ user.id }}">My Profile</a>
-										<a class="dropdown-item" href="/sponsor/profile/{{ user.profile.sponsor.id }}">Sponsor Profile</a>
+										<a class="dropdown-item" href="/sponsor/profile/{{ user.sponsor_profile.sponsor.id }}">Sponsor Profile</a>
 										{% endif %}
 										<a class="dropdown-item" href="{% url 'logout' %}" >Logout</a>
 									</div>

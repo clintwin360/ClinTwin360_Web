@@ -38,6 +38,7 @@ User.add_to_class("is_sponsor", is_sponsor)
 User.add_to_class("is_participant", is_participant)
 User.add_to_class("is_sponsor_admin", is_sponsor_admin)
 
+
 class Contact(models.Model):
     organization = models.CharField('Organization Name', max_length=500)
     first_name = models.CharField(null=True, max_length=50)
@@ -78,8 +79,9 @@ class SponsorRequest(models.Model):
     status = models.CharField('Status', null=True, max_length=100, default='Open')
     createdAt = models.DateTimeField(auto_now_add=True)
 
+
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='sponsor_profile')
     sponsor = models.ForeignKey(Sponsor, null=True, on_delete=models.SET_NULL, related_name='user_profiles')
 
     def __str__(self):
@@ -122,22 +124,27 @@ class Participant(models.Model):
     first_name = models.CharField(max_length=128, null=True)
     last_name = models.CharField(max_length=128, null=True)
     email = models.EmailField(validators= [validate_email])
-    date_joined = models.DateTimeField(auto_now_add=True, null=True,validators= [validate_date])
+    date_joined = models.DateTimeField(auto_now_add=True, null=True, validators= [validate_date])
     phone = PhoneNumberField(null=True)
     location = models.CharField(null=True, max_length=100)
     last_login = models.DateTimeField(auto_now=True, null=True)
-    basic_health = models.IntegerField(default=0, null=True)
 
     def name(self):
         return str(self.email)
+
+    def basic_health_submitted(self):
+        if self.basic_health:
+            return True
+        else:
+            return False
 
     def __str__(self):
         return self.name()
 
 
 class ParticipantProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='participant')
-    participant = models.ForeignKey(Participant, null=True, on_delete=models.SET_NULL, related_name='participant_profiles')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='participant_profile')
+    participant = models.ForeignKey(Participant, null=True, on_delete=models.SET_NULL, related_name='profile')
 
     def __str__(self):
         ret = self.user.username + ":" + self.participant.email
@@ -145,13 +152,13 @@ class ParticipantProfile(models.Model):
 
 
 class ParticipantBasicHealth(models.Model):
-    GENDER = (
+    SEX = (
         ('M', 'Male'),
         ('F', 'Female'),
         ('O', 'Other'),
     )
-    participant = models.OneToOneField("Participant", on_delete=models.CASCADE)
-    gender = models.CharField('Gender', max_length=1, null=True, choices=GENDER)
+    participant = models.OneToOneField("Participant", on_delete=models.CASCADE, related_name="basic_health")
+    sex = models.CharField('Sex', max_length=1, null=True, choices=SEX)
     weight = models.FloatField('Weight', null=True,validators=[MinValueValidator(0, "You can not enter a negative value")])
     height = models.FloatField('Height', null=True,validators=[MinValueValidator(0, "You can not enter a negative value")])
     birth_date = models.DateField('Date of Birth', help_text='MM/DD/YY', null=True, blank=True)
@@ -240,7 +247,6 @@ class VirtualTrialParticipantResponse(models.Model):
 
     def __str__(self):
         return self.question.text
-
 
 
 class ClinicalTrialCriteria(models.Model):
