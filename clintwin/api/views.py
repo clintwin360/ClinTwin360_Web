@@ -205,7 +205,7 @@ class ClinicalTrialViewSet(mixins.UpdateModelMixin,
         if self.request.user.is_clintwin():
             queryset = ClinicalTrial.objects.all()
         elif self.request.user.is_sponsor():
-            queryset = ClinicalTrial.objects.filter(sponsor=self.request.user.profile.sponsor)
+            queryset = ClinicalTrial.objects.filter(sponsor=self.request.user.sponsor_profile.sponsor)
         else:
             queryset = ClinicalTrial.objects.none()
         return queryset

@@ -81,7 +81,7 @@ class SponsorRequest(models.Model):
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='sponsor_profile')
     sponsor = models.ForeignKey(Sponsor, null=True, on_delete=models.SET_NULL, related_name='user_profiles')
 
     def __str__(self):
@@ -124,7 +124,7 @@ class Participant(models.Model):
     first_name = models.CharField(max_length=128, null=True)
     last_name = models.CharField(max_length=128, null=True)
     email = models.EmailField(validators= [validate_email])
-    date_joined = models.DateTimeField(auto_now_add=True, null=True,validators= [validate_date])
+    date_joined = models.DateTimeField(auto_now_add=True, null=True, validators= [validate_date])
     phone = PhoneNumberField(null=True)
     location = models.CharField(null=True, max_length=100)
     last_login = models.DateTimeField(auto_now=True, null=True)
@@ -143,8 +143,8 @@ class Participant(models.Model):
 
 
 class ParticipantProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='participant')
-    participant = models.ForeignKey(Participant, null=True, on_delete=models.SET_NULL, related_name='participant_profiles')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='participant_profile')
+    participant = models.ForeignKey(Participant, null=True, on_delete=models.SET_NULL, related_name='profile')
 
     def __str__(self):
         ret = self.user.username + ":" + self.participant.email

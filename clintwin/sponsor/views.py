@@ -227,7 +227,7 @@ class NewClinicalTrialView(LoginRequiredMixin, generic.CreateView):
     def get_initial(self, *args, **kwargs):
         if not (self.request.user.is_clintwin()):
             initial = {}
-            initial['sponsor'] = self.request.user.profile.sponsor
+            initial['sponsor'] = self.request.user.sponsor_profile.sponsor
             return initial
         else:
             return self.initial.copy()
@@ -419,7 +419,7 @@ def NewAccountFromSponsor(request, pk):
 
 @login_required
 def NewAccountFromSponsorAdmin(request):
-    sponsor = request.user.profile.sponsor
+    sponsor = request.user.sponsor_profile.sponsor
     request.session['sponsor_admin_id'] = sponsor.id
 
     return redirect("newaccountsponsoradmin")
@@ -452,7 +452,7 @@ class NewSponsorRequestView(LoginRequiredMixin, generic.CreateView):
     def get_initial(self, *args, **kwargs):
         if not (self.request.user.is_clintwin()):
             initial = {}
-            initial['sponsor'] = self.request.user.profile.sponsor
+            initial['sponsor'] = self.request.user.sponsor_profile.sponsor
             return initial
         else:
             return self.initial.copy()
