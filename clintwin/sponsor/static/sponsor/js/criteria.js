@@ -173,7 +173,7 @@ function handleEditCriteria(){
         $.getJSON(`/api/criteria_response/${criteria}`, function(result){
             $("#selected-criteria-form").empty();
             console.log(result);
-            
+
             let criteria_item = result.criteria;
             let template = null;
 

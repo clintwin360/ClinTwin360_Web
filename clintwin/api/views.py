@@ -115,6 +115,15 @@ class ParticipantBasicHealthViewSet(mixins.CreateModelMixin,
         ParticipantResponse.objects.create(participant=participant,
                                            question=ParticipantQuestion.objects.get(id=5),
                                            value=basic_health.sex)
+        # IF Male, post No to Pregnancy and Birth Control to avoid false non-matches,
+        # since they won't be asked those questions
+        if basic_health.sex == "M":
+            ParticipantResponse.objects.create(participant=participant,
+                                               question=ParticipantQuestion.objects.get(id=10),
+                                               value="No")
+            ParticipantResponse.objects.create(participant=participant,
+                                               question=ParticipantQuestion.objects.get(id=38),
+                                               value="No")
         ParticipantResponse.objects.create(participant=participant,
                                            question=ParticipantQuestion.objects.get(id=87),
                                            value=basic_health.bmi())
