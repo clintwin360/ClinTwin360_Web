@@ -12,7 +12,6 @@ schema_view = get_swagger_view(title='Pastebin API')
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('card/', views.card, name='card'),
     path('openapi2', schema_view),
     path('dashboard/', views.trial_dashboard, name='trial_dashboard'),
     # API Related Views
