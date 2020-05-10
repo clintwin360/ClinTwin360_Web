@@ -106,6 +106,8 @@ class ClinicalTrial(models.Model):
     status = models.CharField('Status', null=True, max_length=100, default='Draft', validators= [validate_status])
     current_recruitment = models.IntegerField('Current Recruitment', default=0, null=True, blank=True, validators=[MinValueValidator(0, "You can not enter a negative value")])
     is_virtual = models.BooleanField('Virtual Trial', null=True, help_text='Do you plan to administer this trial online?')
+    has_tasks = models.BooleanField(null=True)
+    is_archived = models.BooleanField(null=True)
 
     def __str__(self):
         ret = str(self.id) + ":" + self.title
@@ -212,6 +214,7 @@ class VirtualTrialParticipantQuestion(models.Model):
     valueType = models.CharField(max_length=50)
     # options = ArrayField(models.CharField(max_length=256))
     options = models.TextField()
+    frequency = models.DurationField(null=True)
 
     # categories = models.ManyToManyField(QuestionCategory)
 
