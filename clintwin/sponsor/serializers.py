@@ -154,6 +154,7 @@ class ClinicalTrialCriteriaResponseSerializer(serializers.ModelSerializer):
             "comparison": instance.comparison,
             "negated": instance.negated,
             "criteria": {"id": instance.criteria.id,
-                         "name": instance.criteria.name},
+                         "name": instance.criteria.name,
+                         "valueType": instance.criteria.valueType},
             "trial": instance.trial.id
         }

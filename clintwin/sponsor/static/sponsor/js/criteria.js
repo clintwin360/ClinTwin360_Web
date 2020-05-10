@@ -172,9 +172,9 @@ function handleEditCriteria(){
         let criteria = $(this).data('criteria');
         $.getJSON(`/api/criteria_response/${criteria}`, function(result){
             $("#selected-criteria-form").empty();
-
-            let criteria_id = result.criteria;
-            let criteria_item = criteria_list.find(item=>criteria_id === item.id);
+            console.log(result);
+            
+            let criteria_item = result.criteria;
             let template = null;
 
             if (criteria_item.valueType === 'enter_val_comp'){
