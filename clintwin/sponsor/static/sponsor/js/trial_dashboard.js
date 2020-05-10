@@ -248,6 +248,8 @@ function update_trial_details(props){
     $("#dashboard-description-text").text(props.description);
     $("#dashboard-trial-start-date").text(props.recruitmentStartDate);
     $("#dashboard-trial-end-date").text(props.recruitmentEndDate);
+    $("#dashboard-url-text").attr("href", `"${props.url}"`)
+    $("#dashboard-url-text").text(props.url);
     $("#selected-trial-header").data('trial',props.id);
     if(props.is_virtual == true){
         $("#dashboard-virtual-tag").show()
