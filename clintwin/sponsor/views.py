@@ -1,52 +1,32 @@
 ##  Original additions
-import csv, io  # NEW
-import os
+# New
+import ast
+import csv  # NEW
+import io
 from abc import ABC
 
+from bootstrap_datepicker_plus import DatePickerInput
 from django.contrib import messages  # NEW
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-
-from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
+from django.contrib.auth.models import Group
+from django.core.management import call_command
+from django.forms import CheckboxInput
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import redirect
 from django.shortcuts import render
-
-from django.views.generic import TemplateView
-
-from django.forms import PasswordInput
-# from .forms import *
-from sponsor.forms import NewAccountForm, NewAccountSponsorAdminForm
 # from .forms import AuthenticationForm
 from django.urls import reverse_lazy
 from django.views import generic
-from rest_framework import viewsets
-from rest_framework import permissions
-from rest_framework import generics
-from django.contrib.auth.forms import UserCreationForm, PasswordResetForm
-# New additions
+from django.views.generic import TemplateView
 
-from rest_framework.decorators import api_view, permission_classes
-from .models import Contact, Sponsor, Participant, ClinicalTrial, ClinicalTrialCriteriaResponse, \
-    ParticipantQuestion
-from django.contrib.auth.models import User
+# from .forms import *
+from sponsor.forms import NewAccountSponsorAdminForm
 from .serializers import *
-from django.core.management import call_command
-from django.shortcuts import redirect
-from django.contrib.auth import views as auth_views, logout
-from rest_framework.renderers import TemplateHTMLRenderer
-from django.db.models import Count
 
-# New
-from django.views.generic import ListView
-from django_tables2 import SingleTableView
-from .tables import ClinicalTrialTable
-import ast
-from rest_framework import pagination
-
-from bootstrap_datepicker_plus import DatePickerInput
-from django.forms import fields, CheckboxInput
-from django.core.exceptions import ValidationError
-from django.contrib.auth.models import Group
-from django.core.mail import send_mail
+# New additions
 
 # Create your views here.
 
