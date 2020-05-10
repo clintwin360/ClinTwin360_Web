@@ -159,10 +159,6 @@ def login_success(request):
         return redirect('index')
 
 
-class TrialDetailView(LoginRequiredMixin, generic.DetailView):
-    model = ClinicalTrial
-
-
 class TrialUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = ClinicalTrial
     fields = '__all__'
@@ -636,11 +632,3 @@ class AboutPageView(TemplateView):
 # Static page for How it Works
 class HowWorksPageView(TemplateView):
     template_name = 'sponsor/how_works.html'
-
-
-# Test views
-
-@login_required
-def card(request):
-    trials = ClinicalTrial.objects.filter()
-    return render(request, 'sponsor/card.html')
