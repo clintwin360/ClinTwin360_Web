@@ -38,14 +38,30 @@ div.bottom-nav {
   width: 100%;
 }
 
-.bottom-nav-link{
-    font-size: 24px;
+.bottom-nav-link {
+    font-size: xx-large; /* changed from 24px */
     font-family: Helvetica Medium, sans-serif;
     color: #4bc5ef;
 }
 
-.criteria-item{
+.criteria-item, .ui-menu-item, .select2-results__option {
+  font-size: x-large;
+  font-weight: lighter;
+}
 
+
+#add_btn {
+  font-size: xx-large;
+  padding: 10px;
+  height: 70px;
+  width: 160px;
+}
+
+#criteria-lookup {
+  font-size: x-large;
+  padding: 10px;
+  height: 70px;
+  width: 310px;
 }
 
 .criteria-item:hover {
@@ -59,7 +75,6 @@ svg.bi-x-circle{
 svg.bi-pencil{
     display: none;
 }
-
 
 rect.btn {
   stroke:#fff;

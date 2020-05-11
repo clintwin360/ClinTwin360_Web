@@ -3,6 +3,7 @@
 /* Make all labled bold with grey color */
 label {
   font-weight: bold;
+  font-size: x-large;
   color: #4b555a;
 }
 
@@ -15,6 +16,7 @@ textarea.form-control {
   outline: none;
   box-shadow: none;
   width:100%;
+  font-size: large;
 }
 
 /* Reducing height of all text entry fields */
