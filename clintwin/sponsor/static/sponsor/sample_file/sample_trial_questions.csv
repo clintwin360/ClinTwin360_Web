@@ -1,6 +1,5 @@
 ﻿id,text,valueType,options
-1,How often do you measure your heart rate each day?,pick_one,"[""never"";""1"";""2"";""3""; ""4""; ""5""]"
-2,How often do you measure your blood pressure each day?,pick_one,"[""never"";""1"";""2"";""3""; ""4""; ""5""]"
-3,Did you stretch today?,yes_no,"[""Yes"";""No""]"
-4,Have you had to do physical therapy?,yes_no,"[""Yes"";""No""]"
-5,How old are you?,large_option_set,"{""min"":0;""max"":140;""increment"":1;""unit"":""years""}"
+1,Are you still seeing lines of code when you close your eyes?,yes_no,"[""Yes"";""No""]"
+2,How rested do you feel on a scale of 1-5?,pick_one,"[""1"";""2"";""3"";""4"";""5""]"
+3,Do you feel like you have so much more time on your hands now?,yes_no,"[""Yes"";""No""]"
+4,Do you plan to continue working on your project?,yes_no,"[""Yes"";""No""]"

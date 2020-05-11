@@ -1,6 +1,6 @@
 .card{
   width: 100vw;
-  height: 200px;
+  height: 225px;
   margin-left: 10px;
   margin-top: 0.5rem;
   padding-top: 0.5rem;
@@ -41,6 +41,7 @@
   padding-top: 0.5rem;
   padding-bottom: 0.2rem;
   padding-left: 0.3rem;
+  font-size: 23px;
 }
 
 .card-text{
@@ -55,14 +56,17 @@
 #id-tag {
   float: left;
   padding-left: 0.3rem;
+  font-size: 20px;
 }
 
 #trial-card-virtual-tag{
   margin: 0 2px;
+  font-size: 15px;
 }
 
 #trial-card-status-tag{
   margin: 0 2px;
+  font-size: 15px;
 }
 
 #target-span {
@@ -83,6 +87,7 @@
 #more-info {
   float: left;
   padding-left: 0.5rem;
+  font-size: 13px;
 }
 
 #info {

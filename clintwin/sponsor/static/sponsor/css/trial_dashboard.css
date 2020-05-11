@@ -83,40 +83,43 @@ body, html {
 }
 /* ===== */
 
+.new-trial {
+    position:absolute;
+    bottom: 4px;
+    right: -20px;
+}
+
 .trial-search {
     position:absolute;
     bottom: 4px;
-    right: -22px;
-}
-
-.trial-filter{
-    position:absolute;
-    bottom: 4px;
-    right: 232px;
+    right: 190px;
     display: inline-block;
-    vertical-align: middle;
+    /* vertical-align: middle; */
     font-size: 17px;
+    width: 170px;
 }
 
 .trial-sort {
     position:absolute;
     bottom: 4px;
-    right: 452px;
+    right: 370px;
     display: inline-block;
     vertical-align: middle;
     font-size: 17px;
 }
 
-.new-trial {
-    position:absolute;
-    bottom: 0;
-    right: 670px;
-    width: 150px;
+.trial-filter {
+  position:absolute;
+  bottom: 4px;
+  right: 605px;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 17px;
 }
 
-.glyphicon.glyphicon-edit{
+.glyphicon.glyphicon-plus{
   font-size:25px;
-  padding: 2px;
+  padding: 20px;
   padding-top: 0;
   background: transparent;
   border: 0;
