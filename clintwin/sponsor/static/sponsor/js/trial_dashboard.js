@@ -108,6 +108,7 @@ function setupTrialSorting(){
 }
 
 function sortTrials(key,order){
+    let selected_card = $(".selected-card");
     let order_modifier = "";
     if (order === 'descending'){
         order_modifier = "-"
@@ -118,8 +119,20 @@ function sortTrials(key,order){
         $.each(result.results, function(i, field){
             add_trial_card(field);
             });
-        update_trial_details(result.results[0])
-        get_trial_criteria(result.results[0].id)
+
+
+        if ($(selected_card).length == 1){
+            let selected_card_id = $(selected_card).data('trial');
+            update_trial_details(result.results.find(x=>x.id === selected_card_id));
+            get_trial_criteria(selected_card_id);
+            selectCard($(`#trial-card-${selected_card_id}`));
+        }else{
+            update_trial_details(result.results[0]);
+            get_trial_criteria(result.results[0].id);
+            selectCard($(`#trial-card-${result.results[0].id}`));
+        }
+
+
     });
 
 }
@@ -430,6 +443,26 @@ function registerEditCriteria() {
     })
 }
 
+
+function selectCard(card){
+    if ($(card).hasClass("selected-card")){
+        return;
+    }
+    $(".selected-card").css('background-color', 'white');
+    $(".selected-card").removeClass('selected-card');
+    $(card).addClass('selected-card');
+    if ($('.selected-card:hover').length > 0){
+        $(card).css('background-color', '#62bbff');
+    }else{
+        $(card).css('background-color', '#98d9ff');
+    }
+
+    get_trial_details($(card).data('trial'));
+}
+
+
+
+
 $(function(){
     let key = $("#trial-sort").val();
     let order = $(".set-order:visible").data("order");
@@ -458,13 +491,7 @@ $(function(){
 
 
     $(document).on( "click",".card", function() {
-        if ($(this).hasClass("selected-card")){
-            return;
-        }
-        $(".selected-card").css('background-color', 'white');
-        $(".selected-card").removeClass('selected-card');
-        $(this).addClass('selected-card');
-        get_trial_details($(this).data('trial'));
+        selectCard($(this));
     });
 
 
