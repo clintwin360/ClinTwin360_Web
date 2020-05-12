@@ -51,16 +51,18 @@ div.bottom-nav {
 
 
 #add_btn {
-  font-size: xx-large;
-  padding: 10px;
-  height: 70px;
-  width: 160px;
+  font-size: x-large;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  height: 50px;
+  width: 100px;
+  align-content: center;
 }
 
 #criteria-lookup {
   font-size: x-large;
   padding: 10px;
-  height: 70px;
+  height: 50px;
   width: 310px;
 }
 

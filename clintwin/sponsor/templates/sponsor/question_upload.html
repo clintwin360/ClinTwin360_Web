@@ -2,45 +2,62 @@
 {% load bootstrap4 %}
 {% bootstrap_css %}
 {% bootstrap_javascript jquery='full' %}
-{{ form.media }}
 {% load static %}
 {% load crispy_forms_tags %}
-{% block scripts %}
-
+{% block style %}
+<link href="{% static 'sponsor/css/criteria.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 {% endblock %}
-{% block title %}Upload CSV File Containing Trial Questions{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+{% endblock %}
+
 {% block content %}
+
 <br>
-<h2 id="create-trial">Upload CSV File Containing Trial Questions</h2>
+<h3 id="trial_id">{{clinicaltrial.custom_id}}</h3>
+<h4 class="new-trial-subtitle">Upload Trial Questions</h4>
+<p hidden id="criteria_trial_ID" data-type="{{ criteria_type }}">{{ clinicaltrial.id }}</p>
+
 <br><br>
 <div id="upload-question">
       <form id="upload-file" action="" method="post" enctype="multipart/form-data" novalidate>
         {% csrf_token %}
 
+        <input type="file" id="file-uploaded" name="fileUploaded" accept=".csv, text/plain">
+        <input type="submit" value="Upload" id="upload-btn"><br><br>
+
         {% if messages %}
-        <ul class="messages">
+        <div class="messages">
           {% for message in messages %}
-          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          <h7{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h7>
           {% endfor %}
-        </ul><br>
+        </div><br>
         {% endif %}
 
-
-        <input type="file" id="file-uploaded" name="fileUploaded" accept=".csv, text/plain"><br>
-        <input type="submit" value="Upload" id="upload-btn">
       </form><br><br>
+</div>
 
-      <h3 id="create-trial">Instructions for File Upload</h3><br>
-
+<div id="instructions">
         1.   <a href="{% static 'sponsor/sample_file/sample_trial_questions.csv' %}" target="_blank">Download</a> sample file.<br>
         2.   Fill out the id, question, valueType, and answer options for each questions.<br>
         3.   Make sure to follow the sample format for answer "options".<br>
         4.   Once completed, save as a CSV file and upload the file.<br><br>
-
-      <a id="return_button" class="btn btn-info returnbtn" href="/sponsor/dashboard/">Return to Dashboard</a>
-      <br>
-
 </div>
 
+
+
+<div class="bottom-nav">
+    <div class="d-flex flex-row justify-content-between">
+    <div class="p-2">
+        <a class="bottom-nav-link" href="/sponsor/trial/{{ clinicaltrial.id }}/criteria/review/">Review Criteria</a>
+    </div>
+    <div class="p-2">
+        <a class="bottom-nav-link" href="/sponsor/dashboard/">Dashboard</a>
+    </div>
+    </div>
+</div>
 
 {% endblock %}
