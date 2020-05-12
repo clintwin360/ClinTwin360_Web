@@ -9,11 +9,10 @@ from push_notifications.api.rest_framework import APNSDeviceAuthorizedViewSet
 
 schema_view = get_swagger_view(title='Pastebin API')
 
-
-
 router = routers.DefaultRouter()
 router.register(r'questions', views.ParticipantQuestionViewSet)
-router.register(r'virtual_questions', views.VirtualTrialParticipantQuestionViewSet)
+router.register(r'virtual_questions', views.VirtualTrialParticipantQuestionViewSet,
+                basename='VirtualTrialParticipantQuestion')
 router.register(r'criteria', views.ClinicalTrialCriteriaViewSet, basename='ClinicalTrialCriteria')
 router.register(r'participants', views.ParticipantViewSet)
 router.register(r'health', views.ParticipantBasicHealthViewSet)
@@ -24,7 +23,8 @@ router.register(r'matches', views.ClinicalTrialMatchViewSet, basename='ClinicalT
 router.register(r'trials', views.ClinicalTrialViewSet, basename='ClinicalTrial')
 router.register(r'enroll', views.ClinicalTrialEnrollmentViewSet, basename='ClinicalTrialEnrollment')
 router.register(r'sponsor_request', views.SponsorRequestViewSet)
-router.register(r'criteria_response', views.ClinicalTrialCriteriaResponseViewSet, basename='ClinicalTrialCriteriaResponse')
+router.register(r'criteria_response', views.ClinicalTrialCriteriaResponseViewSet,
+                basename='ClinicalTrialCriteriaResponse')
 router.register(r'device/apns', APNSDeviceAuthorizedViewSet)
 
 urlpatterns = [

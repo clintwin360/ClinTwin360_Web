@@ -1,7 +1,6 @@
 from datetime import date
 from django.core.validators import URLValidator, validate_email, MinValueValidator
 from phonenumber_field.modelfields import PhoneNumberField
-
 from django.contrib.auth.models import User
 from django.db import models
 # from django.contrib.postgres.fields import ArrayField
@@ -16,8 +15,6 @@ from .validators import *
 # End of new additions
 
 # Create your models here
-
-
 def is_clintwin(self):
     return self.groups.filter(name='clintwin').exists()
 
@@ -106,7 +103,6 @@ class ClinicalTrial(models.Model):
     status = models.CharField('Status', null=True, max_length=100, default='Draft', validators= [validate_status])
     current_recruitment = models.IntegerField('Current Recruitment', default=0, null=True, blank=True, validators=[MinValueValidator(0, "You can not enter a negative value")])
     is_virtual = models.BooleanField('Virtual Trial', null=True, help_text='Do you plan to administer this trial online?')
-    has_tasks = models.BooleanField(null=True)
     is_archived = models.BooleanField(null=True)
 
     def __str__(self):
@@ -144,6 +140,17 @@ class Participant(models.Model):
 
     def __str__(self):
         return self.name()
+
+
+class ParticipantQuestion(models.Model):
+    text = models.TextField()
+    valueType = models.CharField(max_length=50)
+    # options = ArrayField(models.CharField(max_length=256))
+    options = models.TextField()
+    categories = models.ManyToManyField(QuestionCategory)
+
+    def __str__(self):
+        return self.text
 
 
 class ParticipantProfile(models.Model):
@@ -196,16 +203,10 @@ class ClinicalTrialEnrollment(models.Model):
     def __str__(self):
         return self.participant.name() + ":" + self.clinical_trial.title
 
-
-class ParticipantQuestion(models.Model):
-    text = models.TextField()
-    valueType = models.CharField(max_length=50)
-    # options = ArrayField(models.CharField(max_length=256))
-    options = models.TextField()
-    categories = models.ManyToManyField(QuestionCategory)
-
-    def __str__(self):
-        return self.text
+    def has_tasks(self):
+        from .views import calculate_virtual_tasks
+        current_questions = calculate_virtual_tasks(self.participant, self.clinical_trial)
+        return len(current_questions)
 
 
 class VirtualTrialParticipantQuestion(models.Model):
@@ -245,9 +246,10 @@ class ParticipantResponse(models.Model):
 
 
 class VirtualTrialParticipantResponse(models.Model):
-    question = models.ForeignKey(VirtualTrialParticipantQuestion, on_delete=models.CASCADE)
+    question = models.ForeignKey(VirtualTrialParticipantQuestion, on_delete=models.CASCADE,
+                                 related_name='virtual_responses')
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE, related_name='virtual_responses')
-    value = models.CharField(max_length=50)
+    value = models.CharField(max_length=1024)
     answered_on = models.DateTimeField(auto_now=True, null=True)
 
     def __str__(self):

@@ -131,7 +131,9 @@ def question_upload(request, pk):
             clinical_trial = trial
             text = column[1]
             valueType = column[2]
-            options = column[3].replace(";", ",").replace('"[', '[').replace(']"', ']').replace('"{', '{').replace('}"','}').replace('""', '"')
+            options = column[3].replace(";", ",").replace('"[', '[').replace(']"', ']').replace('"{', '{').replace('}"',
+                                                                                                                   '}').replace(
+                '""', '"')
             frequency = timedelta(int(column[4]))
 
             vtquestion = VirtualTrialParticipantQuestion.objects.create(
@@ -602,6 +604,23 @@ def question_flow(request):
                                   'followups':
                                       [{'response': x.response, 'next_question': x.next_question.id} for x in flow]})
     return JsonResponse(data)
+
+
+def calculate_virtual_tasks(participant,clinical_trial):
+    virtual_questions = clinical_trial.virtual_questions.all()
+    virtual_responses = participant.virtual_responses.all()
+    current_questions = []
+    for vq in virtual_questions:
+        responses_for_q = virtual_responses.filter(question=vq).order_by('-last_answered')
+        if responses_for_q.count() > 0:
+            last_answered = responses_for_q[0].last_answered
+            response_delta = now - last_answered;
+            q_frequency = vq.frequency
+            if response_delta > q_frequency:
+                current_questions.append(vq.id)
+        else:
+            current_questions.append(vq.id)
+    return current_questions
 
 
 def load_data(request):

@@ -3,7 +3,6 @@ from collections import OrderedDict
 from .models import *
 from rest_framework import serializers
 import ast
-from rest_framework.renderers import JSONRenderer
 
 
 class ParticipantQuestionSerializer(serializers.ModelSerializer):
@@ -115,7 +114,7 @@ class ClinicalTrialField(serializers.PrimaryKeyRelatedField):
             item = ClinicalTrial.objects.get(pk=pk)
             serializer = ClinicalTrialSerializer(item)
             return serializer.data
-        except ClinicalTrialEnrollment.DoesNotExist:
+        except ClinicalTrial.DoesNotExist:
             return None
 
     def get_choices(self, cutoff=None):
@@ -127,11 +126,12 @@ class ClinicalTrialField(serializers.PrimaryKeyRelatedField):
 
 
 class ClinicalTrialEnrollmentSerializer(serializers.ModelSerializer):
+    has_tasks = serializers.IntegerField(required=False)
     clinical_trial = ClinicalTrialField(queryset=ClinicalTrial.objects.all())
 
     class Meta:
         model = ClinicalTrialEnrollment
-        fields = ['participant', 'clinical_trial']
+        fields = ['participant', 'clinical_trial', 'has_tasks']
 
 
 class ClinicalTrialCriteriaResponseSerializer(serializers.ModelSerializer):
