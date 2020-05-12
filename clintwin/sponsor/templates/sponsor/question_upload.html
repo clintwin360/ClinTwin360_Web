@@ -25,14 +25,14 @@
         </ul><br>
         {% endif %}
 
-        
+
         <input type="file" id="file-uploaded" name="fileUploaded" accept=".csv, text/plain"><br>
         <input type="submit" value="Upload" id="upload-btn">
       </form><br><br>
 
       <h3 id="create-trial">Instructions for File Upload</h3><br>
 
-        1.   <a href="{% static 'sponsor/sample_file/sample_trial_questions.xlsx' %}" target="_blank">Download</a> sample file.<br>
+        1.   <a href="{% static 'sponsor/sample_file/sample_trial_questions.csv' %}" target="_blank">Download</a> sample file.<br>
         2.   Fill out the id, question, valueType, and answer options for each questions.<br>
         3.   Make sure to follow the sample format for answer "options".<br>
         4.   Once completed, save as a CSV file and upload the file.<br><br>

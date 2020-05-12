@@ -1,5 +1,6 @@
-﻿id,text,valueType,options
-1,Are you still seeing lines of code when you close your eyes?,yes_no,"[""Yes"";""No""]"
-2,How rested do you feel on a scale of 1-5?,pick_one,"[""1"";""2"";""3"";""4"";""5""]"
-3,Do you feel like you have so much more time on your hands now?,yes_no,"[""Yes"";""No""]"
-4,Do you plan to continue working on your project?,yes_no,"[""Yes"";""No""]"
+﻿id,text,valueType,options,frequency
+1,Are you still seeing lines of code when you close your eyes?,yes_no,"[""Yes"";""No""]",1
+2,How rested do you feel on a scale of 1-5?,pick_one,"[""1"";""2"";""3"";""4"";""5""]",1
+3,Do you feel like you have so much more time on your hands now?,yes_no,"[""Yes"";""No""]",1
+4,How many hours of sleep did you get?,pick_one,"[""3"";""5"";""5"";""6"";""7"";""8+""]",1
+5,Do you plan to continue working on your project?,yes_no,"[""Yes"";""No""]",1

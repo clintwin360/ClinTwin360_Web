@@ -3,6 +3,7 @@
 import ast
 import csv  # NEW
 import io
+from datetime import timedelta
 from abc import ABC
 
 from bootstrap_datepicker_plus import DatePickerInput
@@ -130,12 +131,11 @@ def question_upload(request, pk):
             clinical_trial = trial
             text = column[1]
             valueType = column[2]
-            options = column[3].replace(";", ",").replace('"[', '[').replace(']"', ']').replace('"{', '{').replace('}"',
-                                                                                                                   '}').replace(
-                '""', '"')
+            options = column[3].replace(";", ",").replace('"[', '[').replace(']"', ']').replace('"{', '{').replace('}"','}').replace('""', '"')
+            frequency = timedelta(int(column[4]))
 
             vtquestion = VirtualTrialParticipantQuestion.objects.create(
-                clinical_trial=clinical_trial, text=text, valueType=valueType, options=options)
+                clinical_trial=clinical_trial, text=text, valueType=valueType, options=options, frequency=frequency)
         vtquestion.save()
         vtquestions = VirtualTrialParticipantQuestion.objects.all().filter(clinical_trial=pk)
         context = {}
