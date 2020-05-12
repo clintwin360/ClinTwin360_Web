@@ -12,15 +12,12 @@ from rest_framework.authtoken.models import Token
 from .serializers import UserSerializer
 from sponsor.serializers import *
 from sponsor.models import *
-from sponsor.views import calculate_trial_matches
+from sponsor.views import calculate_trial_matches, calculate_virtual_tasks
 from rest_framework import viewsets, mixins
 from rest_framework import permissions
 from django.contrib.auth import get_user
 from django_filters.rest_framework import DjangoFilterBackend
-
-from sponsor.models import Participant, ParticipantResponse, ParticipantQuestion
-
-from sponsor.serializers import ParticipantSerializer
+from datetime import datetime
 
 
 def get_token(request):
@@ -64,11 +61,23 @@ class VirtualTrialParticipantQuestionViewSet(mixins.ListModelMixin,
     """
     retrieve a list of questions
     """
-    queryset = VirtualTrialParticipantQuestion.objects.all()
     serializer_class = VirtualTrialParticipantQuestionSerializer
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['clinical_trial']
     # permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        now = datetime.now()
+        clinical_trial_id = self.request.query_params.get('clinical_trial', None)
+        if clinical_trial_id:
+            clinical_trial = ClinicalTrial.objects.get(id=clinical_trial_id)
+        else:
+            print("clinical_trial parameter missing")
+            return VirtualTrialParticipantQuestion.objects.none()
+        if self.request.user.is_participant() and clinical_trial.is_virtual:
+            participant = self.request.user.participant_profile.participant
+            current_questions = calculate_virtual_tasks(participant, clinical_trial)
+            return VirtualTrialParticipantQuestion.objects.filter(id__in=current_questions)
+        else:
+            return VirtualTrialParticipantQuestion.objects.none()
 
 
 class ParticipantViewSet(mixins.RetrieveModelMixin,
@@ -203,8 +212,8 @@ class ClinicalTrialEnrollmentViewSet(mixins.CreateModelMixin,
 
     def get_queryset(self):
         if self.request.user.is_participant():
-            participant = Participant.objects.filter(email=self.request.user.username)
-            queryset = ClinicalTrialEnrollment.objects.filter(participant__in=participant)
+            participant = self.request.user.participant_profile.participant
+            queryset = ClinicalTrialEnrollment.objects.filter(participant=participant)
         else:
             queryset = ClinicalTrialEnrollment.objects.none()
 
