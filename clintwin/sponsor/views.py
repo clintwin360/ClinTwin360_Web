@@ -110,12 +110,11 @@ def question_upload(request, pk):
     print(trial)
     # declaring template
     template = 'sponsor/question_upload.html'
-    prompt = {'order': 'order of CSV should be text, valueType, options'
-              }
+    data = {'order': 'order of CSV should be text, valueType, options', 'clinicaltrial': trial}
 
     # Handle the GET model
     if request.method == "GET":
-        return render(request, template, prompt)
+        return render(request, template, data)
     # Handle the POST model
     if request.method == "POST":
         csv_file = request.FILES['fileUploaded']
