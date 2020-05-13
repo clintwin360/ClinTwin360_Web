@@ -27,11 +27,13 @@
                     <td>{{ sponsor.contactPerson }}</td>
                     <td>{{ sponsor.date_joined }}</td>
                     <td>{{ sponsor.notes }}</td>
-                    <td>
-                        <a class="btn btn-info viewbtn\" href="/sponsor/profile/{{ sponsor.id }}">View
-                        <a class="btn btn-secondary editbtn\" href="/sponsor/updateprofile/{{ sponsor.id }}">Edit
-                        <a class="btn btn-danger deletebtn\" href="/sponsor/deleteprofile/{{ sponsor.id }}">Delete
-                    </td>
+                    <span>
+                        <td>
+                            <a class="btn btn-info viewbtn\" href="/sponsor/profile/{{ sponsor.id }}">View
+                            <a class="btn btn-secondary editbtn\" href="/sponsor/updateprofile/{{ sponsor.id }}">Edit
+                            <a class="btn btn-danger deletebtn\" href="/sponsor/deleteprofile/{{ sponsor.id }}">Delete
+                        </td>
+                    </span>
                 </tr>
             {% endfor %}
             </tbody>
