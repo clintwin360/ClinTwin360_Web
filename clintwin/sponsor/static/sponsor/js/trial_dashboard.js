@@ -15,33 +15,7 @@ function getCookie(name) {
     return cookieValue;
 }
 
-function trialDetailsTemplate(){
-    return          `<div>`+
-                    `<div class="d-flex flex-row justify-content-center">`+
-                        `<div class="title-left"></div>`+
-                        `<h2 id="dashboard-trial-title" class="text-center"></h2>`+
-                        `<div class="title-right"><sup id="dashboard-virtual-tag" class="bg-primary rounded text-white tag" hidden>virtual</sup></div>`+
-                    `</div>`+
-                    `<h5 class="text-muted text-center"><span id="dashboard-trial-start-date"></span> - <span id="dashboard-trial-end-date"></span></h5>`+
-                `</div>`+
-                `<div>`+
-                        `<h6>Objective</h6>`+
-                        `<p id="dashboard-objective-text" class="text-muted"></p>`+
-                        `<h6>Description</h6>`+
-                        `<p id="dashboard-description-text" class="text-muted"></p>`+
-                        `<h6>URL</h6>`+
-                        `<a id="dashboard-url-text" href=""></a>`+
-                    `<br>`+
-                    `<br>`+
-                `<h6>Criteria</h6>`+
-                        `<strong>Inclusion</strong>`+
-                        `<ul id="dashboard-inclusion-criteria">`+
-                        `</ul>`+
-                        `<strong>Exclusion</strong>`+
-                        `<ul id="dashboard-exclusion-criteria">`+
-                        `</ul>`+
-                `</div>`
-}
+
 
 
 
@@ -168,7 +142,7 @@ function sortTrials(key,order){
 
         }else{
             $("#dashboard-trial-cards").html(`<div class="col-4"></div><div class="col-4 align-self-center text-center">No Trials. Click the + button to create a new trial</div>`)
-            $("#dashboard-trial-details").html(`<div class="col-4"></div><div class="col-4 align-self-center text-center">Select a Trial to view details</div>`)
+            $("#dashboard-trial-details").html(`<div class="row no-trials"><div class="col-4"></div><div class="col-4 align-self-center text-center">Select a Trial to view details</div></div>`)
         }
 
 
@@ -295,15 +269,36 @@ function trial_card_template(props){
 }
 
 
+function trialDetailsTemplate(props){
+    return          `<div>`+
+                    `<div class="d-flex flex-row justify-content-center">`+
+                        `<div class="title-left"></div>`+
+                        `<h2 id="dashboard-trial-title" class="text-center">${props.title}</h2>`+
+                        `<div class="title-right"><sup id="dashboard-virtual-tag" class="bg-primary rounded text-white tag" hidden>virtual</sup></div>`+
+                    `</div>`+
+                    `<h5 class="text-muted text-center"><span id="dashboard-trial-start-date">${props.recruitmentStartDate}</span> - <span id="dashboard-trial-end-date">${props.recruitmentEndDate}</span></h5>`+
+                `</div>`+
+                `<div>`+
+                        `<h6>Objective</h6>`+
+                        `<p id="dashboard-objective-text" class="text-muted">${props.objective}</p>`+
+                        `<h6>Description</h6>`+
+                        `<p id="dashboard-description-text" class="text-muted">${props.description}</p>`+
+                        `<h6>URL</h6>`+
+                        `<a id="dashboard-url-text" href="${props.url}">${props.url}</a>`+
+                    `<br>`+
+                    `<br>`+
+                `<h6>Criteria</h6>`+
+                        `<strong>Inclusion</strong>`+
+                        `<ul id="dashboard-inclusion-criteria">`+
+                        `</ul>`+
+                        `<strong>Exclusion</strong>`+
+                        `<ul id="dashboard-exclusion-criteria">`+
+                        `</ul>`+
+                `</div>`
+}
+
 function update_trial_details(props){
-    $("#dashboard-trial-details").html(trialDetailsTemplate());
-    $("#dashboard-trial-title").text(props.title)
-    $("#dashboard-objective-text").text(props.objective);
-    $("#dashboard-description-text").text(props.description);
-    $("#dashboard-trial-start-date").text(props.recruitmentStartDate);
-    $("#dashboard-trial-end-date").text(props.recruitmentEndDate);
-    $("#dashboard-url-text").attr("href", `"${props.url}"`)
-    $("#dashboard-url-text").text(props.url);
+    $("#dashboard-trial-details").html(trialDetailsTemplate(props));
     $("#selected-trial-header").data('trial',props.id);
     if(props.is_virtual == true){
         $("#dashboard-virtual-tag").show()
@@ -497,7 +492,6 @@ function selectCard(card){
     }else{
         $(card).css('background-color', '#98d9ff');
     }
-
     get_trial_details($(card).data('trial'));
 }
 

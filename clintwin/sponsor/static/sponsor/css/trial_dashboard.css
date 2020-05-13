@@ -24,13 +24,12 @@
     height: 77vh;
     overflow: hidden;
     overflow-y: auto;
-    border-left: 1px solid gray;
-    border-top: 1px solid gray;
-    border-bottom: 1px solid gray;
+    border: 1px solid gray;
     border-radius: 10px;
     padding-right: 20px;
     padding-left: 20px;
     padding-top: 10px;
+    margin-left: 20px;
     align-content: flex-start;
 }
 
@@ -38,13 +37,32 @@
     height: 77vh;
     overflow: hidden;
     overflow-y: auto;
-    border-left: 1px solid gray;
-    border-top: 1px solid gray;
-    border-bottom: 1px solid gray;
+    border: 1px solid gray;
     border-radius: 10px;
     padding-right: 20px;
     padding-left: 20px;
     padding-top: 15px;
+    margin-right: 20px;
+    align-content: flex-start;
+}
+
+::-webkit-scrollbar {
+    width: 0px;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+    background: #FF0000;
+}
+
+.no-trials {
+    height: 75vh;
+    overflow: hidden;
+    overflow-y: auto;
+    border-radius: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 10px;
     align-content: flex-start;
 }
 
