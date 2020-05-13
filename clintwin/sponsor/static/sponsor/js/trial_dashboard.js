@@ -80,7 +80,10 @@ function registerDeleteTrial(){
           allowOutsideClick: () => !Swal.isLoading()
         }).then((result) => {
           if (result.value) {
-              $(`#trial-card-${id}`).remove()
+                $(`#trial-card-${id}`).remove()
+                let key = $(this).val();
+                let order = $(".set-order:visible").data("order");
+                sortTrials(key,order);
             Swal.fire(
               'Deleted!',
               'Your file has been deleted.',

@@ -24,10 +24,31 @@
     height: 77vh;
     overflow: hidden;
     overflow-y: auto;
-    border: 1px solid blue;
-    padding: 20px;
+    border-left: 1px solid gray;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    border-radius: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 10px;
     align-content: flex-start;
 }
+
+.trial-details {
+    height: 77vh;
+    overflow: hidden;
+    overflow-y: auto;
+    border-left: 1px solid gray;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    border-radius: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 15px;
+    align-content: flex-start;
+}
+
+
 
 body, html {
   margin: 0;
