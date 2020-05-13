@@ -227,7 +227,7 @@ class SponsorDetailView(LoginRequiredMixin, generic.DetailView):
     model = Sponsor
 
 
-class SponsorUpdateView(LoginRequiredMixin, generic.UpdateView):
+class SponsorUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     model = Sponsor
     fields = '__all__'
 
