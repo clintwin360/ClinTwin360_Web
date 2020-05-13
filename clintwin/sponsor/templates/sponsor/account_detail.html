@@ -6,16 +6,19 @@
 
 {% block content %}
 <br><h2 id="account-detail-title"><u>Account Details</u></h2><br>
-<p><strong>Username:</strong> {{ user.username }}</p>
-<p><strong>Email:</strong> {{ user.email }}</p>
-<p><strong>Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
-<p><strong>Sponsor:</strong> <a href="/sponsor/profile/{{ user.profile.sponsor.id }}">{{ user.profile.sponsor.id }} - {{ user.profile.sponsor.organization }}</a></p>
-<p><strong>Admin:</strong> {{user.is_sponsor_admin}}</p>
-<p><strong>Created At:</strong> {{ user.date_joined }}</p>
+<p><strong>Username:</strong> {{ user_object.username }}</p>
+<p><strong>Email:</strong> {{ user_object.email }}</p>
+<p><strong>Name:</strong> {{ user_object.first_name }} {{ user_object.last_name }}</p>
+<p><strong>Sponsor:</strong> <a href="/sponsor/profile/{{ user.profile.sponsor.id }}">{{ user_object.sponsor_profile.sponsor.id }} - {{ user_object.sponsor_profile.sponsor.organization }}</a></p>
+<p><strong>Admin:</strong> {{user_object.is_sponsor_admin}}</p>
+<p><strong>Created At:</strong> {{ user_object.date_joined }}</p>
 {% if user.is_clintwin %}
 <a class="btn btn-info returnbtn" href="{% url 'viewsponsors' %}">Return to Sponsor Dashboard</a>
 {% endif %}
 {% if user.is_sponsor %}
 <a class="btn btn-info returnbtn" href="{% url 'trial_dashboard' %}">Return to Dashboard</a>
+{% endif %}
+{% if user.id == user_object.id %}
+<a class="btn btn-secondary editbtn" href="">Edit Profile</a>
 {% endif %}
 {% endblock %}

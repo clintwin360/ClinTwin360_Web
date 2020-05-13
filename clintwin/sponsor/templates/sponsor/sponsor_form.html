@@ -23,7 +23,7 @@
 
 		{{ form.organization|as_crispy_field }}
 		<!--<div class="d-flex justify-content-around">-->
-			
+
 		<!--</div>-->
 		{{ form.contactPerson|as_crispy_field }}
 		{{ form.email|as_crispy_field }}
@@ -31,8 +31,11 @@
 		{{ form.location|as_crispy_field }}
 		{{ form.notes|as_crispy_field }}
 
-
+        {% if user.is_clintwin %}
 		<a href="{% url 'viewsponsors' %}" class="btn btn-info" id="return_button" role="button">Return to Dashboard</a>
+        {% elif user.is_sponsor_admin %}
+        <a href="{% url 'trial_dashboard' %}" class="btn btn-info" id="return_button" role="button">Return to Dashboard</a>
+        {% endif %}
 		<input class="btn btn-success" type="submit" id="edit_button" value="Edit Sponsor">
 
 	</form>

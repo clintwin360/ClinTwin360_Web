@@ -235,7 +235,8 @@ class SponsorUpdateView(LoginRequiredMixin, generic.UpdateView):
         sponsorid = self.kwargs['pk']
         return reverse_lazy('sponsordetail', kwargs={'pk': sponsorid})
 
-    # TODO limit to clintwin and sponsor admin
+    def test_func(self):
+        return (self.request.user.groups.filter(name='clintwin').exists() or self.request.user.groups.filter(name='sponsor_admin').exists())
 
 
 class DeleteSponsorView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
@@ -369,6 +370,7 @@ class NewAccountSponsorAdminView(LoginRequiredMixin, UserPassesTestMixin, generi
 class AccountDetailView(LoginRequiredMixin, generic.DetailView):
     model = User
     template_name = 'sponsor/account_detail.html'
+    context_object_name = 'user_object'
 
 
 @login_required
