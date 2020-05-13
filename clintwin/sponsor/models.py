@@ -87,6 +87,12 @@ class UserProfile(models.Model):
 
 
 class ClinicalTrial(models.Model):
+    STATUS_CHOICES = [
+        ('Draft', 'Draft'),
+        ('Published', 'Published'),
+        ('Active Recruitment', 'Active Recruitment'),
+        ('Recruitment Ended', 'Recruitment Ended'),
+    ]
     custom_id = models.CharField('Trial ID', max_length=100, null=True)
     sponsor = models.ForeignKey('Sponsor', null=True, on_delete=models.SET_NULL)
     title = models.CharField('Trial Title', null=True, max_length=500)
@@ -100,7 +106,7 @@ class ClinicalTrial(models.Model):
     location = models.CharField('Location', null=True, max_length=100)
     comments = models.TextField('Comments', null=True, blank=True)
     createdTimeStamp = models.DateTimeField(auto_now_add=True)
-    status = models.CharField('Status', null=True, max_length=100, default='Draft', validators= [validate_status])
+    status = models.CharField('Status', null=True, max_length=100, default='Draft', choices=STATUS_CHOICES, validators= [validate_status])
     current_recruitment = models.IntegerField('Current Recruitment', default=0, null=True, blank=True, validators=[MinValueValidator(0, "You can not enter a negative value")])
     is_virtual = models.BooleanField('Virtual Trial', null=True, help_text='Do you plan to administer this trial online?')
     is_archived = models.BooleanField(null=True)

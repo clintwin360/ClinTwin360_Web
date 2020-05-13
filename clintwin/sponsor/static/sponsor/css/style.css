@@ -345,4 +345,18 @@ button, #add_btn, #add_cri #cancel-criteria,
     width: 18%;
   }
 
+div.bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.bottom-nav-link {
+    font-size: xx-large; /* changed from 24px */
+    font-family: Helvetica Medium, sans-serif;
+    color: #4bc5ef;
+}
+
 /* Styling for the Create New Trial Page */

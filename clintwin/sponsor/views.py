@@ -164,7 +164,8 @@ class TrialUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = ClinicalTrial
     fields = '__all__'
 
-    def get_form(self):
+    def get_form(self, form_class=None):
+        print(self.request);
         form = super().get_form()
         form.fields['recruitmentStartDate'].widget = DatePickerInput(format='%m/%d/%Y')
         form.fields['recruitmentEndDate'].widget = DatePickerInput(format='%m/%d/%Y')
@@ -172,8 +173,9 @@ class TrialUpdateView(LoginRequiredMixin, generic.UpdateView):
         return form
 
     def get_success_url(self):
-        trialid = self.kwargs['pk']
-        return reverse_lazy('trialdetail', kwargs={'pk': trialid})
+        return reverse_lazy('trial_dashboard')
+
+
 
 
 class NewClinicalTrialView(LoginRequiredMixin, generic.CreateView):
