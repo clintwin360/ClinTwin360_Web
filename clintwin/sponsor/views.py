@@ -182,8 +182,7 @@ class NewClinicalTrialView(LoginRequiredMixin, generic.CreateView):
     model = ClinicalTrial
     fields = (
         'custom_id', 'title', 'is_virtual', 'sponsor', 'objective', 'recruitmentStartDate', 'recruitmentEndDate',
-        'enrollmentTarget', 'url',
-        'followUp', 'location', 'comments')
+        'enrollmentTarget', 'url','followUp', 'location', 'comments','description')
 
     template_name = 'sponsor/newtrial.html'
 
