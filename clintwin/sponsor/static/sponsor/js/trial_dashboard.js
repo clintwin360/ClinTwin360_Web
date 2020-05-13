@@ -274,7 +274,7 @@ function trialDetailsTemplate(props){
                     `<div class="d-flex flex-row justify-content-center">`+
                         `<div class="title-left"></div>`+
                         `<h2 id="dashboard-trial-title" class="text-center">${props.title}</h2>`+
-                        `<div class="title-right"><sup id="dashboard-virtual-tag" class="bg-primary rounded text-white tag" hidden>virtual</sup></div>`+
+                        `<div class="title-right"><sup id="dashboard-virtual-tag" class="bg-primary rounded text-white tag">virtual</sup></div>`+
                     `</div>`+
                     `<h5 class="text-muted text-center"><span id="dashboard-trial-start-date">${props.recruitmentStartDate}</span> - <span id="dashboard-trial-end-date">${props.recruitmentEndDate}</span></h5>`+
                 `</div>`+
