@@ -15,6 +15,36 @@ function getCookie(name) {
     return cookieValue;
 }
 
+function trialDetailsTemplate(){
+    return          `<div>`+
+                    `<div class="d-flex flex-row justify-content-center">`+
+                        `<div class="title-left"></div>`+
+                        `<h2 id="dashboard-trial-title" class="text-center"></h2>`+
+                        `<div class="title-right"><sup id="dashboard-virtual-tag" class="bg-primary rounded text-white tag" hidden>virtual</sup></div>`+
+                    `</div>`+
+                    `<h5 class="text-muted text-center"><span id="dashboard-trial-start-date"></span> - <span id="dashboard-trial-end-date"></span></h5>`+
+                `</div>`+
+                `<div>`+
+                        `<h6>Objective</h6>`+
+                        `<p id="dashboard-objective-text" class="text-muted"></p>`+
+                        `<h6>Description</h6>`+
+                        `<p id="dashboard-description-text" class="text-muted"></p>`+
+                        `<h6>URL</h6>`+
+                        `<a id="dashboard-url-text" href=""></a>`+
+                    `<br>`+
+                    `<br>`+
+                `<h6>Criteria</h6>`+
+                        `<strong>Inclusion</strong>`+
+                        `<ul id="dashboard-inclusion-criteria">`+
+                        `</ul>`+
+                        `<strong>Exclusion</strong>`+
+                        `<ul id="dashboard-exclusion-criteria">`+
+                        `</ul>`+
+                `</div>`
+}
+
+
+
 function registerDeleteTrial(){
         $("#delete-trial-link").click(function() {
         let id = $("#selected-trial-header").data('trial');
@@ -116,7 +146,8 @@ function sortTrials(key,order){
     let url = `/api/trials/?ordering=${order_modifier}${key}`;
     $.getJSON(url, function(result){
         $("#dashboard-trial-cards").empty();
-        $.each(result.results, function(i, field){
+        if (result.results.length > 0){
+            $.each(result.results, function(i, field){
             add_trial_card(field);
             });
 
@@ -131,6 +162,12 @@ function sortTrials(key,order){
             get_trial_criteria(result.results[0].id);
             selectCard($(`#trial-card-${result.results[0].id}`));
         }
+
+        }else{
+            $("#dashboard-trial-cards").html(`<div class="col-4"></div><div class="col-4 align-self-center text-center">No Trials. Click the + button to create a new trial</div>`)
+            $("#dashboard-trial-details").html(`<div class="col-4"></div><div class="col-4 align-self-center text-center">Select a Trial to view details</div>`)
+        }
+
 
 
     });
@@ -256,6 +293,7 @@ function trial_card_template(props){
 
 
 function update_trial_details(props){
+    $("#dashboard-trial-details").html(trialDetailsTemplate());
     $("#dashboard-trial-title").text(props.title)
     $("#dashboard-objective-text").text(props.objective);
     $("#dashboard-description-text").text(props.description);
