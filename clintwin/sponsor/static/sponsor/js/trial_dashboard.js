@@ -69,7 +69,10 @@ function registerDeleteTrial(){
 }
 
 function setupTrialFiltering(){
-    $("#trial-filter").select2();
+    $("#trial-filter").select2({
+        placeholder: "Filter",
+        allowClear: true});
+
     $("#trial-filter").change(function() {
         let status = $(this).val();
         let url = `/api/trials/`;
@@ -97,7 +100,15 @@ function setupTrialFiltering(){
 }
 
 function setupTrialSorting(){
-    $("#trial-sort").select2();
+    $("#trial-sort").select2({
+        placeholder: "Sort by",
+        allowClear: true,
+        data: [{id:"title",text:"Title"},
+            {id:"recruitmentStartDate",text:"Recruitment Start Date"},
+            {id:"recruitmentEndDate",text:"Recruitment End Date"},
+            {id:"enrollmentTarget",text:"Target Enrollment"},
+            {id:"current_recruitment",text:"Current Recruitment"}]
+});
     $("#trial-sort").change(function() {
         let key = $(this).val();
         let order = $(".set-order:visible").data("order");
@@ -539,5 +550,13 @@ $(function(){
 
     setupTrialSorting()
     setupTrialFiltering();
+
+    $("select").on("select2:clear", function (evt) {
+  $(this).on("select2:opening.cancelOpen", function (evt) {
+    evt.preventDefault();
+
+    $(this).off("select2:opening.cancelOpen");
+  });
+});
 
 });

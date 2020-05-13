@@ -1,20 +1,28 @@
 <div id="selected-trial-header" class="selected-trial-header">
 
-    <div class="trial-card-tools">
-    <div class="col-3 trial-sort">
-        <div class="sort-combo">
-        <select id="trial-sort" name="trial-sort"  style="width: 90%">
-            <option></option>
+
+
+    <div class="trial-sort">
+        <h4 class="sort-label">Sort by</h4>
+        <select id="trial-sort" name="trial-sort"  style="width: 150px">
+            <option value="title">Title</option>
+            <option value="recruitmentStartDate">Recruitment Start Date</option>
+            <option value="recruitmentStartDate">Recruitment End Date</option>
+            <option value="enrollmentTarget">Target Enrollment</option>
+            <option value="current_recruitment">Current Recruitment</option>
         </select>
         <a id="order-ascending" class="set-order" href="#" data-order="ascending"><i class='fas fa-angle-up'></i></a>
         <a id="order-descending" class="set-order"  href="#" data-order="descending"><i class='fas fa-angle-down'></i></a>
-        </div>
+
     </div>
 
 
-    <div class="col-3 trial-filter">
-        <select id="trial-filter" name="trial-filter"  style="width: 100%">
-            <option></option>
+
+
+    <div class="trial-filter">
+        <h4 class="filter-label">Filter</h4>
+        <select id="trial-filter" name="trial-filter"  style="width: 150px">
+            <option value="All" selected>All</option>
             <option value="Draft">Draft</option>
             <option value="Active Recruitment">Active</option>
             <option value="Recruitment Ended">Ended</option>
@@ -23,15 +31,13 @@
         </select>
     </div>
 
-    <div class="col-4 trial-search">
-      <input id="trial-search-field" class="form-control trial-search" type="search"  incremental="incremental" onsearch="searchTrials(this)"  placeholder="Search Trials" aria-label="Search">
-    </div>
 
-        <div class="col-1 new-trial">
+      <input id="trial-search-field" class="form-control trial-search" type="search"  incremental="incremental" onsearch="searchTrials(this)"  placeholder="Search Trials" aria-label="Search">
+
+        <div class="new-trial">
+      <!-- <h4 id="add-trial">Add Trial</h4> -->
       <a href="{% url 'newtrial' %}">
-          <span id="glyph-icon" class="glyphicon glyphicon-plus"></span>
+        <span id="glyph-icon" class="glyphicon glyphicon-plus"></span>
       </a>
     </div>
-
-</div>
 </div>

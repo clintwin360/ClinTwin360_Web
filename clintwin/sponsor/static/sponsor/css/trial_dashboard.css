@@ -7,17 +7,18 @@
 .selected-trial-header{
     height: 91px;
     display: flex;
+    position:relative;
 }
 
 .selected-trial-title{
     align-self: flex-end;
 }
 
-
 .page-container {
     height: 90vh;
     margin: 0;
     padding: 50;
+    min-width: 1250px;
 }
 
 .trial-cards {
@@ -97,9 +98,6 @@ body, html {
     padding: 2px;
 }
 
-.selected-trial-header {
-    position:relative;
-}
 .actions-menu {
     position:absolute;
     bottom:0;
@@ -122,43 +120,58 @@ body, html {
 }
 /* ===== */
 
-.new-trial {
-    position:absolute;
-    bottom: 4px;
-    right: -20px;
-}
+
 
 .trial-search {
-    position:absolute;
     bottom: 4px;
-    right: 190px;
     display: inline-block;
     /* vertical-align: middle; */
     font-size: 17px;
-    width: 170px;
 }
 
-.trial-sort {
-    position:absolute;
+#trial-search-field{
+    height: 36px;
+}
+
+.new-trial {
     bottom: 4px;
-    right: 370px;
     display: inline-block;
-    vertical-align: middle;
+    /* vertical-align: middle; */
     font-size: 17px;
 }
 
-.trial-filter {
-  position:absolute;
-  bottom: 4px;
-  right: 605px;
-  display: inline-block;
-  vertical-align: middle;
-  font-size: 17px;
+
+.trial-sort {
+    bottom: 4px;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 17px;
+    text-align : center;
+    padding-left: 40px;
 }
 
+.sort-combo{
+    min-width: 175px;
+}
+
+.trial-filter {
+    bottom: 4px;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 17px;
+    text-align : center;
+    padding-left: 40px;
+}
+
+.trial-card-tools{
+    position: absolute;
+    width: 113%;
+    bottom: 4px;
+
+}
+
+
 .glyphicon.glyphicon-plus{
-  font-size:25px;
-  padding: 20px;
   padding-top: 0;
   background: transparent;
   border: 0;
@@ -172,25 +185,6 @@ body, html {
   /* bottom: 2px; */
 }
 
-#glyph-icon {
-  top: 0;
-}
-
-.filter-label{
-    position: relative;
-    display: inline-block;
-    font-size: 17px;
-    font-family: Helvetica Medium, sans-serif;
-    bottom: -4px;
-}
-
-.sort-label{
-    position: relative;
-    display: inline-block;
-    font-size: 17px;
-    font-family: Helvetica Medium, sans-serif;
-    bottom: -4px;
-}
 
 .hilite {
     background-color: yellow;
