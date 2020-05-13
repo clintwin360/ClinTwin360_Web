@@ -29,3 +29,4 @@ django-bootstrap4
 django-bootstrap-datepicker-plus
 django-phonenumber-field
 phonenumbers
+apscheduler
