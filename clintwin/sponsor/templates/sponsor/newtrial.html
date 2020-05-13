@@ -23,7 +23,7 @@
     <h3 id="basic-info"> Basic Information </h3><br>
 
     <div id="new_trial_form">
-        <form method="post" novalidate>
+        <form id="new-trial-form" method="post" novalidate>
             {% csrf_token %}
 			{{ form.media }}
 
@@ -41,46 +41,18 @@
                     {{ form.objective|as_crispy_field }}
                     {{ form.description|as_crispy_field }}
 
-            <button class="btn btn-primary" type="submit" id="create_button">Create Trial</button>
-
         </form>
         <br><br><br><br>
     </div>
 </div>
+    <div class="bottom-nav">
+             <div class="d-flex flex-row justify-content-between">
+            <div class="p-2">
+                <a class="bottom-nav-link" href="/sponsor/dashboard/">Cancel</a>
+            </div>
+            <div class="p-2">
+                 <a class="bottom-nav-link" href="" onclick="$('#new-trial-form').submit();return false">Inclusion Criteria</a>
+            </div>
+        </div>
+</div>
 {% endblock %}
-
-<!-- The OLD Code -->
-<!-- <form method="post" novalidate>
-    {% csrf_token %}
-        <div class="col-6">
-            {{ form.title|as_crispy_field }}
-        </div>
-        <div class="col-6">
-            {{ form.url|as_crispy_field }}
-        </div>
-      <div class="row">
-        <div class="col-3">
-            {{ form.recruitmentStartDate|as_crispy_field }}
-        </div>
-        <div class="col-3">
-            {{ form.recruitmentEndDate|as_crispy_field }}
-        </div>
-      </div>
-
-      <div class="col-3">
-            {{ form.enrollmentTarget|as_crispy_field }}
-        </div>
-      <div class="col-3">
-              {{ form.location|as_crispy_field }}
-        </div>
-      <div class="col-6">
-            {{ form.objective|as_crispy_field }}
-        </div>
-
-      <div class="col-6">
-            {{ form.comments|as_crispy_field }}
-        </div>
-      <div class="col-6">
-            {{ form.followUp|as_crispy_field }}
-        </div>
-</form> -->
