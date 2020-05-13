@@ -162,7 +162,9 @@ def login_success(request):
 
 class TrialUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = ClinicalTrial
-    fields = '__all__'
+    fields = (
+        'custom_id', 'title', 'is_virtual', 'sponsor', 'objective', 'recruitmentStartDate', 'recruitmentEndDate',
+        'enrollmentTarget', 'url','followUp', 'location', 'comments','description')
 
     def get_form(self, form_class=None):
         print(self.request);
@@ -228,7 +230,7 @@ class SponsorDetailView(LoginRequiredMixin, generic.DetailView):
 
 class SponsorUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     model = Sponsor
-    fields = '__all__'
+    fields = ['organization', 'contactPerson', 'location', 'phone', 'email', 'notes']
 
     def get_success_url(self):
         sponsorid = self.kwargs['pk']
