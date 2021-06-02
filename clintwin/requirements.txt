@@ -21,7 +21,7 @@ selenium==3.141.0
 simplejson==3.17.0
 sqlparse==0.3.1
 uritemplate==3.0.1
-urllib3==1.25.8
+urllib3==1.26.5
 uWSGI==2.0.18
 django-push-notifications
 django-filter==2.2.0
